@@ -1,0 +1,14 @@
+﻿{
+  "AppSettings": {
+    "SiteEmailAddress": "alexandre.dias.simoes@outlook.com",
+    "enviarEmailNotificacao": "1"
+  },
+  "ml": {
+    "token": "",
+    "refreshToken": "",
+    "userId": "",
+    "keyExpires": "",
+    "loginDate": ""
+  }
+
+}

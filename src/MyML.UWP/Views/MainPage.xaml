@@ -1,0 +1,180 @@
+﻿<Page x:Class="MyML.UWP.Views.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:Behaviors="using:Template10.Behaviors"
+      xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+      xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+      xmlns:controls="using:Template10.Controls"
+      xmlns:converters="using:MyML.UWP.Converters"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="using:MyML.UWP.Views"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:vm="using:MyML.UWP.ViewModels" mc:Ignorable="d"
+      xmlns:Universal="using:Microsoft.Advertising.WinRT.UI"
+      xmlns:uc="using:MyML.UWP.Usercontrols">
+
+    <Page.DataContext>
+        <Binding Source="{StaticResource Locator}" Path="MainPage" />
+    </Page.DataContext>
+
+    <Page.Resources>
+        <converters:StringFormatConverter x:Name="StringFormatConverter" />
+        <converters:BoolToVisibilityConverter x:Name="BoolToVisibilityConverter" />
+        <converters:InvertedBoolToVisibilityConverter x:Name="InvertedBoolToVisibilityConverter" />
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="AdaptiveVisualStateGroup">
+                <VisualState x:Name="VisualStateNarrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!--<Setter Target="AdMediator_MOBILE.Visibility" Value="Visible" />
+                        <Setter Target="AdMediator_DESKTOP.Visibility" Value="Collapsed" />-->
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="VisualStateNormal">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!--<Setter Target="AdMediator_MOBILE.Visibility" Value="Collapsed" />
+                        <Setter Target="AdMediator_DESKTOP.Visibility" Value="Visible" />-->
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="VisualStateWide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource WideMinWidth}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!--<Setter Target="AdMediator_MOBILE.Visibility" Value="Collapsed" />
+                        <Setter Target="AdMediator_DESKTOP.Visibility" Value="Visible" />-->
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <!--  page header  -->
+        <controls:PageHeader Grid.Row="0" Content="Meu MercadoLivre Universal" x:Uid="PageTitleHeader" Background="{StaticResource MercadoLivreBackgroundColor}" Foreground="{StaticResource MercadoLivreForegroundColor}">
+            <controls:PageHeader.PrimaryCommands>
+
+            </controls:PageHeader.PrimaryCommands>
+            <controls:PageHeader.SecondaryCommands>
+                <AppBarButton Click="{x:Bind ViewModel.GotoSettings}" Label="Configurações" />
+                <AppBarButton Click="{x:Bind ViewModel.GotoPrivacy}" Label="Privacidade" />
+                <AppBarButton Click="{x:Bind ViewModel.GotoAbout}" Label="Sobre" />
+                <AppBarSeparator />
+                <AppBarButton Label="Sair" Icon="Clear" Command="{Binding RevokeAccess}" />
+                <!--<AppBarButton Label="Carregar meu produto" Command="{Binding LoadProduto}" CommandParameter="MLB740666193" />
+                <AppBarButton Label="Carregar meu produto 2" Command="{Binding LoadProduto}"  CommandParameter="MLB740694926"/>-->
+
+            </controls:PageHeader.SecondaryCommands>
+        </controls:PageHeader>
+
+        <uc:AdsControl Grid.Row="1"/>
+
+        <!--<Universal: AdMediatorControl x:Name="AdMediator_3D4884_MAIN" 
+                      HorizontalAlignment="Center"  
+                     Id="AdMediator_3D4884_MAIN"  
+                     VerticalAlignment="Top" Grid.Row="1" />-->
+
+        <!--  page content  -->
+        <ScrollViewer Grid.Row="2" VerticalAlignment="Top" 
+                    Padding="12,8,15,0" Visibility="{Binding IsAuthenticated, Converter={StaticResource BoolToVisibilityConverter}}">
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Text="Saldo no MercadoPago"  Grid.Row="0" Style="{StaticResource SubheaderTextBlockStyle}" Margin="10,19.8,0,10"/>
+                <Border Grid.Row="1" Margin="10" BorderBrush="#66A6A5A5" BorderThickness="0.5">
+                    <Border.Background>
+                        <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
+                    </Border.Background>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Line Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" X1="3000" VerticalAlignment="Bottom" Stroke="#B2000000" StrokeThickness="0.5" X2="0.5" Y1="0.5" Y2="0.5" />
+                        <Line Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" X1="3000" VerticalAlignment="Bottom" Stroke="#B2000000" StrokeThickness="0.5" X2="0.5" Y1="0.5" Y2="0.5" />
+                        <Line Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" X1="3000" VerticalAlignment="Bottom" Stroke="#B2000000" StrokeThickness="0.5" X2="0.5" Y1="0.5" Y2="0.5" />
+
+                        <TextBlock Text="Disponível" Grid.Row="0" Grid.Column="0" Style="{StaticResource BodyTextBlockStyle}" FontWeight="Bold" Margin="10,8,0,8" />
+                        <TextBlock Text="Em conta" Grid.Row="1" Grid.Column="0"  Margin="10,8,0,8"/>
+                        <TextBlock Text="Não disponível" Grid.Row="2" Grid.Column="0"  Margin="10,8,0,8"/>
+
+                        <TextBlock  Text="{Binding Balance, FallbackValue=0\,0, ConverterParameter=\{0:c2\}, Converter={StaticResource StringFormatConverter}}" Grid.Row="0" Grid.Column="1" Margin="0,8,10,8" Style="{StaticResource BodyTextBlockStyle}" HorizontalAlignment="Right" />
+                        <TextBlock  Text="{Binding BalanceWithDraw, FallbackValue=0\,0, ConverterParameter=\{0:c2\}, Converter={StaticResource StringFormatConverter}}" Grid.Row="1" Grid.Column="1" Margin="0,8,10,8" Style="{StaticResource BodyTextBlockStyle}" HorizontalAlignment="Right" />
+                        <TextBlock  Text="{Binding UnavailableBalance, FallbackValue=0\,0, ConverterParameter=\{0:c2\}, Converter={StaticResource StringFormatConverter}}" Grid.Row="2" Grid.Column="1" Margin="0,8,10,8" Style="{StaticResource BodyTextBlockStyle}" HorizontalAlignment="Right" />
+                    </Grid>
+                </Border>
+
+                <TextBlock Text="Meus anúncios"  Grid.Row="2" Style="{StaticResource SubheaderTextBlockStyle}" Margin="10,19.8,0,10"/>
+                <Border Grid.Row="3" Margin="10" BorderBrush="#66A6A5A5" BorderThickness="0.5">
+                    <Border.Background>
+                        <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
+                    </Border.Background>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Line Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" X1="3000" VerticalAlignment="Bottom" Stroke="#B2000000" StrokeThickness="0.5" X2="0.5" Y1="0.5" Y2="0.5" />
+                        <Line Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" X1="3000" VerticalAlignment="Bottom" Stroke="#B2000000" StrokeThickness="0.5" X2="0.5" Y1="0.5" Y2="0.5" />
+                        <Line Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" X1="3000" VerticalAlignment="Bottom" Stroke="#B2000000" StrokeThickness="0.5" X2="0.5" Y1="0.5" Y2="0.5" />
+
+                        <TextBlock Text="Ativos" Grid.Row="0" Grid.Column="0" Style="{StaticResource BodyTextBlockStyle}" FontWeight="Bold" Margin="10,8,0,8" />
+                        <TextBlock Text="Pausados" Grid.Row="1" Grid.Column="0"  Margin="10,8,0,8"/>
+                        <TextBlock Text="Finalizados" Grid.Row="2" Grid.Column="0"  Margin="10,8,0,8"/>
+
+                        <TextBlock Text="{Binding ActiveItems, FallbackValue=0}" Grid.Row="0" Grid.Column="1" Margin="0,8,10,8" Style="{StaticResource BodyTextBlockStyle}" HorizontalAlignment="Right" />
+                        <TextBlock Text="{Binding PausedItems, FallbackValue=0}" Grid.Row="1" Grid.Column="1" Margin="0,8,10,8" Style="{StaticResource BodyTextBlockStyle}" HorizontalAlignment="Right" />
+                        <TextBlock Text="{Binding FinalizedItems, FallbackValue=0}" Grid.Row="2" Grid.Column="1" Margin="0,8,10,8" Style="{StaticResource BodyTextBlockStyle}" HorizontalAlignment="Right" />
+                    </Grid>
+                </Border>
+            </Grid>
+        </ScrollViewer>
+
+
+        <StackPanel Grid.Row="2" VerticalAlignment="Center" 
+                    Padding="12,8,0,0" Visibility="{Binding IsAuthenticated, Converter={StaticResource InvertedBoolToVisibilityConverter}}" HorizontalAlignment="Center" d:IsHidden="True" >
+            <!--<TextBlock Text="Vera sem logar" />-->
+            <Path Data="M19.449124,17.768005C18.48412,18.376038 16.044096,21.006042 12.235074,17.788025 8.9880373,18.67804 6.7060353,20.585999 6.7060353,22.983032L24.946181,22.983032C24.946181,20.585999,22.696161,18.65802,19.449124,17.768005z M15.8251,9.0170288C13.366065,9.0170288 11.37206,11.220032 11.37206,13.348022 11.37206,15.477051 13.366065,17.768005 15.8251,17.768005 18.28612,17.768005 20.279148,15.477051 20.279148,13.348022 20.279148,11.220032 18.28612,9.0170288 15.8251,9.0170288z M16.226105,0C16.226105,0 21.762163,5.3870239 31.509224,5.3870239 31.509224,5.3870239 32.502243,16.164001 29.250202,22.257996 26.979187,26.507996 22.395163,29.946045 15.824093,32 9.2560446,29.946045 4.6700074,26.341003 2.40299,22.091003 -0.85103555,15.996033 0.14296089,5.3870239 0.14296108,5.3870239 9.89106,5.3870239 16.226105,0 16.226105,0z" Stretch="Uniform" Fill="{ThemeResource SystemControlForegroundAccentBrush}" Width="138" Height="138" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <TransformGroup.Children>
+                            <RotateTransform Angle="0" />
+                            <ScaleTransform ScaleX="1" ScaleY="1" />
+                        </TransformGroup.Children>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <TextBlock Text="Para visualizar sua área segura, faça o login" Style="{StaticResource TitleTextBlockStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Margin="0,25,0,0" />
+        </StackPanel>
+    </Grid>
+</Page>
+

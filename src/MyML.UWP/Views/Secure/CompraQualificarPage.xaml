@@ -1,0 +1,131 @@
+﻿<Page
+    x:Class="MyML.UWP.Views.Secure.CompraQualificarPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MyML.UWP.Views.Secure"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:Behaviors="using:Template10.Behaviors"
+    xmlns:MyBehaviors="using:MyML.UWP.Behaviors"
+    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:controls="using:Template10.Controls"
+    xmlns:converters="using:MyML.UWP.Converters"
+    xmlns:convertersML="using:MyML.UWP.Converters.MercadoLivre"
+    xmlns:designViewModels="using:MyML.UWP.ViewModels.Design"
+    xmlns:uc="using:MyML.UWP.Usercontrols"
+    d:DataContext="{d:DesignInstance designViewModels:BuscaPageDesignViewModel, IsDesignTimeCreatable=True}"    
+    DataContext="{Binding Source={StaticResource Locator}, Path=CompraQualificarPage}"
+    x:Name="This">
+    <Page.Resources>
+        <converters:NullToVisibilitConverter x:Name="NullToVisibilitConverter" />
+        <converters:InvertBoolean x:Name="InvertBoolean" />
+        <converters:BoolToVisibilityConverter x:Name="BoolToVisibilityConverter" />
+        <converters:InvertedBoolToVisibilityConverter x:Name="InvertedBoolToVisibilityConverter" />
+        <converters:ValueToVisibilityConverter x:Name="ValueToVisibilityConverter" />
+        <converters:ValueToBooleanConverter x:Name="ValueToBooleanConverter" />
+    </Page.Resources>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="AdaptiveVisualStateGroup">
+                <VisualState x:Name="VisualStateNarrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!--  TODO: change properties for narrow view  -->
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="VisualStateNormal">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!--  TODO: change properties for normal view  -->
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="VisualStateWide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource WideMinWidth}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!--  TODO: change properties for wide view  -->
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <!--  page header  -->
+        <controls:PageHeader Content="Qualificar" Background="{StaticResource MercadoLivreBackgroundColor}" Foreground="{StaticResource MercadoLivreForegroundColor}">
+        </controls:PageHeader>
+        <StackPanel Grid.Row="1" Margin="15">
+            <StackPanel Grid.Row="1" Visibility="{Binding ActualPart, Converter={StaticResource ValueToVisibilityConverter}, ConverterParameter='QualifyPartOne'}"  x:Name="QualifyPartOne">
+                <StackPanel.Transitions>
+                    <TransitionCollection>
+                        <EntranceThemeTransition IsStaggeringEnabled="True" FromHorizontalOffset="-128"/>
+                    </TransitionCollection>
+                </StackPanel.Transitions>
+                <TextBlock Style="{StaticResource BodyTextBlockStyle}" Margin="10,0" >
+                    <Run Text="Você recebeu o produto que estava esperando?"/>
+                </TextBlock>
+                <StackPanel Padding="10" Margin="10" Background="#14000000">
+                    <RadioButton Content="Sim, recebi o produto está tudo correto" IsChecked="{Binding IsFulFilled, Mode=TwoWay, Converter={StaticResource ValueToBooleanConverter}, ConverterParameter='Sim'}" GroupName="FulFilled"/>
+                    <RadioButton Content="Decidi não comprá-lo" IsChecked="{Binding IsFulFilled,Mode=TwoWay, Converter={StaticResource ValueToBooleanConverter}, ConverterParameter='Talvez'}"  GroupName="FulFilled"/>
+                    <RadioButton Content="Não, tive problemas" IsChecked="{Binding IsFulFilled,Mode=TwoWay, Converter={StaticResource ValueToBooleanConverter}, ConverterParameter='Nao'}"  GroupName="FulFilled"/>
+                </StackPanel>
+                <Button Content="Continuar" Visibility="{Binding IsFulFilled, Converter={StaticResource NullToVisibilitConverter}}" Foreground="White" Background="{StaticResource CustomColorBrush}"  Command="{Binding NextPage}" HorizontalAlignment="Stretch" Margin="10" />
+            </StackPanel>
+            <!--Parte 2 para NAO -->
+            <StackPanel Grid.Row="1" Visibility="{Binding ActualPart, Converter={StaticResource ValueToVisibilityConverter}, ConverterParameter='QualifyPartTwoNo'}" x:Name="QualifyPartTwoNo">
+                <StackPanel.Transitions>
+                    <TransitionCollection>
+                        <EntranceThemeTransition IsStaggeringEnabled="True" FromHorizontalOffset="-128"/>
+                    </TransitionCollection>
+                </StackPanel.Transitions>
+                <TextBlock Margin="10,0" Style="{StaticResource BodyTextBlockStyle}" Text="O que aconteceu? " />
+                <StackPanel Padding="10" Margin="10" Background="#14000000">
+                    <RadioButton Content="É diferente do que comprei / Chegou com defeito" GroupName="Reason" IsChecked="{Binding Reason,Mode=TwoWay, Converter={StaticResource ValueToBooleanConverter}, ConverterParameter='SELLER_OUT_OF_STOCK'}"/>
+                    <RadioButton Content="O produto nunca chegou" GroupName="Reason" IsChecked="{Binding Reason,Mode=TwoWay, Converter={StaticResource ValueToBooleanConverter}, ConverterParameter='BUYER_PAID_BUT_DID_NOT_RECEIVE'}" />
+                    <RadioButton Content="Outro" GroupName="Reason" IsChecked="{Binding Reason,Mode=TwoWay, Converter={StaticResource ValueToBooleanConverter}, ConverterParameter='OTHER_MY_RESPONSIBILITY'}"/>
+                </StackPanel>
+                <Button Content="Continuar" Visibility="{Binding Reason, Converter={StaticResource NullToVisibilitConverter}}" Command="{Binding NextPage}" Foreground="White" Background="{StaticResource CustomColorBrush}" HorizontalAlignment="Stretch" Margin="10" />
+            </StackPanel>
+
+            <!--Parte 2 para SIM -->
+            <StackPanel Grid.Row="1" Visibility="{Binding ActualPart, Converter={StaticResource ValueToVisibilityConverter}, ConverterParameter='QualifyPartTwoYes'}" x:Name="QualifyPartTwoYes">
+                <StackPanel.Transitions>
+                    <TransitionCollection>
+                        <EntranceThemeTransition IsStaggeringEnabled="True" FromHorizontalOffset="-128"/>
+                    </TransitionCollection>
+                </StackPanel.Transitions>
+                <TextBlock Margin="10,0" Style="{StaticResource BodyTextBlockStyle}" Text="Conte-nos sobre o comprador: você recomendaria para outros vendedores?" />
+                <StackPanel Padding="10" Margin="10" Background="#14000000">
+                    <RadioButton Content="Sim" GroupName="Rating" IsChecked="{Binding Rating,Mode=TwoWay, Converter={StaticResource ValueToBooleanConverter}, ConverterParameter='positive'}"/>
+                    <RadioButton Content="Não tenho certeza" GroupName="Rating" IsChecked="{Binding Rating,Mode=TwoWay, Converter={StaticResource ValueToBooleanConverter}, ConverterParameter='neutral'}" />
+                    <RadioButton Content="Não" GroupName="Rating" IsChecked="{Binding Rating,Mode=TwoWay, Converter={StaticResource ValueToBooleanConverter}, ConverterParameter='negative'}"/>
+                </StackPanel>
+                <Button Content="Continuar" Command="{Binding NextPage}" Foreground="White" Background="{StaticResource CustomColorBrush}" HorizontalAlignment="Stretch" Margin="10" />
+            </StackPanel>
+
+            <StackPanel Visibility="{Binding ActualPart, Converter={StaticResource ValueToVisibilityConverter}, ConverterParameter='QualifyPartThreeYes'}" Grid.Row="1"  x:Name="QualifyPartThreeYes">
+                <StackPanel.Transitions>
+                    <TransitionCollection>
+                        <EntranceThemeTransition IsStaggeringEnabled="True" FromHorizontalOffset="-128"/>
+                    </TransitionCollection>
+                </StackPanel.Transitions>
+                <TextBlock Margin="10,0" Style="{StaticResource SubtitleTextBlockStyle}" Text="Compartilhe sua opinião com todos" />
+                <TextBlock Margin="10,0" Style="{StaticResource BodyTextBlockStyle}" Text="Eles pagaram rápido? Foram amáveis? Deixe seu comentário para que todos saibam como são estes compradores." />
+                <TextBox Margin="10,0" TextWrapping="Wrap" MinHeight="80" MaxLength="160" Text="{Binding Message,Mode=TwoWay}" />
+                <TextBlock Margin="10,0" Style="{StaticResource BodyTextBlockStyle}" Text="160 caracteres" />
+
+                <Button Content="Qualificar" Foreground="White" Background="{StaticResource CustomColorBrush}" Command="{Binding Qualify}" HorizontalAlignment="Stretch" Margin="10" />
+
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

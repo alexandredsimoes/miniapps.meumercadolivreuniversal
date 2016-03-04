@@ -1,0 +1,160 @@
+﻿<Page
+    x:Class="MyML.UWP.Views.Secure.AlterarAtributoPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MyML.UWP.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:Behaviors="using:Template10.Behaviors"
+    xmlns:MyBehaviors="using:MyML.UWP.Behaviors"
+    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:controls="using:Template10.Controls"
+    xmlns:converters="using:MyML.UWP.Converters"
+    xmlns:convertersML="using:MyML.UWP.Converters.MercadoLivre"
+    xmlns:designViewModels="using:MyML.UWP.ViewModels.Design"
+    xmlns:uc="using:MyML.UWP.Usercontrols"
+    d:DataContext="{d:DesignInstance designViewModels:BuscaPageDesignViewModel, IsDesignTimeCreatable=True}">
+
+    <Page.DataContext>
+        <Binding Source="{StaticResource Locator}" Path="AlterarAtributoPage" />
+    </Page.DataContext>
+
+    <Page.Resources>
+
+
+        <converters:NullToVisibilitConverter x:Key="NullToVisibilitConverter"/>
+        <converters:DoubleStringConverter x:Key="DoubleStringConverter"/>
+        <converters:IntStringConverter x:Key="IntStringConverter"/>
+        <converters:InverterNullToVisibilityConverter x:Key="InverterNullToVisibilityConverter"/>
+        <convertersML:MLStringDateConveter x:Key="MLStringDateConveter" />
+        <converters:ObjetctToPropertyConverter x:Key="ObjetctToPropertyConverter" />
+        <converters:StringFormatConverter x:Key="StringFormatConverter" />
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <converters:InvertedBoolToVisibilityConverter x:Key="InvertedBoolToVisibilityConverter" />
+        <convertersML:OrderStatusToStringConverter x:Key="OrderStatusToStringConverter" />
+        <convertersML:OrderPaymentTypeConverter x:Key="OrderPaymentTypeConverter" />
+        <convertersML:OrderPaymentStatusDetailConverter x:Key="OrderPaymentStatusDetailConverter" />
+        <convertersML:OrderShipStatusDetailConverter x:Key="OrderShipStatusDetailConverter" />
+        <convertersML:FeedbackRatingConverter x:Key="FeedbackRatingConverter" />
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="AdaptiveVisualStateGroup">
+                <VisualState x:Name="VisualStateNarrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!--  TODO: change properties for narrow view  -->
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="VisualStateNormal">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!--  TODO: change properties for normal view  -->
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="VisualStateWide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource WideMinWidth}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!--  TODO: change properties for wide view  -->
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <!--  page header  -->
+        <controls:PageHeader Content="Alterar atributo" Background="{StaticResource MercadoLivreBackgroundColor}" Foreground="{StaticResource MercadoLivreForegroundColor}">
+
+        </controls:PageHeader>
+        <StackPanel Grid.Row="1" Padding="10">
+            <Border Padding="0" x:Name="TitleBorder">
+                <Border.Background>
+                    <SolidColorBrush Color="{ThemeResource SystemChromeLowColor}"/>
+                </Border.Background>
+                <Border.BorderBrush>
+                    <SolidColorBrush Color="{ThemeResource SystemChromeLowColor}"/>
+                </Border.BorderBrush>
+                <StackPanel>
+                    <TextBlock Text="Título do anúncio" Margin="10,5,5,5" />
+                    <Line X1="999.7" X2="1" Margin="0,5" >
+                        <Line.Stroke>
+                            <SolidColorBrush Color="{ThemeResource SystemBaseMediumLowColor}"/>
+                        </Line.Stroke>
+                    </Line>
+                    <TextBox Margin="10,5,10,10" Text="{Binding Title, Mode=TwoWay}" />
+                </StackPanel>
+                <Interactivity:Interaction.Behaviors>
+                    <Core:DataTriggerBehavior Binding="{Binding SourceInfo}" Value="title" ComparisonCondition="NotEqual">
+                        <Core:ChangePropertyAction TargetObject="{Binding ElementName=TitleBorder}" PropertyName="Visibility" Value="Collapsed" />
+                    </Core:DataTriggerBehavior>
+                    <Core:DataTriggerBehavior Binding="{Binding SourceInfo}" Value="title" ComparisonCondition="Equal">
+                        <Core:ChangePropertyAction TargetObject="{Binding ElementName=TitleBorder}" PropertyName="Visibility" Value="Visible" />
+                    </Core:DataTriggerBehavior>
+                </Interactivity:Interaction.Behaviors>
+            </Border>
+            <Border Padding="0" x:Name="PriceBorder">
+                <Border.Background>
+                    <SolidColorBrush Color="{ThemeResource SystemChromeLowColor}"/>
+                </Border.Background>
+                <StackPanel>
+                    <TextBlock Text="Preço de venda" Margin="10,5,5,5" />
+                    <Line X1="999.7" X2="1" Margin="0,5" >
+                        <Line.Stroke>
+                            <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
+                        </Line.Stroke>
+                        <Line.Fill>
+                            <SolidColorBrush Color="{ThemeResource SystemBaseMediumLowColor}"/>
+                        </Line.Fill>
+                    </Line>
+                    <TextBox Margin="10,5,10,10" Text="{Binding Price, Mode=TwoWay, Converter={StaticResource DoubleStringConverter}}" InputScope="Number" />
+                </StackPanel>
+                <Interactivity:Interaction.Behaviors>
+                    <Core:DataTriggerBehavior Binding="{Binding SourceInfo}" Value="price" ComparisonCondition="NotEqual">
+                        <Core:ChangePropertyAction TargetObject="{Binding ElementName=PriceBorder}" PropertyName="Visibility" Value="Collapsed" />
+                    </Core:DataTriggerBehavior>
+                    <Core:DataTriggerBehavior Binding="{Binding SourceInfo}" Value="price" ComparisonCondition="Equal">
+                        <Core:ChangePropertyAction TargetObject="{Binding ElementName=PriceBorder}" PropertyName="Visibility" Value="Visible" />
+                    </Core:DataTriggerBehavior>
+                </Interactivity:Interaction.Behaviors>
+            </Border>
+            <Border Padding="0" x:Name="QuantityBorder">
+                <Border.Background>
+                    <SolidColorBrush Color="{ThemeResource SystemChromeLowColor}"/>
+                </Border.Background>
+                <StackPanel>
+                    <TextBlock Text="Quantidade de unidades" Margin="10,5,5,5" />
+                    <Line X1="999.7" X2="1" Margin="0,5" >
+                        <Line.Stroke>
+                            <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
+                        </Line.Stroke>
+                        <Line.Fill>
+                            <SolidColorBrush Color="{ThemeResource SystemBaseMediumLowColor}"/>
+                        </Line.Fill>
+                    </Line>
+                    <TextBox Margin="10,5,10,10" Text="{Binding Quantity, Mode=TwoWay, Converter={StaticResource IntStringConverter}}" InputScope="Number" />
+                </StackPanel>
+                <Interactivity:Interaction.Behaviors>
+                    <Core:DataTriggerBehavior Binding="{Binding SourceInfo}" Value="quantity" ComparisonCondition="NotEqual">
+                        <Core:ChangePropertyAction TargetObject="{Binding ElementName=QuantityBorder}" PropertyName="Visibility" Value="Collapsed" />
+                    </Core:DataTriggerBehavior>
+                    <Core:DataTriggerBehavior Binding="{Binding SourceInfo}" Value="quantity" ComparisonCondition="Equal">
+                        <Core:ChangePropertyAction TargetObject="{Binding ElementName=QuantityBorder}" PropertyName="Visibility" Value="Visible" />
+                    </Core:DataTriggerBehavior>
+                </Interactivity:Interaction.Behaviors>
+            </Border>
+            <Button Content="Continuar" Command="{Binding DoCommand}" Padding="10" HorizontalAlignment="Stretch" Margin="5,20,5,5" />
+        </StackPanel>
+    </Grid>
+</Page>

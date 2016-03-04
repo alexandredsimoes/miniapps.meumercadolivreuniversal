@@ -1,0 +1,10 @@
+<common:BootStrapper x:Class="MyML.UWP.App" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+                     xmlns:common="using:Template10.Common"
+                     xmlns:vm="using:MyML.UWP.ViewModels">
+
+    <Application.Resources>
+        <ResourceDictionary Source="Styles\Custom.xaml" x:Key="CustomStyles" />
+    </Application.Resources>
+
+</common:BootStrapper>

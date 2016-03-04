@@ -1,0 +1,572 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{C4594ECC-3B09-4F7F-AAA9-10A974AEDE8F}</ProjectGuid>
+    <OutputType>AppContainerExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MyML.UWP</RootNamespace>
+    <AssemblyName>MyML.UWP</AssemblyName>
+    <DefaultLanguage>pt-BR</DefaultLanguage>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
+    <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <PackageCertificateKeyFile>MyML.UWP_StoreKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateThumbprint>2049588BC8B9CE1CC957B2E89258D75B5B1BF745</PackageCertificateThumbprint>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxBundle>Always</AppxBundle>
+    <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="MyML.UWP_StoreKey.pfx" />
+    <None Include="MyML.UWP_TemporaryKey.pfx" />
+    <None Include="project.json" />
+    <PRIResource Include="Strings\pt-BR\Resources.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Adapters\GeneratorIncrementalLoadingClass.cs" />
+    <Compile Include="Adapters\IncrementalLoadingBase.cs" />
+    <Compile Include="Adapters\IPagedResponse.cs" />
+    <Compile Include="Adapters\IPagedSource.cs" />
+    <Compile Include="Adapters\MercadoLivreIncrementalLoadingClass.cs" />
+    <Compile Include="Adapters\Search\IncrementalSearchSource.cs" />
+    <Compile Include="Adapters\Search\OrdersDataSource.cs" />
+    <Compile Include="Adapters\Search\QuestionDataSource.cs" />
+    <Compile Include="Adapters\Search\SearchDataSource.cs" />
+    <Compile Include="Aggregattor\MessengerDetails.cs" />
+    <Compile Include="Aggregattor\MessengerFilterDetails.cs" />
+    <Compile Include="Aggregattor\MessengerFilterResult.cs" />
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AppStorage\AppLogs.cs" />
+    <Compile Include="AppStorage\UserStorage.cs" />
+    <Compile Include="Behaviors\ParallaxBehavior.cs" />
+    <Compile Include="Behaviors\WebBrowserHelper.cs" />
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\DecimalStringConverter.cs" />
+    <Compile Include="Converters\DoubleStringConverter.cs" />
+    <Compile Include="Converters\HumanizeDateConverter.cs" />
+    <Compile Include="Converters\IntStringConverter.cs" />
+    <Compile Include="Converters\InvertBoolean.cs" />
+    <Compile Include="Converters\InvertBooleanConverter.cs" />
+    <Compile Include="Converters\InvertedBoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\InvertedValueToInvisibilityConverter.cs" />
+    <Compile Include="Converters\InvertedVisibilityConverter.cs" />
+    <Compile Include="Converters\InverterNullToVisibilityConverter.cs" />
+    <Compile Include="Converters\MercadoLivre\AvailableFilterBooleanConverter.cs" />
+    <Compile Include="Converters\MercadoLivre\FavoritesOpacityConverter.cs" />
+    <Compile Include="Converters\MercadoLivre\FeedbackRatingConverter.cs" />
+    <Compile Include="Converters\MercadoLivre\IsFilterSelectedConverter.cs" />
+    <Compile Include="Converters\MercadoLivre\MLStringDateConveter.cs" />
+    <Compile Include="Converters\MercadoLivre\OrderPaymentStatusDetailConverter.cs" />
+    <Compile Include="Converters\MercadoLivre\OrderPaymentTypeConverter.cs" />
+    <Compile Include="Converters\MercadoLivre\OrderShipStatusDetailConverter.cs" />
+    <Compile Include="Converters\MercadoLivre\OrderStatusToStringConverter.cs" />
+    <Compile Include="Converters\MercadoLivre\ReputationHeightConverter.cs" />
+    <Compile Include="Converters\MercadoLivre\UserStatusConverter.cs" />
+    <Compile Include="Converters\NullToVisibilitConverter.cs" />
+    <Compile Include="Converters\ObjetctToPropertyConverter.cs" />
+    <Compile Include="Converters\ResourceStringFormatConverter.cs" />
+    <Compile Include="Converters\SelectedRangesToIntConverter.cs" />
+    <Compile Include="Converters\StringFormatConverter.cs" />
+    <Compile Include="Converters\StringToBoolean.cs" />
+    <Compile Include="Converters\StringToUriConverter.cs" />
+    <Compile Include="Converters\ValueToBooleanConverter.cs" />
+    <Compile Include="Converters\ValueToInvisibilityConverter.cs" />
+    <Compile Include="Converters\ValueToVisibilityConverter.cs" />
+    <Compile Include="Extensions\VisualTreeHelperExtensions.cs" />
+    <Compile Include="Models\Categories.cs" />
+    <Compile Include="Models\Configuration.cs" />
+    <Compile Include="Models\Consts.cs" />
+    <Compile Include="Models\Mercadolivre\MLAccountBalance.cs" />
+    <Compile Include="Models\Mercadolivre\MLCategorySearchResult.cs" />
+    <Compile Include="Models\Mercadolivre\MLErrorRequest.cs" />
+    <Compile Include="Models\Mercadolivre\MLFeedback.cs" />
+    <Compile Include="Models\Mercadolivre\MLJson.cs" />
+    <Compile Include="Models\Mercadolivre\MLListPrice.cs" />
+    <Compile Include="Models\Mercadolivre\MLListType.cs" />
+    <Compile Include="Models\Mercadolivre\MLMyItemsSearchResult.cs" />
+    <Compile Include="Models\Mercadolivre\MLNewItemResult.cs" />
+    <Compile Include="Models\Mercadolivre\MLOrder.cs" />
+    <Compile Include="Models\Mercadolivre\MLProductDescription.cs" />
+    <Compile Include="Models\Mercadolivre\MLQuestionSearchResult.cs" />
+    <Compile Include="Models\Mercadolivre\MLShipping.cs" />
+    <Compile Include="Models\Mercadolivre\ProductQuestion.cs" />
+    <Compile Include="Models\Mercadolivre\UserAddress.cs" />
+    <Compile Include="Models\Mercadolivre\UserInfo.cs" />
+    <Compile Include="Models\MLAutorizationInfo.cs" />
+    <Compile Include="Models\QuestionGroup.cs" />
+    <Compile Include="Models\SelectionList.cs" />
+    <Compile Include="Models\SellItem.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\DataService.cs" />
+    <Compile Include="Services\IDataService.cs" />
+    <Compile Include="Services\IMercadoLivreService.cs" />
+    <Compile Include="Services\MercadoLivreServices.cs" />
+    <Compile Include="Services\SettingsServices\ISettingsService.cs" />
+    <Compile Include="Services\SettingsServices\SettingsService.cs" />
+    <Compile Include="Usercontrols\ActionButtonControl.xaml.cs">
+      <DependentUpon>ActionButtonControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Usercontrols\AdsControl.xaml.cs">
+      <DependentUpon>AdsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Usercontrols\MercadoLivreFilterTemplateSelector.cs" />
+    <Compile Include="Usercontrols\TabHeader.xaml.cs">
+      <DependentUpon>TabHeader.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AlterarAtributoPageViewModel.cs" />
+    <Compile Include="ViewModels\AnunciosAlterarExposicaoPageViewModel.cs" />
+    <Compile Include="ViewModels\AnunciosDetalhePageViewModel.cs" />
+    <Compile Include="ViewModels\AnunciosPageViewModel.cs" />
+    <Compile Include="ViewModels\await.cs" />
+    <Compile Include="ViewModels\BuscaFilterPageViewModel.cs" />
+    <Compile Include="ViewModels\BuscaPageViewModel.cs" />
+    <Compile Include="ViewModels\CompraDetalhePageViewModel.cs" />
+    <Compile Include="ViewModels\CompraQualificarPageViewModel.cs" />
+    <Compile Include="ViewModels\ComprarItemPageViewModel.cs" />
+    <Compile Include="ViewModels\ComprasPageViewModel.cs" />
+    <Compile Include="ViewModels\Design\BuscaPageDesignViewModel.cs" />
+    <Compile Include="ViewModels\PerguntasVendasDetalhesPageViewModel.cs" />
+    <Compile Include="ViewModels\FavoritesPageViewModel.cs" />
+    <Compile Include="ViewModels\LoginPageViewModel.cs" />
+    <Compile Include="ViewModels\MainPageViewModel.cs" />
+    <Compile Include="ViewModels\DetailPageViewModel.cs" />
+    <Compile Include="ViewModels\PerguntarPageViewModel.cs" />
+    <Compile Include="ViewModels\PerguntasComprasPageViewModel.cs" />
+    <Compile Include="ViewModels\PerguntasVendasPageViewModel.cs" />
+    <Compile Include="ViewModels\ProdutoDescricaoPageViewModel.cs" />
+    <Compile Include="ViewModels\ProdutoDetalheViewModel.cs" />
+    <Compile Include="ViewModels\ProdutoPerguntasPageViewModel.cs" />
+    <Compile Include="ViewModels\SettingsPageViewModel.cs" />
+    <Compile Include="ViewModels\VendaDetalhePageViewModel.cs" />
+    <Compile Include="ViewModels\VendaQualificarPageViewModel.cs" />
+    <Compile Include="ViewModels\VendasPageViewModel.cs" />
+    <Compile Include="ViewModels\VendedorInfoPageViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="Views\BuscaFilterPage.xaml.cs">
+      <DependentUpon>BuscaFilterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BuscaPage.xaml.cs">
+      <DependentUpon>BuscaPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Busy.xaml.cs">
+      <DependentUpon>Busy.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CategoriaPage.xaml.cs">
+      <DependentUpon>CategoriaPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PerguntarPage.xaml.cs">
+      <DependentUpon>PerguntarPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProdutoDescricaoPage.xaml.cs">
+      <DependentUpon>ProdutoDescricaoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProdutoDetalhePage.xaml.cs">
+      <DependentUpon>ProdutoDetalhePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProdutoPerguntasPage.xaml.cs">
+      <DependentUpon>ProdutoPerguntasPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Secure\AlterarAtributoPage.xaml.cs">
+      <DependentUpon>AlterarAtributoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Secure\AnunciosAlterarExposicaoPage.xaml.cs">
+      <DependentUpon>AnunciosAlterarExposicaoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Secure\AnunciosDetalhePage.xaml.cs">
+      <DependentUpon>AnunciosDetalhePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Secure\AnunciosPage.xaml.cs">
+      <DependentUpon>AnunciosPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Secure\CompraDetalhePage.xaml.cs">
+      <DependentUpon>CompraDetalhePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Secure\CompraQualificarPage.xaml.cs">
+      <DependentUpon>CompraQualificarPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Secure\ComprarItemPage.xaml.cs">
+      <DependentUpon>ComprarItemPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Secure\ComprasPage.xaml.cs">
+      <DependentUpon>ComprasPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Secure\FavoritesPage.xaml.cs">
+      <DependentUpon>FavoritesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Secure\PerguntasComprasPage.xaml.cs">
+      <DependentUpon>PerguntasComprasPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Secure\PerguntasVendasDetalhesPage.xaml.cs">
+      <DependentUpon>PerguntasVendasDetalhesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Secure\PerguntasVendasPage.xaml.cs">
+      <DependentUpon>PerguntasVendasPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Secure\VendaDetalhePage.xaml.cs">
+      <DependentUpon>VendaDetalhePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Secure\VendasPage.xaml.cs">
+      <DependentUpon>VendasPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Secure\VendedorInfoPage.xaml.cs">
+      <DependentUpon>VendedorInfoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shell.xaml.cs">
+      <DependentUpon>Shell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Splash.xaml.cs">
+      <DependentUpon>Splash.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Secure\VendaQualificarPage.xaml.cs">
+      <DependentUpon>VendaQualificarPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\chat-in.png" />
+    <Content Include="Assets\chat-out.png" />
+    <Content Include="Assets\me.png" />
+    <Content Include="Assets\memoria-kingston-1gb-ddr2-800mhz-kvr800d2n61g-15190-MLB20098034628_052014-F.jpg" />
+    <Content Include="Assets\Meu MercadoLivre Logo.png" />
+    <Content Include="Assets\mp.png" />
+    <Content Include="Assets\NewStoreLogo.scale-100.png" />
+    <Content Include="Assets\NewStoreLogo.scale-125.png" />
+    <Content Include="Assets\NewStoreLogo.scale-150.png" />
+    <Content Include="Assets\NewStoreLogo.scale-200.png" />
+    <Content Include="Assets\NewStoreLogo.scale-400.png" />
+    <Content Include="Assets\SplashScreen.scale-100.png" />
+    <Content Include="Assets\SplashScreen.scale-125.png" />
+    <Content Include="Assets\SplashScreen.scale-150.png" />
+    <Content Include="Assets\SplashScreen.scale-400.png" />
+    <Content Include="Assets\Square150x150Logo.scale-100.png" />
+    <Content Include="Assets\Square150x150Logo.scale-125.png" />
+    <Content Include="Assets\Square150x150Logo.scale-150.png" />
+    <Content Include="Assets\Square150x150Logo.scale-400.png" />
+    <Content Include="Assets\Square310x310Logo.scale-100.png" />
+    <Content Include="Assets\Square310x310Logo.scale-125.png" />
+    <Content Include="Assets\Square310x310Logo.scale-150.png" />
+    <Content Include="Assets\Square310x310Logo.scale-200.png" />
+    <Content Include="Assets\Square310x310Logo.scale-400.png" />
+    <Content Include="Assets\Square44x44Logo.scale-100.png" />
+    <Content Include="Assets\Square44x44Logo.scale-125.png" />
+    <Content Include="Assets\Square44x44Logo.scale-150.png" />
+    <Content Include="Assets\Square44x44Logo.scale-400.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-16.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-16_altform-unplated.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-24.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-256.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-256_altform-unplated.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-32.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-32_altform-unplated.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-48.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-48_altform-unplated.png" />
+    <Content Include="Assets\Square71x71Logo.scale-100.png" />
+    <Content Include="Assets\Square71x71Logo.scale-125.png" />
+    <Content Include="Assets\Square71x71Logo.scale-150.png" />
+    <Content Include="Assets\Square71x71Logo.scale-200.png" />
+    <Content Include="Assets\Square71x71Logo.scale-400.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-100.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-125.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-150.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-400.png" />
+    <Content Include="Help.htm" />
+    <None Include="Package.StoreAssociation.xml" />
+    <Content Include="Properties\Default.rd.xml" />
+    <Content Include="Assets\LockScreenLogo.scale-200.png" />
+    <Content Include="Assets\SplashScreen.scale-200.png" />
+    <Content Include="Assets\Square150x150Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
+    <Content Include="Assets\StoreLogo.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Styles\Custom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Styles\CustomListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Styles\CustomPivot.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Usercontrols\ActionButtonControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Usercontrols\AdsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Usercontrols\TabHeader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BuscaFilterPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BuscaPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Busy.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\CategoriaPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DeviceFamily-Mobile\BuscaPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LoginPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PerguntarPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProdutoDescricaoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProdutoDetalhePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProdutoPerguntasPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Secure\AlterarAtributoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Secure\AnunciosAlterarExposicaoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Secure\AnunciosDetalhePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Secure\AnunciosPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Secure\CompraDetalhePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Secure\CompraQualificarPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Secure\ComprarItemPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Secure\ComprasPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Secure\FavoritesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Secure\PerguntasComprasPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Secure\PerguntasVendasDetalhesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Secure\PerguntasVendasPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Secure\VendaDetalhePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Secure\VendasPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Secure\VendedorInfoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Shell.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Splash.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Secure\VendaQualificarPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="Microsoft.Advertising.Xaml, Version=10.0">
+      <Name>Microsoft Advertising SDK for XAML</Name>
+    </SDKReference>
+    <SDKReference Include="Microsoft.VCLibs, Version=14.0">
+      <Name>Visual C++ 2015 Runtime for Universal Windows Platform Apps</Name>
+    </SDKReference>
+    <SDKReference Include="SQLite.UAP.2015, Version=3.10.2">
+      <Name>SQLite for Universal App Platform</Name>
+    </SDKReference>
+    <SDKReference Include="WindowsDesktop, Version=10.0.10586.0">
+      <Name>Windows Desktop Extensions for the UWP</Name>
+    </SDKReference>
+    <SDKReference Include="WindowsMobile, Version=10.0.10586.0">
+      <Name>Windows Mobile Extensions for the UWP</Name>
+    </SDKReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MyML.BackgroundHelper\MyML.BackgroundHelper.csproj">
+      <Project>{b0c70df6-2d38-40c5-bc0c-1a4cdc3aa639}</Project>
+      <Name>MyML.BackgroundHelper</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

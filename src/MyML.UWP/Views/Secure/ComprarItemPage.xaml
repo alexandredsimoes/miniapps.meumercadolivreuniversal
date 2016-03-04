@@ -1,0 +1,121 @@
+﻿<Page
+    x:Class="MyML.UWP.Views.Secure.ComprarItemPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MyML.UWP.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:Behaviors="using:Template10.Behaviors"
+    xmlns:MyBehaviors="using:MyML.UWP.Behaviors"
+    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:controls="using:Template10.Controls"
+    xmlns:converters="using:MyML.UWP.Converters"
+    xmlns:convertersML="using:MyML.UWP.Converters.MercadoLivre"
+    xmlns:designViewModels="using:MyML.UWP.ViewModels.Design"
+    d:DataContext="{d:DesignInstance designViewModels:BuscaPageDesignViewModel, IsDesignTimeCreatable=True}"
+    x:Name="ThePage">
+    <Page.DataContext>
+        <Binding Source="{StaticResource Locator}" Path="ComprarItemPage" />
+    </Page.DataContext>
+
+    <Page.Resources>
+        <converters:ValueToInvisibilityConverter x:Key="ValueToInvisibilityConverter"/>
+        <converters:StringFormatConverter x:Key="StringFormatConverter" />
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <converters:InvertedBoolToVisibilityConverter x:Key="InvertedBoolToVisibilityConverter" />
+        <converters:NullToVisibilitConverter x:Key="NullToVisibilitConverter" />
+        <convertersML:FavoritesOpacityConverter x:Key="FavoritesOpacityConverter" />
+        <convertersML:ReputationHeightConverter x:Key="ReputationHeightConverter" />
+        <convertersML:UserStatusConverter x:Key="UserStatusConverter" />
+
+    </Page.Resources>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="AdaptiveVisualStateGroup">
+                <VisualState x:Name="VisualStateNarrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!--  TODO: change properties for narrow view  -->
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="VisualStateNormal">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!--  TODO: change properties for normal view  -->
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="VisualStateWide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource WideMinWidth}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!--  TODO: change properties for wide view  -->
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <!--  page header  -->
+        <controls:PageHeader Content="Sua compra" Background="{StaticResource MercadoLivreBackgroundColor}" Foreground="{StaticResource MercadoLivreForegroundColor}">
+
+        </controls:PageHeader>
+
+        <!--  page content  -->
+        <StackPanel Grid.Row="1">
+            <Border Margin="10" Padding="10" Background="#0C000000">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" Grid.Row="0" Source="{Binding SelectedItem.thumbnail}" Height="80" Margin="0,0,0,20"/>
+                    <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding SelectedItem.title}" TextWrapping="Wrap" Style="{StaticResource TitleTextBlockStyle}" />
+                    <Line Grid.ColumnSpan="2" X1="1000" Grid.Row="1" Margin="0" Stroke="#7F000000" VerticalAlignment="Top" />
+
+                    <TextBlock Margin="0,10,0,0" Text="Quantidade" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" />
+                    <ComboBox Grid.Column="1" Grid.Row="1" Margin="0,10,0,0" HorizontalAlignment="Right" SelectedIndex="-1" ItemsSource="{Binding Quantities}" />
+                </Grid>
+            </Border>
+
+            <TextBlock Text="Forma de envio" Style="{StaticResource SubtitleTextBlockStyle}" Margin="10" />
+            <Border Margin="10" Padding="10" Background="#0C000000">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" Grid.Row="0" Source="{Binding SelectedItem.thumbnail}" Height="80" Margin="0,0,0,20"/>
+                    <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding SelectedItem.title}" TextWrapping="Wrap" Style="{StaticResource TitleTextBlockStyle}" />
+                    <Line Grid.ColumnSpan="2" X1="1000" Grid.Row="1" Margin="0" Stroke="#7F000000" VerticalAlignment="Top" />
+
+                    <TextBlock Margin="0,10,0,0" Text="Quantidade" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" />
+                    <ComboBox Grid.Column="1" Grid.Row="1" Margin="0,10,0,0" HorizontalAlignment="Right" SelectedIndex="-1" ItemsSource="{Binding Quantities}" />
+                </Grid>
+            </Border>
+        </StackPanel>
+        
+    </Grid>
+</Page>
+

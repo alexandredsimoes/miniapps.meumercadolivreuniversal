@@ -1,0 +1,507 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ApplicationName" xml:space="preserve">
+    <value>Meu MercadoLivre Universal</value>
+  </data>
+  <data name="ApplicationTitle" xml:space="preserve">
+    <value>Meu MercadoLivre</value>
+  </data>
+  <data name="BuscaTextBox.PlaceholderText" xml:space="preserve">
+    <value>O que você procura?</value>
+  </data>
+  <data name="BuyProductPagePaymentMethod" xml:space="preserve">
+    <value>Pagamento: {0}</value>
+  </data>
+  <data name="BuyProductPageSelectedQuantityContent" xml:space="preserve">
+    <value>Quantidade: {0}</value>
+  </data>
+  <data name="BuyProductPageShippingMethod" xml:space="preserve">
+    <value>Forma de envio: {0}</value>
+  </data>
+  <data name="BuyProductPageShippingMethodList" xml:space="preserve">
+    <value>Não selecionado;Combinar com o vendedor;Pagarei o frete</value>
+  </data>
+  <data name="BuyProductPageTitleTextBlock.Text" xml:space="preserve">
+    <value>Sua compra</value>
+  </data>
+  <data name="ConfigurationPagePersonalInfoTextBlock.Text" xml:space="preserve">
+    <value>Altere seus dados pessoais como nome, telefone, endereços</value>
+  </data>
+  <data name="ConfigurationPagePersonalInfoTextBlockTitle.Text" xml:space="preserve">
+    <value>Dados pessoais</value>
+  </data>
+  <data name="EmptyDataTemplateText.Text" xml:space="preserve">
+    <value>Nenhum item encontrado</value>
+  </data>
+  <data name="ItensPageAvailableTextBlock.Text" xml:space="preserve">
+    <value>disponível</value>
+  </data>
+  <data name="ItensPageMenuItemFinalize.Text" xml:space="preserve">
+    <value>Isso mesmo, pode finalizar</value>
+  </data>
+  <data name="ItensPageMenuItemRemove.Text" xml:space="preserve">
+    <value>Isso mesmo, pode excluir</value>
+  </data>
+  <data name="ItensPageMsgRemoveProductOK" xml:space="preserve">
+    <value>Seu produto foi excluído com sucesso!</value>
+  </data>
+  <data name="ItensPageStopTimeTextBlock.Text" xml:space="preserve">
+    <value>Finaliza em</value>
+  </data>
+  <data name="ItensPageTitle.Text" xml:space="preserve">
+    <value>Meus anúncios</value>
+  </data>
+  <data name="MainPageAccountBalance.Text" xml:space="preserve">
+    <value>Em conta</value>
+  </data>
+  <data name="MainPageAccountBalanceUnavailable.Text" xml:space="preserve">
+    <value>Indisponível</value>
+  </data>
+  <data name="MainPageAccountBalanceWithDraw.Text" xml:space="preserve">
+    <value>Disponível</value>
+  </data>
+  <data name="MainPageNotAuthenticatedButton.Content" xml:space="preserve">
+    <value>Entrar na minha conta</value>
+  </data>
+  <data name="MainPageNotAuthenticatedTextBlock.Text" xml:space="preserve">
+    <value>Para visualizar sua área segura, é preciso que você efetue o login no Mercado Livre</value>
+  </data>
+  <data name="MainPageViewModelMsgEmailLog" xml:space="preserve">
+    <value>Seu arquivo de log de erros será compatilhado com o desenvolvedor. Esse arquivo não contém suas informações pessoais. Deseja continuar?</value>
+  </data>
+  <data name="MainPageViewModelNotLogMessage" xml:space="preserve">
+    <value>Não foi gerado nenhum arquivo até o momento. Nada será enviado.</value>
+  </data>
+  <data name="MLFeedbackRatingNegative" xml:space="preserve">
+    <value>Negativo</value>
+  </data>
+  <data name="MLFeedbackRatingNeutral" xml:space="preserve">
+    <value>Neutro</value>
+  </data>
+  <data name="MLFeedbackRatingPositive" xml:space="preserve">
+    <value>Positivo</value>
+  </data>
+  <data name="MLOrderPaymentStatusDetailAccredited" xml:space="preserve">
+    <value>Pagamento recebido</value>
+  </data>
+  <data name="MLOrderPaymentStatusDetailApproved" xml:space="preserve">
+    <value>Pagamento aprovado</value>
+  </data>
+  <data name="MLOrderPaymentStatusDetailCancelled" xml:space="preserve">
+    <value>Pagamento cancelado</value>
+  </data>
+  <data name="MLOrderPaymentStatusDetailInMediation" xml:space="preserve">
+    <value>Pagamento em mediação</value>
+  </data>
+  <data name="MLOrderPaymentStatusDetailInProcess" xml:space="preserve">
+    <value>Pagamento em processamento</value>
+  </data>
+  <data name="MLOrderPaymentStatusDetailPending" xml:space="preserve">
+    <value>Pagamento pendente</value>
+  </data>
+  <data name="MLOrderPaymentStatusDetailRefunded" xml:space="preserve">
+    <value>Pagamento devolvido</value>
+  </data>
+  <data name="MLOrderPaymentStatusDetailRejected" xml:space="preserve">
+    <value>Pagamento rejeitado</value>
+  </data>
+  <data name="MLOrderPaymentTypeCreditCard" xml:space="preserve">
+    <value>Cartão de crédito</value>
+  </data>
+  <data name="MLOrderPaymentTypeMoney" xml:space="preserve">
+    <value>Dinheiro</value>
+  </data>
+  <data name="MLOrderPaymentTypeTicket" xml:space="preserve">
+    <value>Boleto</value>
+  </data>
+  <data name="MLOrderShipStatusCancelled" xml:space="preserve">
+    <value>Envio cancelado</value>
+  </data>
+  <data name="MLOrderShipStatusDelivered" xml:space="preserve">
+    <value>Entregue</value>
+  </data>
+  <data name="MLOrderShipStatusHandling" xml:space="preserve">
+    <value>Pronto para o envio.</value>
+  </data>
+  <data name="MLOrderShipStatusNotDelivered" xml:space="preserve">
+    <value>Não entregue</value>
+  </data>
+  <data name="MLOrderShipStatusNotVerified" xml:space="preserve">
+    <value>Não verificado</value>
+  </data>
+  <data name="MLOrderShipStatusPending" xml:space="preserve">
+    <value>Envio pendente</value>
+  </data>
+  <data name="MLOrderShipStatusShipped" xml:space="preserve">
+    <value>Enviado</value>
+  </data>
+  <data name="MLStatusConfirmed" xml:space="preserve">
+    <value>Pedido confirmado</value>
+  </data>
+  <data name="MLStatusPaid" xml:space="preserve">
+    <value>Pedido pago</value>
+  </data>
+  <data name="MLStatusPaymentCancelled" xml:space="preserve">
+    <value>Pagamento cancelado</value>
+  </data>
+  <data name="MLStatusPaymentInvalid" xml:space="preserve">
+    <value>Pagamento inválido</value>
+  </data>
+  <data name="MLStatusPaymentProccess" xml:space="preserve">
+    <value>Processamento pagamento</value>
+  </data>
+  <data name="MLStatusPaymentRequired" xml:space="preserve">
+    <value>Compra incompleta</value>
+  </data>
+  <data name="ModifyItemMsg" xml:space="preserve">
+    <value>Deseja alterar os dados desse produto?</value>
+  </data>
+  <data name="ModifyItemMsgNOK" xml:space="preserve">
+    <value>Não foi possível alterar seu produto. Tente novamente mais tarde.</value>
+  </data>
+  <data name="ModifyItemMsgOK" xml:space="preserve">
+    <value>Seu produto foi alterado com sucesso! </value>
+  </data>
+  <data name="ModifyItemMsgRelist" xml:space="preserve">
+    <value>Deseja recadastrar esse produto?</value>
+  </data>
+  <data name="ModifyItemMsgRelistNOK" xml:space="preserve">
+    <value>Não foi possível recadastrar seu produto. Tente novamente mais tarde.</value>
+  </data>
+  <data name="ModifyItemMsgRelistOK" xml:space="preserve">
+    <value>Seu produto foi recadastrado com sucesso! Em breve ele aparecerá na sua lista.</value>
+  </data>
+  <data name="ModifyItemPageTitleTextBlock.Text" xml:space="preserve">
+    <value>Modificar</value>
+  </data>
+  <data name="ModifyItemRefreshButton.Label" xml:space="preserve">
+    <value>recarregar</value>
+  </data>
+  <data name="ModifyItemRelistButton.Label" xml:space="preserve">
+    <value>confirmar</value>
+  </data>
+  <data name="MsgVotar5Estrelas" xml:space="preserve">
+    <value>Está gostando do nosso aplicativo? Aproveita e dê 5 estrelas pra ele, é rapidinho. :P</value>
+  </data>
+  <data name="MustLoggedMessage" xml:space="preserve">
+    <value>Você precisa logar antes para ver seus dados pessoais.</value>
+  </data>
+  <data name="MyOrdersPageTitleTextBlock.Text" xml:space="preserve">
+    <value>Minhas compras</value>
+  </data>
+  <data name="MyOrdersStateBuyQualifiedTextBlock.Text" xml:space="preserve">
+    <value>Você qualificou </value>
+  </data>
+  <data name="MyOrdersStateSellQualifiedTextBlock.Text" xml:space="preserve">
+    <value>O vendedor qualificou você </value>
+  </data>
+  <data name="NavMenuItemConfiguracoes" xml:space="preserve">
+    <value>Configurações</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Não</value>
+  </data>
+  <data name="NotAuthenticatedMessage" xml:space="preserve">
+    <value>É preciso estar logado para utilizar esse recurso.</value>
+  </data>
+  <data name="OrdersPageTitleTextBlock.Text" xml:space="preserve">
+    <value>Minhas vendas</value>
+  </data>
+  <data name="OrdersPageViewModelErrorLoading" xml:space="preserve">
+    <value>Não foi possível listar suas vendas. Verifique se há conexão com a internet.</value>
+  </data>
+  <data name="OrdersPageViewModelMsgAddContact" xml:space="preserve">
+    <value>Deseja adicionar essa pessoa como seu contato?</value>
+  </data>
+  <data name="PageTitleHeader.Content" xml:space="preserve">
+    <value>Meu MercadoLivre Universal</value>
+  </data>
+  <data name="PeronalInfoPageTitleTextBlock.Text" xml:space="preserve">
+    <value>Dados pessoais</value>
+  </data>
+  <data name="PersonalInfoAccountAddressTitle.Text" xml:space="preserve">
+    <value>Endereços</value>
+  </data>
+  <data name="PersonalInfoPageAccountNickName.Text" xml:space="preserve">
+    <value>Apelido:</value>
+  </data>
+  <data name="PersonalInfoPageAccountPassword.Text" xml:space="preserve">
+    <value>Senha</value>
+  </data>
+  <data name="PersonalInfoPageCancelNicknameButton.Content" xml:space="preserve">
+    <value>cancelar</value>
+  </data>
+  <data name="PersonalInfoPageEmail.Text" xml:space="preserve">
+    <value>E-mail: </value>
+  </data>
+  <data name="PersonalInfoPageModifyNickNameTextBox.PlaceholderText" xml:space="preserve">
+    <value>Novo apelido</value>
+  </data>
+  <data name="PersonalInfoPageModifyNickNameTitle.Text" xml:space="preserve">
+    <value>Modificar apelido</value>
+  </data>
+  <data name="PersonalInfoPagePhone.Text" xml:space="preserve">
+    <value>Telefones: </value>
+  </data>
+  <data name="ProductSearchResultaPageSellerInfoPoints" xml:space="preserve">
+    <value>pontos obtidos com suas compras e vendas</value>
+  </data>
+  <data name="ProductSearchResultaPageSellerInfoTransactionsTotal" xml:space="preserve">
+    <value>vendas concretizadas</value>
+  </data>
+  <data name="ProductSearchResultPageButtonFilter.Label" xml:space="preserve">
+    <value>filtrar</value>
+  </data>
+  <data name="ProductSearchResultPageFlyoutFilterTitle.Text" xml:space="preserve">
+    <value>Filtrar resultados</value>
+  </data>
+  <data name="ProductSearchResultPageViewModelErrorLoadingShippingInfo" xml:space="preserve">
+    <value>Não foi possível localizar os dados de entrega para esse CEP.</value>
+  </data>
+  <data name="ProductSearchResultPageViewModelNoItemsFound" xml:space="preserve">
+    <value>Nenhum item localizado. Verifique se sua conexão de internet está ativa</value>
+  </data>
+  <data name="ProductSearchResultPageViewModelQuestionEmpty" xml:space="preserve">
+    <value>Você precisa informar sua pergunta antes de enviar.</value>
+  </data>
+  <data name="ProductSearchResultPageViewModelQuestionMustLogged" xml:space="preserve">
+    <value>Você precisa estar logado para enviar suas questões.</value>
+  </data>
+  <data name="ProductSearchResultPageViewModelQuestionNotSend" xml:space="preserve">
+    <value>Não foi possível enviar sua pergunta. Tente novamente mais tarde.</value>
+  </data>
+  <data name="ProductSearchResultPageViewModelQuestionSend" xml:space="preserve">
+    <value>Sua pergunta foi enviada ao vendedor.</value>
+  </data>
+  <data name="ProductSearchResultPageViewModelShippingZipCodeEmpty" xml:space="preserve">
+    <value>Informe seu CEP antes de calcular</value>
+  </data>
+  <data name="QuestionDetailPageMsgAnsweError" xml:space="preserve">
+    <value>Não foi possível enviar a resposta para essa pergunta. Tente novamente mais tarde.</value>
+  </data>
+  <data name="QuestionDetailPageMsgEmptyAnswer" xml:space="preserve">
+    <value>É necessário que você informe uma resposta para enviar.</value>
+  </data>
+  <data name="QuestionDetailPageMsgRemoverItem" xml:space="preserve">
+    <value>Deseja realmente remover essa pergunta? Isso não poderá ser desfeito.</value>
+  </data>
+  <data name="QuestionDetailPageMsgRemoverItemError" xml:space="preserve">
+    <value>Não foi possível remover essa pergunta. Tente novamente mais tarde.</value>
+  </data>
+  <data name="RelistItemPageTitleTextBlock.Text" xml:space="preserve">
+    <value>Modificar e recadastrar</value>
+  </data>
+  <data name="SellProductPageMaxImages" xml:space="preserve">
+    <value>É permitido adicionar até 5 imagens</value>
+  </data>
+  <data name="SellProductPagePrice" xml:space="preserve">
+    <value>Informe o valor unitário do produto</value>
+  </data>
+  <data name="SellProductPageQuantity" xml:space="preserve">
+    <value>Informe a quantidade disponível</value>
+  </data>
+  <data name="SellProductPageTitle" xml:space="preserve">
+    <value>Informe o título do produto</value>
+  </data>
+  <data name="ShareLogText" xml:space="preserve">
+    <value>Estou enviando meu arquivo de log em anexo.</value>
+  </data>
+  <data name="StateBuyQualifiedTextBlock.Text" xml:space="preserve">
+    <value>O comprador qualificou você</value>
+  </data>
+  <data name="StateSellQualifiedTextBlock.Text" xml:space="preserve">
+    <value>Você qualificou</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Sim</value>
+  </data>
+  <data name="UserStatusgold" xml:space="preserve">
+    <value>Mercadolíder Ouro</value>
+  </data>
+  <data name="UserStatusNull" xml:space="preserve">
+    <value>Sem status</value>
+  </data>
+  <data name="UserStatusplatinum" xml:space="preserve">
+    <value>Mercadolíder Platinum</value>
+  </data>
+  <data name="UserStatussilver" xml:space="preserve">
+    <value>Mercadolíder Prata</value>
+  </data>
+  <data name="PerguntaPageEmptyQuestion" xml:space="preserve">
+    <value>É necessário informar sua pergunta antes de enviar</value>
+  </data>
+  <data name="MsgNotAuthenticated" xml:space="preserve">
+    <value>Você precisa logar antes para visualizar essa área</value>
+  </data>
+  <data name="PerguntasComprasPageMsgErrorLoadQuestionDetail" xml:space="preserve">
+    <value>Não foi possível obter detalhes da pergunta. Verifique se sua conexão de internet está ativa.</value>
+  </data>
+  <data name="AnunciosDetalhePageDescriptionHtml" xml:space="preserve">
+    <value>Anúncio com descrição em HTML</value>
+  </data>
+  <data name="AnunciosDetalhePageFinalizar" xml:space="preserve">
+    <value>Faltam {0} dias deste anúncio.</value>
+  </data>
+  <data name="AnunciosDetalhePageFinalizarTitle" xml:space="preserve">
+    <value>Finalizar anúncio</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="Finalize" xml:space="preserve">
+    <value>Finalizar</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Remover</value>
+  </data>
+  <data name="AnunciosDetalhePageRemover" xml:space="preserve">
+    <value>Excluir anúncio?</value>
+  </data>
+  <data name="MsgDeviceCallNotFound" xml:space="preserve">
+    <value>Opção não disponivel para este dispositivo</value>
+  </data>
+  <data name="SobreEmail" xml:space="preserve">
+    <value>alexandre.dias.simoes@outlook.com</value>
+  </data>
+  <data name="SobreEmailAssunto" xml:space="preserve">
+    <value>Sugestões - Meu MercadoLivre Universal</value>
+  </data>
+  <data name="SobreEmailBody" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PerguntasVendasDetalhesPageMsgEmptyAnswer" xml:space="preserve">
+    <value>Infome sua resposta antes de enviar.</value>
+  </data>
+  <data name="MsgPerguntaAvaliacao" xml:space="preserve">
+    <value>Gostando do aplicativo? Então, diz pra gente o que você achou. Deseja avaliar agora?</value>
+  </data>
+  <data name="MsgPerguntaFeedback" xml:space="preserve">
+    <value>Tudo bem, então gostaria de enviar um feedback por e-mail?</value>
+  </data>
+  <data name="ConfigurationPageCompraEfetuada" xml:space="preserve">
+    <value>Compra efetuada com sucesso. Reinicie o aplicativo para remover a propaganda.</value>
+  </data>
+  <data name="ConfigurationPageCompraJaEfetuada" xml:space="preserve">
+    <value>Você já possue esse recurso. Obrigado pelo suporte!</value>
+  </data>
+  <data name="ConfigurationPageCompraNaoEfetuada" xml:space="preserve">
+    <value>Não foi possível finalizar a compra</value>
+  </data>
+</root>

@@ -1,0 +1,374 @@
+﻿<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MyML.UWP.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Behaviors="using:Template10.Behaviors"
+    xmlns:MyBehaviors="using:MyML.UWP.Behaviors"
+    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:controls="using:Template10.Controls"
+    xmlns:converters="using:MyML.UWP.Converters"
+    xmlns:convertersML="using:MyML.UWP.Converters.MercadoLivre"
+    xmlns:designViewModels="using:MyML.UWP.ViewModels.Design"
+    xmlns:uc="using:MyML.UWP.Usercontrols"
+    xmlns:WindowsStateTriggers="using:WindowsStateTriggers"
+    x:Class="MyML.UWP.Views.Secure.CompraDetalhePage"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance designViewModels:BuscaPageDesignViewModel, IsDesignTimeCreatable=True}"
+    x:Name="This">
+
+    <Page.Resources>
+        <converters:NullToVisibilitConverter x:Key="NullToVisibilitConverter"/>
+        <converters:InverterNullToVisibilityConverter x:Key="InverterNullToVisibilityConverter"/>
+
+        <converters:ObjetctToPropertyConverter x:Key="ObjetctToPropertyConverter" />
+        <converters:StringFormatConverter x:Key="StringFormatConverter" />
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <converters:InvertedBoolToVisibilityConverter x:Key="InvertedBoolToVisibilityConverter" />
+        <convertersML:OrderStatusToStringConverter x:Key="OrderStatusToStringConverter" />
+        <convertersML:OrderPaymentTypeConverter x:Key="OrderPaymentTypeConverter" />
+        <convertersML:OrderPaymentStatusDetailConverter x:Key="OrderPaymentStatusDetailConverter" />
+        <convertersML:OrderShipStatusDetailConverter x:Key="OrderShipStatusDetailConverter" />
+        <convertersML:FeedbackRatingConverter x:Key="FeedbackRatingConverter" />
+    </Page.Resources>
+
+    <Page.DataContext>
+        <Binding Source="{StaticResource Locator}" Path="CompraDetalhePage" />
+    </Page.DataContext>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <VisualStateManager.VisualStateGroups>
+
+            <VisualStateGroup x:Name="VisualsStateGroup">
+                <!--Exibe ou oculta alguns controls de acordo com o SHIPPING da compra -->
+                <VisualState x:Name="VisualsShipping">
+                    <VisualState.Setters>
+                        <Setter Target="ShipDateTextBlock.Visibility" Value="Collapsed"/>
+                        <Setter Target="ShipMethodTextBlock.Visibility" Value="Collapsed"/>
+                        <Setter Target="ShipTrackNumberTextBlock.Visibility" Value="Collapsed"/>
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <WindowsStateTriggers:NotEqualStateTrigger NotEqualTo="shipped" Value="{Binding OrderInfo.shipping.status}" />
+                    </VisualState.StateTriggers>
+                </VisualState>
+
+                <!--Exibe ou oculta alguns controls de acordo com o FEEDBACK(PURCHASE) da compra -->
+                <VisualState x:Name="VisualsFeedbackPurchase">
+                    <VisualState.StateTriggers>
+                        <WindowsStateTriggers:IsFalseStateTrigger Value="{Binding HasPurchaseFeedback}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="FeedBackPurchaseRating.Visibility" Value="Collapsed"/>
+                        <Setter Target="FeedBackPurchaseMessage.Visibility" Value="Collapsed"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+
+            <VisualStateGroup>
+                <!--Exibe ou oculta alguns controls de acordo com o FEEDBACK(SALE) da compra -->
+                <VisualState x:Name="VisualsFeedbackSale">
+                    <VisualState.Setters>
+                        <Setter Target="FeedBackSaleRating.Visibility" Value="Collapsed"/>
+                        <Setter Target="FeedBackSaleMessage.Visibility" Value="Collapsed"/>
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <WindowsStateTriggers:IsFalseStateTrigger Value="{Binding HasSaleFeedback}" />
+                    </VisualState.StateTriggers>
+                </VisualState>
+            </VisualStateGroup>
+
+            <VisualStateGroup x:Name="AdaptiveVisualStateGroup">
+                <!--Exibe ou oculta alguns controls de acordo com o status da compra -->
+                <VisualState x:Name="VisualsPayment">
+                    <VisualState.Setters>
+                        <Setter Target="CompletarCompraButton.Visibility" Value="Visible"/>
+                        <Setter Target="VendedorBorder.Visibility" Value="Collapsed"/>
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <WindowsStateTriggers:EqualsStateTrigger Value="{Binding OrderInfo.status}" EqualTo="payment_required"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+
+                <VisualState x:Name="VisualStateNarrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}" />
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="VisualStateNormal">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}" />
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="VisualStateWide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource WideMinWidth}" />
+                    </VisualState.StateTriggers>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <!--  page header  -->
+        <controls:PageHeader Content="Detalhe da compra" Background="{StaticResource MercadoLivreBackgroundColor}" Foreground="{StaticResource MercadoLivreForegroundColor}"/>
+        <ScrollViewer Grid.Row="1" Padding="10">
+            <StackPanel Padding="0,0,10,0">
+                <!--Detalhe da compra-->
+                <Border BorderBrush="#300E0D0D" BorderThickness="0.5" Margin="0,5" Background="#05000000" CornerRadius="5" Padding="5">
+                    <Grid Margin="0,0,0,10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Ellipse Width="80" Grid.Column="0" Height="80">
+                            <Ellipse.Fill>
+                                <ImageBrush>
+                                    <ImageBrush.ImageSource>
+                                        <BitmapImage DecodePixelHeight="80" DecodePixelWidth="80" UriSource="{Binding OrderInfo.order_items[0].item.thumbnail}" />
+                                    </ImageBrush.ImageSource>
+                                </ImageBrush>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                            <TextBlock Text="{Binding OrderInfo.order_items[0].item.title}" TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}" />
+                            <TextBlock x:Name="PrecoTextBlock" Grid.Row="1" Text="{Binding OrderInfo.total_amount, ConverterParameter=\{0:c2\}, Converter={StaticResource StringFormatConverter}}" Style="{StaticResource BodyTextBlockStyle}"  TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FFBB0000" FontWeight="Bold" />
+                        </StackPanel>
+                        <Border Grid.Row="2" Grid.ColumnSpan="2" BorderBrush="#2B000000" BorderThickness="0,0.5,0,0" Margin="0,10,0,0" />
+                        <StackPanel Grid.ColumnSpan="2" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5,7,0,0">
+                            <Path Data="M29.876316,14.622148C29.371618,14.616776 28.805393,14.710572 28.382732,15.059728 27.931944,15.43251 27.696049,16.061815 27.677158,16.936251L27.677101,17 30,17 30,14.626769z M2,14.058598L2,17 4.424633,17 4.434906,16.941517C4.533145,16.353569 4.5839672,15.396526 4.0602403,14.763309 3.6867125,14.312605 3.0549777,14.077317 2.1814904,14.058709z M15.35298,4.086997L16.53898,4.086997 16.53898,5.2899981C17.450981,5.316998,18.072981,5.5099978,18.53598,5.7169981L18.144981,6.907999C17.797981,6.7659988 17.16198,6.467999 16.17798,6.467999 15.16498,6.467999 14.802979,6.9339991 14.802979,7.3729997 14.802979,7.9039998 15.32498,8.2010002 16.55398,8.6420002 18.173981,9.1860008 18.89698,9.8840017 18.89698,11.035003 18.89698,12.135003 18.04298,13.106004 16.45298,13.339005L16.45298,14.672006 15.26598,14.672006 15.26598,13.416004C14.35498,13.391005,13.443979,13.157004,12.922979,12.847004L13.31398,11.631003C13.87698,11.928003 14.68798,12.200004 15.56998,12.200004 16.481979,12.200004 17.103981,11.799003 17.103981,11.178002 17.103981,10.596003 16.596981,10.221002 15.52698,9.8710012 14.007979,9.3790016 13.023979,8.7580004 13.023979,7.5549998 13.023979,6.441999 13.89198,5.5879979 15.35298,5.355998z M15.772015,2.4400101C11.993011,2.4400103 8.9180079,5.5150061 8.9180079,9.295001 8.9180079,13.074995 11.993011,16.149992 15.772015,16.149992 19.552017,16.149992 22.627022,13.074995 22.627022,9.295001 22.627022,5.5150061 19.552017,2.4400103 15.772015,2.4400101z M27.837694,2L27.841438,2.1944275C27.863852,2.6385 27.975515,3.1061273 28.274788,3.4680042 28.615812,3.8811939 29.174749,4.1105194 29.938923,4.1608548L30,4.1635137 30,2z M18.678898,2L18.826502,2.0583081C21.64477,3.2524467 23.627022,6.0467553 23.627022,9.295001 23.627022,13.085496 20.928957,16.256601 17.353006,16.99015L17.297993,17 26.678589,17 26.682373,16.79674C26.729532,15.673656 27.086374,14.831709 27.74868,14.285661 28.356419,13.784242 29.111933,13.632745 29.777134,13.623474L30,13.626774 30,5.1664357 29.818508,5.1562376C28.791468,5.0779657 28.014519,4.7258859 27.50173,4.1020079 27.000317,3.4934421 26.848822,2.7378755 26.839468,2.0727968L26.840534,2z M5.5980649,2L5.587491,2.1600213C5.497273,3.1463859 5.1473155,3.8955059 4.5402184,4.3960075 3.9111826,4.9140096 3.1251376,5.05901 2.4440985,5.05901 2.3410928,5.05901 2.2404778,5.0556974 2.1431675,5.0498676L2,5.0393486 2,13.060964 2.0377431,13.060036C3.3058872,13.056018 4.2425666,13.412822 4.8332982,14.129374 5.5496016,14.99866 5.5517893,16.167915 5.4456191,16.944828L5.4375205,17 14.246076,17 14.191066,16.99015C10.615307,16.256601 7.9180064,13.085496 7.9180064,9.295001 7.9180064,6.0467553 9.8996964,3.2524467 12.717684,2.0583081L12.865273,2z M2,2L2,4.0346346 2.2007098,4.0520062C2.7526164,4.0870066 3.4231548,4.0215063 3.9061823,3.622005 4.2818289,3.3113787 4.5078573,2.8226271 4.5835352,2.1623416L4.5980678,2z M0,0L32,0 32,19 0,19z" Stretch="Uniform" Width="26" Height="26" Margin="0,6,0,0" RenderTransformOrigin="0.5,0.5">
+                                <Path.Fill>
+                                    <SolidColorBrush Color="{ThemeResource SystemBaseHighColor}"/>
+                                </Path.Fill>
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <RotateTransform Angle="0" />
+                                        <ScaleTransform ScaleX="1" ScaleY="1" />
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                            <TextBlock Grid.Row="2" Text="{Binding OrderInfo.status, Converter={StaticResource OrderStatusToStringConverter}}" Style="{StaticResource BodyTextBlockStyle}" Grid.ColumnSpan="2" Margin="10,10,0,0" />
+                        </StackPanel>
+                        <Button Grid.Row="3" x:Name="CompletarCompraButton" Grid.ColumnSpan="2" Content="Completar a compra" HorizontalAlignment="Stretch" Margin="0,10,0,0" FontWeight="Bold" Visibility="Collapsed"/>
+
+                    </Grid>
+                </Border>
+
+                <!--Detalhe do vendedor-->
+                <Border x:Name="VendedorBorder" BorderBrush="#300E0D0D" BorderThickness="0.5" Margin="0,5" Background="#05000000" CornerRadius="5" Padding="5" Visibility="Visible">
+                    <Grid Margin="0,0,0,10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Border Grid.Row="0" BorderBrush="#2B000000" BorderThickness="0,0.5,0,0" VerticalAlignment="Bottom"/>
+                        <TextBlock Text="Vendedor" Grid.Row="0" Style="{StaticResource SubtitleTextBlockStyle}" />
+                        <StackPanel Grid.Column="1" Grid.Row="1">
+                            <TextBlock Text="{Binding OrderInfo.seller.first_name}" TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}" />
+                            <TextBlock TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}">
+								<Run Text="{Binding OrderInfo.seller.phone.area_code}" />
+								<Run Text="{Binding OrderInfo.seller.phone.number}" />
+                            </TextBlock>
+                            <TextBlock Text="{Binding OrderInfo.seller.email}" TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}" />
+                        </StackPanel>
+                        <Border Grid.Row="2" Grid.ColumnSpan="2" BorderBrush="#2B000000" BorderThickness="0,0.6,0,0" Margin="0,10,0,0" />
+                        <Grid Grid.Row="2" Margin="0,15,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            <Button Grid.Column="0" Command="{Binding ElementName=This, Path=DataContext.BuyerAction}" CommandParameter="call" HorizontalAlignment="Stretch" Margin="5">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <FontIcon Glyph="&#xE13A;" Margin="0,0,10,0"  />
+                                    <TextBlock Text="Ligar" Style="{StaticResource BodyTextBlockStyle}" HorizontalAlignment="Center" />
+                                </StackPanel>
+                            </Button>
+
+                            <Button Command="{Binding ElementName=This, Path=DataContext.BuyerAction}" Grid.Column="1" CommandParameter="email" HorizontalAlignment="Stretch" Margin="5">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <FontIcon Glyph="&#xE119;" Margin="0,0,10,0"  />
+                                    <TextBlock Text="E-mail" Style="{StaticResource BodyTextBlockStyle}" HorizontalAlignment="Center" />
+                                </StackPanel>
+                            </Button>
+
+                            <Button Command="{Binding ElementName=This, Path=DataContext.BuyerAction}" Grid.Column="2" CommandParameter="contact" HorizontalAlignment="Stretch" Margin="5">
+                                <StackPanel Orientation="Horizontal">
+                                    <FontIcon Glyph="&#xE1E2;" Margin="0,0,10,0"  />
+                                    <TextBlock Grid.Column="2" Text="Adicionar" Style="{StaticResource BodyTextBlockStyle}" HorizontalAlignment="Center" />
+                                </StackPanel>
+                            </Button>
+
+                        </Grid>
+                    </Grid>
+                </Border>
+                <!-- Detalhes do pagamento-->
+                <Border BorderBrush="#300E0D0D" BorderThickness="0.5" Margin="0,5" CornerRadius="5" Padding="5">
+                    <Border.Background>
+                        <SolidColorBrush Color="{ThemeResource SystemChromeLowColor}"/>
+                    </Border.Background>
+                    <Grid Margin="0,0,0,10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Border Grid.Row="0" BorderBrush="#2B000000" BorderThickness="0,0.5,0,0" VerticalAlignment="Bottom"/>
+                        <TextBlock Text="Pagamento" Grid.Row="0" Style="{StaticResource SubtitleTextBlockStyle}" />
+
+                        <StackPanel Grid.Column="1" Grid.Row="1">
+                            <TextBlock Text="{Binding OrderInfo.payments[0].status, Converter={StaticResource OrderPaymentStatusDetailConverter}}" TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}" />
+                            <TextBlock Text="{Binding OrderInfo.payments[0].payment_type, Converter={StaticResource OrderPaymentTypeConverter}}" TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}" />
+
+                            <Grid Margin="0,15,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Column="0" Grid.Row="0" x:Name="PaymentProductAmount" TextWrapping="Wrap"  Style="{StaticResource BodyTextBlockStyle}">
+								<Run Text="Produto" />
+								<Run Text=" ( x" />
+								<Run Text="{Binding OrderInfo.order_items[0].quantity}"/>
+								<Run Text=" )" />
+                                </TextBlock>
+                                <TextBlock Grid.Column="0" Grid.Row="1" Text="Custo do envio" Style="{StaticResource BodyTextBlockStyle}" />
+                                <TextBlock  Grid.Column="0"  Grid.Row="2" Text="Total a pagar" />
+
+                                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding OrderInfo.total_amount, ConverterParameter=\{0:c2\}, Converter={StaticResource StringFormatConverter}}" HorizontalAlignment="Right"/>
+                                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding OrderInfo.shipping.cost, ConverterParameter=\{0:c2\}, Converter={StaticResource StringFormatConverter}}" HorizontalAlignment="Right"/>
+                                <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding OrderInfo.total_amount_with_shipping, ConverterParameter=\{0:c2\}, Converter={StaticResource StringFormatConverter}}" HorizontalAlignment="Right"/>
+                            </Grid>
+                        </StackPanel>
+
+                    </Grid>
+                </Border>
+                <!-- Detalhes da Entrega-->
+                <Border BorderBrush="#300E0D0D" BorderThickness="0.5" Margin="0,5" CornerRadius="5" Padding="5">
+                    <Border.Background>
+                        <SolidColorBrush Color="{ThemeResource SystemChromeLowColor}"/>
+                    </Border.Background>
+                    <Grid Margin="0,0,0,10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Border Grid.Row="0" BorderBrush="#2B000000" BorderThickness="0,0.5,0,0" VerticalAlignment="Bottom"/>
+                        <TextBlock Text="Entrega" Grid.Row="0" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,0,0,5" />
+
+                        <StackPanel Grid.Column="1" Grid.Row="1">
+                            <StackPanel Orientation="Horizontal">
+                                <Path Data="M26.100006,8.6000139L22.600006,8.6999895 22.600006,11.000011 28.200012,11.000011C27.900024,10.00001,26.100006,8.6000139,26.100006,8.6000139z M0,0L21.900024,0 21.900024,6.2999936 27.300018,6.2999936C30.200012,8.1000139 32,11.000011 32,14.300001 32,15.000014 31.900024,15.600021 31.800018,16.199996L27.800018,16.199996C27.800018,16.40001 27.900024,16.600022 27.900024,16.800004 27.900024,18.400012 26.400024,19.7 24.5,19.7 22.600006,19.7 21.100006,18.400012 21.100006,16.800004 21.100006,16.600022 21.100006,16.40001 21.200012,16.199996L20.300018,16.199996 11,16.199996C11,16.40001 11.100006,16.600022 11.100006,16.800004 11.100006,18.400012 9.6000061,19.7 7.7000122,19.7 5.8000183,19.7 4.3000183,18.400012 4.3000183,16.800004 4.3000183,16.600022 4.3000183,16.40001 4.4000244,16.199996L0,16.199996z" Stretch="Uniform" Width="26" Height="26" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
+                                    <Path.Fill>
+                                        <SolidColorBrush Color="{ThemeResource SystemBaseHighColor}"/>
+                                    </Path.Fill>
+                                    <Path.RenderTransform>
+                                        <TransformGroup>
+                                            <TransformGroup.Children>
+                                                <RotateTransform Angle="0" />
+                                                <ScaleTransform ScaleX="-1" ScaleY="1" />
+                                            </TransformGroup.Children>
+                                        </TransformGroup>
+                                    </Path.RenderTransform>
+                                </Path>
+                                <TextBlock x:Name="ShipStatusTextBlock" TextWrapping="Wrap" Text="{Binding OrderInfo.shipping.status, Converter={StaticResource OrderShipStatusDetailConverter}}"  Style="{StaticResource BodyTextBlockStyle}" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <TextBlock x:Name="ShipDateTextBlock" TextWrapping="Wrap" Text="{Binding OrderInfo.shipping.status_history.date_delivered}"  Style="{StaticResource BodyTextBlockStyle}"/>
+                            <TextBlock x:Name="ShipMethodTextBlock" TextWrapping="Wrap"  Style="{StaticResource BodyTextBlockStyle}" >
+								<Run Text="Forma de envio" />
+								<Run Text=" ( " />
+								<Run Text="{Binding OrderInfo.shipping.tracking_method}"/>
+								<Run Text=" )" />
+
+                            </TextBlock>
+
+                            <TextBlock x:Name="ShipTrackNumberTextBlock" TextWrapping="Wrap"  Style="{StaticResource BodyTextBlockStyle}" >
+								<Run Text="Código" />
+								<Run Text=" ( " />
+								<Run Text="{Binding OrderInfo.shipping.tracking_number}"/>
+								<Run Text=" )" />
+                            </TextBlock>
+
+                            <TextBlock x:Name="ShipAddressTextBlock" TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}"  Text="{Binding OrderInfo.shipping.receiver_address.address_line}" />
+
+                            <TextBlock x:Name="ShipCityTextBlock" TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}">
+								<Run Text="{Binding OrderInfo.shipping.receiver_address.zip_code}" />
+								<Run Text="{Binding OrderInfo.shipping.receiver_address.city.name}"/>
+								<Run Text="-"/>
+								<Run Text="{Binding OrderInfo.shipping.receiver_address.state.name}"/>
+                            </TextBlock>
+
+
+                        </StackPanel>
+
+                    </Grid>
+                </Border>
+
+                <!-- Estado da compra-->
+                <Border x:Name="FeedbackBorder" BorderBrush="#300E0D0D" BorderThickness="0.5" Margin="0,5" CornerRadius="5" Padding="5">
+                    <Border.Background>
+                        <SolidColorBrush Color="{ThemeResource SystemChromeLowColor}"/>
+                    </Border.Background>
+                    <Grid Margin="0,0,0,10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Border Grid.Row="0" BorderBrush="#2B000000" BorderThickness="0,0.5,0,0" VerticalAlignment="Bottom"/>
+                        <TextBlock Text="Estado da compra" Grid.Row="0" Style="{StaticResource SubtitleTextBlockStyle}" />
+
+                        <StackPanel Grid.Column="1" Grid.Row="1">
+                            <!--<TextBlock x:Name="StateTextBlock" TextWrapping="Wrap" Text="{Binding OrderInfo.shipping.status, Converter={StaticResource OrderShipStatusDetailConverter}}"  Style="{StaticResource BodyTextBlockStyle}"  />-->
+                            <!--Feedback do vendedor-->
+
+                            <TextBlock x:Name="FeedBackSaleRating" TextWrapping="Wrap" Grid.Row="2"  Style="{StaticResource BodyTextBlockStyle}" >
+								<Run Text="O vendedor qualificou você " x:Name="StateSellQualifiedTextBlock" x:Uid="MyOrdersStateSellQualifiedTextBlock" />
+								<Run Text=" ( " />
+								<Run Text="{Binding OrderInfo.feedback.sale.rating, Converter={StaticResource FeedbackRatingConverter}}"/>
+								<Run Text=" )" />
+                            </TextBlock>
+                            <TextBlock x:Name="FeedBackSaleMessage" TextWrapping="Wrap" Grid.Row="3"  Style="{StaticResource BodyTextBlockStyle}" >
+								<Run Text="&quot;" />                            
+								<Run Text="{Binding OrderInfo.feedback.sale.message}"/>
+								<Run Text="&quot;" />
+                            </TextBlock>
+
+                            <!--Feedback do comprador-->
+                            <TextBlock x:Name="FeedBackPurchaseRating" TextWrapping="Wrap" Grid.Row="5"  Style="{StaticResource BodyTextBlockStyle}" Margin="5,10,0,0" >
+								<Run Text="Você qualificou " x:Name="StateBuyQualifiedTextBlock" x:Uid="MyOrdersStateBuyQualifiedTextBlock"/>
+								<Run Text="(" />
+								<Run Text="{Binding OrderInfo.feedback.purchase.rating, Converter={StaticResource FeedbackRatingConverter}}"/>
+								<Run Text=")" />
+                            </TextBlock>
+                            <TextBlock  x:Name="FeedBackPurchaseMessage" TextWrapping="Wrap" Grid.Row="6"  Style="{StaticResource BodyTextBlockStyle}" >
+								<Run Text="&quot;" />                            
+								<Run Text="{Binding OrderInfo.feedback.purchase.message}"/>
+								<Run Text="&quot;" />
+                            </TextBlock>
+                            <Button  Content="Qualificar" HorizontalAlignment="Stretch" Command="{Binding QualifyProduct}" Visibility="{Binding HasSaleFeedback,Converter={StaticResource InvertedBoolToVisibilityConverter}}"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

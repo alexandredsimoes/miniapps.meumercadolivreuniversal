@@ -1,0 +1,2 @@
+MainPackage=C:\Users\Alexandre\Git\MyML.UWP\src\MyML.UWP\bin\x86\Release\Upload\MyML.UWP_1.1.73.0_x86.appx
+SymbolPackage=C:\Users\Alexandre\Git\MyML.UWP\src\MyML.UWP\AppPackages\MyML.UWP_1.1.73.0\MyML.UWP_1.1.73.0_x86.appxsym
