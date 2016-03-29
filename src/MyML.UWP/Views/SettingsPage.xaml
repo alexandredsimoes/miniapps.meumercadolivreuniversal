@@ -380,7 +380,13 @@
         </Grid.RowDefinitions>
 
         <!--  header  -->
-        <controls:PageHeader Content="Configurações" Frame="{x:Bind Frame}" Background="{StaticResource MercadoLivreBackgroundColor}" Foreground="{StaticResource MercadoLivreForegroundColor}">
+        <controls:PageHeader Content="Configurações" Frame="{x:Bind Frame}">
+            <!--<controls:PageHeader.Foreground>
+                <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
+            </controls:PageHeader.Foreground>
+            <controls:PageHeader.Background>
+                <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
+            </controls:PageHeader.Background>-->
             <Interactivity:Interaction.Behaviors>
                 <Behaviors:EllipsisBehavior Visibility="Auto" />
             </Interactivity:Interaction.Behaviors>
@@ -476,13 +482,13 @@
                         </TextBlock>
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Grid.Row="2" Grid.ColumnSpan="2">
-                        <Button Command="{Binding QualifyApp}" Content="Qualificar aplicativo na loja" Margin="10" Padding="5" HorizontalAlignment="Stretch" Background="#FF2C5193" Foreground="White" />
-                        <Button Command="{Binding SendEmail}" Content="Sugestões" Margin="10" Padding="5" HorizontalAlignment="Stretch" Background="#FF2C5193" Foreground="White" />
-                        <Button Command="{Binding SendLog}" Content="Enviar log de erros" Margin="10" Padding="5" HorizontalAlignment="Stretch" Background="#FF2C5193" Foreground="White" />
+                        <Button Command="{Binding QualifyApp}" Content="Qualificar aplicativo na loja" Margin="10" Padding="5" HorizontalAlignment="Stretch" />
+                        <Button Command="{Binding SendEmail}" Content="Sugestões" Margin="10" Padding="5" HorizontalAlignment="Stretch"  />
+                        <Button Command="{Binding SendLog}" Content="Enviar log de erros" Margin="10" Padding="5" HorizontalAlignment="Stretch" />
 
                         <Line X1="1000" Stroke="Black" Margin="5"/>
 
-                        <Button Command="{Binding RemoveAds}" Visibility="Visible" Content="Não quero ver propagandas" Margin="10" Padding="5" HorizontalAlignment="Stretch" Background="#FF2C5193" Foreground="White" />
+                        <Button Command="{Binding RemoveAds}" Visibility="Visible" Content="Não quero ver propagandas" Margin="10" Padding="5" HorizontalAlignment="Stretch"  />
                     </StackPanel>
                 </Grid>
             </PivotItem>

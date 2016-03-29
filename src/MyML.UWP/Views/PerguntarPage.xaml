@@ -365,6 +365,15 @@
             </Setter>
         </Style>
     </Page.Resources>
+
+    <Page.BottomAppBar>
+        <CommandBar>
+            <CommandBar.PrimaryCommands>
+                <AppBarButton x:Name="EnviarPerguntaButton" Width="48"  Label="Perguntar" Command="{Binding EnviarPergunta}" Icon="Send" />
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+    
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="AdaptiveVisualStateGroup">
@@ -400,9 +409,14 @@
         </Grid.RowDefinitions>
 
         <!--  page header  -->
-        <controls:PageHeader Content="Perguntas" Background="{StaticResource MercadoLivreBackgroundColor}" Foreground="{StaticResource MercadoLivreForegroundColor}">
-            <AppBarButton x:Name="EnviarPerguntaButton" Background="{StaticResource MercadoLivreBackgroundColor}" Foreground="{StaticResource MercadoLivreForegroundColor}" Width="48"  Label="Perguntar" Command="{Binding EnviarPergunta}" Icon="Send">
-            </AppBarButton>
+        <controls:PageHeader Content="Perguntas">
+            <!--<controls:PageHeader.Foreground>
+                <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
+            </controls:PageHeader.Foreground>
+            <controls:PageHeader.Background>
+                <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
+            </controls:PageHeader.Background>-->
+            
         </controls:PageHeader>
         <TextBox Grid.Row="1" PlaceholderText="Escreva aqui sua pergunta" Text="{Binding QuestionText, Mode=TwoWay}" BorderThickness="0" Margin="0,25,0,0" AcceptsReturn="True" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" TextWrapping="Wrap" />
         <!--<Pivot Grid.Row="1" x:Name="PivotMenu" Style="{StaticResource TabsStylePivotStyle}">

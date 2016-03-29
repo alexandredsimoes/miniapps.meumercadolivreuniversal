@@ -10,7 +10,7 @@
     d:DesignWidth="400"
     Width="64" Height="68" IsTabStop="False">
 
-    <StackPanel >
+    <StackPanel Background="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}}">
         <FontIcon
                             HorizontalAlignment="Center"
                             Margin="0,12,0,0"

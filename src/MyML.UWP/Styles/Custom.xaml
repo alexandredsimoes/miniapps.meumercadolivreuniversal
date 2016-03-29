@@ -11,9 +11,10 @@
     <Color x:Key="CustomColor">SteelBlue</Color>
     <SolidColorBrush x:Key="CustomColorBrush" Color="{StaticResource CustomColor}" />
     <SolidColorBrush x:Key="TextDefaultColor" Color="#FF616060" />
-    <!--<SolidColorBrush x:Key="MercadoLivreBackgroundColor" Color="#FFFFF273" />-->
-    <SolidColorBrush x:Key="MercadoLivreBackgroundColor" Color="#FF494949" />
+    <!--<SolidColorBrush x:Key="MercadoLivreBackgroundColor" Color="#FF494949" />-->
+    <SolidColorBrush x:Key="MercadoLivreBackgroundColor" Color="{ThemeResource SystemChromeHighColor}" />
     <SolidColorBrush x:Key="MercadoLivreForegroundColor" Color="#B2FFFFFF" />
+    <!--<SolidColorBrush x:Key="MercadoLivreForegroundColor" Color="#B2FFFFFF" />-->
     
     
     

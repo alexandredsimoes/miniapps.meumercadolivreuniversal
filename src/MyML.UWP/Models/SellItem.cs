@@ -81,6 +81,8 @@ namespace MyML.UWP.Models
             set { Set(() => ProductCategory, ref _ProductCategory, value); }
         }
 
+        public string CurrencyId { get; set; } = "BRL";
+
 
     }
     public class ProductImage : ObservableObject

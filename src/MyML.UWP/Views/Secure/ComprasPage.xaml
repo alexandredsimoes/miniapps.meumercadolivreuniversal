@@ -38,6 +38,14 @@
         <convertersML:FeedbackRatingConverter x:Key="FeedbackRatingConverter" />
     </Page.Resources>
 
+    <Page.BottomAppBar>
+        <CommandBar>
+            <CommandBar.PrimaryCommands>
+                <AppBarButton x:Name="RecarregarButton" Width="Auto"  Label="Recarregar" Command="{Binding Refresh}" Icon="Refresh" />
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+    
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="GenralVisualStateGroup">
@@ -85,9 +93,14 @@
         </Grid.RowDefinitions>
 
         <!--  page header  -->
-        <controls:PageHeader Content="Compras" Background="{StaticResource MercadoLivreBackgroundColor}" Foreground="{StaticResource MercadoLivreForegroundColor}">
-            <AppBarButton x:Name="RecarregarButton" Width="Auto"  Label="Recarregar" Command="{Binding Refresh}" Icon="Refresh" Background="{StaticResource MercadoLivreBackgroundColor}" Foreground="{StaticResource MercadoLivreForegroundColor}">
-            </AppBarButton>
+        <controls:PageHeader Content="Compras">
+            <!--<controls:PageHeader.Foreground>
+                <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
+            </controls:PageHeader.Foreground>
+            <controls:PageHeader.Background>
+                <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
+            </controls:PageHeader.Background>-->
+            
         </controls:PageHeader>
 
         <uc:AdsControl Grid.Row="1"/>

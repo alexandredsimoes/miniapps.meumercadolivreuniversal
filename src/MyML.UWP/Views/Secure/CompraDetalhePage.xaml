@@ -38,6 +38,23 @@
         <Binding Source="{StaticResource Locator}" Path="CompraDetalhePage" />
     </Page.DataContext>
 
+    <Page.BottomAppBar>
+        <CommandBar>
+            <CommandBar.PrimaryCommands>
+
+                <AppBarButton Label="Copiar dados da compra" Icon="Copy">
+                    <AppBarButton.Flyout>
+                        <MenuFlyout>
+                            <MenuFlyoutItem Command="{Binding CopyTrackingCode}" CommandParameter="TrackingCode" Text="Copiar código de rastreio" />
+                            <MenuFlyoutItem Command="{Binding CopyTrackingCode}" CommandParameter="Email" Text="Copiar e-mail do vendedor" />
+                        </MenuFlyout>
+                    </AppBarButton.Flyout>
+                </AppBarButton>
+
+            </CommandBar.PrimaryCommands> 
+
+        </CommandBar>
+    </Page.BottomAppBar>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <VisualStateManager.VisualStateGroups>
 
@@ -50,7 +67,8 @@
                         <Setter Target="ShipTrackNumberTextBlock.Visibility" Value="Collapsed"/>
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
-                        <WindowsStateTriggers:NotEqualStateTrigger NotEqualTo="shipped" Value="{Binding OrderInfo.shipping.status}" />
+                        <!--<WindowsStateTriggers:NotEqualStateTrigger NotEqualTo="shipped" Value="{Binding OrderInfo.shipping.status}" />-->
+                        <WindowsStateTriggers:NotEqualStateTrigger NotEqualTo="delivered" Value="{Binding OrderInfo.shipping.status}" />
                     </VisualState.StateTriggers>
                 </VisualState>
 
@@ -114,7 +132,14 @@
         </Grid.RowDefinitions>
 
         <!--  page header  -->
-        <controls:PageHeader Content="Detalhe da compra" Background="{StaticResource MercadoLivreBackgroundColor}" Foreground="{StaticResource MercadoLivreForegroundColor}"/>
+        <controls:PageHeader Content="Detalhe da compra">
+            <!--<controls:PageHeader.Foreground>
+                <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
+            </controls:PageHeader.Foreground>
+            <controls:PageHeader.Background>
+                <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
+            </controls:PageHeader.Background>-->
+        </controls:PageHeader>
         <ScrollViewer Grid.Row="1" Padding="10">
             <StackPanel Padding="0,0,10,0">
                 <!--Detalhe da compra-->

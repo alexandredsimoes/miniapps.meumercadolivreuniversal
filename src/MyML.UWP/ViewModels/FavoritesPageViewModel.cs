@@ -59,8 +59,14 @@ namespace MyML.UWP.ViewModels
                 NavigationService.Navigate(typeof(LoginPage), null, new Windows.UI.Xaml.Media.Animation.ContinuumNavigationTransitionInfo());
                 return;
             }
-            if (mode != NavigationMode.Back)
+            if (mode != NavigationMode.Back && CacheHelper.IsExpired(nameof(FavoritesPageViewModel)))
                 await LoadItems();
+        }
+
+        public override Task OnNavigatedFromAsync(IDictionary<string, object> pageState, bool suspending)
+        {
+            Views.Shell.SetBusy(false);
+            return Task.CompletedTask;
         }
 
         private async Task LoadItems()
@@ -80,6 +86,8 @@ namespace MyML.UWP.ViewModels
                     }
                     Bookmarks = items;
                     HasItems = Bookmarks.Count > 0;
+
+                    CacheHelper.AddCache(nameof(FavoritesPageViewModel)); //Atualiza o cache da página
                 }
             }
             finally

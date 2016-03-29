@@ -31,6 +31,11 @@ namespace MyML.UWP.Adapters.Search
             //_mercadoLivreServices = new MercadoLivreServices(new HttpClient(), new DataService());            
         }
 
+        public Task<IPagedResponse<Item>> GetPage(string query, int pageIndex, int pageSize, string status)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<IPagedResponse<Item>> GetPage(string query, int pageIndex, int pageSize, bool searchByName)
         {                        
             try

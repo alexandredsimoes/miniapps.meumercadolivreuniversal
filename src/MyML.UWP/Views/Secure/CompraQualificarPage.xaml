@@ -61,7 +61,13 @@
         </Grid.RowDefinitions>
 
         <!--  page header  -->
-        <controls:PageHeader Content="Qualificar" Background="{StaticResource MercadoLivreBackgroundColor}" Foreground="{StaticResource MercadoLivreForegroundColor}">
+        <controls:PageHeader Content="Qualificar">
+            <!--<controls:PageHeader.Foreground>
+                <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
+            </controls:PageHeader.Foreground>
+            <controls:PageHeader.Background>
+                <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
+            </controls:PageHeader.Background>-->
         </controls:PageHeader>
         <StackPanel Grid.Row="1" Margin="15">
             <StackPanel Grid.Row="1" Visibility="{Binding ActualPart, Converter={StaticResource ValueToVisibilityConverter}, ConverterParameter='QualifyPartOne'}"  x:Name="QualifyPartOne">

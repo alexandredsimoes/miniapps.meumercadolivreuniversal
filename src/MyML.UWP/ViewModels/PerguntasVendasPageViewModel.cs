@@ -65,6 +65,8 @@ namespace MyML.UWP.ViewModels
         {
             if (args.Suspending || args.NavigationMode == NavigationMode.Back)
                 Messenger.Default.Unregister<MessengerDetails>(this, ProccessMessenger);
+
+            Views.Shell.SetBusy(false);
             return Task.CompletedTask;
         }
 

@@ -15,7 +15,7 @@ namespace MyML.UWP.Converters.MercadoLivre
 
         public UserStatusConverter()
         {
-            _resourceLoader = ServiceLocator.Current.GetInstance<ResourceLoader>();
+            _resourceLoader = new ResourceLoader();// ServiceLocator.Current.GetInstance<ResourceLoader>();
         }
         public object Convert(object value, Type targetType, object parameter, string language)
         {

@@ -15,6 +15,7 @@ using Windows.ApplicationModel.Resources;
 using Windows.ApplicationModel.DataTransfer;
 using MyML.UWP.AppStorage;
 using Windows.System;
+using Template10.Services.NavigationService;
 
 namespace MyML.UWP.ViewModels
 {
@@ -24,6 +25,9 @@ namespace MyML.UWP.ViewModels
         private readonly IMercadoLivreService _mercadoLivreService;
         private readonly IDataService _dataService;
         private readonly ResourceLoader _resourceLoader;
+
+        public event Action<bool> ZoomModeChanged;
+
         public ProdutoDetalheViewModel(IMercadoLivreService mercadoLivreService, IDataService dataService, ResourceLoader resourceLoader)
         {
             _mercadoLivreService = mercadoLivreService;
@@ -75,28 +79,40 @@ namespace MyML.UWP.ViewModels
                 }
             });
 
-            OpenOptions = new RelayCommand<int>((o) =>
+            OpenOptions = new RelayCommand<string>((o) =>
             {
-                if (o == 0)
+                if (o == "seller_info")
                 {
                     NavigationService.Navigate(typeof(VendedorInfoPage), SelectedProduct.seller_id);
                 }
-                else if (o == 1)
+                else if (o == "product_description")
                 {
                     NavigationService.Navigate(typeof(ProdutoDescricaoPage), SelectedProduct.id);
                 }
-                else if(o == 2)
+                else if (o == "questions")
                 {
                     NavigationService.Navigate(typeof(ProdutoPerguntasPage), SelectedProduct.id);
                 }
+            });
+
+            OpenShipping = new RelayCommand(() =>
+            {
+                NavigationService.Navigate(typeof(ProdutoDetalheEnvioPage), SelectedProduct.id);
+            });
+
+            ShowZoom = new RelayCommand(() =>
+            {
+                ZoomMode = !ZoomMode;
+                var handler = ZoomModeChanged;
+                if (handler != null) handler(ZoomMode);
             });
         }
 
         private async void BuyItemExecute(string origin)
         {
-            if(origin == "web")
+            if (origin == "web")
             {
-                var uri = new Uri(SelectedProduct.permalink);                
+                var uri = new Uri(SelectedProduct.permalink);
                 await Launcher.LaunchUriAsync(uri);
             }
             else
@@ -114,9 +130,9 @@ namespace MyML.UWP.ViewModels
                     return;
                 }
 
-                NavigationService.Navigate(typeof(ComprarItemPage), SelectedProduct.id, 
+                NavigationService.Navigate(typeof(ComprarItemPage), SelectedProduct.id,
                     new Windows.UI.Xaml.Media.Animation.ContinuumNavigationTransitionInfo());
-            }            
+            }
         }
         void _dataTransferManager_DataRequested(DataTransferManager sender, DataRequestedEventArgs args)
         {
@@ -137,16 +153,33 @@ namespace MyML.UWP.ViewModels
             {
                 if (parameter != null)
                 {
-                    await LoadProductDetails(parameter);
+                    var id = parameter.ToString();
+                    if (SelectedProduct == null || SelectedProduct.id != id)
+                        await LoadProductDetails(parameter);
                 }
             }
             //return base.OnNavigatedToAsync(parameter, mode, state);
+        }
+
+        public override Task OnNavigatingFromAsync(NavigatingEventArgs args)
+        {
+            if(!args.Suspending && ZoomMode)
+            {
+                args.Cancel = true;
+                
+                var handler = ZoomModeChanged;
+                if (handler != null) handler(ZoomMode);
+                ZoomMode = false;
+            }
+            return Task.CompletedTask;
         }
 
         public override Task OnNavigatedFromAsync(IDictionary<string, object> pageState, bool suspending)
         {
             if (_dataTransferManager != null)
                 _dataTransferManager.DataRequested -= _dataTransferManager_DataRequested;
+
+            Views.Shell.SetBusy(false);
 
             return Task.CompletedTask;
         }
@@ -164,7 +197,7 @@ namespace MyML.UWP.ViewModels
                     var sellerId = SelectedProduct.seller == null ? SelectedProduct.seller_id : SelectedProduct.seller.id;
                     SellerInfo = await _mercadoLivreService.GetUserInfo(sellerId.ToString(),
                         new KeyValuePair<string, string>[] { /*new KeyValuePair<string, string>("attributes", "seller_reputation,points")*/ });
-                   
+
 
                     var favorites = await _mercadoLivreService.GetBookmarkItems();
                     if (favorites != null)
@@ -176,11 +209,11 @@ namespace MyML.UWP.ViewModels
                     IsFavorite = SelectedProduct.IsFavorite; //Para atualizar a UI
 
                     //Carrega as perguntas (apenas uma e seu total)
-                    QuestionsList = await _mercadoLivreService.ListQuestionsByProduct(SelectedProduct.id, 0,0,new KeyValuePair<string, object>[] {
+                    QuestionsList = await _mercadoLivreService.ListQuestionsByProduct(SelectedProduct.id, 0, 0, new KeyValuePair<string, object>[] {
                         new KeyValuePair<string, object>("attributes", "total,questions&limit=1&offset")
                     });
 
-                    if(QuestionsList != null)
+                    if (QuestionsList != null)
                     {
                         Questions = QuestionsList.total ?? 0;
                         HasQuestions = Questions > 0;
@@ -220,7 +253,7 @@ namespace MyML.UWP.ViewModels
                                                 region = excluded.rule.value[i];
                                                 break;
                                         }
-                                        excludeRegions += excluded.rule.value[i] + (i < excluded.rule.value.Count - 1 ? ", " : "");
+                                        excludeRegions += region + (i < excluded.rule.value.Count - 1 ? ", " : "");
                                     }
                                 }
                             }
@@ -228,6 +261,14 @@ namespace MyML.UWP.ViewModels
 
                         if (string.IsNullOrWhiteSpace(ShippingExcludeRegions))
                             ShippingExcludeRegions = $"(Exceto para as regiões {excludeRegions})";
+                    }
+                    else
+                    {
+                        if (SelectedProduct.shipping != null && SelectedProduct.shipping.id != null)
+                        {
+                            var shippingInfo = await _mercadoLivreService.GetShippingDetails(SelectedProduct.shipping.ToString());
+                        }
+
                     }
                 }
                 else
@@ -305,13 +346,21 @@ namespace MyML.UWP.ViewModels
 
         public bool HasQuestions { get; set; } = false;
 
+        private bool _ZoomMode = false;
+        public bool ZoomMode
+        {
+            get { return _ZoomMode; }
+            set { Set(() => ZoomMode, ref _ZoomMode, value); }
+        }
+
+
 
         public RelayCommand Perguntar { get; private set; }
         public RelayCommand DoFavorite { get; private set; }
         public RelayCommand ShareProduct { get; private set; }
         public RelayCommand<string> BuyItem { get; private set; }
-        public RelayCommand<int> OpenOptions { get; set; }
-
-
+        public RelayCommand<string> OpenOptions { get; set; }
+        public RelayCommand OpenShipping { get; set; }
+        public RelayCommand ShowZoom { get; private set; }
     }
 }

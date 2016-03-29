@@ -84,6 +84,12 @@ namespace MyML.UWP.ViewModels
             }                        
         }
 
+        public override Task OnNavigatedFromAsync(IDictionary<string, object> pageState, bool suspending)
+        {
+            Views.Shell.SetBusy(false);
+            return Task.CompletedTask;
+        }
+
         private void RevokeAccessExecute()
         {
             _mercadoLivreServices.RevokeAccess();

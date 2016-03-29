@@ -29,15 +29,30 @@ namespace MyML.UWP.ViewModels
             }            
         }
 
+        public override Task OnNavigatedFromAsync(IDictionary<string, object> pageState, bool suspending)
+        {
+            Views.Shell.SetBusy(false);
+            return Task.CompletedTask;
+        }
+
         private async Task LoadDescriptions(string id)
         {
-            //Pega a descrição do produto
-            var description = await _mercadoLivreService.GetProductDescrition(id);
-            if (description != null)
+            try
             {
-                IsHtml = !string.IsNullOrWhiteSpace(description.text) && string.IsNullOrWhiteSpace(description.plain_text);                
-                Description = IsHtml ? description.text : description.plain_text;
+                Views.Shell.SetBusy(true);
+                //Pega a descrição do produto
+                var description = await _mercadoLivreService.GetProductDescrition(id);
+                if (description != null)
+                {
+                    IsHtml = !string.IsNullOrWhiteSpace(description.text) && string.IsNullOrWhiteSpace(description.plain_text);
+                    Description = IsHtml ? description.text : description.plain_text;
+                }
             }
+            finally
+            {
+                Views.Shell.SetBusy(false);
+            }
+           
         }
 
         private bool _IsHtml;

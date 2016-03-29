@@ -22,9 +22,9 @@
         <converters:StringFormatConverter x:Name="StringFormatConverter" />
         <converters:HumanizeDateConverter x:Name="HumanizeDateConverter" />
         <convertersML:UserStatusConverter x:Name="UserStatusConverter"/>
-        
+
         <convertersML:ReputationHeightConverter x:Name="ReputationHeightConverter"/>
-        
+
 
     </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -62,7 +62,13 @@
         </Grid.RowDefinitions>
 
         <!--  page header  -->
-        <controls:PageHeader Content="Informações sobre o vendedor" Background="{StaticResource MercadoLivreBackgroundColor}" Foreground="{StaticResource MercadoLivreForegroundColor}">
+        <controls:PageHeader Content="Informações sobre o vendedor">
+            <!--<controls:PageHeader.Foreground>
+                <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
+            </controls:PageHeader.Foreground>
+            <controls:PageHeader.Background>
+                <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
+            </controls:PageHeader.Background>-->
         </controls:PageHeader>
         <StackPanel Grid.Row="1" Margin="15">
             <TextBlock Text="Localização" Style="{StaticResource TitleTextBlockStyle}"/>
@@ -76,7 +82,7 @@
                     </Path.RenderTransform>
                 </Path>
                 <TextBlock Margin="15,0" >
-            				<Run Text="{Binding SellerInfo.address.city}" />
+            				<Run Text="{Binding SellerInfo.address.city}" FontWeight="Bold" />
             				<Run Text="," />
             				<Run Text="{Binding SellerInfo.address.state}" />
                 </TextBlock>
@@ -93,7 +99,10 @@
             </StackPanel>
             <TextBlock Text="{Binding SellerInfo.seller_reputation.power_seller_status, Converter={StaticResource UserStatusConverter}}" Margin="15" />
 
-            <StackPanel Background="{ThemeResource SystemControlPageBackgroundBaseLowBrush}">
+            <StackPanel>
+                <StackPanel.Background>
+                    <SolidColorBrush Color="{ThemeResource SystemChromeMediumLowColor}"/>
+                </StackPanel.Background>
                 <StackPanel Orientation="Horizontal" Margin="10,0,10,0">
                     <TextBlock Text="{Binding SellerInfo.seller_reputation.transactions.ratings.positive, Converter={StaticResource StringFormatConverter}, ConverterParameter=\{0:p0\}}"  Style="{StaticResource SubheaderTextBlockStyle}" />
                     <TextBlock Text="dos seus compradores o recomendam" Style="{StaticResource BodyTextBlockStyle}" VerticalAlignment="Center" Margin="10,0,0,0"  />
@@ -106,7 +115,7 @@
                 <Line X1="3000" Margin="10" Stroke="{ThemeResource SystemControlForegroundBaseHighBrush}" StrokeThickness="1" />
                 <TextBlock Text="{Binding SellerInfo.registration_date, Converter={StaticResource HumanizeDateConverter}}" Margin="10,0,10,0" Style="{StaticResource BodyTextBlockStyle}" FontWeight="Bold"/>
                 <TextBlock Text="vendendo no MercadoLivre" Margin="10,0,10,15" Style="{StaticResource BodyTextBlockStyle}" />
-                
+
             </StackPanel>
         </StackPanel>
 

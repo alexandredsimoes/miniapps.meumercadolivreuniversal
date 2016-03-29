@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Ioc;
 using MyML.UWP.AppStorage;
 using MyML.UWP.Models.Mercadolivre;
 using MyML.UWP.Services;
@@ -7,10 +8,12 @@ using MyML.UWP.Views.Secure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Template10.Mvvm;
 using Windows.ApplicationModel.Contacts;
+using Windows.ApplicationModel.DataTransfer;
 using Windows.ApplicationModel.Email;
 using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
@@ -36,6 +39,34 @@ namespace MyML.UWP.ViewModels
             {
                 NavigationService.Navigate(typeof(CompraQualificarPage), OrderInfo.id);
             });
+            CopyTrackingCode = new RelayCommand<string>( async(o) =>
+            {
+               
+
+                var dataPackage = new DataPackage();
+                dataPackage.RequestedOperation = DataPackageOperation.Copy;
+                if (o == "TrackingCode")
+                {
+                    if (String.IsNullOrWhiteSpace(OrderInfo?.shipping?.tracking_number))
+                    {
+                        await new MessageDialog("Nenhum código de rastreamento foi informado pelo vendedor", _resourceLoader.GetString("ApplicationTitle")).ShowAsync();
+                        return;
+                    }
+                    dataPackage.SetText(OrderInfo.shipping.tracking_number);
+                }
+                else if (o == "Email")
+                {
+                    if (String.IsNullOrWhiteSpace(OrderInfo?.seller?.email))
+                    {
+                        await new MessageDialog("Nenhum e-mail foi informado pelo vendedor", _resourceLoader.GetString("ApplicationTitle")).ShowAsync();
+                        return;
+                    }
+                    dataPackage.SetText(OrderInfo.seller.email);
+                }
+                Clipboard.SetContent(dataPackage);
+                await new MessageDialog("Informação copiada para Área de transferência.", _resourceLoader.GetString("ApplicationTitle")).ShowAsync();               
+                
+            });
         }
         public async override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
@@ -47,6 +78,12 @@ namespace MyML.UWP.ViewModels
                     await LoadOrderInfo(OrderId);
                 }                
             }
+        }
+
+        public override Task OnNavigatedFromAsync(IDictionary<string, object> pageState, bool suspending)
+        {
+            Views.Shell.SetBusy(false);
+            return Task.CompletedTask;
         }
 
         private async void BuyerActionExecute(string arg)
@@ -130,15 +167,15 @@ namespace MyML.UWP.ViewModels
                     //orderInfo.feedback = feedbackInfo;
 
                     //Pega os dados de entrega
-                    //if (orderInfo.shipping != null)
-                    //{
-                    //    var shippingDetails = await _mercadoLivreService.GetShippingDetails(orderInfo.shipping.id.ToString());
+                    if (orderInfo.shipping != null)
+                    {
+                        var shippingDetails = await _mercadoLivreService.GetShippingDetails(orderInfo.shipping.id.ToString());
 
-                    //    if (shippingDetails != null && DateTime.TryParse(shippingDetails.status_history.date_delivered, out data))
-                    //        shippingDetails.status_history.date_delivered = data.ToString("dd/MMMM/yyyy");
+                        if (shippingDetails != null && DateTime.TryParse(shippingDetails.status_history.date_delivered, out data))
+                            shippingDetails.status_history.date_delivered = data.ToString("dd/MMMM/yyyy");
 
-                    //    orderInfo.shipping = shippingDetails;
-                    //}
+                        orderInfo.shipping = shippingDetails;
+                    }
 
                     if (orderInfo.feedback != null)
                     {
@@ -199,6 +236,7 @@ namespace MyML.UWP.ViewModels
 
         public RelayCommand<string> BuyerAction { get; private set; }
         public RelayCommand QualifyProduct { get; private set; }
+        public RelayCommand<string> CopyTrackingCode { get; private set; }
 
     }
 }

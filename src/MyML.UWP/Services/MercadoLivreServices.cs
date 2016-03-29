@@ -11,7 +11,7 @@ using System.Diagnostics;
 using System.Net.Http.Headers;
 using MyML.UWP.AppStorage;
 using Windows.Globalization.NumberFormatting;
-
+using Windows.Storage;
 
 namespace MyML.UWP.Services
 {
@@ -543,7 +543,7 @@ namespace MyML.UWP.Services
             }
         }
 
-        public async Task<MLNewItemResult> ListNewItem(SellItem itemInfo)
+        public async Task<Item> ListNewItem(SellItem itemInfo)
         {
             try
             {
@@ -554,39 +554,24 @@ namespace MyML.UWP.Services
                 _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 var obj = new
-                {
-                    /*
-                        title:"Anteojos Ray Ban Wayfare",
-                        category_id:"MLA5529",
-                        price:10,
-                        currency_id:"ARS",
-                        available_quantity:1,
-                        buying_mode:"buy_it_now",
-                        listing_type_id:"bronze",
-                        condition:"new",
-                        description: "Item:,  Ray-Ban WAYFARER Gloss Black RB2140 901  Model: RB2140. Size: 50mm. Name: WAYFARER. Color: Gloss Black. Includes Ray-Ban Carrying Case and Cleaning Cloth. New in Box",
-                        video_id: "YOUTUBE_ID_HERE",
-                        warranty: "12 month by Ray Ban"
-                        pictures:[
-                        {source:"http://upload.wikimedia.org/wikipedia/commons/f/fd/Ray_Ban_Original_Wayfarer.jpg"},
-                        {source:"http://en.wikipedia.org/wiki/File:Teashades.gif"}
-                        ]
-
-                    */
+                {                   
                     title = itemInfo.Title,
                     price = itemInfo.ProductValue,
-                    currency_id = "BRL",
                     available_quantity = itemInfo.Quantity,
                     condition = itemInfo.IsNew ?? false ? "new" : "used",
                     description = itemInfo.ProductDescription,
                     buying_mode = "buy_it_now",
-                    category_id = itemInfo.ProductCategory
+                    currency_id = itemInfo.CurrencyId,
+                    category_id = itemInfo.ProductCategory,
+                                                                                                                        
                 };
                 var json = new StringContent(JsonConvert.SerializeObject(itemInfo));
+                
+
                 var response = await _httpClient.PostAsync(url, json);
-                if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                {
-                    return JsonConvert.DeserializeObject<MLNewItemResult>(await response.Content.ReadAsStringAsync());
+
+                if (response.StatusCode == System.Net.HttpStatusCode.Created)
+                {                                       
                 }
                 return null;
 
@@ -1073,7 +1058,7 @@ namespace MyML.UWP.Services
                         url = string.Concat(url, "&", attributesAndFilters[i].Key, "=", attributesAndFilters[i].Value, i < (attributesAndFilters.Length - 1) ? "," : string.Empty);
                     }
                 }
-                var response = await _httpClient.GetAsync(url, HttpCompletionOption.ResponseContentRead).ConfigureAwait(false);
+                var response = await _httpClient.GetAsync(url, HttpCompletionOption.ResponseContentRead);
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
                     var result = JsonConvert.DeserializeObject<MLMyItemsSearchResult>(await response.Content.ReadAsStringAsync());
@@ -1407,6 +1392,78 @@ namespace MyML.UWP.Services
             catch (Exception ex)
             {
                 AppLogs.WriteError("MercadoLivreServices.SendBuyerOrderFeedback()", ex);
+                return false;
+            }
+        }
+        public async Task<MLImage> UploadProductImage(ProductImage image)
+        {
+            try
+            {
+                var accessToken = _dataService.GetMLConfig(Consts.ML_CONFIG_KEY_ACCESS_TOKEN);
+                var url = Consts.GetUrl(Consts.ML_UPLOAD_IMAGE, accessToken);
+
+                _httpClient.DefaultRequestHeaders.Accept.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+
+                MultipartFormDataContent form = new MultipartFormDataContent();
+                HttpContent content = new StringContent("file");
+                form.Add(content, "file");
+                var file = await StorageFile.GetFileFromPathAsync(image.LocalPath);
+                var stream = await file.OpenStreamForReadAsync();
+                content = new StreamContent(stream);
+                content.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
+                {
+                    Name = "file",
+                    FileName = file.Name
+                };
+
+                form.Add(content);
+                var response = await _httpClient.PostAsync(url, form);
+
+                if(response.StatusCode == System.Net.HttpStatusCode.OK ||  response.StatusCode == System.Net.HttpStatusCode.Created)
+                {
+                    var result = await response.Content.ReadAsStringAsync();
+                    return await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<MLImage>(result));
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                AppLogs.WriteError("MercadoLivreServices.UploadProductImage()", ex);
+                return null;
+            }
+            
+
+        }
+        public async Task<bool> AddPicture(string pictureId, string itemId)
+        {
+            try
+            {
+                var accessToken = _dataService.GetMLConfig(Consts.ML_CONFIG_KEY_ACCESS_TOKEN);
+                var url = Consts.GetUrl(Consts.ML_ITEM_POST_IMAGE, pictureId, accessToken);
+
+                _httpClient.DefaultRequestHeaders.Accept.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var obj = new
+                {
+                    id = pictureId
+                };
+                var json = new StringContent(JsonConvert.SerializeObject(obj));
+
+                var response = await _httpClient.PostAsync(url, json);
+
+                if (response.StatusCode == System.Net.HttpStatusCode.Created)
+                {
+                    return true;
+                }
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                AppLogs.WriteError("MercadoLivreServices.AddPicture()", ex);
                 return false;
             }
         }

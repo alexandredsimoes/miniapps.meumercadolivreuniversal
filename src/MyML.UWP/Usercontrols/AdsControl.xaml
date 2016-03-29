@@ -1,4 +1,5 @@
-﻿<UserControl
+﻿<UserControl 
+    xmlns:Universal="using:Microsoft.AdMediator.Universal" 
     x:Class="MyML.UWP.Usercontrols.AdsControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -6,10 +7,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    xmlns:Universal="using:Microsoft.Advertising.WinRT.UI"
+    
     d:DesignHeight="300"
     d:DesignWidth="400"
-    xmlns:WindowsStateTriggers="using:WindowsStateTriggers">
+    xmlns:WindowsStateTriggers="using:WindowsStateTriggers"
+    xmlns:adduplex="using:AdDuplex">
 
     <!--<VisualStateManager.VisualStateGroups>
         <VisualStateGroup x:Name="DeviceFamilyStateGroup">
@@ -37,20 +39,9 @@
     </VisualStateManager.VisualStateGroups>-->
 
     <Grid>
-        <!--ADS MOBILE-->
-        <Universal:AdControl  
-                     x:Name="AdMediator_MOBILE" ApplicationId="0f8d2e69-c878-402d-a106-21c5abfac193" AdUnitId="11585571" Height="50" Width="300" Margin="0,5,0,5" AutoRefreshIntervalInSeconds="30"  >
-            <Universal:AdControl.Background>
-                <SolidColorBrush Color="{ThemeResource SystemBaseMediumLowColor}"/>
-            </Universal:AdControl.Background>
-        </Universal:AdControl>
 
-        <!--ADS DESKTOP-->
-        <Universal:AdControl  
-                     x:Name="AdMediator_DESKTOP" ApplicationId="f202da6a-07d0-4773-8148-6f4e2435bde2" AdUnitId="11585576" Height="90" Width="728" Margin="0,5,0,5" AutoRefreshIntervalInSeconds="30"  >
-            <Universal:AdControl.Background>
-                <SolidColorBrush Color="{ThemeResource SystemBaseMediumLowColor}"/>
-            </Universal:AdControl.Background>
-        </Universal:AdControl>
+        <!--<Universal:AdMediatorControl Height="50" Width="300" Margin="0,5,0,5" x:Name="AdMediator_MOBILE" Id="AdMediatorTopMobile" />-->
+
+        <adduplex:AdControl  Margin="5" x:Name="AdMediator_MOBILE"  />
     </Grid>
 </UserControl>

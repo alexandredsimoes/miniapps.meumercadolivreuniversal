@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
+using Microsoft.ApplicationInsights;
 using Microsoft.Practices.ServiceLocation;
 using MyML.UWP.Models;
 using MyML.UWP.Services;
@@ -49,7 +50,13 @@ namespace MyML.UWP.ViewModels
             SimpleIoc.Default.Register<ProdutoPerguntasPageViewModel>();
             SimpleIoc.Default.Register<VendedorInfoPageViewModel>();
             SimpleIoc.Default.Register<VendaQualificarPageViewModel>();
-            SimpleIoc.Default.Register<CompraQualificarPageViewModel>();            
+            SimpleIoc.Default.Register<CompraQualificarPageViewModel>();
+            SimpleIoc.Default.Register<VenderPageViewModel>();
+            SimpleIoc.Default.Register<ProdutoDetalheEnvioPageViewModel>();
+
+            var telemetryClient = new TelemetryClient();
+            SimpleIoc.Default.Register(() => telemetryClient);
+            
         }
 
         public MainPageViewModel MainPage => ServiceLocator.Current.GetInstance<MainPageViewModel>();
@@ -75,6 +82,10 @@ namespace MyML.UWP.ViewModels
         public ProdutoPerguntasPageViewModel ProdutoPerguntasPage => ServiceLocator.Current.GetInstance<ProdutoPerguntasPageViewModel>();
         public VendedorInfoPageViewModel VendedorInfoPage => ServiceLocator.Current.GetInstance<VendedorInfoPageViewModel>();
         public VendaQualificarPageViewModel VendaQualificarPage => ServiceLocator.Current.GetInstance<VendaQualificarPageViewModel>();
-        public CompraQualificarPageViewModel CompraQualificarPage => ServiceLocator.Current.GetInstance<CompraQualificarPageViewModel>();        
+        public CompraQualificarPageViewModel CompraQualificarPage => ServiceLocator.Current.GetInstance<CompraQualificarPageViewModel>();
+        public VenderPageViewModel VenderPage => ServiceLocator.Current.GetInstance<VenderPageViewModel>();
+        public ProdutoDetalheEnvioPageViewModel ProdutoDetalheEnvioPage => ServiceLocator.Current.GetInstance<ProdutoDetalheEnvioPageViewModel>();
+        
+
     }
 }

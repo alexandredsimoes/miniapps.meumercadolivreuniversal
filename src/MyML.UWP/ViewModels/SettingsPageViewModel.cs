@@ -13,6 +13,8 @@ using Windows.ApplicationModel.Store;
 using Windows.Storage;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
+using System.Threading.Tasks;
+using Template10.Services.NavigationService;
 
 namespace MyML.UWP.ViewModels
 {
@@ -86,6 +88,12 @@ namespace MyML.UWP.ViewModels
 
             SendLog = new RelayCommand(SendLogExecute);
             RemoveAds = new RelayCommand(RemoverAdsExecute);
+        }
+
+        public override Task OnNavigatingFromAsync(NavigatingEventArgs args)
+        {
+            Views.Shell.SetBusy(false);
+            return Task.CompletedTask;
         }
 
         private async void SendLogExecute()

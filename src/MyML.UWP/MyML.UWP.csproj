@@ -98,6 +98,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="AdMediator.config" />
     <None Include="MyML.UWP_StoreKey.pfx" />
     <None Include="MyML.UWP_TemporaryKey.pfx" />
     <None Include="project.json" />
@@ -109,6 +110,7 @@
     <Compile Include="Adapters\IPagedResponse.cs" />
     <Compile Include="Adapters\IPagedSource.cs" />
     <Compile Include="Adapters\MercadoLivreIncrementalLoadingClass.cs" />
+    <Compile Include="Adapters\Search\AdvertsDataSource.cs" />
     <Compile Include="Adapters\Search\IncrementalSearchSource.cs" />
     <Compile Include="Adapters\Search\OrdersDataSource.cs" />
     <Compile Include="Adapters\Search\QuestionDataSource.cs" />
@@ -163,6 +165,7 @@
     <Compile Include="Models\Mercadolivre\MLCategorySearchResult.cs" />
     <Compile Include="Models\Mercadolivre\MLErrorRequest.cs" />
     <Compile Include="Models\Mercadolivre\MLFeedback.cs" />
+    <Compile Include="Models\Mercadolivre\MLImage.cs" />
     <Compile Include="Models\Mercadolivre\MLJson.cs" />
     <Compile Include="Models\Mercadolivre\MLListPrice.cs" />
     <Compile Include="Models\Mercadolivre\MLListType.cs" />
@@ -180,6 +183,7 @@
     <Compile Include="Models\SelectionList.cs" />
     <Compile Include="Models\SellItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CacheHelper.cs" />
     <Compile Include="Services\DataService.cs" />
     <Compile Include="Services\IDataService.cs" />
     <Compile Include="Services\IMercadoLivreService.cs" />
@@ -200,7 +204,6 @@
     <Compile Include="ViewModels\AnunciosAlterarExposicaoPageViewModel.cs" />
     <Compile Include="ViewModels\AnunciosDetalhePageViewModel.cs" />
     <Compile Include="ViewModels\AnunciosPageViewModel.cs" />
-    <Compile Include="ViewModels\await.cs" />
     <Compile Include="ViewModels\BuscaFilterPageViewModel.cs" />
     <Compile Include="ViewModels\BuscaPageViewModel.cs" />
     <Compile Include="ViewModels\CompraDetalhePageViewModel.cs" />
@@ -217,6 +220,7 @@
     <Compile Include="ViewModels\PerguntasComprasPageViewModel.cs" />
     <Compile Include="ViewModels\PerguntasVendasPageViewModel.cs" />
     <Compile Include="ViewModels\ProdutoDescricaoPageViewModel.cs" />
+    <Compile Include="ViewModels\ProdutoDetalheEnvioPageViewModel.cs" />
     <Compile Include="ViewModels\ProdutoDetalheViewModel.cs" />
     <Compile Include="ViewModels\ProdutoPerguntasPageViewModel.cs" />
     <Compile Include="ViewModels\SettingsPageViewModel.cs" />
@@ -224,6 +228,7 @@
     <Compile Include="ViewModels\VendaQualificarPageViewModel.cs" />
     <Compile Include="ViewModels\VendasPageViewModel.cs" />
     <Compile Include="ViewModels\VendedorInfoPageViewModel.cs" />
+    <Compile Include="ViewModels\VenderPageViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="Views\BuscaFilterPage.xaml.cs">
       <DependentUpon>BuscaFilterPage.xaml</DependentUpon>
@@ -248,6 +253,9 @@
     </Compile>
     <Compile Include="Views\ProdutoDescricaoPage.xaml.cs">
       <DependentUpon>ProdutoDescricaoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProdutoDetalheEnvioPage.xaml.cs">
+      <DependentUpon>ProdutoDetalheEnvioPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ProdutoDetalhePage.xaml.cs">
       <DependentUpon>ProdutoDetalhePage.xaml</DependentUpon>
@@ -299,6 +307,9 @@
     </Compile>
     <Compile Include="Views\Secure\VendedorInfoPage.xaml.cs">
       <DependentUpon>VendedorInfoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Secure\VenderPage.xaml.cs">
+      <DependentUpon>VenderPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
@@ -446,6 +457,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ProdutoDetalheEnvioPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ProdutoDetalhePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -514,6 +529,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Secure\VenderPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\SettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -532,6 +551,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <SDKReference Include="Microsoft.AdMediator.Universal, Version=1.0">
+      <Name>Microsoft Advertising Universal SDK</Name>
+    </SDKReference>
     <SDKReference Include="Microsoft.Advertising.Xaml, Version=10.0">
       <Name>Microsoft Advertising SDK for XAML</Name>
     </SDKReference>

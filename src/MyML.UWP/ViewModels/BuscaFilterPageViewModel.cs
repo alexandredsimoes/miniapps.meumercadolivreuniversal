@@ -133,12 +133,10 @@ namespace MyML.UWP.ViewModels
             return Task.CompletedTask;
         }
 
-        public override Task OnNavigatingFromAsync(NavigatingEventArgs args)
+
+        public override Task OnNavigatedFromAsync(IDictionary<string, object> pageState, bool suspending)
         {
-            //if(args.NavigationMode == NavigationMode.Back || args.Suspending)
-            //{
-            //    Messenger.Default.Unregister<MessengerFilterDetails>(this, SetMessengerFilters);
-            //}
+            Views.Shell.SetBusy(false);
             return Task.CompletedTask;
         }
 

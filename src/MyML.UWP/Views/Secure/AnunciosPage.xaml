@@ -425,6 +425,14 @@
         </DataTemplate>
     </Page.Resources>
 
+    <Page.BottomAppBar>
+        <CommandBar>
+            <CommandBar.PrimaryCommands>
+                <AppBarButton x:Name="RecarregarButton" Width="Auto"  Label="Recarregar" Command="{Binding Refresh}" Icon="Refresh" />
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="AdaptiveVisualStateGroup">
@@ -461,10 +469,15 @@
         </Grid.RowDefinitions>
 
         <!--  page header  -->
-        <controls:PageHeader Content="Anúncios" Background="{StaticResource MercadoLivreBackgroundColor}" Foreground="{StaticResource MercadoLivreForegroundColor}">
-            <AppBarButton x:Name="RecarregarButton" Width="Auto"  Label="Recarregar" Command="{Binding Refresh}" Icon="Refresh" Background="{StaticResource MercadoLivreBackgroundColor}" Foreground="{StaticResource MercadoLivreForegroundColor}">
-            </AppBarButton>
+        <controls:PageHeader Content="Anúncios">
+            <!--<controls:PageHeader.Foreground>
+                <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
+            </controls:PageHeader.Foreground>
+            <controls:PageHeader.Background>
+                <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
+            </controls:PageHeader.Background>-->
         </controls:PageHeader>
+        
 
         <uc:AdsControl Grid.Row="1"/>
 
@@ -473,37 +486,56 @@
                 <PivotItem.Header>
                     <uc:TabHeader Label="Ativos" Glyph="&#xE768;" />
                 </PivotItem.Header>
-                <ListView ItemTemplate="{StaticResource ListViewItemTemplate1}" ItemContainerStyle="{StaticResource ListViewItemStyle1}" ItemsSource="{Binding Items.results_graph}" Grid.Row="1" x:Name="ProdutosListView">
-                    <Interactivity:Interaction.Behaviors>
-                        <Core:EventTriggerBehavior EventName="Tapped">
-                            <Core:InvokeCommandAction Command="{Binding SelectItem}" CommandParameter="{Binding ElementName=ProdutosListView,Path=SelectedItem}" />
-                        </Core:EventTriggerBehavior>
-                    </Interactivity:Interaction.Behaviors>
-                </ListView>
+                <Grid>
+                    <ListView ItemTemplate="{StaticResource ListViewItemTemplate1}" ItemContainerStyle="{StaticResource ListViewItemStyle1}" ItemsSource="{Binding Items}" Grid.Row="1" x:Name="ProdutosListView">
+                        <Interactivity:Interaction.Behaviors>
+                            <Core:EventTriggerBehavior EventName="Tapped">
+                                <Core:InvokeCommandAction Command="{Binding SelectItem}" CommandParameter="{Binding ElementName=ProdutosListView,Path=SelectedItem}" />
+                            </Core:EventTriggerBehavior>
+                        </Interactivity:Interaction.Behaviors>
+                    </ListView>
+                    <StackPanel Margin="20" Visibility="{Binding HasActiveItems, Converter={StaticResource InvertedBoolToVisibilityConverter}}" x:Name="EmptyMsg" HorizontalAlignment="Center" VerticalAlignment="Center" d:IsHidden="True">
+                        <TextBlock Text="Você não tem anúncios ativos." Style="{StaticResource SubheaderTextBlockStyle}" />
+                        <TextBlock Text="Já tentou olhar em pausados ou finalizados?" Style="{StaticResource BodyTextBlockStyle}" />
+                    </StackPanel>
+                </Grid>
             </PivotItem>
             <PivotItem>
                 <PivotItem.Header>
                     <uc:TabHeader Label="Pausados" Glyph="&#xE769;" />
                 </PivotItem.Header>
-                <ListView ItemTemplate="{StaticResource ListViewItemTemplate1}" ItemContainerStyle="{StaticResource ListViewItemStyle1}" ItemsSource="{Binding ItemsPaused.results_graph}" Grid.Row="1" x:Name="ProdutosPausadosListView">
-                    <Interactivity:Interaction.Behaviors>
-                        <Core:EventTriggerBehavior EventName="Tapped">
-                            <Core:InvokeCommandAction Command="{Binding SelectItem}" CommandParameter="{Binding ElementName=ProdutosPausadosListView,Path=SelectedItem}" />
-                        </Core:EventTriggerBehavior>
-                    </Interactivity:Interaction.Behaviors>
-                </ListView>
+                <Grid>
+                    <ListView ItemTemplate="{StaticResource ListViewItemTemplate1}" ItemContainerStyle="{StaticResource ListViewItemStyle1}" ItemsSource="{Binding ItemsPaused}" Grid.Row="1" x:Name="ProdutosPausadosListView">
+                        <Interactivity:Interaction.Behaviors>
+                            <Core:EventTriggerBehavior EventName="Tapped">
+                                <Core:InvokeCommandAction Command="{Binding SelectItem}" CommandParameter="{Binding ElementName=ProdutosPausadosListView,Path=SelectedItem}" />
+                            </Core:EventTriggerBehavior>
+                        </Interactivity:Interaction.Behaviors>
+                    </ListView>
+                    <StackPanel Margin="20" Visibility="{Binding HasPausedItems, Converter={StaticResource InvertedBoolToVisibilityConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Text="Você não tem anúncios pausados." Style="{StaticResource SubheaderTextBlockStyle}" />
+                        <TextBlock Text="Já tentou olhar em ativos ou finalizados?" Style="{StaticResource BodyTextBlockStyle}" />
+                    </StackPanel>
+                </Grid>
+                
             </PivotItem>
             <PivotItem>
                 <PivotItem.Header>
                     <uc:TabHeader Label="Finalizados" Glyph="&#xE922;" />
                 </PivotItem.Header>
-                <ListView ItemTemplate="{StaticResource ListViewItemTemplate1}" ItemContainerStyle="{StaticResource ListViewItemStyle1}" ItemsSource="{Binding ItemsClosed.results_graph}" Grid.Row="1" x:Name="ProdutosClosedListView">
-                    <Interactivity:Interaction.Behaviors>
-                        <Core:EventTriggerBehavior EventName="Tapped">
-                            <Core:InvokeCommandAction Command="{Binding SelectItem}" CommandParameter="{Binding ElementName=ProdutosClosedListView,Path=SelectedItem}" />
-                        </Core:EventTriggerBehavior>
-                    </Interactivity:Interaction.Behaviors>
-                </ListView>
+                <Grid>
+                    <ListView ItemTemplate="{StaticResource ListViewItemTemplate1}" ItemContainerStyle="{StaticResource ListViewItemStyle1}" ItemsSource="{Binding ItemsClosed}" Grid.Row="1" x:Name="ProdutosClosedListView">
+                        <Interactivity:Interaction.Behaviors>
+                            <Core:EventTriggerBehavior EventName="Tapped">
+                                <Core:InvokeCommandAction Command="{Binding SelectItem}" CommandParameter="{Binding ElementName=ProdutosClosedListView,Path=SelectedItem}" />
+                            </Core:EventTriggerBehavior>
+                        </Interactivity:Interaction.Behaviors>
+                    </ListView>
+                    <StackPanel Margin="20" Visibility="{Binding HasClosedItems, Converter={StaticResource InvertedBoolToVisibilityConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Text="Você não tem anúncios finalizados." Style="{StaticResource SubheaderTextBlockStyle}" />
+                        <TextBlock Text="Já tentou olhar em ativos ou pausados?" Style="{StaticResource BodyTextBlockStyle}" />
+                    </StackPanel>
+                </Grid>
             </PivotItem>
         </Pivot>
     </Grid>

@@ -17,12 +17,21 @@
         <converters:BoolToVisibilityConverter x:Name="BoolToVisibilityConverter" />
     </Page.Resources>
     <Controls:ModalDialog x:Name="ModalContainer" CanBackButtonDismiss="False"
-                          DisableBackButtonWhenModal="True">
+                          DisableBackButtonWhenModal="False">
         <Controls:ModalDialog.ModalBackground>
             <SolidColorBrush Color="#99000000" Opacity="0.800000011920929"/>
         </Controls:ModalDialog.ModalBackground>
         <Controls:ModalDialog.Content>
-            <Controls:HamburgerMenu PaneClosed="MyHamburgerMenu_PaneClosed" PaneOpened="MyHamburgerMenu_PaneOpened" x:Name="MyHamburgerMenu" HamburgerBackground="{StaticResource MercadoLivreBackgroundColor}" HamburgerForeground="{StaticResource MercadoLivreForegroundColor}" NavAreaBackground="{StaticResource MercadoLivreBackgroundColor}" NavButtonForeground="{StaticResource MercadoLivreForegroundColor}" NavButtonHoverBackground="#A5FFF8F8" NavButtonCheckedBackground="#D8DCD200" NavButtonCheckedForeground="#A5494949" NavButtonPressedBackground="#A5494949">
+            <!--<Controls:HamburgerMenu PaneClosed="MyHamburgerMenu_PaneClosed" PaneOpened="MyHamburgerMenu_PaneOpened" x:Name="MyHamburgerMenu"
+                                    HamburgerBackground="{StaticResource MercadoLivreBackgroundColor}"
+                                    HamburgerForeground="{StaticResource MercadoLivreForegroundColor}" 
+                                    NavAreaBackground="{StaticResource MercadoLivreBackgroundColor}" 
+                                    NavButtonForeground="{StaticResource MercadoLivreForegroundColor}"
+                                    NavButtonHoverBackground="#A5FFF8F8"
+                                    NavButtonCheckedBackground="#D8DCD200" 
+                                    NavButtonCheckedForeground="#A5494949" 
+                                    NavButtonPressedBackground="#A5494949">-->
+            <Controls:HamburgerMenu PaneClosed="MyHamburgerMenu_PaneClosed" PaneOpened="MyHamburgerMenu_PaneOpened" x:Name="MyHamburgerMenu">
                 <Controls:HamburgerMenu.PrimaryButtons>
                     <!--  mainpage button  -->
                     <Controls:HamburgerButtonInfo  ClearHistory="True" PageType="views:MainPage">
@@ -45,6 +54,16 @@
                             <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Text="Favoritos" />
                         </StackPanel>
                     </Controls:HamburgerButtonInfo>
+                    
+                    <!-- ********************************** REATIVAR QUANDO ESTIVER PRONTO ************************************************ -->
+                    <!--  vender button  -->
+                    <!--<Controls:HamburgerButtonInfo ClearHistory="False" PageType="viewsSecure:VenderPage">
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon  Width="48" Height="48" Glyph="" />
+                            <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Text="Vender" />
+                        </StackPanel>
+                    </Controls:HamburgerButtonInfo>-->
+                    
                     <!--Separador?-->
                     <Controls:HamburgerButtonInfo  IsEnabled="False" x:Name="SeparadorCompras" Visibility="Collapsed">
                         <TextBlock Margin="12,10,0,0" VerticalAlignment="Center" Text="Compras" />
@@ -109,21 +128,7 @@
                 </Controls:HamburgerMenu.PrimaryButtons>
 
                 <Controls:HamburgerMenu.SecondaryButtons>
-                    <!--  Logoff button  -->
-                    <!--
-                    <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:LoginPage">
-                        <StackPanel Orientation="Horizontal">
-                            <SymbolIcon Width="48" Height="48" Symbol="Cancel" />
-                            <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Text="Sair" />
-                        </StackPanel>
-                    </Controls:HamburgerButtonInfo>-->
-                    <!--  Login button  -->
-                    <Controls:HamburgerButtonInfo ClearHistory="False" PageType="views:LoginPage">
-                        <StackPanel Orientation="Horizontal">
-                            <SymbolIcon Width="48" Height="48" Symbol="Permissions" />
-                            <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Text="Login" />
-                        </StackPanel>
-                    </Controls:HamburgerButtonInfo>
+                    
                     <!--  settingspage button  -->
                     <Controls:HamburgerButtonInfo x:Name="SettingsButton" PageType="views:SettingsPage">
                         <Controls:HamburgerButtonInfo.NavigationTransitionInfo>
@@ -134,17 +139,17 @@
                             <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Text="Configurações" />
                         </StackPanel>
                     </Controls:HamburgerButtonInfo>
+                    <!--  Login button  -->
+                    <Controls:HamburgerButtonInfo ClearHistory="False" PageType="views:LoginPage">
+                        <StackPanel Orientation="Horizontal">
+                            <SymbolIcon Width="48" Height="48" Symbol="Permissions" />
+                            <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Text="Login" />
+                        </StackPanel>
+                    </Controls:HamburgerButtonInfo>
+
+                    <Controls:HamburgerButtonInfo IsEnabled="False">
+                    </Controls:HamburgerButtonInfo>
                 </Controls:HamburgerMenu.SecondaryButtons>
-                <!--<Interactivity:Interaction.Behaviors>
-                    <Core:EventTriggerBehavior EventName="PaneOpened" SourceObject="{Binding ElementName=MyHamburgerMenu}">
-                        <Core:ChangePropertyAction TargetObject="{Binding ElementName=SeparadorVendas}" PropertyName="Visibility" Value="Visible" />
-                        <Core:ChangePropertyAction TargetObject="{Binding ElementName=SeparadorCompras}" PropertyName="Visibility" Value="Visible" />
-                    </Core:EventTriggerBehavior>
-                    <Core:EventTriggerBehavior EventName="PaneClosed" SourceObject="{Binding ElementName=MyHamburgerMenu}">
-                        <Core:ChangePropertyAction TargetObject="{Binding ElementName=SeparadorVendas}" PropertyName="Visibility" Value="Collapsed" />
-                        <Core:ChangePropertyAction TargetObject="{Binding ElementName=SeparadorCompras}" PropertyName="Visibility" Value="Collapsed" />
-                    </Core:EventTriggerBehavior>
-                </Interactivity:Interaction.Behaviors>-->
             </Controls:HamburgerMenu>
         </Controls:ModalDialog.Content>
 
@@ -153,6 +158,5 @@
         </Controls:ModalDialog.ModalContent>
 
     </Controls:ModalDialog>
-
 </Page>
 

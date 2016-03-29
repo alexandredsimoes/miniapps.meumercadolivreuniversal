@@ -79,7 +79,7 @@ namespace MyML.UWP.Models.Mercadolivre
 
     public class EstimatedDelivery
     {
-        public object date { get; set; }
+        public DateTimeOffset? date { get; set; }
         public object time_from { get; set; }
         public object time_to { get; set; }
     }

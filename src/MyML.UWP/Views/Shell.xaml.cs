@@ -1,16 +1,19 @@
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using Template10.Common;
 using Template10.Controls;
 using Template10.Services.NavigationService;
 using Windows.UI.Core;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 
 namespace MyML.UWP.Views
 {
     // DOCS: https://github.com/Windows-XAML/Template10/wiki/Docs-%7C-SplitView
     public sealed partial class Shell : Page
     {
+        double InitialManipulationPointX = 0;
         public static Shell Instance { get; set; }
         public static HamburgerMenu HamburgerMenu { get { return Instance.MyHamburgerMenu; } }
 
@@ -19,6 +22,10 @@ namespace MyML.UWP.Views
             Instance = this;
             InitializeComponent();
             Loaded += Shell_Loaded;
+            ManipulationMode = ManipulationModes.TranslateX;
+            ManipulationStarted += Shell_ManipulationStarted;
+            ManipulationDelta += Shell_ManipulationDelta;
+            ManipulationCompleted += Shell_ManipulationCompleted;
 
             //MyHamburgerMenu.PaneOpened += (sender, e) =>
             //{
@@ -30,6 +37,22 @@ namespace MyML.UWP.Views
             //    SeparadorVendas.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             //    SeparadorCompras.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             //};
+        }
+
+        private void Shell_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
+        {
+            InitialManipulationPointX = e.Position.X;
+            Debug.WriteLine("X -> " + InitialManipulationPointX);
+        }
+
+        private void Shell_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        {
+        }
+
+        private void Shell_ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
+        {
+            InitialManipulationPointX = e.Position.X;
+            Debug.WriteLine("X -> " + InitialManipulationPointX);
         }
 
         private void Shell_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)

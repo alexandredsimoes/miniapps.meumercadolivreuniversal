@@ -23,6 +23,16 @@
         <converters:InvertedBoolToVisibilityConverter x:Name="InvertedBoolToVisibilityConverter" />
     </Page.Resources>
 
+    <Page.BottomAppBar>
+        <CommandBar>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Click="{x:Bind ViewModel.GotoPrivacy}" Label="Privacidade" />
+                <AppBarButton Click="{x:Bind ViewModel.GotoAbout}" Label="Sobre" />
+                <AppBarSeparator />
+                <AppBarButton Label="Sair" Icon="Clear" Command="{Binding RevokeAccess}" />
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
         <VisualStateManager.VisualStateGroups>
@@ -64,28 +74,17 @@
         </Grid.RowDefinitions>
 
         <!--  page header  -->
-        <controls:PageHeader Grid.Row="0" Content="Meu MercadoLivre Universal" x:Uid="PageTitleHeader" Background="{StaticResource MercadoLivreBackgroundColor}" Foreground="{StaticResource MercadoLivreForegroundColor}">
-            <controls:PageHeader.PrimaryCommands>
-
-            </controls:PageHeader.PrimaryCommands>
-            <controls:PageHeader.SecondaryCommands>
-                <AppBarButton Click="{x:Bind ViewModel.GotoSettings}" Label="Configurações" />
-                <AppBarButton Click="{x:Bind ViewModel.GotoPrivacy}" Label="Privacidade" />
-                <AppBarButton Click="{x:Bind ViewModel.GotoAbout}" Label="Sobre" />
-                <AppBarSeparator />
-                <AppBarButton Label="Sair" Icon="Clear" Command="{Binding RevokeAccess}" />
-                <!--<AppBarButton Label="Carregar meu produto" Command="{Binding LoadProduto}" CommandParameter="MLB740666193" />
-                <AppBarButton Label="Carregar meu produto 2" Command="{Binding LoadProduto}"  CommandParameter="MLB740694926"/>-->
-
-            </controls:PageHeader.SecondaryCommands>
+        <controls:PageHeader Grid.Row="0" Content="Meu MercadoLivre Universal" x:Uid="PageTitleHeader">
+            <!--<controls:PageHeader.Foreground>
+                <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
+            </controls:PageHeader.Foreground>
+            <controls:PageHeader.Background>
+                <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
+            </controls:PageHeader.Background>-->
         </controls:PageHeader>
+        
 
-        <uc:AdsControl Grid.Row="1"/>
-
-        <!--<Universal: AdMediatorControl x:Name="AdMediator_3D4884_MAIN" 
-                      HorizontalAlignment="Center"  
-                     Id="AdMediator_3D4884_MAIN"  
-                     VerticalAlignment="Top" Grid.Row="1" />-->
+        <uc:AdsControl Grid.Row="1" />
 
         <!--  page content  -->
         <ScrollViewer Grid.Row="2" VerticalAlignment="Top" 
@@ -173,7 +172,7 @@
                     </TransformGroup>
                 </Path.RenderTransform>
             </Path>
-            <TextBlock Text="Para visualizar sua área segura, faça o login" Style="{StaticResource TitleTextBlockStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Margin="0,25,0,0" />
+            <HyperlinkButton Content="Para visualizar sua área segura, faça o login" Command="{Binding DoLogin}" HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="0,25,0,0" />
         </StackPanel>
     </Grid>
 </Page>

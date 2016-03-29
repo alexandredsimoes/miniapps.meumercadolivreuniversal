@@ -159,6 +159,8 @@ namespace MyML.UWP.ViewModels
                 HasSellerRefundMoney = null;
                 RestockItem = null;
             }
+
+            Views.Shell.SetBusy(false);
             return Task.CompletedTask;
         }
 

@@ -30,7 +30,7 @@ namespace MyML.UWP.ViewModels.Design
                 name = "Normal",
                 list_cost = 16.99,
                 cost = 16.99,
-                estimated_delivery = new EstimatedDelivery() { date = "2015-07-02T00:00:00.000-03:00" }
+                estimated_delivery = new EstimatedDelivery() { date = DateTimeOffset.Parse("2015-07-02T00:00:00.000-03:00") }
             });
             ShippingInfo = new ShippingCost()
             {
@@ -473,7 +473,7 @@ namespace MyML.UWP.ViewModels.Design
                 available_quantity = 222,
                 shipping = new Shipping()
                 {
-                    free_shipping = true,
+                    free_shipping = false,
                     free_methods = new List<FreeMethod>(new FreeMethod[]
                     {
 

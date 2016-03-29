@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using Microsoft.ApplicationInsights;
 using MyML.UWP.Adapters;
 using MyML.UWP.Adapters.Search;
 using MyML.UWP.Aggregattor;
@@ -21,12 +22,14 @@ namespace MyML.UWP.ViewModels
 {
     public class BuscaPageViewModel : ViewModelBase
     {
+        private readonly TelemetryClient _telemetryClient;
         private readonly IMercadoLivreService _mercadoLivreService;
         public IList<AvailableFilter> SelectedFilters { get; set; } = new List<AvailableFilter>();
 
-        public BuscaPageViewModel(IMercadoLivreService mercadoLivreService)
+        public BuscaPageViewModel(IMercadoLivreService mercadoLivreService, TelemetryClient telemetryClient)
         {
             _mercadoLivreService = mercadoLivreService;
+            _telemetryClient = telemetryClient;
 
             Messenger.Default.Register<MessengerFilterResult>(this, GetFilterResult);
             Buscar = new RelayCommand<string>((s) =>
@@ -43,11 +46,11 @@ namespace MyML.UWP.ViewModels
                 {
                     Filters = this.Filters,
                     Sorts = this.Sorts,
-                                        
+
                 });
             });
 
-           
+
         }
 
         private void GetFilterResult(MessengerFilterResult obj)
@@ -59,13 +62,14 @@ namespace MyML.UWP.ViewModels
 
         public override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
-
+            //if (state.ContainsKey("Searchterm"))
+            //    Searchterm = (string)state["Searchterm"];
             //if(state.ContainsKey("SCROLL_POSITION"))
             //{
             //    ScrollPosition = (int)state["SCROLL_POSITION"];
             //}
 
-            if(mode  == NavigationMode.Back)
+            if (mode == NavigationMode.Back)
             {
                 //Items.Move(0, 30);
             }
@@ -74,7 +78,7 @@ namespace MyML.UWP.ViewModels
 
         public override Task OnNavigatingFromAsync(NavigatingEventArgs args)
         {
-            if(args.NavigationMode == NavigationMode.Back && !args.Suspending)
+            if (args.NavigationMode == NavigationMode.Back && !args.Suspending)
             {
                 //Limpa a bagunça toda
                 if (Items != null)
@@ -86,8 +90,10 @@ namespace MyML.UWP.ViewModels
                     Items = null;
                 }
             }
+
+            Shell.SetBusy(false);
             return Task.CompletedTask;
-        }        
+        }
 
         public override Task OnNavigatedFromAsync(IDictionary<string, object> pageState, bool suspending)
         {
@@ -95,6 +101,11 @@ namespace MyML.UWP.ViewModels
             //    pageState["SCROLL_POSITION"] = ScrollPosition;
             //else
             //    pageState.Add("SCROLL_POSITION", ScrollPosition);
+
+            //if (!pageState.ContainsKey("Searchterm"))
+            //    pageState.Add("Searchterm", Searchterm);
+            //else
+            //    pageState["Searchterm"] = Searchterm;
 
             return Task.CompletedTask;
         }
@@ -139,6 +150,7 @@ namespace MyML.UWP.ViewModels
             Items.LoadMoreItemsCompleted += Items_LoadMoreItemsCompleted;
             Items.LoadMoreItemsStarted += Items_LoadMoreItemsStarted;
 
+            _telemetryClient.TrackEvent("BuscaPageViewModel", new Dictionary<string, string>() { { "Pesquisa", query } });
         }
 
         private void Items_FiltersAvailable(IList<AvailableFilter> listFilters, IList<AvailableSort> listSorts)
@@ -198,7 +210,15 @@ namespace MyML.UWP.ViewModels
             get { return _ScrollPosition; }
             set { Set(() => ScrollPosition, ref _ScrollPosition, value); }
         }
-        
+
+        private string _Searchterm;
+
+        public string Searchterm
+        {
+            get { return _Searchterm; }
+            set { Set(() => Searchterm, ref _Searchterm, value); }
+        }
+
 
         public RelayCommand<string> Buscar { get; private set; }
         public RelayCommand<object> SelecionarProduto { get; private set; }

@@ -1,4 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using MyML.UWP.Adapters;
+using MyML.UWP.Adapters.Search;
 using MyML.UWP.Models;
 using MyML.UWP.Models.Mercadolivre;
 using MyML.UWP.Services;
@@ -8,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Template10.Mvvm;
 using Windows.ApplicationModel.Resources;
@@ -21,6 +24,7 @@ namespace MyML.UWP.ViewModels
         private readonly IMercadoLivreService _mercadoLivreService;
         private readonly ResourceLoader _resourceLoader;
         private readonly IDataService _dataService;
+        private CancellationTokenSource cts = new CancellationTokenSource(); 
         public AnunciosPageViewModel(IMercadoLivreService mercadoLivreService, ResourceLoader resourceLoader,
             IDataService dataService)
         {
@@ -40,9 +44,7 @@ namespace MyML.UWP.ViewModels
                     return;
                 }
 
-                await LoadAdverts("active");
-                await LoadAdverts("paused");
-                await LoadAdverts("closed");
+                await LoadAdverts();
             });
             SelectItem = new RelayCommand<object>((obj) =>
             {
@@ -64,80 +66,87 @@ namespace MyML.UWP.ViewModels
                 return;
             }
 
-            if (mode != NavigationMode.Back)
+            if (mode != NavigationMode.Back && CacheHelper.IsExpired(nameof(AnunciosPageViewModel)))
             {
-                await LoadAdverts("active");
-                await LoadAdverts("paused");
-                await LoadAdverts("closed");
+                await LoadAdverts();
             }
         }
-        private async Task LoadAdverts(string status)
+
+        public override Task OnNavigatedFromAsync(IDictionary<string, object> pageState, bool suspending)
+        {
+            Views.Shell.SetBusy(false);
+            return Task.CompletedTask;
+        }
+        private Task LoadAdverts()
         {            
             try
             {
-                Views.Shell.SetBusy(true, "Carregando informações");
-                var items = await _mercadoLivreService.ListMyItems(0, 10,
-                    new KeyValuePair<string, object>[]
-                    {
-                        new KeyValuePair<string, object>("status",status)
-                    });
 
-                if (items != null)
-                {
-                    items.ListTypes = await _mercadoLivreService.ListTypes(Consts.ML_ID_BRASIL);
+                Items = new IncrementalSearchSource<AdvertsDataSource, Item>(0, 10, "active", true);
+                ItemsPaused = new IncrementalSearchSource<AdvertsDataSource, Item>(0, 10, "paused", true);
+                ItemsClosed = new IncrementalSearchSource<AdvertsDataSource, Item>(0, 10, "closed", true);
 
-                    if (items.results_graph == null)
-                        items.results_graph = new List<Item>();
+                Items.LoadMoreItemsStarted += () => { Shell.SetBusy(true); };
+                ItemsPaused.LoadMoreItemsStarted += () => { Shell.SetBusy(true); };
+                ItemsClosed.LoadMoreItemsStarted += () => { Shell.SetBusy(true); };
 
-                    foreach (var item in items.results)
-                    {
-                        var product = await _mercadoLivreService.GetItemDetails(item, new KeyValuePair<string, string>[] { new KeyValuePair<string, string>("attributes", "id,title,price,thumbnail,stop_time,available_quantity") });
-                        if (product != null)
-                        {
-                            if (items.ListTypes != null)
-                                product.ListType = items.ListTypes.FirstOrDefault(c => c.id == product.listing_type_id);
+                Items.LoadMoreItemsCompleted += () => { Shell.SetBusy(false); HasActiveItems = Items?.Count > 0; };
+                ItemsPaused.LoadMoreItemsCompleted += () => { Shell.SetBusy(false); HasPausedItems = ItemsPaused?.Count > 0; };
+                ItemsClosed.LoadMoreItemsCompleted += () => { Shell.SetBusy(false); HasClosedItems = ItemsClosed?.Count > 0; };
 
-                            items.results_graph.Add(product);
-                        }
-                    }
-                    if (status == "active")
-                        Items = items;
-                    if (status == "paused")
-                        ItemsPaused = items;
-                    if (status == "closed")
-                        ItemsClosed = items;
-                }
+                CacheHelper.AddCache(nameof(AnunciosPageViewModel)); //Atualiza o cache da página            
+                return Task.CompletedTask;               
             }
             finally
             {
-                Views.Shell.SetBusy(false);
+                //Views.Shell.SetBusy(false);
             }
         }
 
-        public RelayCommand Refresh { get; private set; }
-        public RelayCommand<object> SelectItem { get; private set; }
+        private bool _HasActiveItems;
+        public bool HasActiveItems
+        {
+            get { return _HasActiveItems; }
+            set { Set(() => HasActiveItems, ref _HasActiveItems, value); }
+        }
+
+        private bool _HasPausedItems;
+        public bool HasPausedItems
+        {
+            get { return _HasPausedItems; }
+            set { Set(() => HasPausedItems, ref _HasPausedItems, value); }
+        }
 
 
-        private MLMyItemsSearchResult _Items;
-        public MLMyItemsSearchResult Items
+        private bool _HasClosedItems;
+        public bool HasClosedItems
+        {
+            get { return _HasClosedItems; }
+            set { Set(() => HasClosedItems, ref _HasClosedItems, value); }
+        }
+
+        private IncrementalSearchSource<AdvertsDataSource, Item> _Items;
+        public IncrementalSearchSource<AdvertsDataSource, Item> Items
         {
             get { return _Items; }
             set { Set(() => Items, ref _Items, value); }
         }
 
-        private MLMyItemsSearchResult _ItemsPaused;
-        public MLMyItemsSearchResult ItemsPaused
+        private IncrementalSearchSource<AdvertsDataSource, Item> _ItemsPaused;
+        public IncrementalSearchSource<AdvertsDataSource, Item> ItemsPaused
         {
             get { return _ItemsPaused; }
             set { Set(() => ItemsPaused, ref _ItemsPaused, value); }
         }
 
-        private MLMyItemsSearchResult _ItemsClosed;
-        public MLMyItemsSearchResult ItemsClosed
+        private IncrementalSearchSource<AdvertsDataSource, Item> _ItemsClosed;
+        public IncrementalSearchSource<AdvertsDataSource, Item> ItemsClosed
         {
             get { return _ItemsClosed; }
             set { Set(() => ItemsClosed, ref _ItemsClosed, value); }
         }
 
+        public RelayCommand Refresh { get; private set; }
+        public RelayCommand<object> SelectItem { get; private set; }       
     }
 }

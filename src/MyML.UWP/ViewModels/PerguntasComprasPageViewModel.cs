@@ -60,6 +60,7 @@ namespace MyML.UWP.ViewModels
         public override Task OnNavigatingFromAsync(NavigatingEventArgs args)
         {
             //if(args.NavigationMode == NavigationMode.Back)
+            Views.Shell.SetBusy(false);
             return Task.CompletedTask;
         }
 

@@ -54,7 +54,13 @@
         </Grid.RowDefinitions>
 
         <!--  page header  -->
-        <controls:PageHeader Background="{StaticResource MercadoLivreBackgroundColor}" Foreground="{StaticResource MercadoLivreForegroundColor}" Content="Login" x:Uid="PageTitleHeader" >
+        <controls:PageHeader Content="Autenticação" x:Uid="PageTitleHeader">
+            <!--<controls:PageHeader.Foreground>
+                <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
+            </controls:PageHeader.Foreground>
+            <controls:PageHeader.Background>
+                <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
+            </controls:PageHeader.Background>-->
             <!--<controls:PageHeader.PrimaryCommands>
                 <AppBarButton Label="Sair" Command="{Binding RevokeAccess}" Icon="Clear" />
             </controls:PageHeader.PrimaryCommands>-->

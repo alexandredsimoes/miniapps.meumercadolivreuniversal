@@ -57,8 +57,13 @@
         </Grid.RowDefinitions>
 
         <!--  page header  -->
-        <controls:PageHeader Content="Descrição do anúncio" Background="{StaticResource MercadoLivreBackgroundColor}" Foreground="{StaticResource MercadoLivreForegroundColor}">
-
+        <controls:PageHeader Content="Descrição do anúncio">
+            <!--<controls:PageHeader.Foreground>
+                <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
+            </controls:PageHeader.Foreground>
+            <controls:PageHeader.Background>
+                <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
+            </controls:PageHeader.Background>-->
         </controls:PageHeader>
         <TextBlock Grid.Row="1" Text="{Binding Description}"  Margin="0" TextWrapping="Wrap" Visibility="{Binding IsHtml, Converter={StaticResource InvertedBoolToVisibilityConverter}}" Padding="10,15,15,15" />
         <WebView MyBehaviors:WebBrowserHelper.Html="{Binding Description}"  Margin="0" Visibility="{Binding IsHtml, Converter={StaticResource BoolToVisibilityConverter}}" Grid.Row="1"/>

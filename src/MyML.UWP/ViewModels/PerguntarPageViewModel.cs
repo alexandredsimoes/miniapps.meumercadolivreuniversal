@@ -45,22 +45,31 @@ namespace MyML.UWP.ViewModels
                 return;
             }
 
-            var questionResult = await _mercadoLivreService.AskQuestion(QuestionText, ProductId);
-
-            if (questionResult != null)
+            try
             {
-                if (await _dataService.SaveQuestion(questionResult))
-                {
-                    await new MessageDialog(_resourceLoader.GetString("ProductSearchResultPageViewModelQuestionSend"),
-                        _resourceLoader.GetString("ApplicationTitle")).ShowAsync();
+                Shell.SetBusy(true, "Enviando pergunta");
+                var questionResult = await _mercadoLivreService.AskQuestion(QuestionText, ProductId);
 
-                    if (NavigationService.CanGoBack)
-                        NavigationService.GoBack();
+                if (questionResult != null)
+                {
+                    if (await _dataService.SaveQuestion(questionResult))
+                    {
+                        await new MessageDialog(_resourceLoader.GetString("ProductSearchResultPageViewModelQuestionSend"),
+                            _resourceLoader.GetString("ApplicationTitle")).ShowAsync();
+
+                        if (NavigationService.CanGoBack)
+                            NavigationService.GoBack();
+                    }
                 }
+                else
+                    await new MessageDialog(_resourceLoader.GetString("ProductSearchResultPageViewModelQuestionNotSend"),
+                        _resourceLoader.GetString("ApplicationTitle")).ShowAsync();
             }
-            else
-                await new MessageDialog(_resourceLoader.GetString("ProductSearchResultPageViewModelQuestionNotSend"),
-                    _resourceLoader.GetString("ApplicationTitle")).ShowAsync();
+            finally
+            {
+                Shell.SetBusy(false);
+            }
+           
         }
 
         public override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
@@ -71,6 +80,12 @@ namespace MyML.UWP.ViewModels
                 //QuestionsList = await _mercadoLivreService.ListQuestionsByProduct(parameter.ToString());
                 ProductId = parameter.ToString();
             }
+            return Task.CompletedTask;
+        }
+
+        public override Task OnNavigatedFromAsync(IDictionary<string, object> pageState, bool suspending)
+        {
+            Views.Shell.SetBusy(false);
             return Task.CompletedTask;
         }
 

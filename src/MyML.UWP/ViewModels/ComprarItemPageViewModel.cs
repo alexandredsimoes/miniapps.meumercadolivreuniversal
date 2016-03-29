@@ -38,6 +38,12 @@ namespace MyML.UWP.ViewModels
             
         }
 
+        public override Task OnNavigatedFromAsync(IDictionary<string, object> pageState, bool suspending)
+        {
+            Views.Shell.SetBusy(false);
+            return Task.CompletedTask;
+        }
+
         private async Task LoadItemDetails(string itemId)
         {
             if (!_dataService.IsAuthenticated())

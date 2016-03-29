@@ -77,6 +77,7 @@ namespace MyML.UWP.ViewModels
                 MLBuyerRatingReason reason = (MLBuyerRatingReason)Enum.Parse(typeof(MLBuyerRatingReason), _Reason, false);
 
 
+                Message = Message  + " - Enviado pelo MeuMercado Livre Universal para Windows Mobile";
                 var result = await _mercadoLivreService.SendBuyerOrderFeedback(OrderInfo.id.ToString(),
                     false, rating, Message, reason);
             }
@@ -151,6 +152,8 @@ namespace MyML.UWP.ViewModels
                 OrderInfo = null;
                 Message = null;
             }
+
+            Views.Shell.SetBusy(false);
             return Task.CompletedTask;
         }
 

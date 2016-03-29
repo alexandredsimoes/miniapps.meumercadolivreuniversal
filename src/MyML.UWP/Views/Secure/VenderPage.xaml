@@ -1,0 +1,461 @@
+﻿<Page
+    x:Class="MyML.UWP.Views.Secure.VenderPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MyML.UWP.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:Behaviors="using:Template10.Behaviors"
+    xmlns:MyBehaviors="using:MyML.UWP.Behaviors"
+    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:controls="using:Template10.Controls"
+    xmlns:converters="using:MyML.UWP.Converters"
+    xmlns:convertersML="using:MyML.UWP.Converters.MercadoLivre"
+    xmlns:designViewModels="using:MyML.UWP.ViewModels.Design"
+    xmlns:uc="using:MyML.UWP.Usercontrols"
+    d:DataContext="{d:DesignInstance designViewModels:BuscaPageDesignViewModel, IsDesignTimeCreatable=True}"
+    DataContext="{Binding Source={StaticResource Locator}, Path=VenderPage}"
+    x:Name="This">
+
+    <Page.Resources>
+        <converters:InvertedValueToInvisibilityConverter x:Name="InvertedValueToInvisibilityConverter" />
+        <converters:ValueToVisibilityConverter x:Name="ValueToVisibilityConverter" />
+        <converters:IntStringConverter x:Name="IntStringConverter" />
+        <converters:DoubleStringConverter x:Name="DoubleStringConverter" />
+        <converters:BoolToVisibilityConverter x:Name="BoolToVisibilityConverter" />
+        <converters:InvertedBoolToVisibilityConverter x:Name="InvertedBoolToVisibilityConverter" />
+        <converters:StringFormatConverter x:Name="StringFormatConverter" />
+        <converters:InvertBoolean x:Name="InvertBoolean" />
+
+
+        <Style x:Key="ListViewItemStyle1" TargetType="ListViewItem">
+            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
+            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
+            <Setter Property="TabNavigation" Value="Local"/>
+            <Setter Property="IsHoldingEnabled" Value="True"/>
+            <Setter Property="Padding" Value="12,0,12,0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="MinWidth" Value="{ThemeResource ListViewItemMinWidth}"/>
+            <Setter Property="MinHeight" Value="{ThemeResource ListViewItemMinHeight}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListViewItem">
+                        <ListViewItemPresenter CheckBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}" ContentMargin="{TemplateBinding Padding}" CheckMode="Inline" ContentTransitions="{TemplateBinding ContentTransitions}" CheckBoxBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}" DragForeground="{ThemeResource ListViewItemDragForegroundThemeBrush}" DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}" DragBackground="{ThemeResource ListViewItemDragBackgroundThemeBrush}" DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}" FocusBorderBrush="{ThemeResource SystemControlForegroundAltHighBrush}" FocusSecondaryBorderBrush="{ThemeResource SystemControlForegroundBaseHighBrush}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" PointerOverForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}" PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}" ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}" SelectionCheckMarkVisualEnabled="True" SelectedForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Storyboard x:Name="Storyboard2">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="PartTwo">
+                <EasingDoubleKeyFrame KeyTime="0" Value="-500">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="Storyboard3">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="PartThree">
+                <EasingDoubleKeyFrame KeyTime="0" Value="-500">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="Storyboard4">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="PartFour">
+                <EasingDoubleKeyFrame KeyTime="0" Value="-500">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="Storyboard5">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="PartFive">
+                <EasingDoubleKeyFrame KeyTime="0" Value="-500">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="Storyboard6">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="PartSix">
+                <EasingDoubleKeyFrame KeyTime="0" Value="-500">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="Storyboard7">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="PartSeven">
+                <EasingDoubleKeyFrame KeyTime="0" Value="-500">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="Storyboard8">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="PartEight">
+                <EasingDoubleKeyFrame KeyTime="0" Value="-500">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="Storyboard9">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="PartNine">
+                <EasingDoubleKeyFrame KeyTime="0" Value="-500">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Page.Resources>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <controls:PageHeader Content="Vender">
+            <!--<controls:PageHeader.Foreground>
+                <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
+            </controls:PageHeader.Foreground>
+            <controls:PageHeader.Background>
+                <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
+            </controls:PageHeader.Background>-->
+        </controls:PageHeader>
+
+        <uc:AdsControl Grid.Row="1"/>
+
+        <ScrollViewer Margin="15" Grid.Row="2">
+            <StackPanel>
+                <StackPanel x:Name="PartOne" Visibility="{Binding ActualPart, Converter={StaticResource ValueToVisibilityConverter}, ConverterParameter=1}">
+                    <StackPanel Padding="5" Margin="5">
+                        <StackPanel.Background>
+                            <SolidColorBrush Color="{ThemeResource SystemChromeLowColor}"/>
+                        </StackPanel.Background>
+                        <TextBlock Text="Escolha o que vender" Style="{StaticResource TitleTextBlockStyle}" />
+                        <TextBlock Text="Crie seu anúncio de forma rápida e segura"/>
+                    </StackPanel>
+
+                    <Line X1="3000" Margin="5" >
+                        <Line.Stroke>
+                            <SolidColorBrush Color="{ThemeResource SystemBaseLowColor}"/>
+                        </Line.Stroke>
+                    </Line>
+                    <Button Content="Produtos e outros" HorizontalAlignment="Stretch" Margin="5" Command="{Binding NextPart}"/>
+                    <Button Content="Veículos (em breve)" IsEnabled="False" HorizontalAlignment="Stretch" Margin="5"/>
+                    <Button Content="Imóveis (em breve)"  IsEnabled="False" HorizontalAlignment="Stretch" Margin="5"/>
+                    <Button Content="Serviços (em breve)"  IsEnabled="False" HorizontalAlignment="Stretch" Margin="5"/>
+                </StackPanel>
+
+                <!--Parte 2 - Fotos -->
+                <StackPanel x:Name="PartTwo" Visibility="{Binding ActualPart, Converter={StaticResource ValueToVisibilityConverter}, ConverterParameter=2}" RenderTransformOrigin="0.5,0.5">
+                    <StackPanel.RenderTransform>
+                        <CompositeTransform TranslateX="-2500"/>
+                    </StackPanel.RenderTransform>
+                    <StackPanel Padding="5" Margin="5">
+                        <StackPanel.Background>
+                            <SolidColorBrush Color="{ThemeResource SystemChromeLowColor}"/>
+                        </StackPanel.Background>
+                        <TextBlock Text="Adicione fotos do seu produto" Style="{StaticResource TitleTextBlockStyle}" />
+                    </StackPanel>
+                    <Line X1="3000" Margin="5" >
+                        <Line.Stroke>
+                            <SolidColorBrush Color="{ThemeResource SystemBaseLowColor}"/>
+                        </Line.Stroke>
+                    </Line>
+                    <Button Width="125" Padding="0" Margin="0" BorderThickness="0">
+                        <Button.Flyout>
+                            <MenuFlyout Placement="Bottom">
+                                <MenuFlyout.Items>
+                                    <MenuFlyoutItem Text="Câmera" Command="{Binding GetImage}" CommandParameter="Camera" />
+                                    <MenuFlyoutItem Text="Galeria" Command="{Binding GetImage}" CommandParameter="Gallery"/>
+                                </MenuFlyout.Items>
+                            </MenuFlyout>
+                        </Button.Flyout>
+                        <Button.ContentTemplate>
+                            <DataTemplate>
+                                <Grid Padding="5" Margin="0,5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <FontIcon Glyph="" Grid.Column="0" FontSize="40" />
+                                    <FontIcon Glyph=""  Grid.Column="1" FontSize="32"/>
+
+                                    <TextBlock Style="{StaticResource BodyTextBlockStyle}" Grid.ColumnSpan="2" Grid.Row="1"  TextWrapping="Wrap">
+                                    <Run Text="{Binding AvailablePhotos}"/>
+                                    <Run Text="fotos disponíveis" />
+                                    </TextBlock>
+                                </Grid>
+                            </DataTemplate>
+                        </Button.ContentTemplate>
+
+                    </Button>
+
+                    <TextBlock Text="Imagens selecionadas" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,10,0,0"/>
+                    <GridView ItemsSource="{Binding ProductInfo.Images}" Grid.Row="1" Margin="0,10,0,0" >
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding LocalPath}" Visibility="Collapsed"/>
+                                    <Image Source="{Binding Source}" Width="100" Height="100"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                    </GridView>
+
+                    <Button Content="Próximo" Visibility="{Binding ProductInfo.Images.Count, Converter={StaticResource InvertedValueToInvisibilityConverter} , ConverterParameter=0}" HorizontalAlignment="Stretch" Margin="10" Command="{Binding NextPart}" />
+                </StackPanel>
+
+                <!--Parte 3 - Titulo do anuncio -->
+                <StackPanel x:Name="PartThree" Visibility="{Binding ActualPart, Converter={StaticResource ValueToVisibilityConverter}, ConverterParameter=3}" Grid.Row="1">
+                    <StackPanel.RenderTransform>
+                        <CompositeTransform TranslateX="-2500"/>
+                    </StackPanel.RenderTransform>
+                    <TextBlock Text="Nome do seu produto" Style="{StaticResource SubtitleTextBlockStyle}" />
+                    <TextBox PlaceholderText="Título do anúncio" Margin="0,0,0,5" Text="{Binding ProductInfo.Title, Mode=TwoWay}" BorderThickness="0,0,0,0.5" />
+
+                    <Button Content="Próximo" HorizontalAlignment="Stretch" Margin="10" Command="{Binding NextPart}" />
+                </StackPanel>
+
+                <!--Parte 4 - Preço de venda -->
+                <StackPanel x:Name="PartFour" Visibility="{Binding ActualPart, Converter={StaticResource ValueToVisibilityConverter}, ConverterParameter=4}" Grid.Row="1">
+                    <StackPanel.RenderTransform>
+                        <CompositeTransform/>
+                    </StackPanel.RenderTransform>
+                    <TextBlock Text="Preço  de venda" Style="{StaticResource SubtitleTextBlockStyle}" />
+                    <TextBox PlaceholderText="Preço de venda" Margin="0,0,0,5" Text="{Binding ProductInfo.ProductValue, Mode=TwoWay, Converter={StaticResource DoubleStringConverter}}" BorderThickness="0,0,0,0.5"   />
+                    <Button Content="Próximo" HorizontalAlignment="Stretch" Margin="10" Command="{Binding NextPart}" />
+                </StackPanel>
+
+                <!--Parte 5 - Quantidade disponivel -->
+                <StackPanel x:Name="PartFive" Visibility="{Binding ActualPart, Converter={StaticResource ValueToVisibilityConverter}, ConverterParameter=5}" Grid.Row="1">
+                    <StackPanel.RenderTransform>
+                        <CompositeTransform/>
+                    </StackPanel.RenderTransform>
+                    <TextBlock Text="Quantidade disponível" Style="{StaticResource SubtitleTextBlockStyle}" />
+                    <TextBox PlaceholderText="Quantidade" Margin="0,0,0,5" Text="{Binding ProductInfo.Quantity, Mode=TwoWay, Converter={StaticResource IntStringConverter}}" BorderThickness="0,0,0,0.5" />
+                    <Button Content="Próximo" HorizontalAlignment="Stretch" Margin="10" Command="{Binding NextPart}" />
+                </StackPanel>
+
+                <!--Parte 6 - Descrição do anúncio -->
+                <StackPanel x:Name="PartSix" Visibility="{Binding ActualPart, Converter={StaticResource ValueToVisibilityConverter}, ConverterParameter=6}" Grid.Row="1">
+                    <StackPanel.RenderTransform>
+                        <CompositeTransform/>
+                    </StackPanel.RenderTransform>
+                    <TextBlock Text="Descreve seu produto" Style="{StaticResource SubtitleTextBlockStyle}" />
+                    <TextBox PlaceholderText="Descrição do seu produto" AcceptsReturn="True" Height="115" Margin="0,0,0,5" Text="{Binding ProductInfo.ProductDescription, Mode=TwoWay}" BorderThickness="0,0,0,0.5" />
+                    <Button Content="Próximo" HorizontalAlignment="Stretch" Margin="10" Command="{Binding NextPart}" />
+                </StackPanel>
+
+                <!--Parte 7 - Categoria -->
+                <StackPanel x:Name="PartSeven" Visibility="{Binding ActualPart, Converter={StaticResource ValueToVisibilityConverter}, ConverterParameter=7}" Grid.Row="1">
+                    <StackPanel.RenderTransform>
+                        <CompositeTransform/>
+                    </StackPanel.RenderTransform>
+                    <Button  Margin="10" Visibility="{Binding IsCategoryOpen, Converter={StaticResource InvertedBoolToVisibilityConverter}}" Command="{Binding OpenCategories}" HorizontalAlignment="Stretch" >
+                        <Button.Content>
+                            <StackPanel HorizontalAlignment="Center">
+                                <TextBlock Text="Clique para selecionar uma categoria" Style="{StaticResource SubheaderTextBlockStyle}"/>
+                                <TextBlock Style="{StaticResource BodyTextBlockStyle}">
+                                    <Run Text="Categoria selecionada: "/>
+                                    <Run Text="{Binding SelectedCategory.name}"/>
+                                </TextBlock>
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+
+                    <ListView ItemContainerStyle="{StaticResource ListViewItemStyle1}" Visibility="{Binding IsCategoryOpen, Converter={StaticResource BoolToVisibilityConverter}}" x:Name="CategoriesListView" ItemsSource="{Binding Categories}" Margin="0,10,0,0">
+                        <Interactivity:Interaction.Behaviors>
+                            <!--Selecao -->
+                            <Core:EventTriggerBehavior SourceObject="{Binding ElementName=CategoriesListView}" EventName="Tapped">
+                                <Core:InvokeCommandAction Command="{Binding ElementName=This,Path=DataContext.SelectCategory}"  CommandParameter="{Binding SelectedItem, ElementName=CategoriesListView}" />
+                            </Core:EventTriggerBehavior>
+                        </Interactivity:Interaction.Behaviors>
+                        <ListView.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="Selecione uma categoria para anunciar" Style="{StaticResource SubtitleTextBlockStyle}" />
+                                    <!--<HyperlinkButton Content="Voltar" Visibility="{Binding HasBackupFilter, Converter={StaticResource BoolToVisibilityConverter}}" Command="{Binding RestoreCategory}"/>-->
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.HeaderTemplate>
+                        <ListView.ItemContainerTransitions>
+                            <TransitionCollection>
+                                <EntranceThemeTransition FromHorizontalOffset="110"/>
+                                <AddDeleteThemeTransition/>
+                            </TransitionCollection>
+                        </ListView.ItemContainerTransitions>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="#300E0D0D" BorderThickness="0,0,0,1" Padding="0,0,0,5">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Style="{StaticResource BodyTextBlockStyle}"  Text="{Binding name}" />
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+
+                    <Button Content="Próximo" HorizontalAlignment="Stretch" Margin="10" Command="{Binding NextPart}" />
+                </StackPanel>
+
+                <!--Parte 8 - Tipo de produto (usado, novo)-->
+                <StackPanel x:Name="PartEight" Visibility="{Binding ActualPart, Converter={StaticResource ValueToVisibilityConverter}, ConverterParameter=8}" Grid.Row="1">
+                    <StackPanel.RenderTransform>
+                        <CompositeTransform/>
+                    </StackPanel.RenderTransform>
+                    <TextBlock Text="Qual o estado do seu produto" Style="{StaticResource SubtitleTextBlockStyle}" />
+                    <StackPanel Orientation="Horizontal">
+                        <RadioButton Content="Novo" GroupName="ProductState" x:Name="NewRadio" IsChecked="{Binding ProductInfo.IsNew, Mode=TwoWay}" >
+
+                        </RadioButton>
+                        <RadioButton Content="Usado" GroupName="ProductState" x:Name="UsedRadio" IsChecked="{Binding ProductInfo.IsNew, Converter={StaticResource InvertBoolean}, Mode=TwoWay}">
+
+                        </RadioButton>
+                    </StackPanel>
+                    <Button Content="Próximo" HorizontalAlignment="Stretch" Margin="10" Command="{Binding NextPart}" />
+                </StackPanel>
+
+                <!--Parte 9 - Tipo do anúncio-->
+                <StackPanel x:Name="PartNine" Visibility="{Binding ActualPart, Converter={StaticResource ValueToVisibilityConverter}, ConverterParameter=9}" Grid.Row="1">
+                    <StackPanel.RenderTransform>
+                        <CompositeTransform/>
+                    </StackPanel.RenderTransform>
+                    <Button  Margin="10" Visibility="{Binding IsTypeOpen, Converter={StaticResource InvertedBoolToVisibilityConverter}}" Command="{Binding OpenTypes}" HorizontalAlignment="Stretch" >
+                        <Button.Content>
+                            <StackPanel HorizontalAlignment="Center">
+                                <TextBlock Text="Clique para selecionar um tipo de anúncio" Style="{StaticResource SubheaderTextBlockStyle}"/>
+                                <TextBlock Style="{StaticResource BodyTextBlockStyle}">
+                                    <Run Text="Anúncio selecionado: "/>
+                                    <Run Text="{Binding SelectedListingPrice.listing_type_name}"/>
+                                </TextBlock>
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+
+                    <ListView ItemContainerStyle="{StaticResource ListViewItemStyle1}" Visibility="{Binding IsTypeOpen, Converter={StaticResource BoolToVisibilityConverter}}" x:Name="PricesListView" ItemsSource="{Binding ListingPrice}" Margin="0,10,0,0">
+                        <Interactivity:Interaction.Behaviors>
+                            <!--Selecao -->
+                            <Core:EventTriggerBehavior SourceObject="{Binding ElementName=PricesListView}" EventName="Tapped">
+                                <Core:InvokeCommandAction Command="{Binding ElementName=This,Path=DataContext.SelectPrice}"  CommandParameter="{Binding SelectedItem, ElementName=PricesListView}" />
+                            </Core:EventTriggerBehavior>
+                        </Interactivity:Interaction.Behaviors>
+                        <ListView.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel HorizontalAlignment="Center">
+                                    <TextBlock Text="Selecione um tipo de anúncio para publicar" Style="{StaticResource SubtitleTextBlockStyle}" />
+                                    <!--<HyperlinkButton Content="Voltar" Visibility="{Binding HasBackupFilter, Converter={StaticResource BoolToVisibilityConverter}}" Command="{Binding RestoreCategory}"/>-->
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.HeaderTemplate>
+                        <ListView.ItemContainerTransitions>
+                            <TransitionCollection>
+                                <EntranceThemeTransition FromHorizontalOffset="110"/>
+                                <AddDeleteThemeTransition/>
+                            </TransitionCollection>
+                        </ListView.ItemContainerTransitions>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderThickness="0,0,0,1" Margin="5">
+                                    <Border.BorderBrush>
+                                        <SolidColorBrush Color="{ThemeResource SystemChromeHighColor}"/>
+                                    </Border.BorderBrush>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Row="0" Style="{StaticResource SubheaderTextBlockStyle}" Text="{Binding listing_type_name}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10"/>
+                                        <StackPanel Grid.Row="1">
+                                            <TextBlock Grid.Row="1" Style="{StaticResource HeaderTextBlockStyle}" Text="{Binding sale_fee_amount, Converter={StaticResource StringFormatConverter}, ConverterParameter=\{0:c2\}}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10" Foreground="#FF7E0101"/>
+                                            <TextBlock Style="{StaticResource BaseTextBlockStyle}" Text="tarifa por venda" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0"/>
+
+                                            <TextBlock Grid.Row="1" Style="{StaticResource HeaderTextBlockStyle}" Text="{Binding listing_fee_amount, Converter={StaticResource StringFormatConverter}, ConverterParameter=\{0:c2\}}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10" Foreground="#FF7E0101"/>
+                                            <TextBlock Style="{StaticResource BaseTextBlockStyle}" Text="tarifa por anúncio" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0"/>
+                                        </StackPanel>
+                                        <!--<Button Grid.Row="2" Margin="10" Command="{Binding ElementName=This, Path=DataContext.ChangeListType}" CommandParameter="{Binding}" Content="Contratar" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="10"/>-->
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <!--<ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="#300E0D0D" BorderThickness="0,0,0,1" Padding="0,0,0,5">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Style="{StaticResource BodyTextBlockStyle}"  Text="{Binding listing_type_name}" />
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>-->
+                    </ListView>
+
+
+                    <Button Content="Próximo" HorizontalAlignment="Stretch" Margin="10" Command="{Binding NextPart}" />
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

@@ -14,6 +14,9 @@ using MyML.UWP.AppStorage;
 using Windows.Storage;
 using Windows.ApplicationModel.Background;
 using Windows.UI.Notifications;
+using Microsoft.ApplicationInsights;
+using Windows.UI.Popups;
+using Windows.ApplicationModel.Resources;
 
 namespace MyML.UWP
 {
@@ -47,8 +50,20 @@ namespace MyML.UWP
             #endregion
         }
 
-        private void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        private async void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
+            e.Handled = true;
+            var resourceLoader = ResourceLoader.GetForCurrentView();
+            var telemetryClient = new TelemetryClient();
+            telemetryClient.TrackException(e.Exception);
+
+            var dialog = new MessageDialog("Houve um erro inesperado", resourceLoader.GetString("ApplicationTitle"));
+            await dialog.ShowAsync();
+
+            if (e.Exception != null)
+                AppLogs.WriteError("App_UnhandledException", e.Exception);
+            /*
+
             if (e != null)
             {
                 Exception exception = e.Exception;
@@ -98,6 +113,7 @@ namespace MyML.UWP
 
                 e.Handled = true;
             }
+            */
         }
 
         // runs even if restored from state
@@ -161,6 +177,10 @@ namespace MyML.UWP
 
         private void VerifyLicense()
         {
+#if DEBUG
+            ExibirAds = true;
+            return;
+#endif
             //ApplicationData.Current.RoamingSettings.Values.Clear();
 
             if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Consts.CONFIG_REMOVE_ADS_KEY))

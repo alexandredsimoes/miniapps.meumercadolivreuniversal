@@ -18,6 +18,11 @@ namespace MyML.UWP.Adapters.Search
             _mercadoLivreServices = SimpleIoc.Default.GetInstance<IMercadoLivreService>();
         }
 
+        public Task<IPagedResponse<MLOrderInfo>> GetPage(string query, int pageIndex, int pageSize, string status)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<IPagedResponse<MLOrderInfo>> GetPage(string query, int pageIndex, int pageSize, bool recents)
         {
             try

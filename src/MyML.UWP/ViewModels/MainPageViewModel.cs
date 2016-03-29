@@ -38,6 +38,8 @@ namespace MyML.UWP.ViewModels
                NavigationService.Navigate(typeof(ProdutoDetalhePage), parametro);
            });
 
+            DoLogin = new RelayCommand(() => { NavigationService.Navigate(typeof(LoginPage)); });
+
             RevokeAccess = new RelayCommand(RevokeAccessExecute);
 
             if (GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic)
@@ -74,9 +76,34 @@ namespace MyML.UWP.ViewModels
             }
             else
             {
-                //
+#if DEBUG
+                Debug.WriteLine("TENTANDO RESTAURAR TOKEN DO ML ************************ ");
+#endif
+                //Tenta atualizar o token de autenticação, caso já tenha sido autenticado em algum momento.
+                var refreshToken = _dataService.GetMLConfig(Consts.ML_CONFIG_KEY_REFRESH_TOKEN);
+                if (!String.IsNullOrWhiteSpace(refreshToken))
+                {
+                    var login = await _mercadoLivreServices.TryRefreshToken();
+                    if (login != null && !String.IsNullOrWhiteSpace(login.Refresh_Token))
+                    {
+#if DEBUG
+                        Debug.WriteLine("LOGIN RESTAURADO ************************ ");
+#endif
+                        _dataService.SaveConfig(Consts.ML_CONFIG_KEY_USER_ID, login.user_id);
+                        _dataService.SaveConfig(Consts.ML_CONFIG_KEY_REFRESH_TOKEN, login.Refresh_Token);
+                        _dataService.SaveConfig(Consts.ML_CONFIG_KEY_EXPIRES, DateTime.Now.AddSeconds(login.Expires_In ?? 0).ToString());
+                        _dataService.SaveConfig(Consts.ML_CONFIG_KEY_ACCESS_TOKEN, login.Access_Token);
+                        _dataService.SaveConfig(Consts.ML_CONFIG_KEY_LOGIN_DATE, DateTime.Now.ToString());                       
+                    }
+                    else
+                    {
+                        
+                    }
+                }
+                IsAuthenticated = _dataService.IsAuthenticated();
+                if (IsAuthenticated)
+                    await LoadSummary();
             }
-
             await VerifyExecutions();
         }
 
@@ -143,6 +170,8 @@ namespace MyML.UWP.ViewModels
             {
 
             }
+
+            Shell.SetBusy(false);
             return Task.CompletedTask;
 
         }
@@ -250,6 +279,7 @@ namespace MyML.UWP.ViewModels
         }
 
         public RelayCommand RevokeAccess { get; private set; }
+        public RelayCommand DoLogin { get; private set; }
     }
 }
 

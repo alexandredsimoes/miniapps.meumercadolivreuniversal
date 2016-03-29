@@ -143,6 +143,14 @@
                                                          BooleanDataTemplate="{StaticResource BooleanDataTemplate}"/>
     </Page.Resources>
 
+    <Page.BottomAppBar>
+        <CommandBar>
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Label="Aplicar" Icon="Accept" Command="{Binding SaveFilter}"/>
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+    
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="AdaptiveVisualStateGroup">
@@ -179,10 +187,16 @@
         </Grid.RowDefinitions>
 
         <!--  page header  -->
-        <controls:PageHeader Content="Refinar" Background="{StaticResource MercadoLivreBackgroundColor}" Foreground="{StaticResource MercadoLivreForegroundColor}">
-            <controls:PageHeader.PrimaryCommands>
-                <AppBarButton Label="Aplicar" Icon="Accept" Foreground="{StaticResource MercadoLivreForegroundColor}" Command="{Binding SaveFilter}"/>
-            </controls:PageHeader.PrimaryCommands>
+        <controls:PageHeader Content="Refinar">
+            <!--<controls:PageHeader.Foreground>
+                <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
+            </controls:PageHeader.Foreground>
+            <controls:PageHeader.Background>
+                <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
+            </controls:PageHeader.Background>-->
+            <!--<controls:PageHeader.PrimaryCommands>
+                <AppBarButton Label="Aplicar" Icon="Accept" Command="{Binding SaveFilter}"/>
+            </controls:PageHeader.PrimaryCommands>-->
         </controls:PageHeader>
 
         <!--  page content  -->

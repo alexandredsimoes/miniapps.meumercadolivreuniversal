@@ -50,7 +50,7 @@ namespace MyML.UWP.Services
         Task<MLAutorizationInfo> TryRefreshToken();
         Task<MLProductVisits> GetProductVisits(string productId, DateTime startDate, DateTime finishDate);
         Task<IReadOnlyList<MLListPrice>> GetListingPrices(string countryId, double productPrice, params KeyValuePair<string, object>[] attributesOrFilters);
-        Task<MLNewItemResult> ListNewItem(SellItem itemInfo);
+        Task<Item> ListNewItem(SellItem itemInfo);
         Task<bool> RevokeAccess();
         //Task<MLQuestionResultSearch> ListQuestions(KeyValuePair<string, object>[] attributesOrFilters);
         Task<IReadOnlyList<MLListType>> GetAvailableUpgrades(string itemId);
@@ -59,5 +59,7 @@ namespace MyML.UWP.Services
             bool restockItem = false, bool hasSellerRefundMoney = false);
         Task<bool> SendBuyerOrderFeedback(string orderId, bool fulfilled, MLRating rating, string message, MLBuyerRatingReason reason);
         Task<MLOrder> ListRecentOrders(int pageIndex = 0, int pageSize = 0, params KeyValuePair<string, string>[] attributes);
+        Task<MLImage> UploadProductImage(ProductImage image);
+        Task<bool> AddPicture(string pictureId, string itemId);
     }
 }
