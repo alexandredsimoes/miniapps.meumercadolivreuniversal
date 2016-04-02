@@ -10,11 +10,10 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:vm="using:MyML.UWP.ViewModels"
       xmlns:uc="using:MyML.UWP.Usercontrols"
-      mc:Ignorable="d">
+      mc:Ignorable="d"
+      DataContext="{Binding Source={StaticResource Locator}, Path=SettingsPage}">
 
-    <Page.DataContext>
-        <vm:SettingsPageViewModel x:Name="ViewModel" />
-    </Page.DataContext>
+
 
     <Page.Resources>
         <Style x:Key="TabsStylePivotStyle" TargetType="Pivot">
@@ -410,6 +409,20 @@
                                       IsOn="{Binding UseLightThemeButton, Mode=TwoWay}" OffContent="Tema escuro"
                                       OnContent="Tema claro"
                                       RelativePanel.Below="UseShellDrawnBackButtonToggleSwtich" Visibility="Visible" />
+
+                        <ToggleSwitch x:Name="ReceiveNotificationsToggleSwitch" Header="Receber notificações"
+                                      IsOn="{Binding ReceiveNotifications, Mode=TwoWay}" OffContent="Não"
+                                      OnContent="Sim"
+                                      RelativePanel.Below="UseLightThemeToggleSwitch" Visibility="Visible"
+                                      >
+                            <Interactivity:Interaction.Behaviors>
+                                <Core:EventTriggerBehavior SourceObject="{Binding ElementName=ReceiveNotificationsToggleSwitch}" EventName="Toggled">
+                                    <Core:InvokeCommandAction Command="{Binding TrySigninNotifications}" CommandParameter="{Binding ElementName=ReceiveNotificationsToggleSwitch, Path=IsOn}" />
+                                </Core:EventTriggerBehavior>
+                            </Interactivity:Interaction.Behaviors>
+                        </ToggleSwitch>
+                        <TextBlock Text="" RelativePanel.Below="ReceiveNotificationsToggleSwitch" Visibility="Visible"  />
+
                         <TextBox x:Name="BusyTextTextBox" Width="200" Margin="0,12,0,0"
                                  HorizontalAlignment="Left" Header="Busy text"
                                  RelativePanel.Below="UseLightThemeToggleSwitch"

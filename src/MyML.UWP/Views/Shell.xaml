@@ -57,12 +57,13 @@
                     
                     <!-- ********************************** REATIVAR QUANDO ESTIVER PRONTO ************************************************ -->
                     <!--  vender button  -->
-                    <!--<Controls:HamburgerButtonInfo ClearHistory="False" PageType="viewsSecure:VenderPage">
+                    <Controls:HamburgerButtonInfo ClearHistory="False" PageType="viewsSecure:VenderPage">
                         <StackPanel Orientation="Horizontal">
                             <FontIcon  Width="48" Height="48" Glyph="" />
                             <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Text="Vender" />
                         </StackPanel>
-                    </Controls:HamburgerButtonInfo>-->
+                    </Controls:HamburgerButtonInfo>
+                    <!-- ********************************** REATIVAR QUANDO ESTIVER PRONTO ************************************************ -->
                     
                     <!--Separador?-->
                     <Controls:HamburgerButtonInfo  IsEnabled="False" x:Name="SeparadorCompras" Visibility="Collapsed">

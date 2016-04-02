@@ -1,13 +1,12 @@
-﻿using Microsoft.Graphics.Canvas.UI.Composition;
+﻿
+
+
 using Microsoft.Xaml.Interactivity;
 using MyML.UWP.Extensions;
 using Windows.UI.Composition;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Hosting;
-using Windows.UI.Xaml.Media.Animation;
-
-
 
 namespace MyML.UWP.Behaviors
 {
@@ -61,7 +60,7 @@ namespace MyML.UWP.Behaviors
             }
             if (scroller == null) return;
 
-            CompositionPropertySet scrollerViewerManipulation = ElementCompositionPreview.GetScrollViewerManipulationPropertySet(scroller);
+            CompositionPropertySet scrollerViewerManipulation = ElementCompositionPreview.GetContainerVisual(scroller) as CompositionPropertySet;
 
             Compositor compositor = scrollerViewerManipulation.Compositor;
 
@@ -70,8 +69,8 @@ namespace MyML.UWP.Behaviors
             expression.SetScalarParameter("ParallaxMultiplier", (float)ParallaxMultiplier);
             expression.SetReferenceParameter("ScrollManipululation", scrollerViewerManipulation);
 
-            Visual textVisual = ElementCompositionPreview.GetElementVisual(ParallaxContent);
-            textVisual.StartAnimation("Offset.Y", expression);
+            Visual textVisual = ElementCompositionPreview.GetContainerVisual(ParallaxContent) as Visual;
+            textVisual.ConnectAnimation("Offset.Y", expression);
         }
 
         private static void OnParallaxContentChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

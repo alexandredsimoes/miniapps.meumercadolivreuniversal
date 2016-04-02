@@ -52,115 +52,143 @@
             </Setter>
         </Style>
         <Storyboard x:Name="Storyboard2">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="PartTwo">
-                <EasingDoubleKeyFrame KeyTime="0" Value="-500">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CubicEase EasingMode="EaseIn"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="0">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CubicEase EasingMode="EaseIn"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="PartTwo">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="PartTwo">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="PartTwo">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
-        <Storyboard x:Name="Storyboard3">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="PartThree">
-                <EasingDoubleKeyFrame KeyTime="0" Value="-500">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CubicEase EasingMode="EaseIn"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="0">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CubicEase EasingMode="EaseIn"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
+        <!--<Storyboard x:Name="Storyboard3">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="PartThree">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="PartThree">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="PartThree">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>-->
         <Storyboard x:Name="Storyboard4">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="PartFour">
-                <EasingDoubleKeyFrame KeyTime="0" Value="-500">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CubicEase EasingMode="EaseIn"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="0">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CubicEase EasingMode="EaseIn"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="PartFour">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="PartFour">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="PartFour">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Name="Storyboard5">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="PartFive">
-                <EasingDoubleKeyFrame KeyTime="0" Value="-500">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CubicEase EasingMode="EaseIn"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CubicEase EasingMode="EaseIn"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="PartFive">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="PartFive">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="PartFive">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Name="Storyboard6">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="PartSix">
-                <EasingDoubleKeyFrame KeyTime="0" Value="-500">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CubicEase EasingMode="EaseIn"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CubicEase EasingMode="EaseIn"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="PartSix">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="PartSix">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="PartSix">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Name="Storyboard7">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="PartSeven">
-                <EasingDoubleKeyFrame KeyTime="0" Value="-500">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CubicEase EasingMode="EaseIn"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CubicEase EasingMode="EaseIn"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="PartSeven">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="PartSeven">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="PartSeven">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Name="Storyboard8">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="PartEight">
-                <EasingDoubleKeyFrame KeyTime="0" Value="-500">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CubicEase EasingMode="EaseIn"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CubicEase EasingMode="EaseIn"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="PartEight">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="PartEight">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="PartEight">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Name="Storyboard9">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="PartNine">
-                <EasingDoubleKeyFrame KeyTime="0" Value="-500">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CubicEase EasingMode="EaseIn"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CubicEase EasingMode="EaseIn"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="PartNine">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="PartNine">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="PartNine">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="Storyboard10">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="PartTen">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="PartTen">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="PartTen">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="Storyboard3">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="PartThree">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="PartThree">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="PartThree">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </Page.Resources>
@@ -171,12 +199,7 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <controls:PageHeader Content="Vender">
-            <!--<controls:PageHeader.Foreground>
-                <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
-            </controls:PageHeader.Foreground>
-            <controls:PageHeader.Background>
-                <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
-            </controls:PageHeader.Background>-->
+
         </controls:PageHeader>
 
         <uc:AdsControl Grid.Row="1"/>
@@ -204,9 +227,9 @@
                 </StackPanel>
 
                 <!--Parte 2 - Fotos -->
-                <StackPanel x:Name="PartTwo" Visibility="{Binding ActualPart, Converter={StaticResource ValueToVisibilityConverter}, ConverterParameter=2}" RenderTransformOrigin="0.5,0.5">
+                <StackPanel x:Name="PartTwo" RenderTransformOrigin="0.5,0.5" Visibility="{Binding ActualPart, Converter={StaticResource ValueToVisibilityConverter}, ConverterParameter=2}">
                     <StackPanel.RenderTransform>
-                        <CompositeTransform TranslateX="-2500"/>
+                        <CompositeTransform/>
                     </StackPanel.RenderTransform>
                     <StackPanel Padding="5" Margin="5">
                         <StackPanel.Background>
@@ -268,9 +291,9 @@
                 </StackPanel>
 
                 <!--Parte 3 - Titulo do anuncio -->
-                <StackPanel x:Name="PartThree" Visibility="{Binding ActualPart, Converter={StaticResource ValueToVisibilityConverter}, ConverterParameter=3}" Grid.Row="1">
+                <StackPanel x:Name="PartThree"   Visibility="{Binding ActualPart, Converter={StaticResource ValueToVisibilityConverter}, ConverterParameter=3}" Grid.Row="1">
                     <StackPanel.RenderTransform>
-                        <CompositeTransform TranslateX="-2500"/>
+                        <CompositeTransform/>
                     </StackPanel.RenderTransform>
                     <TextBlock Text="Nome do seu produto" Style="{StaticResource SubtitleTextBlockStyle}" />
                     <TextBox PlaceholderText="Título do anúncio" Margin="0,0,0,5" Text="{Binding ProductInfo.Title, Mode=TwoWay}" BorderThickness="0,0,0,0.5" />
@@ -279,37 +302,37 @@
                 </StackPanel>
 
                 <!--Parte 4 - Preço de venda -->
-                <StackPanel x:Name="PartFour" Visibility="{Binding ActualPart, Converter={StaticResource ValueToVisibilityConverter}, ConverterParameter=4}" Grid.Row="1">
+                <StackPanel x:Name="PartFour" RenderTransformOrigin="0.5,0.5" Visibility="{Binding ActualPart, Converter={StaticResource ValueToVisibilityConverter}, ConverterParameter=4}" Grid.Row="1">
                     <StackPanel.RenderTransform>
                         <CompositeTransform/>
                     </StackPanel.RenderTransform>
                     <TextBlock Text="Preço  de venda" Style="{StaticResource SubtitleTextBlockStyle}" />
-                    <TextBox PlaceholderText="Preço de venda" Margin="0,0,0,5" Text="{Binding ProductInfo.ProductValue, Mode=TwoWay, Converter={StaticResource DoubleStringConverter}}" BorderThickness="0,0,0,0.5"   />
+                    <TextBox PlaceholderText="Preço de venda" InputScope="CurrencyAmount" Margin="0,0,0,5" Text="{Binding ProductInfo.ProductValue, Mode=TwoWay, Converter={StaticResource DoubleStringConverter}}" BorderThickness="0,0,0,0.5"   />
                     <Button Content="Próximo" HorizontalAlignment="Stretch" Margin="10" Command="{Binding NextPart}" />
                 </StackPanel>
 
                 <!--Parte 5 - Quantidade disponivel -->
-                <StackPanel x:Name="PartFive" Visibility="{Binding ActualPart, Converter={StaticResource ValueToVisibilityConverter}, ConverterParameter=5}" Grid.Row="1">
+                <StackPanel x:Name="PartFive" RenderTransformOrigin="0.5,0.5" Visibility="{Binding ActualPart, Converter={StaticResource ValueToVisibilityConverter}, ConverterParameter=5}" Grid.Row="1">
                     <StackPanel.RenderTransform>
                         <CompositeTransform/>
                     </StackPanel.RenderTransform>
-                    <TextBlock Text="Quantidade disponível" Style="{StaticResource SubtitleTextBlockStyle}" />
-                    <TextBox PlaceholderText="Quantidade" Margin="0,0,0,5" Text="{Binding ProductInfo.Quantity, Mode=TwoWay, Converter={StaticResource IntStringConverter}}" BorderThickness="0,0,0,0.5" />
+                    <TextBlock Text="Quantidade disponível" Style="{StaticResource SubtitleTextBlockStyle}"  />
+                    <TextBox PlaceholderText="Quantidade" InputScope="Number" Margin="0,0,0,5" Text="{Binding ProductInfo.Quantity, Mode=TwoWay, Converter={StaticResource IntStringConverter}}" BorderThickness="0,0,0,0.5" />
                     <Button Content="Próximo" HorizontalAlignment="Stretch" Margin="10" Command="{Binding NextPart}" />
                 </StackPanel>
 
                 <!--Parte 6 - Descrição do anúncio -->
-                <StackPanel x:Name="PartSix" Visibility="{Binding ActualPart, Converter={StaticResource ValueToVisibilityConverter}, ConverterParameter=6}" Grid.Row="1">
+                <StackPanel x:Name="PartSix" RenderTransformOrigin="0.5,0.5" Visibility="{Binding ActualPart, Converter={StaticResource ValueToVisibilityConverter}, ConverterParameter=6}" Grid.Row="1">
                     <StackPanel.RenderTransform>
                         <CompositeTransform/>
                     </StackPanel.RenderTransform>
                     <TextBlock Text="Descreve seu produto" Style="{StaticResource SubtitleTextBlockStyle}" />
-                    <TextBox PlaceholderText="Descrição do seu produto" AcceptsReturn="True" Height="115" Margin="0,0,0,5" Text="{Binding ProductInfo.ProductDescription, Mode=TwoWay}" BorderThickness="0,0,0,0.5" />
+                    <TextBox PlaceholderText="Descrição do seu produto (apenas texto)" MaxLength="500" AcceptsReturn="True" Height="115" Margin="0,0,0,5" Text="{Binding ProductInfo.ProductDescription, Mode=TwoWay}" BorderThickness="0,0,0,0.5" />
                     <Button Content="Próximo" HorizontalAlignment="Stretch" Margin="10" Command="{Binding NextPart}" />
                 </StackPanel>
 
                 <!--Parte 7 - Categoria -->
-                <StackPanel x:Name="PartSeven" Visibility="{Binding ActualPart, Converter={StaticResource ValueToVisibilityConverter}, ConverterParameter=7}" Grid.Row="1">
+                <StackPanel x:Name="PartSeven" RenderTransformOrigin="0.5,0.5" Visibility="{Binding ActualPart, Converter={StaticResource ValueToVisibilityConverter}, ConverterParameter=7}" Grid.Row="1">
                     <StackPanel.RenderTransform>
                         <CompositeTransform/>
                     </StackPanel.RenderTransform>
@@ -319,7 +342,7 @@
                                 <TextBlock Text="Clique para selecionar uma categoria" Style="{StaticResource SubheaderTextBlockStyle}"/>
                                 <TextBlock Style="{StaticResource BodyTextBlockStyle}">
                                     <Run Text="Categoria selecionada: "/>
-                                    <Run Text="{Binding SelectedCategory.name}"/>
+                                    <Run Text="{Binding SelectedCategoryLevel}"/>
                                 </TextBlock>
                             </StackPanel>
                         </Button.Content>
@@ -362,7 +385,7 @@
                 </StackPanel>
 
                 <!--Parte 8 - Tipo de produto (usado, novo)-->
-                <StackPanel x:Name="PartEight" Visibility="{Binding ActualPart, Converter={StaticResource ValueToVisibilityConverter}, ConverterParameter=8}" Grid.Row="1">
+                <StackPanel x:Name="PartEight" RenderTransformOrigin="0.5,0.5" Visibility="{Binding ActualPart, Converter={StaticResource ValueToVisibilityConverter}, ConverterParameter=8}" Grid.Row="1">
                     <StackPanel.RenderTransform>
                         <CompositeTransform/>
                     </StackPanel.RenderTransform>
@@ -379,7 +402,7 @@
                 </StackPanel>
 
                 <!--Parte 9 - Tipo do anúncio-->
-                <StackPanel x:Name="PartNine" Visibility="{Binding ActualPart, Converter={StaticResource ValueToVisibilityConverter}, ConverterParameter=9}" Grid.Row="1">
+                <StackPanel x:Name="PartNine" RenderTransformOrigin="0.5,0.5" Visibility="{Binding ActualPart, Converter={StaticResource ValueToVisibilityConverter}, ConverterParameter=9}" Grid.Row="1">
                     <StackPanel.RenderTransform>
                         <CompositeTransform/>
                     </StackPanel.RenderTransform>
@@ -441,19 +464,22 @@
                                 </Border>
                             </DataTemplate>
                         </ListView.ItemTemplate>
-                        <!--<ListView.ItemTemplate>
-                            <DataTemplate>
-                                <Border BorderBrush="#300E0D0D" BorderThickness="0,0,0,1" Padding="0,0,0,5">
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Style="{StaticResource BodyTextBlockStyle}"  Text="{Binding listing_type_name}" />
-                                    </StackPanel>
-                                </Border>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>-->
                     </ListView>
-
-
                     <Button Content="Próximo" HorizontalAlignment="Stretch" Margin="10" Command="{Binding NextPart}" />
+
+
+                </StackPanel>
+
+                <!--Parte 10 - Resumo e envio-->
+                <StackPanel x:Name="PartTen" RenderTransformOrigin="0.5,0.5" Visibility="{Binding ActualPart, Converter={StaticResource ValueToVisibilityConverter}, ConverterParameter=10}" Grid.Row="1">
+                    <StackPanel.RenderTransform>
+                        <CompositeTransform/>
+                    </StackPanel.RenderTransform>
+                    <TextBlock Margin="15,0,0,0" Text="Seu produto está pronto para ser anunciado." Style="{StaticResource HeaderTextBlockStyle}" />
+                    <TextBlock Margin="15,0,0,0" Text="Você pode voltar para revisar seu anúncio." Style="{StaticResource BodyTextBlockStyle}" />
+                    <!--<TextBlock  Margin="15,0,0,0" Text="{Binding ProductInfo.Title}" />
+                    <TextBlock  Margin="15,0,0,0" Text="{Binding ProductInfo.ProductValue}" />-->
+                    <Button Content="ANUNCIAR" HorizontalAlignment="Stretch" Margin="10" Command="{Binding CreateItem}" />
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>

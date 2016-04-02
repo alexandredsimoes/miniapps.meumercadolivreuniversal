@@ -74,7 +74,7 @@ namespace MyML.UWP.ViewModels
                     Views.Shell.SetBusy(true, "Carregando informações");
                 };
 
-                Orders.LoadMoreItemsCompleted += () =>
+                Orders.LoadMoreItemsCompleted += (paging) =>
                 {
                     Views.Shell.SetBusy(false);
                 };
@@ -84,7 +84,7 @@ namespace MyML.UWP.ViewModels
                     Views.Shell.SetBusy(true, "Carregando informações");
                 };
 
-                OrdersClosed.LoadMoreItemsCompleted += () =>
+                OrdersClosed.LoadMoreItemsCompleted += (paging) =>
                 {
                     Views.Shell.SetBusy(false);
                 };

@@ -13,5 +13,6 @@ namespace MyML.UWP.Adapters
         int VirtualCount { get; }
         IList<AvailableFilter> Filters {get;}
         IList<AvailableSort> Sorts { get; }
+        Paging Paging { get;  }
     }
 }

@@ -15,23 +15,98 @@ using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using System.Threading.Tasks;
 using Template10.Services.NavigationService;
+using MyML.UWP.Services;
+using Windows.Networking.PushNotifications;
+using Microsoft.WindowsAzure.Messaging;
+using MyML.UWP.AppStorage;
 
 namespace MyML.UWP.ViewModels
 {
     public class SettingsPageViewModel : ViewModelBase
     {
-        public SettingsPartViewModel SettingsPartViewModel { get; } = new SettingsPartViewModel();
+        private readonly IDataService _dataService;
+        private readonly ResourceLoader _resourceLoader;
+        public SettingsPageViewModel(IDataService dataService, ResourceLoader resourceLoader)
+        {
+            _resourceLoader = resourceLoader;
+            _dataService = dataService;
+
+            SettingsPartViewModel = new SettingsPartViewModel(_dataService, _resourceLoader);
+        }
+
+        public SettingsPartViewModel SettingsPartViewModel { get; } //= new SettingsPartViewModel(_dataService, _resourceLoader);
         public AboutPartViewModel AboutPartViewModel { get; } = new AboutPartViewModel();
     }
 
     public class SettingsPartViewModel : ViewModelBase
     {
         Services.SettingsServices.SettingsService _settings;
+        private readonly IDataService _dataService;
+        private readonly ResourceLoader _resourceLoader;
 
-        public SettingsPartViewModel()
+        public SettingsPartViewModel(IDataService dataService, ResourceLoader resourceLoader)
         {
+            _dataService = dataService;
             if (!Windows.ApplicationModel.DesignMode.DesignModeEnabled)
                 _settings = Services.SettingsServices.SettingsService.Instance;
+
+            TrySigninNotifications = new RelayCommand<bool?>(TrySigninNotificationsExecute);
+        }
+
+        private async void TrySigninNotificationsExecute(bool? state)
+        {
+            if(state ?? false)
+            {
+                _settings.IsNotificationSigned  = await SubscribeNotification();
+            }
+            else
+            {
+
+            }
+        }
+
+        private async Task<bool> SubscribeNotification()
+        {
+            try
+            {
+                var user_id = _dataService.GetMLConfig(Consts.ML_CONFIG_KEY_USER_ID);
+                if (!_dataService.IsAuthenticated())
+                {
+                    await new MessageDialog("Você precisa estar autenticado para se inscrever nas notificações",
+                        _resourceLoader.GetString("ApplicationTitle")).ShowAsync();
+                    return false;
+                }
+#if DEBUG
+
+                Debug.WriteLine("Inscrevendo na notificação " + user_id);
+#endif
+                //Verifica se já está inscrito
+                var expirationString = _dataService.GetMLConfig(Consts.ML_NOTIFICATION_EXPIRES);
+                DateTime expirationDate = DateTime.MinValue;
+                if (DateTime.TryParse(expirationString, out expirationDate))
+                {
+                    if (expirationDate > DateTime.Now)
+                        return true;
+                }
+                var channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
+
+                //Endpoint=sb://meumercadolivre.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=wOen194enfv8wsOo0V5GqJ2wAFf6gQbxPFQCgRzk01A=;EntityPath=universal                     
+                //Endpoint=sb://meumercadolivre.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=wOen194enfv8wsOo0V5GqJ2wAFf6gQbxPFQCgRzk01A=;EntityPath=universal
+                //Endpoint=sb://meumercadolivreuniversal.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=il6dtCewcwNTF4Am4bccLekIGtg0vM5xx+EU7BbKW3w=
+                var hub = new NotificationHub("notificacoes", "Endpoint=sb://meumercadolivreuniversal.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=il6dtCewcwNTF4Am4bccLekIGtg0vM5xx+EU7BbKW3w=");
+                var result = await hub.RegisterNativeAsync(channel.Uri, new string[] { user_id });
+                _dataService.SaveConfig(Consts.ML_NOTIFICATION_EXPIRES, result.ExpiresAt.ToString());
+
+#if DEBUG
+                Debug.WriteLine("Inscrito - expira em " + result.ExpiresAt.ToString());
+                return true;
+#endif
+            }
+            catch (Exception ex)
+            {
+                AppLogs.WriteError("LoginPageViewModel.SubscribeNotification()", ex);
+                return false;
+            }
         }
 
         public bool UseShellBackButton
@@ -53,6 +128,7 @@ namespace MyML.UWP.ViewModels
             set { Set(ref _BusyText, value); }
         }
 
+
         public void ShowBusy()
         {
             Views.Shell.SetBusy(true, _BusyText);
@@ -62,6 +138,15 @@ namespace MyML.UWP.ViewModels
         {
             Views.Shell.SetBusy(false);
         }
+
+        private string _ReceiveNotifications;
+        public string ReceiveNotifications
+        {
+            get { return _ReceiveNotifications; }
+            set { Set(() => ReceiveNotifications, ref _ReceiveNotifications, value); }
+        }
+
+        public RelayCommand<bool?> TrySigninNotifications { get; private set; }
     }
 
     public class AboutPartViewModel : ViewModelBase
@@ -84,11 +169,13 @@ namespace MyML.UWP.ViewModels
                 message.Body = _resourceLoader.GetString("SobreEmailBody");
                 message.To.Add(new EmailRecipient(_resourceLoader.GetString("SobreEmail")));
                 await EmailManager.ShowComposeNewEmailAsync(message);
-            });
+            });           
 
             SendLog = new RelayCommand(SendLogExecute);
             RemoveAds = new RelayCommand(RemoverAdsExecute);
         }
+
+       
 
         public override Task OnNavigatingFromAsync(NavigatingEventArgs args)
         {
@@ -204,7 +291,7 @@ namespace MyML.UWP.ViewModels
         public RelayCommand QualifyApp { get; private set; }
         public RelayCommand SendEmail { get; private set; }
         public RelayCommand SendLog { get; private set; }
-        public RelayCommand RemoveAds { get; private set; }
+        public RelayCommand RemoveAds { get; private set; }        
     }
 }
 

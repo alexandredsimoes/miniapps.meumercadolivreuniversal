@@ -583,5 +583,7 @@ namespace MyML.UWP.ViewModels.Design
         public MLOrderInfo OrderInfo { get; private set; }
         public Item SelectedItem { get; set; }
         public Item SelectedProduct { get; set; }
+
+        public int ActualPart { get; set; } = 10;
     }
 }

@@ -259,7 +259,7 @@ namespace MyML.UWP.ViewModels
                             }
                         }
 
-                        if (string.IsNullOrWhiteSpace(ShippingExcludeRegions))
+                        if (!string.IsNullOrWhiteSpace(excludeRegions))
                             ShippingExcludeRegions = $"(Exceto para as regiões {excludeRegions})";
                     }
                     else
@@ -268,12 +268,12 @@ namespace MyML.UWP.ViewModels
                         {
                             var shippingInfo = await _mercadoLivreService.GetShippingDetails(SelectedProduct.shipping.ToString());
                         }
-
                     }
                 }
                 else
                 {
                     //Avisa o usuário?
+                    await new MessageDialog("Ocorreu um erro ao carregar dados do produto. Verifique sua conexão de internet.", _resourceLoader.GetString("ApplicationTitle")).ShowAsync();
                 }
             }
             finally

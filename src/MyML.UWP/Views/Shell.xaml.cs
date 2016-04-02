@@ -76,7 +76,7 @@ namespace MyML.UWP.Views
         {
             WindowWrapper.Current().Dispatcher.Dispatch(() =>
             {
-                Instance.BusyView.BusyText = "aguarde...";
+                Instance.BusyView.BusyText = text;
                 Instance.ModalContainer.IsModal = Instance.BusyView.IsBusy = busy;
             });
         }

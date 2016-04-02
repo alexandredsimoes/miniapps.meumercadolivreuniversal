@@ -59,6 +59,18 @@ namespace MyML.UWP.Services.SettingsServices
                 BootStrapper.Current.CacheMaxDuration = value;
             }
         }
+
+        private bool _IsNotificationSigned;
+
+        public bool IsNotificationSigned
+        {
+            get { return _helper.Read<bool>(nameof(IsNotificationSigned), false); }
+            set
+            {
+                _helper.Write(nameof(IsNotificationSigned), value);                
+            }
+        }
+
     }
 }
 

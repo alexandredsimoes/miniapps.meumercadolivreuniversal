@@ -71,7 +71,7 @@ namespace MyML.UWP.ViewModels
 
             if (mode == NavigationMode.Back)
             {
-                //Items.Move(0, 30);
+                //Items.GetEnumerator().
             }
             return Task.CompletedTask;
         }
@@ -116,13 +116,15 @@ namespace MyML.UWP.ViewModels
             var item = obj as Item;
 
             if (item == null) return;
-            NavigationService.Navigate(typeof(ProdutoDetalhePage), item.id);
+            NavigationService.Navigate(typeof(ProdutoDetalhePage), item.id);            
         }
 
 
         private async void BuscaExecute(string[] parametro)
         {
             if (parametro == null || parametro.Length != 2) return;
+
+            Windows.UI.ViewManagement.InputPane.GetForCurrentView().TryHide();
 
             var query = parametro[0];
             ResultQuery = query;
@@ -148,9 +150,10 @@ namespace MyML.UWP.ViewModels
 
             Items.FiltersAvailable += Items_FiltersAvailable;
             Items.LoadMoreItemsCompleted += Items_LoadMoreItemsCompleted;
-            Items.LoadMoreItemsStarted += Items_LoadMoreItemsStarted;
+            Items.LoadMoreItemsStarted += Items_LoadMoreItemsStarted;            
 
             _telemetryClient.TrackEvent("BuscaPageViewModel", new Dictionary<string, string>() { { "Pesquisa", query } });
+            
         }
 
         private void Items_FiltersAvailable(IList<AvailableFilter> listFilters, IList<AvailableSort> listSorts)
@@ -164,8 +167,11 @@ namespace MyML.UWP.ViewModels
             Views.Shell.SetBusy(true, "Carregando informações");
         }
 
-        private void Items_LoadMoreItemsCompleted()
+        private void Items_LoadMoreItemsCompleted(Paging paging)
         {
+            if (paging != null)
+                ScrollPosition = paging.offset;
+
             Views.Shell.SetBusy(false);
         }
 
@@ -218,6 +224,8 @@ namespace MyML.UWP.ViewModels
             get { return _Searchterm; }
             set { Set(() => Searchterm, ref _Searchterm, value); }
         }
+
+        public Item SelectedItem { get; set; }
 
 
         public RelayCommand<string> Buscar { get; private set; }

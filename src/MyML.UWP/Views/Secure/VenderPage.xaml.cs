@@ -1,4 +1,5 @@
 ﻿using MyML.UWP.ViewModels;
+using System;
 using System.Linq;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
@@ -36,8 +37,35 @@ namespace MyML.UWP.Views.Secure
 
         private void _viewModel_PartChanged(int actualPart)
         {
+            return;
+            //if (actualPart == 3) return;
             var resourceName = $"Storyboard{actualPart}";
-            if(Resources.Any(c=>c.Key.ToString() == resourceName))
+
+            //var sb = new Storyboard();
+            //var sp = FindName("PartTwo") as StackPanel;
+
+
+            //DoubleAnimationUsingKeyFrames key = new DoubleAnimationUsingKeyFrames();
+            //key.KeyFrames.Add(new EasingDoubleKeyFrame()
+            //{
+            //    KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(0)),
+            //    Value =   0
+            //});
+            //key.KeyFrames.Add(new EasingDoubleKeyFrame()
+            //{
+            //    KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(3)),
+            //    Value = 1
+            //});
+            //sb.Children.Add(key);
+
+            //Storyboard.SetTargetName(key, "PartTwo");
+            //Storyboard.SetTargetProperty(key, "(UIElement.Opacity)");
+            ////sb.SetValue(Storyboard.TargetNameProperty, sp.Name);
+            ////sb.SetValue(Storyboard.TargetPropertyProperty, "(UIElement.Opacity)");
+
+            //sb.Begin();
+
+            if (Resources.Any(c => c.Key.ToString() == resourceName))
             {
                 var storyBoard = Resources[resourceName] as Storyboard;
                 if (storyBoard != null)

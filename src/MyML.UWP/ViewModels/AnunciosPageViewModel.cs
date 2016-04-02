@@ -90,9 +90,9 @@ namespace MyML.UWP.ViewModels
                 ItemsPaused.LoadMoreItemsStarted += () => { Shell.SetBusy(true); };
                 ItemsClosed.LoadMoreItemsStarted += () => { Shell.SetBusy(true); };
 
-                Items.LoadMoreItemsCompleted += () => { Shell.SetBusy(false); HasActiveItems = Items?.Count > 0; };
-                ItemsPaused.LoadMoreItemsCompleted += () => { Shell.SetBusy(false); HasPausedItems = ItemsPaused?.Count > 0; };
-                ItemsClosed.LoadMoreItemsCompleted += () => { Shell.SetBusy(false); HasClosedItems = ItemsClosed?.Count > 0; };
+                Items.LoadMoreItemsCompleted += (paging) => { Shell.SetBusy(false); HasActiveItems = Items?.Count > 0; };
+                ItemsPaused.LoadMoreItemsCompleted += (paging) => { Shell.SetBusy(false); HasPausedItems = ItemsPaused?.Count > 0; };
+                ItemsClosed.LoadMoreItemsCompleted += (paging) => { Shell.SetBusy(false); HasClosedItems = ItemsClosed?.Count > 0; };
 
                 CacheHelper.AddCache(nameof(AnunciosPageViewModel)); //Atualiza o cache da página            
                 return Task.CompletedTask;               

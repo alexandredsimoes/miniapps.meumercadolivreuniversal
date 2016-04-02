@@ -27,13 +27,7 @@ namespace MyML.UWP.Adapters.Search
 
         public SearchDataSource()
         {
-            _mercadoLivreServices = SimpleIoc.Default.GetInstance<IMercadoLivreService>();
-            //_mercadoLivreServices = new MercadoLivreServices(new HttpClient(), new DataService());            
-        }
-
-        public Task<IPagedResponse<Item>> GetPage(string query, int pageIndex, int pageSize, string status)
-        {
-            throw new NotImplementedException();
+            _mercadoLivreServices = SimpleIoc.Default.GetInstance<IMercadoLivreService>();            
         }
 
         public async Task<IPagedResponse<Item>> GetPage(string query, int pageIndex, int pageSize, bool searchByName)
@@ -56,7 +50,7 @@ namespace MyML.UWP.Adapters.Search
                     var filters = items.available_filters;
                     int virtualCount;
                     virtualCount = items.paging.total;
-                    return new ItensResponse(items.results.AsEnumerable(), virtualCount, filters, sorts);
+                    return new ItensResponse(items.results.AsEnumerable(), virtualCount, filters, sorts, items.paging);
                 }
 
                 return null;
@@ -73,17 +67,19 @@ namespace MyML.UWP.Adapters.Search
     [DebuggerDisplay("PageIndex = {PageIndex} - PageSize = {PageSize} - VirtualCount = {VirtualCount}")]
     public class ItensResponse : IPagedResponse<Item>
     {
-        public ItensResponse(IEnumerable<Item> items, int virtualCount, IList<AvailableFilter> filters, IList<AvailableSort> sorts)
+        public ItensResponse(IEnumerable<Item> items, int virtualCount, IList<AvailableFilter> filters, IList<AvailableSort> sorts, Paging pagingInfo)
         {
             this.Items = items;
             this.VirtualCount = virtualCount;
             this.Filters = filters;
             this.Sorts = sorts;
+            this.Paging = pagingInfo;
         }
         
         public int VirtualCount { get; private set; }
         public IEnumerable<Item> Items { get; private set; }
         public IList<AvailableFilter> Filters { get; set; }
         public IList<AvailableSort> Sorts { get; set; }
+        public Paging Paging { get;  }
     }
 }

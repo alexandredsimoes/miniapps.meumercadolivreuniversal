@@ -139,8 +139,10 @@ namespace MyML.UWP.ViewModels
                         return;
                 }
                 var channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
-                                                                
-                var hub = new NotificationHub("notifications", "Endpoint=sb://meumercadolivre.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=KtkSa6kJWmjoOunjPZd4p/E0zRYe2cNnnre2zXb6zCs=");
+
+                //Endpoint=sb://meumercadolivre.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=wOen194enfv8wsOo0V5GqJ2wAFf6gQbxPFQCgRzk01A=;EntityPath=universal                     
+                //Endpoint=sb://meumercadolivre.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=wOen194enfv8wsOo0V5GqJ2wAFf6gQbxPFQCgRzk01A=;EntityPath=universal
+                var hub = new NotificationHub("universal", "Endpoint=sb://meumercadolivre.servicebus.windows.net/;SharedAccessKeyName=DefaultFullSharedAccessSignature;SharedAccessKey=zWBrWVesFE7/eq1LNSRxvc1nx0UnpfXLolWOsFyHHyY=;EntityPath=universal");
                 var result = await hub.RegisterNativeAsync(channel.Uri, new string[] { user_id });
                 _dataService.SaveConfig(Consts.ML_NOTIFICATION_EXPIRES, result.ExpiresAt.ToString());
 

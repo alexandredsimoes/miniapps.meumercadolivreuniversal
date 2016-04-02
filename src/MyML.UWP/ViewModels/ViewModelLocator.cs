@@ -85,7 +85,9 @@ namespace MyML.UWP.ViewModels
         public CompraQualificarPageViewModel CompraQualificarPage => ServiceLocator.Current.GetInstance<CompraQualificarPageViewModel>();
         public VenderPageViewModel VenderPage => ServiceLocator.Current.GetInstance<VenderPageViewModel>();
         public ProdutoDetalheEnvioPageViewModel ProdutoDetalheEnvioPage => ServiceLocator.Current.GetInstance<ProdutoDetalheEnvioPageViewModel>();
+        public SettingsPageViewModel SettingsPage => ServiceLocator.Current.GetInstance<SettingsPageViewModel>();
         
+
 
     }
 }

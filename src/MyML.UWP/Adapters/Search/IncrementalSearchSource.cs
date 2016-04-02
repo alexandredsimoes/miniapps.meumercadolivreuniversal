@@ -74,7 +74,7 @@ namespace MyML.UWP.Adapters
                     if (result == null)
                     {
 
-                        OnLoadMoreItemsCompleted();//terminamos por aqui
+                        OnLoadMoreItemsCompleted(result.Paging);//terminamos por aqui
                         return new LoadMoreItemsResult() { Count = 0 };
                     }
 
@@ -85,7 +85,7 @@ namespace MyML.UWP.Adapters
                             Add(item);
 
 
-                        OnLoadMoreItemsCompleted();
+                        OnLoadMoreItemsCompleted(result.Paging);
                         OnFiltersAvailable(result.Filters, result.Sorts);
                     });
 
@@ -100,7 +100,7 @@ namespace MyML.UWP.Adapters
         public event Action<IList<AvailableFilter>, IList<AvailableSort>> FiltersAvailable;
         //public event Action<IList<AvailableSort>> SortsAvailable;
         public event Action LoadMoreItemsStarted;
-        public event Action LoadMoreItemsCompleted;
+        public event Action<Paging> LoadMoreItemsCompleted;
 
         protected virtual void OnLoadMoreItemsStarted()
         {
@@ -108,10 +108,10 @@ namespace MyML.UWP.Adapters
             if (handler != null) handler();
         }
 
-        protected virtual void OnLoadMoreItemsCompleted()
-        {
+        protected virtual void OnLoadMoreItemsCompleted(Paging paging)
+        {            
             var handler = LoadMoreItemsCompleted;
-            if (handler != null) handler();
+            if (handler != null) handler(paging);
         }
 
         protected virtual void OnFiltersAvailable(IList<AvailableFilter> filters, IList<AvailableSort> sorts)

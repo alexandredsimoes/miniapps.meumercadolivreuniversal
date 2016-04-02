@@ -560,21 +560,39 @@ namespace MyML.UWP.Services
                     available_quantity = itemInfo.Quantity,
                     condition = itemInfo.IsNew ?? false ? "new" : "used",
                     description = itemInfo.ProductDescription,
-                    buying_mode = "buy_it_now",
+                    buying_mode = itemInfo.BuyingMode,
                     currency_id = itemInfo.CurrencyId,
                     category_id = itemInfo.ProductCategory,
-                                                                                                                        
+                    listing_type_id = itemInfo.ListType.id
+
                 };
-                var json = new StringContent(JsonConvert.SerializeObject(itemInfo));
+                var json = new StringContent(JsonConvert.SerializeObject(obj));
                 
 
                 var response = await _httpClient.PostAsync(url, json);
 
                 if (response.StatusCode == System.Net.HttpStatusCode.Created)
-                {                                       
+                {
+                    var result = await response.Content.ReadAsStringAsync();
+                    return await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<Item>(result));
+                }
+                else
+                {
+                    //Convertemos para o formato de erro
+                    var result = await response.Content.ReadAsStringAsync();
+                    var error =  await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<MLErrorRequest>(result));
+
+                    if(error != null)
+                    {
+                        
+                        await AppLogs.WriteLog("MercadoLivreServices.ListNewItem()", "Erro durante a criação do novo item", "");
+                        foreach (var item in error.cause)
+                        {
+                            await AppLogs.WriteLog("     ", item.code + " - " + item.message, "");
+                        }
+                    }
                 }
                 return null;
-
             }
             catch (Exception ex)
             {
@@ -1441,7 +1459,7 @@ namespace MyML.UWP.Services
             try
             {
                 var accessToken = _dataService.GetMLConfig(Consts.ML_CONFIG_KEY_ACCESS_TOKEN);
-                var url = Consts.GetUrl(Consts.ML_ITEM_POST_IMAGE, pictureId, accessToken);
+                var url = Consts.GetUrl(Consts.ML_ITEM_POST_IMAGE, itemId, accessToken);
 
                 _httpClient.DefaultRequestHeaders.Accept.Clear();
                 _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));

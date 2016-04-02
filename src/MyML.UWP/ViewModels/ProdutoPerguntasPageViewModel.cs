@@ -49,7 +49,7 @@ namespace MyML.UWP.ViewModels
                 Views.Shell.SetBusy(true, "Carregando informações");              
             };
 
-            Items.LoadMoreItemsCompleted += () =>
+            Items.LoadMoreItemsCompleted += (paging) =>
             {
                 Views.Shell.SetBusy(false);              
             };

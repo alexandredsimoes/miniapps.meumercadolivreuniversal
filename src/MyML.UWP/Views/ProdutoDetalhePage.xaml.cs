@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
+using Windows.UI.Xaml.Media.Media3D;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -51,6 +52,34 @@ namespace MyML.UWP.Views
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             _viewModel.ZoomModeChanged -= _viewModel_ZoomModeChanged;   
+        }
+
+        private void NormalizeParallax(UIElement target)
+        {
+            var transform = target.Transform3D as CompositeTransform3D;
+
+            if (transform != null)
+            {
+                var transformToVisual = ParallaxRoot.TransformToVisual(target);
+                var center = new Point(ParallaxRoot.ActualWidth / 2.0, RootGrid.ActualHeight / 2.0);
+
+                // Center of ParallaxRoot in the coordinates of target.
+                var transformedCenter = transformToVisual.TransformPoint(center);
+
+                transform.CenterX = transformedCenter.X;
+
+                // TransformToVisual doesn't account for ScrollViewer offset
+                transform.CenterY = transformedCenter.Y - ParallaxRoot.VerticalOffset;
+
+                // This could be done statically in markup but it's easier to show here.
+                transform.ScaleX = transform.ScaleY =
+                    -transform.TranslateZ / PerspectiveTransform.Depth + 0.8;
+            }
+        }
+
+        private void RootGrid_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            NormalizeParallax(FlipImage);
         }
     }
 }

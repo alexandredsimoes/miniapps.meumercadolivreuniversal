@@ -104,16 +104,17 @@
                     <RowDefinition  />
 
                 </Grid.RowDefinitions>
-                <TextBox Grid.Row="0" PlaceholderText="Entre aqui o que procura" x:Name="BuscaTextBox" Text="{Binding Searchterm, Mode=TwoWay}" x:Uid="BuscaTextBox" Margin="0,15,10,10" BorderBrush="#7F7A7A7A" BorderThickness="0,0,0,1">
+                <TextBox Grid.Row="0" PlaceholderText="Entre aqui o que procura" x:Name="BuscaTextBox" Text="{Binding Searchterm, Mode=TwoWay}" x:Uid="BuscaTextBox" Margin="0,15,10,10" BorderBrush="#7F7A7A7A" BorderThickness="0,0,0,1" InputScope="Search">
                     <Interactivity:Interaction.Behaviors>
-                        <Behaviors:TextBoxEnterKeyBehavior>
+                        <Behaviors:KeyBehavior Key="Enter">
                             <Core:InvokeCommandAction Command="{Binding Buscar}" CommandParameter="{Binding ElementName=BuscaTextBox, Path=Text}" />
-                        </Behaviors:TextBoxEnterKeyBehavior>
+                        </Behaviors:KeyBehavior>
                     </Interactivity:Interaction.Behaviors>
                 </TextBox>
 
                 <!--Resultado-->
-                <ListView  Visibility="Visible" Grid.Row="1" ItemsSource="{Binding Items}" x:Name="ProdutosListView" IsMultiSelectCheckBoxEnabled="False" IsActiveView="True">
+                <ListView  Visibility="Visible" Grid.Row="1" ItemsSource="{Binding Items}" x:Name="ProdutosListView" 
+                           IsMultiSelectCheckBoxEnabled="False" IsActiveView="True">
                     <Interactivity:Interaction.Behaviors>
                         <Core:EventTriggerBehavior EventName="Tapped">
                             <Core:InvokeCommandAction Command="{Binding SelecionarProduto}" CommandParameter="{Binding ElementName=ProdutosListView, Path=SelectedItem}" />

@@ -15,6 +15,7 @@ using Windows.Storage.Streams;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+using Template10.Services.NavigationService;
 
 namespace MyML.UWP.ViewModels
 {
@@ -53,6 +54,63 @@ namespace MyML.UWP.ViewModels
             {
                 IsTypeOpen = !IsTypeOpen;
             });
+            CreateItem = new RelayCommand(CreateItemExecute);
+        }
+
+        private async void CreateItemExecute()
+        {
+            try
+            {
+
+                Views.Shell.SetBusy(true, "Criando novo anúncio");
+
+                ProductInfo.ListType = new MLListType() { id = SelectedListingPrice.listing_type_id };
+                ProductInfo.ProductCategory = SelectedCategory.id;
+                ProductInfo.BuyingMode = "buy_it_now"; //Sempre será esse?
+
+
+                if (ProductInfo.ListType.id == "free" && ProductInfo.Quantity > 1)
+                {
+                    Views.Shell.SetBusy(false);
+                    await Dispatcher.DispatchAsync(async() =>
+                    {
+                        await new MessageDialog("Quando o tipo de anúncio é GRÁTIS, a quantidade não pode ser maior que 1. Por favor, volte o corrija quantidade",
+                            _resourceLoader.GetString("ApplicationTitle")).ShowAsync();
+                    });
+                    
+                    return;
+                }
+
+                var r = await _mercadoLivreServices.ListNewItem(_ProductInfo);
+
+                if (r != null)
+                {
+                    Views.Shell.SetBusy(true, "Enviando as imagens");
+                    //Envia as imagens
+                    foreach (var item in ProductInfo.Images)
+                    {
+                        var imagemInfo = await _mercadoLivreServices.UploadProductImage(item);
+                        if (imagemInfo != null)
+                        {
+                            await _mercadoLivreServices.AddPicture(imagemInfo.id, r.id);
+                        }
+                    }
+
+                    Views.Shell.SetBusy(false);
+                    await new MessageDialog("Seu produto foi cadastrado com sucesso e em breve será listado.",
+                        _resourceLoader.GetString("ApplicationTitle")).ShowAsync();
+                }
+                else
+                {
+                    Views.Shell.SetBusy(false);
+                    await new MessageDialog("Não foi possível criar seu item no momento. Envie o LOG de erros para o desenvolvedor em configurações -> Sobre -> Enviar Log.",
+                        _resourceLoader.GetString("ApplicationTitle")).ShowAsync();
+                }
+            }
+            finally
+            {
+                Views.Shell.SetBusy(false);
+            }
         }
 
         private void SelectPriceExecute(object obj)
@@ -73,7 +131,19 @@ namespace MyML.UWP.ViewModels
             var categoryDetail = await _mercadoLivreServices.GetCategoryDetail(item.id);
             if (categoryDetail == null) return;
 
-            if(categoryDetail.children_categories.Count > 0)
+
+            if (categoryDetail.path_from_root.Count == 1)
+                SelectedCategoryLevel = categoryDetail.name;
+            else
+            {
+                SelectedCategoryLevel = string.Empty;
+                foreach (var category in categoryDetail.path_from_root)
+                {
+                    SelectedCategoryLevel = (!String.IsNullOrWhiteSpace(SelectedCategoryLevel)  ? SelectedCategoryLevel + " -> " : "")  + category.name;
+                }
+            }
+
+            if (categoryDetail.children_categories.Count > 0)
             {
                 //Recarrega os subitems
                 this.Categories.Clear();
@@ -86,7 +156,7 @@ namespace MyML.UWP.ViewModels
                         total_items_in_this_category = category.total_items_in_this_category
                     });
                 }
-                
+
             }
             else
             {
@@ -97,53 +167,30 @@ namespace MyML.UWP.ViewModels
             }
         }
 
+
+        public override Task OnNavigatingFromAsync(NavigatingEventArgs args)
+        {
+            args.Cancel = ActualPart > 1 && args.NavigationMode == NavigationMode.Back;
+            if (args.Cancel)
+            {
+                ActualPart--;
+                var handler = PartChanged;
+                if (handler != null) handler(ActualPart);
+            }
+            return Task.CompletedTask;
+        }
         public override Task OnNavigatedFromAsync(IDictionary<string, object> pageState, bool suspending)
         {
-            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
-            {
-                Windows.Phone.UI.Input.HardwareButtons.BackPressed -= HardwareButtons_BackPressed; ;
-            }
-            ActualPart = 1;
-
             Views.Shell.SetBusy(false);
-            return Task.CompletedTask;            
+            return Task.CompletedTask;
         }
 
-        public async override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
-        {            
-            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
-            {
-                Windows.Phone.UI.Input.HardwareButtons.BackPressed += HardwareButtons_BackPressed; ;
-            }
-
-            if (SelectedCategory == null)
-            {
-                Views.Shell.SetBusy(true);                
-
-                var lista = await _mercadoLivreServices.ListCategories(Consts.ML_ID_BRASIL);
-                if (lista != null)
-                {
-                    Categories = new ObservableCollection<MLCategorySearchResult>(lista);
-                    _backupCategories = lista;
-                }
-                else
-                {
-                    await new MessageDialog("Não foi possível acessar o serviço do MercadoLivre, verifique se você está conectado a internet.",
-                        _resourceLoader.GetString("ApplicationTitle")).ShowAsync();
-                }
-                Views.Shell.SetBusy(false);
-            }
-
-            AvailablePhotos = MaxImages - ProductInfo.Images.Count;
-        }
-
-        private void HardwareButtons_BackPressed(object sender, Windows.Phone.UI.Input.BackPressedEventArgs e)
+        public override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
-            e.Handled = ActualPart > 1;
-            ActualPart--;
-            var handler = PartChanged;
-            if (handler != null) handler(ActualPart);
+            AvailablePhotos = MaxImages - ProductInfo.Images.Count;
+            return Task.CompletedTask;
         }
+
 
         private async void GetImageExecute(string source)
         {
@@ -182,13 +229,13 @@ namespace MyML.UWP.ViewModels
 
         private async void NextPartExecute()
         {
-            if(ActualPart == 3 && String.IsNullOrWhiteSpace(ProductInfo.Title))
+            if (ActualPart == 3 && String.IsNullOrWhiteSpace(ProductInfo.Title))
             {
                 await new MessageDialog("Informe o NOME do seu produto", _resourceLoader.GetString("ApplicationTitle")).ShowAsync();
                 return;
             }
 
-            if (ActualPart == 4 && (ProductInfo.ProductValue??0) <= 0)
+            if (ActualPart == 4 && (ProductInfo.ProductValue ?? 0) <= 0)
             {
                 await new MessageDialog("Informe o PREÇO do seu produto", _resourceLoader.GetString("ApplicationTitle")).ShowAsync();
                 return;
@@ -214,18 +261,52 @@ namespace MyML.UWP.ViewModels
 
 
             ActualPart++;
-            
+
             var handler = PartChanged;
             if (handler != null) handler(ActualPart);
 
 
-            if(ActualPart == 9)
+            if (ActualPart == 7)
             {
-                //Carrega os tipos de anuncio
-                ListingPrice = await _mercadoLivreServices.GetListingPrices(Consts.ML_ID_BRASIL, ProductInfo.ProductValue ?? 0, 
-                    new KeyValuePair<string, object>[] { });
+                if (SelectedCategory == null)
+                {
+                    try
+                    {
+                        Views.Shell.SetBusy(true, "carregando as categorias");
 
-                IsTypeOpen = false;
+                        var lista = await _mercadoLivreServices.ListCategories(Consts.ML_ID_BRASIL);
+                        if (lista != null)
+                        {
+                            Categories = new ObservableCollection<MLCategorySearchResult>(lista);
+                            _backupCategories = lista;
+                        }
+                        else
+                        {
+                            await new MessageDialog("Não foi possível acessar o serviço do MercadoLivre, verifique se você está conectado a internet.",
+                                _resourceLoader.GetString("ApplicationTitle")).ShowAsync();
+                        }
+                    }
+                    finally
+                    {
+                        Views.Shell.SetBusy(false);
+                    }
+                }
+            }
+            else if (ActualPart == 9)
+            {
+                try
+                {
+                    Views.Shell.SetBusy(true, "carregando os tipos de anúncio");
+                    //Carrega os tipos de anuncio
+                    ListingPrice = await _mercadoLivreServices.GetListingPrices(Consts.ML_ID_BRASIL, ProductInfo.ProductValue ?? 0,
+                        new KeyValuePair<string, object>[] { });
+
+                    IsTypeOpen = false;
+                }
+                finally
+                {
+                    Views.Shell.SetBusy(false);
+                }
             }
         }
 
@@ -288,6 +369,15 @@ namespace MyML.UWP.ViewModels
             set { Set(() => SelectedCategory, ref _SelectedCategory, value); }
         }
 
+        private string _SelectedCategoryLevel;
+
+        public string SelectedCategoryLevel
+        {
+            get { return _SelectedCategoryLevel; }
+            set { Set(() => SelectedCategoryLevel, ref _SelectedCategoryLevel, value); }
+        }
+
+
 
         private MLListPrice _SelectedListingPrice;
         public MLListPrice SelectedListingPrice
@@ -325,7 +415,8 @@ namespace MyML.UWP.ViewModels
         public RelayCommand OpenTypes { get; private set; }
         public RelayCommand<string> GetImage { get; private set; }
         public RelayCommand<object> SelectCategory { get; private set; }
-        public RelayCommand<object> SelectPrice { get; private set; }        
+        public RelayCommand<object> SelectPrice { get; private set; }
+        public RelayCommand CreateItem { get; private set; }
 
     }
 }
