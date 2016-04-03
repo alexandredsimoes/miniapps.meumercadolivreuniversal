@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
-using Microsoft.AdMediator.Core.Events;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -14,7 +13,6 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using Microsoft.AdMediator.Core.Models;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -71,74 +69,74 @@ namespace MyML.UWP.Usercontrols
             }
         }
 
-        private void AdMediator_MOBILE_AdSdkError(object sender, Microsoft.AdMediator.Core.Events.AdFailedEventArgs e)
-        {
-            if(Debugger.IsAttached)
-            {
-                WriteErrorAdFailure("Mobile", e);
-            }
-        }
+        //private void AdMediator_MOBILE_AdSdkError(object sender, Microsoft.AdMediator.Core.Events.AdFailedEventArgs e)
+        //{
+        //    if(Debugger.IsAttached)
+        //    {
+        //        WriteErrorAdFailure("Mobile", e);
+        //    }
+        //}
 
-        private void WriteErrorAdFailure(string origin, AdFailedEventArgs e)
-        {
-            Debug.WriteLine($"Mobile SDK Error - {origin} - {e.ErrorCode} - {e.Error?.Message} - {e.EventName} - {e.SdkEventArgs}");
-        }
-        private void WriteErrorMediatorFailure(string origin, AdMediatorFailedEventArgs e)
-        {
-            Debug.WriteLine($"Mobile AdMediator Error - {origin} - {e.ErrorCode} - {e.Error?.Message}");
-        }
+        //private void WriteErrorAdFailure(string origin, AdFailedEventArgs e)
+        //{
+        //    Debug.WriteLine($"Mobile SDK Error - {origin} - {e.ErrorCode} - {e.Error?.Message} - {e.EventName} - {e.SdkEventArgs}");
+        //}
+        //private void WriteErrorMediatorFailure(string origin, AdMediatorFailedEventArgs e)
+        //{
+        //    Debug.WriteLine($"Mobile AdMediator Error - {origin} - {e.ErrorCode} - {e.Error?.Message}");
+        //}
 
-        private void AdMediator_MOBILE_AdMediatorError(object sender, Microsoft.AdMediator.Core.Events.AdMediatorFailedEventArgs e)
-        {
-            if (Debugger.IsAttached)
-            {
-                WriteErrorMediatorFailure("Mobile", e);
-            }
-        }
+        //private void AdMediator_MOBILE_AdMediatorError(object sender, Microsoft.AdMediator.Core.Events.AdMediatorFailedEventArgs e)
+        //{
+        //    if (Debugger.IsAttached)
+        //    {
+        //        WriteErrorMediatorFailure("Mobile", e);
+        //    }
+        //}
 
-        private void AdMediator_DESKTOP_AdSdkError(object sender, Microsoft.AdMediator.Core.Events.AdFailedEventArgs e)
-        {
-            if (Debugger.IsAttached)
-            {
-                WriteErrorAdFailure("Desktop", e);
-            }
-        }
+        //private void AdMediator_DESKTOP_AdSdkError(object sender, Microsoft.AdMediator.Core.Events.AdFailedEventArgs e)
+        //{
+        //    if (Debugger.IsAttached)
+        //    {
+        //        WriteErrorAdFailure("Desktop", e);
+        //    }
+        //}
 
-        private void AdMediator_DESKTOP_AdMediatorError(object sender, Microsoft.AdMediator.Core.Events.AdMediatorFailedEventArgs e)
-        {
-            if (Debugger.IsAttached)
-            {
-                WriteErrorMediatorFailure("Desktop", e);
-            }
-        }
+        //private void AdMediator_DESKTOP_AdMediatorError(object sender, Microsoft.AdMediator.Core.Events.AdMediatorFailedEventArgs e)
+        //{
+        //    if (Debugger.IsAttached)
+        //    {
+        //        WriteErrorMediatorFailure("Desktop", e);
+        //    }
+        //}
 
-        private void AdsControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (App.ExibirAds)
-            {
-                var family = Windows.System.Profile.AnalyticsInfo.VersionInfo.DeviceFamily;
-                if (family.Equals("Windows.Desktop") || family.Equals("Windows.Xbox") || family.Equals("Windows.IoT"))
-                {
-                    AdMediator_MOBILE.Height = 90;
-                    AdMediator_MOBILE.Width = 728;
-                    //AdMediator_DESKTOP.Visibility = Visibility.Visible;
-                    //AdMediator_MOBILE.Visibility = Visibility.Collapsed;
-                    //AdMediator_MOBILE.Pause();
-                }
-                else if (family.Equals("Windows.Mobile"))
-                {
-                    AdMediator_MOBILE.Height = 50;
-                    AdMediator_MOBILE.Width = 300;
-                    //AdMediator_DESKTOP.Visibility = Visibility.Collapsed;
-                    //AdMediator_MOBILE.Visibility = Visibility.Visible;
-                    //AdMediator_DESKTOP.Pause();
-                }
-                else
-                {
-                    AdMediator_MOBILE.Height = 50;
-                    AdMediator_MOBILE.Width = 300;
-                }
-            }           
-        }
+        //private void AdsControl_Loaded(object sender, RoutedEventArgs e)
+        //{
+        //    if (App.ExibirAds)
+        //    {
+        //        var family = Windows.System.Profile.AnalyticsInfo.VersionInfo.DeviceFamily;
+        //        if (family.Equals("Windows.Desktop") || family.Equals("Windows.Xbox") || family.Equals("Windows.IoT"))
+        //        {
+        //            AdMediator_MOBILE.Height = 90;
+        //            AdMediator_MOBILE.Width = 728;
+        //            //AdMediator_DESKTOP.Visibility = Visibility.Visible;
+        //            //AdMediator_MOBILE.Visibility = Visibility.Collapsed;
+        //            //AdMediator_MOBILE.Pause();
+        //        }
+        //        else if (family.Equals("Windows.Mobile"))
+        //        {
+        //            AdMediator_MOBILE.Height = 50;
+        //            AdMediator_MOBILE.Width = 300;
+        //            //AdMediator_DESKTOP.Visibility = Visibility.Collapsed;
+        //            //AdMediator_MOBILE.Visibility = Visibility.Visible;
+        //            //AdMediator_DESKTOP.Pause();
+        //        }
+        //        else
+        //        {
+        //            AdMediator_MOBILE.Height = 50;
+        //            AdMediator_MOBILE.Width = 300;
+        //        }
+        //    }           
+        //}
     }
 }

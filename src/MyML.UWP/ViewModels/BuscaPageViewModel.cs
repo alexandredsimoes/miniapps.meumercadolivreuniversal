@@ -116,6 +116,7 @@ namespace MyML.UWP.ViewModels
             var item = obj as Item;
 
             if (item == null) return;
+
             NavigationService.Navigate(typeof(ProdutoDetalhePage), item.id);            
         }
 
@@ -143,10 +144,13 @@ namespace MyML.UWP.ViewModels
                 //ResultQuery = String.Format("Busca por " + query);
             }
 
-            //var items = _mercadoLivreService.ListProductsByName(query, 0, 20);
-            //Items = new MercadoLivreIncrementalLoadingClass<Item>(0, 10, query, parametro[1] == "category" ? false : true);
+            var family = Windows.System.Profile.AnalyticsInfo.VersionInfo.DeviceFamily;
+            var pageSize = 15;
 
-            Items = new IncrementalSearchSource<SearchDataSource, Item>(0, 15, query, parametro[1] == "category" ? false : true);
+            if (family.Equals("Windows.Desktop") || family.Equals("Windows.Xbox"))
+                pageSize = 30;
+
+            Items = new IncrementalSearchSource<SearchDataSource, Item>(0, pageSize, query, parametro[1] == "category" ? false : true);
 
             Items.FiltersAvailable += Items_FiltersAvailable;
             Items.LoadMoreItemsCompleted += Items_LoadMoreItemsCompleted;

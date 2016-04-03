@@ -11,9 +11,12 @@
       xmlns:vm="using:MyML.UWP.ViewModels"
       xmlns:uc="using:MyML.UWP.Usercontrols"
       mc:Ignorable="d"
-      DataContext="{Binding Source={StaticResource Locator}, Path=SettingsPage}">
+      >
 
-
+    <!--DataContext="{Binding Source={StaticResource Locator}, Path=SettingsPage}"-->
+    <Page.DataContext>
+        <vm:SettingsPageViewModel x:Name="ViewModel" />
+    </Page.DataContext>
 
     <Page.Resources>
         <Style x:Key="TabsStylePivotStyle" TargetType="Pivot">

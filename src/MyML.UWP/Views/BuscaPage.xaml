@@ -15,7 +15,6 @@
     xmlns:designViewModels="using:MyML.UWP.ViewModels.Design"
     d:DataContext="{d:DesignInstance designViewModels:BuscaPageDesignViewModel, IsDesignTimeCreatable=True}"
     x:Name="ThePage"
-    xmlns:Universal="using:Microsoft.Advertising.WinRT.UI"
     xmlns:uc="using:MyML.UWP.Usercontrols">
     <Page.DataContext>
         <Binding Source="{StaticResource Locator}" Path="BuscaPage" />
@@ -114,7 +113,7 @@
 
                 <!--Resultado-->
                 <ListView  Visibility="Visible" Grid.Row="1" ItemsSource="{Binding Items}" x:Name="ProdutosListView" 
-                           IsMultiSelectCheckBoxEnabled="False" IsActiveView="True">
+                           IsMultiSelectCheckBoxEnabled="False">
                     <Interactivity:Interaction.Behaviors>
                         <Core:EventTriggerBehavior EventName="Tapped">
                             <Core:InvokeCommandAction Command="{Binding SelecionarProduto}" CommandParameter="{Binding ElementName=ProdutosListView, Path=SelectedItem}" />

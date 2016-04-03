@@ -26,12 +26,12 @@ namespace MyML.UWP.ViewModels
     {
         private readonly IDataService _dataService;
         private readonly ResourceLoader _resourceLoader;
-        public SettingsPageViewModel(IDataService dataService, ResourceLoader resourceLoader)
+        public SettingsPageViewModel()
         {
-            _resourceLoader = resourceLoader;
-            _dataService = dataService;
+            _resourceLoader = SimpleIoc.Default.GetInstance<ResourceLoader>();
+            _dataService = SimpleIoc.Default.GetInstance<IDataService>();
 
-            SettingsPartViewModel = new SettingsPartViewModel(_dataService, _resourceLoader);
+            SettingsPartViewModel = new SettingsPartViewModel();
         }
 
         public SettingsPartViewModel SettingsPartViewModel { get; } //= new SettingsPartViewModel(_dataService, _resourceLoader);
@@ -44,9 +44,10 @@ namespace MyML.UWP.ViewModels
         private readonly IDataService _dataService;
         private readonly ResourceLoader _resourceLoader;
 
-        public SettingsPartViewModel(IDataService dataService, ResourceLoader resourceLoader)
+        public SettingsPartViewModel()
         {
-            _dataService = dataService;
+            _resourceLoader = SimpleIoc.Default.GetInstance<ResourceLoader>();
+            _dataService = SimpleIoc.Default.GetInstance<IDataService>();
             if (!Windows.ApplicationModel.DesignMode.DesignModeEnabled)
                 _settings = Services.SettingsServices.SettingsService.Instance;
 
@@ -81,13 +82,13 @@ namespace MyML.UWP.ViewModels
                 Debug.WriteLine("Inscrevendo na notificação " + user_id);
 #endif
                 //Verifica se já está inscrito
-                var expirationString = _dataService.GetMLConfig(Consts.ML_NOTIFICATION_EXPIRES);
-                DateTime expirationDate = DateTime.MinValue;
-                if (DateTime.TryParse(expirationString, out expirationDate))
-                {
-                    if (expirationDate > DateTime.Now)
-                        return true;
-                }
+                //var expirationString = _dataService.GetMLConfig(Consts.ML_NOTIFICATION_EXPIRES);
+                //DateTime expirationDate = DateTime.MinValue;
+                //if (DateTime.TryParse(expirationString, out expirationDate))
+                //{
+                //    if (expirationDate > DateTime.Now)
+                //        return true;
+                //}
                 var channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
 
                 //Endpoint=sb://meumercadolivre.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=wOen194enfv8wsOo0V5GqJ2wAFf6gQbxPFQCgRzk01A=;EntityPath=universal                     
@@ -99,8 +100,9 @@ namespace MyML.UWP.ViewModels
 
 #if DEBUG
                 Debug.WriteLine("Inscrito - expira em " + result.ExpiresAt.ToString());
-                return true;
+                
 #endif
+                return true;
             }
             catch (Exception ex)
             {
@@ -139,8 +141,8 @@ namespace MyML.UWP.ViewModels
             Views.Shell.SetBusy(false);
         }
 
-        private string _ReceiveNotifications;
-        public string ReceiveNotifications
+        private bool? _ReceiveNotifications;
+        public bool? ReceiveNotifications
         {
             get { return _ReceiveNotifications; }
             set { Set(() => ReceiveNotifications, ref _ReceiveNotifications, value); }

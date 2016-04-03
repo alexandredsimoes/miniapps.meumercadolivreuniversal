@@ -16,6 +16,8 @@ using Windows.ApplicationModel.DataTransfer;
 using MyML.UWP.AppStorage;
 using Windows.System;
 using Template10.Services.NavigationService;
+using Template10.Utils;
+using System.Diagnostics;
 
 namespace MyML.UWP.ViewModels
 {
@@ -163,10 +165,15 @@ namespace MyML.UWP.ViewModels
 
         public override Task OnNavigatingFromAsync(NavigatingEventArgs args)
         {
-            if(!args.Suspending && ZoomMode)
+            NavigationService.Frame.BackStack.ForEach(c =>
+            {
+                Debug.WriteLine("Historico -> " + c.SourcePageType);
+            });
+
+            if (!args.Suspending && ZoomMode)
             {
                 args.Cancel = true;
-                
+
                 var handler = ZoomModeChanged;
                 if (handler != null) handler(ZoomMode);
                 ZoomMode = false;
@@ -225,35 +232,38 @@ namespace MyML.UWP.ViewModels
                     if (SelectedProduct.shipping?.free_shipping == true)
                     {
                         var excludeRegions = "";
-                        //Verifica se existe zonas de exclusão
-                        foreach (var excluded in SelectedProduct.shipping.free_methods)
+                        if (SelectedProduct.shipping.free_methods != null)
                         {
-                            if (excluded.rule != null)
+                            //Verifica se existe zonas de exclusão
+                            foreach (var excluded in SelectedProduct.shipping.free_methods)
                             {
-                                if (excluded.rule.free_mode == "exclude_region")
+                                if (excluded.rule != null)
                                 {
-                                    for (int i = 0; i < excluded.rule.value.Count; i++)
+                                    if (excluded.rule.free_mode == "exclude_region")
                                     {
-                                        var region = excluded.rule.value[i];
-                                        switch (region)
+                                        for (int i = 0; i < excluded.rule.value.Count; i++)
                                         {
-                                            case "BR-NO":
-                                                region = "Norte";
-                                                break;
-                                            case "BR-NE":
-                                                region = "Nordeste";
-                                                break;
-                                            case "BR-SE":
-                                                region = "Sudeste";
-                                                break;
-                                            case "BR-SO":
-                                                region = "Sul";
-                                                break;
-                                            default:
-                                                region = excluded.rule.value[i];
-                                                break;
+                                            var region = excluded.rule.value[i];
+                                            switch (region)
+                                            {
+                                                case "BR-NO":
+                                                    region = "Norte";
+                                                    break;
+                                                case "BR-NE":
+                                                    region = "Nordeste";
+                                                    break;
+                                                case "BR-SE":
+                                                    region = "Sudeste";
+                                                    break;
+                                                case "BR-SO":
+                                                    region = "Sul";
+                                                    break;
+                                                default:
+                                                    region = excluded.rule.value[i];
+                                                    break;
+                                            }
+                                            excludeRegions += region + (i < excluded.rule.value.Count - 1 ? ", " : "");
                                         }
-                                        excludeRegions += region + (i < excluded.rule.value.Count - 1 ? ", " : "");
                                     }
                                 }
                             }

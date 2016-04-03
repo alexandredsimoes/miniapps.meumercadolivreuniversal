@@ -74,7 +74,7 @@ namespace MyML.UWP.Adapters
                     if (result == null)
                     {
 
-                        OnLoadMoreItemsCompleted(result.Paging);//terminamos por aqui
+                        OnLoadMoreItemsCompleted(result?.Paging);//terminamos por aqui
                         return new LoadMoreItemsResult() { Count = 0 };
                     }
 

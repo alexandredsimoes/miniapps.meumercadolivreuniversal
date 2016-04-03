@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using MyML.UWP.ViewModels;
 using MyML.UWP.Models.Mercadolivre;
+using Windows.UI.Xaml.Hosting;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -25,7 +26,6 @@ namespace MyML.UWP.Views
     public sealed partial class BuscaPage : Page
     {
         private readonly BuscaPageViewModel _viewModel;
-        private Item _selectedItem;
          
         public BuscaPage()
         {
@@ -39,19 +39,20 @@ namespace MyML.UWP.Views
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if(e.NavigationMode == NavigationMode.Back)
+            if (e.NavigationMode == NavigationMode.Back && _viewModel?.SelectedItem != null)
             {
+                this.UpdateLayout();
                 ProdutosListView.ScrollIntoView(_viewModel.SelectedItem, ScrollIntoViewAlignment.Leading);
-                _viewModel.RaisePropertyChanged(() =>_viewModel.Items);
             }
         }
+
 
         private void ProdutosListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Selector selector = sender as Selector;
             if (selector is ListView)
             {
-                _viewModel.SelectedItem =  selector.SelectedItem as Item;
+                _viewModel.SelectedItem = selector.SelectedItem as Item;
             }
         }
     }
