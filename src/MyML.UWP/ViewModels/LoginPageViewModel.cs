@@ -60,6 +60,8 @@ namespace MyML.UWP.ViewModels
                             _dataService.SaveConfig(Consts.ML_CONFIG_KEY_ACCESS_TOKEN, login.Access_Token);
                             _dataService.SaveConfig(Consts.ML_CONFIG_KEY_LOGIN_DATE, DateTime.Now.ToString());
 
+                            await NotificationHelper.SubscribeNotification();
+
                             if (NavigationService.CanGoBack)
                                 NavigationService.GoBack();
                             else
@@ -107,7 +109,7 @@ namespace MyML.UWP.ViewModels
                 ApplicationData.Current.LocalSettings.Values[Consts.ML_CONFIG_KEY_LOGIN_DATE] = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
 
 
-                await SubscribeNotification(userInfo.user_id);
+                await NotificationHelper.SubscribeNotification();
                 Shell.SetBusy(false);
 
                 
@@ -123,39 +125,6 @@ namespace MyML.UWP.ViewModels
         }
 
 
-        private async Task SubscribeNotification(string user_id)
-        {
-            try
-            {
-#if DEBUG
-                Debug.WriteLine("Inscrevendo na notificação " + user_id);
-#endif
-                //Verifica se já está inscrito
-                var expirationString = _dataService.GetMLConfig(Consts.ML_NOTIFICATION_EXPIRES);
-                DateTime expirationDate = DateTime.MinValue;
-                if (DateTime.TryParse(expirationString, out expirationDate))
-                {
-                    if (expirationDate > DateTime.Now)
-                        return;
-                }
-                var channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
-
-                //Endpoint=sb://meumercadolivre.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=wOen194enfv8wsOo0V5GqJ2wAFf6gQbxPFQCgRzk01A=;EntityPath=universal                     
-                //Endpoint=sb://meumercadolivre.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=wOen194enfv8wsOo0V5GqJ2wAFf6gQbxPFQCgRzk01A=;EntityPath=universal
-                var hub = new NotificationHub("universal", "Endpoint=sb://meumercadolivre.servicebus.windows.net/;SharedAccessKeyName=DefaultFullSharedAccessSignature;SharedAccessKey=zWBrWVesFE7/eq1LNSRxvc1nx0UnpfXLolWOsFyHHyY=;EntityPath=universal");
-                var result = await hub.RegisterNativeAsync(channel.Uri, new string[] { user_id });
-                _dataService.SaveConfig(Consts.ML_NOTIFICATION_EXPIRES, result.ExpiresAt.ToString());
-
-#if DEBUG
-                Debug.WriteLine("Inscrito - expira em " + result.ExpiresAt.ToString());
-#endif
-            }
-            catch (Exception ex)
-            {
-                AppLogs.WriteError("LoginPageViewModel.SubscribeNotification()", ex);
-            }
-
-        }
 
         private string _NavigationUrl;
         public string NavigationUrl

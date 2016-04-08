@@ -188,6 +188,7 @@
     <Compile Include="Services\IDataService.cs" />
     <Compile Include="Services\IMercadoLivreService.cs" />
     <Compile Include="Services\MercadoLivreServices.cs" />
+    <Compile Include="Services\NotificationHelper.cs" />
     <Compile Include="Services\SettingsServices\ISettingsService.cs" />
     <Compile Include="Services\SettingsServices\SettingsService.cs" />
     <Compile Include="Usercontrols\ActionButtonControl.xaml.cs">
@@ -563,6 +564,12 @@
     <SDKReference Include="WindowsTeam, Version=10.0.10240.0">
       <Name>Windows Team Extensions for the UWP</Name>
     </SDKReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MyML.UWP.BackgroundServices.AnswerQuestionTask\MyML.UWP.BackgroundServices.csproj">
+      <Project>{20f8242f-8c55-4f2f-9783-ee16bb4737d8}</Project>
+      <Name>MyML.UWP.BackgroundServices</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

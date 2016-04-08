@@ -171,7 +171,30 @@ namespace MyML.UWP
             if (startKind == StartKind.Launch)
                 await RegisterBackgroundTask();
 
-            NavigationService.Navigate(typeof(Views.MainPage));
+            if(args.Kind == ActivationKind.ToastNotification)
+            {
+                //Verifica de onde veio esse toast
+                var toastArgs = args as ToastNotificationActivatedEventArgs;
+                if(toastArgs != null)
+                {
+#if DEBUG
+                    var items = String.Empty;
+                    toastArgs.UserInput.ToList().ForEach(c => {
+                        items += $"{c.Key}={c.Value}\r\n";
+                    });
+                    await AppLogs.WriteInfo("Start", toastArgs.Argument);
+                    await AppLogs.WriteInfo("Start", items);
+#endif
+                    if (toastArgs.Argument.Contains("openQuestion"))
+                        NavigationService.Navigate(typeof(Views.Secure.PerguntasVendasPage));
+                }
+            }
+            else
+            {
+                NavigationService.Navigate(typeof(Views.MainPage));
+            }
+
+            
             //return Task.CompletedTask;
         }
 
@@ -200,33 +223,63 @@ namespace MyML.UWP
 
         private async Task<bool> RegisterBackgroundTask()
         {
-            //Limpa qualquer notificação pendente
-            ToastNotificationManager.History.Clear();
-
-            // Unregister any previous exising background task
-            UnregisterTasks();
-
-            // Request access
-            BackgroundAccessStatus status = await BackgroundExecutionManager.RequestAccessAsync();
-
-            // If denied
-            if (status != BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity && status != BackgroundAccessStatus.AllowedWithAlwaysOnRealTimeConnectivity)
-                return false;
-
-            // Construct the background task
-            BackgroundTaskBuilder builder = new BackgroundTaskBuilder()
+            try
             {
-                Name = Consts.BACKGROUND_TASKNAME_QUESTIONS,
-                TaskEntryPoint = "MyML.BackgroundHelper.ToastQuestionsBackgrundTask"
-            };
+                UnregisterTasks();
 
-            // Set trigger for Toast History Changed
-            builder.SetTrigger(new PushNotificationTrigger());
+                await BackgroundExecutionManager.RequestAccessAsync();
+                BackgroundTaskBuilder taskBuilder = new BackgroundTaskBuilder();
+                taskBuilder.Name = Consts.BACKGROUND_TASKNAME_QUESTIONS;
+                //var t = new Windows.ApplicationModel.Background.SystemTrigger(SystemTriggerType.TimeZoneChange, false);
+                ToastNotificationActionTrigger trigger = new ToastNotificationActionTrigger();
+                taskBuilder.SetTrigger(trigger);
 
-            // And register the background task
-            BackgroundTaskRegistration registration = builder.Register();
 
-            return true;
+                taskBuilder.TaskEntryPoint = typeof(MyML.UWP.BackgroundServices.AnswerQuestionTask).FullName;// "MyML.UWP.BackgroundAnswerQuestion.AnswerQuestionTask";
+                var registration = taskBuilder.Register();
+                registration.Completed += (BackgroundTaskRegistration sender, BackgroundTaskCompletedEventArgs args) =>
+                {
+                    args.CheckResult();
+                };
+                return true;
+            }
+            catch (Exception ex)
+            {
+                AppLogs.WriteError("MainPage.xaml.cs - RegisterBackgroundTask", ex);
+                return false;
+            }
+            finally
+            {
+
+            }
+            ////Limpa qualquer notificação pendente
+            //ToastNotificationManager.History.Clear();
+
+            //// Unregister any previous exising background task
+            //UnregisterTasks();
+
+            //// Request access
+            //BackgroundAccessStatus status = await BackgroundExecutionManager.RequestAccessAsync();
+
+            //// If denied
+            //if (status != BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity && status != BackgroundAccessStatus.AllowedWithAlwaysOnRealTimeConnectivity)
+            //    return false;
+
+            //// Construct the background task
+            //BackgroundTaskBuilder builder = new BackgroundTaskBuilder()
+            //{
+            //    Name = Consts.BACKGROUND_TASKNAME_QUESTIONS,                
+            //    TaskEntryPoint = "MyML.UWP.BackgroundAnswerQuestion.AnswerQuestionTask"
+            //};
+
+            //// Set trigger for Toast History Changed
+            //ToastNotificationActionTrigger trigger = new ToastNotificationActionTrigger();
+            //builder.SetTrigger(trigger);
+
+            //// And register the background task
+            //BackgroundTaskRegistration registration = builder.Register();
+
+            //return true;
         }
 
         public static bool ExibirAds { get; internal set; }

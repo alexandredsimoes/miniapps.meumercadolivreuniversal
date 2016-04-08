@@ -9,7 +9,7 @@ namespace MyML.UWP.Models
     {
         //public const string CONFIG_LICENSE_REMOVE_ADS = "CONFIG_LICENSE_REMOVE_ADS";
         internal static readonly string CONFIG_REMOVE_ADS_KEY = "ML_REMOVER_ANUNCIO";
-        internal static readonly string BACKGROUND_TASKNAME_QUESTIONS = "ToastQuestionsBackgrundTask";
+        internal static readonly string BACKGROUND_TASKNAME_QUESTIONS = "AnswerQuestionTask";
 
 
         public const string CONFIG_KEY_EXECUCOES = "ml_executions";

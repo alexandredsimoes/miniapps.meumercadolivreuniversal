@@ -51,65 +51,39 @@ namespace MyML.UWP.ViewModels
             if (!Windows.ApplicationModel.DesignMode.DesignModeEnabled)
                 _settings = Services.SettingsServices.SettingsService.Instance;
 
-            TrySigninNotifications = new RelayCommand<bool?>(TrySigninNotificationsExecute);
+            TrySigninNotifications = new RelayCommand(TrySigninNotificationsExecute);
         }
 
-        private async void TrySigninNotificationsExecute(bool? state)
-        {
-            if(state ?? false)
-            {
-                _settings.IsNotificationSigned  = await SubscribeNotification();
-            }
-            else
-            {
-
-            }
-        }
-
-        private async Task<bool> SubscribeNotification()
+        private async void TrySigninNotificationsExecute()
         {
             try
             {
-                var user_id = _dataService.GetMLConfig(Consts.ML_CONFIG_KEY_USER_ID);
                 if (!_dataService.IsAuthenticated())
                 {
                     await new MessageDialog("Você precisa estar autenticado para se inscrever nas notificações",
                         _resourceLoader.GetString("ApplicationTitle")).ShowAsync();
-                    return false;
+                    return;
                 }
-#if DEBUG
+                var result = await NotificationHelper.SubscribeNotification();
+                if (result)
+                {
+                    await new MessageDialog("Registro efetuado com sucesso.", _resourceLoader.GetString("ApplicationTitle")).ShowAsync();
+                }
+                else
+                {
+                    await new MessageDialog("Não foi possível efetuar o registro para receber notificações. Envie seu log de erros para o desenvolvedor.", _resourceLoader.GetString("ApplicationTitle")).ShowAsync();
+                }
 
-                Debug.WriteLine("Inscrevendo na notificação " + user_id);
-#endif
-                //Verifica se já está inscrito
-                //var expirationString = _dataService.GetMLConfig(Consts.ML_NOTIFICATION_EXPIRES);
-                //DateTime expirationDate = DateTime.MinValue;
-                //if (DateTime.TryParse(expirationString, out expirationDate))
-                //{
-                //    if (expirationDate > DateTime.Now)
-                //        return true;
-                //}
-                var channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
-
-                //Endpoint=sb://meumercadolivre.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=wOen194enfv8wsOo0V5GqJ2wAFf6gQbxPFQCgRzk01A=;EntityPath=universal                     
-                //Endpoint=sb://meumercadolivre.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=wOen194enfv8wsOo0V5GqJ2wAFf6gQbxPFQCgRzk01A=;EntityPath=universal
-                //Endpoint=sb://meumercadolivreuniversal.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=il6dtCewcwNTF4Am4bccLekIGtg0vM5xx+EU7BbKW3w=
-                var hub = new NotificationHub("notificacoes", "Endpoint=sb://meumercadolivreuniversal.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=il6dtCewcwNTF4Am4bccLekIGtg0vM5xx+EU7BbKW3w=");
-                var result = await hub.RegisterNativeAsync(channel.Uri, new string[] { user_id });
-                _dataService.SaveConfig(Consts.ML_NOTIFICATION_EXPIRES, result.ExpiresAt.ToString());
-
-#if DEBUG
-                Debug.WriteLine("Inscrito - expira em " + result.ExpiresAt.ToString());
-                
-#endif
-                return true;
+                Views.Shell.SetBusy(true, "Efetuando registro");
             }
-            catch (Exception ex)
+            finally
             {
-                AppLogs.WriteError("LoginPageViewModel.SubscribeNotification()", ex);
-                return false;
+                Views.Shell.SetBusy(false);
             }
+            
+            //_settings.IsNotificationSigned = result;
         }
+        
 
         public bool UseShellBackButton
         {
@@ -148,7 +122,7 @@ namespace MyML.UWP.ViewModels
             set { Set(() => ReceiveNotifications, ref _ReceiveNotifications, value); }
         }
 
-        public RelayCommand<bool?> TrySigninNotifications { get; private set; }
+        public RelayCommand TrySigninNotifications { get; private set; }
     }
 
     public class AboutPartViewModel : ViewModelBase

@@ -82,7 +82,6 @@ namespace MyML.UWP.Services
 
         public async Task<bool> AnswerQuestion(string questionId, string content)
         {
-            var userId = _dataService.GetMLConfig(Consts.ML_CONFIG_KEY_USER_ID);
             var accessToken = _dataService.GetMLConfig(Consts.ML_CONFIG_KEY_ACCESS_TOKEN);
 
             var url = Consts.GetUrl(Consts.ML_QUESTIONS_ANSWER_URL, accessToken);
@@ -570,16 +569,14 @@ namespace MyML.UWP.Services
                 
 
                 var response = await _httpClient.PostAsync(url, json);
-
+                var result = await response.Content.ReadAsStringAsync();
                 if (response.StatusCode == System.Net.HttpStatusCode.Created)
-                {
-                    var result = await response.Content.ReadAsStringAsync();
+                {                    
                     return await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<Item>(result));
                 }
                 else
                 {
                     //Convertemos para o formato de erro
-                    var result = await response.Content.ReadAsStringAsync();
                     var error =  await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<MLErrorRequest>(result));
 
                     if(error != null)
@@ -591,6 +588,8 @@ namespace MyML.UWP.Services
                             await AppLogs.WriteLog("     ", item.code + " - " + item.message, "");
                         }
                     }
+
+                    AppLogs.WriteWarning("MercadoLivreServices.ListNewItem()", result);
                 }
                 return null;
             }
@@ -622,10 +621,12 @@ namespace MyML.UWP.Services
                     status = status == MLProductStatus.mlpsActive ? "active" : status == MLProductStatus.mlpsPause ? "paused" : "closed"
                 });
                 var response = await _httpClient.PutAsync(url, new StringContent(jason));
+                var result = await response.Content.ReadAsStringAsync();
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
                     return true;
                 }
+                AppLogs.WriteWarning("MercadoLivreServices.GetProductStatus()", result);
                 return false;
             }
             catch (Exception ex)
@@ -651,10 +652,13 @@ namespace MyML.UWP.Services
                     deleted = true
                 });
                 var response = await _httpClient.PutAsync(url, new StringContent(jason));
+                var result = await response.Content.ReadAsStringAsync();
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
                     return true;
                 }
+
+                AppLogs.WriteWarning("MercadoLivreServices.RemoveProduct()", result);
                 return false;
             }
             catch (Exception ex)
@@ -683,6 +687,7 @@ namespace MyML.UWP.Services
                     listing_type_id = listTypeId
                 });
                 var response = await _httpClient.PostAsync(url, new StringContent(jason));
+                var result = await response.Content.ReadAsStringAsync();
                 if (response.StatusCode == System.Net.HttpStatusCode.Created)
                 {
                     return true;
@@ -691,6 +696,7 @@ namespace MyML.UWP.Services
                 {
                     //Tentar converter para MLErrorRequest
                 }
+                AppLogs.WriteWarning("MercadoLivreServices.RelistProduct()", result);
                 return false;
             }
             catch (Exception ex)
@@ -715,10 +721,12 @@ namespace MyML.UWP.Services
 
                 var jason = JsonConvert.SerializeObject(attributes);
                 var response = await _httpClient.PutAsync(url, new StringContent(jason));
+                var result = await response.Content.ReadAsStringAsync();
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
                     return true;
                 }
+                AppLogs.WriteWarning("MercadoLivreServices.ChangeProductAttributes()", result);
                 return false;
             }
             catch (Exception ex)

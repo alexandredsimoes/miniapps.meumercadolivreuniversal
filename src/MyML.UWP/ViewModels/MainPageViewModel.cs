@@ -43,7 +43,8 @@ namespace MyML.UWP.ViewModels
             RevokeAccess = new RelayCommand(RevokeAccessExecute);
 
             if (GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic)
-                IsAuthenticated = true;
+                IsAuthenticated = true;            
+
         }
 
         private async void RevokeAccessExecute()
@@ -63,6 +64,7 @@ namespace MyML.UWP.ViewModels
 
         public async override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
+            //await new MessageDialog("QUESTION_DETAIL = " + ApplicationData.Current.LocalSettings.Values["QUESTION_ID"]).ShowAsync();
             if (state.Any())
             {
                 state.Clear();

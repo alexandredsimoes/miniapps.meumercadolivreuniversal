@@ -1,2 +1,2 @@
-MainPackage=E:\_BACKUP PROJETOS\Git 01-04-2016\MyML.UWP\src\MyML.UWP\bin\x64\Release\MyML.UWP_1.1.98.0_x64.appx
-SymbolPackage=E:\_BACKUP PROJETOS\Git 01-04-2016\MyML.UWP\src\MyML.UWP\AppPackages\MyML.UWP_1.1.98.0_Test\MyML.UWP_1.1.98.0_x64.appxsym
+MainPackage=E:\_BACKUP PROJETOS\Git 01-04-2016\MyML.UWP\src\MyML.UWP\bin\x64\Release\MyML.UWP_1.1.101.0_x64.appx
+SymbolPackage=E:\_BACKUP PROJETOS\Git 01-04-2016\MyML.UWP\src\MyML.UWP\AppPackages\MyML.UWP_1.1.101.0_Test\MyML.UWP_1.1.101.0_x64.appxsym

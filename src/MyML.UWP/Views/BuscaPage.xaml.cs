@@ -34,7 +34,19 @@ namespace MyML.UWP.Views
 
             _viewModel = DataContext as BuscaPageViewModel;
             ProdutosListView.SelectionChanged += ProdutosListView_SelectionChanged;
+            BuscaTextBox.GotFocus += BuscaTextBox_GotFocus;
+            //BuscaTextBox.LostFocus += BuscaTextBox_LostFocus;
            
+        }
+
+        private void BuscaTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            Windows.UI.ViewManagement.InputPane.GetForCurrentView().TryHide();
+        }
+
+        private void BuscaTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            Windows.UI.ViewManagement.InputPane.GetForCurrentView().TryShow();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
