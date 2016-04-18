@@ -36,6 +36,10 @@ namespace MyML.UWP.Models.Mercadolivre
 
         [Ignore]
         public Item Item { get; set; }
+        public string nickname { get; set; }
+        public string buyer_experience { get; set; }
+        public DateTimeOffset? registration_date { get; set; }
+        public long? buyer_id { get; set; }
     }
 
     public class FiltersQuestion

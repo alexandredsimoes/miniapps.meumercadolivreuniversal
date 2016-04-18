@@ -25,6 +25,7 @@ namespace MyML.UWP.ViewModels
         private readonly IMercadoLivreService _mercadoLivreService;
         private readonly ResourceLoader _resourceLoader;
         private readonly IDataService _dataService;
+
         public PerguntasVendasPageViewModel(IMercadoLivreService mercadoLivreService, ResourceLoader resourceLoader,
             IDataService dataService)
         {
@@ -45,7 +46,7 @@ namespace MyML.UWP.ViewModels
                 var question = o as ProductQuestionContent;
                 if (question == null) return;
 
-                NavigationService.Navigate(typeof(PerguntasVendasDetalhesPage), question.id);
+                NavigationService.Navigate(typeof(PerguntasVendasDetalhesPage), $"{question.id};{question.buyer_id}");
             });
 
             Refresh = new RelayCommand(async () => await LoadQuestions());
@@ -72,30 +73,15 @@ namespace MyML.UWP.ViewModels
 
         private async void ProccessMessenger(MessengerDetails obj)
         {
-            string lastItem = null;
-            foreach (var item in Questions)
-            {
-                if (item.Produto.id == obj.SubId.ToString())
-                {
-                    long id = 0;
-                    if(long.TryParse(obj.Id.ToString(), out id))
-                    {
-                        await Task.Delay(2000); //Aguarda um pouco
-                        var itemToRemove = item.Perguntas.FirstOrDefault(c => c.id == id);
-                        if (itemToRemove != null)
-                            item.Perguntas.Remove(itemToRemove);
+            var id = long.Parse(obj.Id.ToString());
+            var q = Questions.FirstOrDefault();
 
-                        if (item.Perguntas.Count == 0)
-                            lastItem = item.Produto.id;
-                    } 
-                }
-            }
-            //if (lastItem != null)
-            //{
-            //    var item = Questions.FirstOrDefault(c => c.Produto.id == lastItem);
-            //    if (item != null)
-             //       Questions.Remove(item);
-            //}                
+            var q2 = q.FirstOrDefault(c => c.id == id);
+            if (q2 != null)
+            {
+                await Task.Delay(1000);
+                q.Remove(q2);
+            }               
         }
 
         private async Task LoadQuestions()
@@ -121,52 +107,57 @@ namespace MyML.UWP.ViewModels
                 foreach (var item in questions.questions)
                 {
                     //Tenta obter os detalhes da questao
-                    var questionDetail = await _mercadoLivreService.GetQuestionDetails(item.id.ToString(), new KeyValuePair<string, object>[] { });
+                    item.From.UserInfo = await _mercadoLivreService.GetUserInfo(item.From.id.ToString(), new KeyValuePair<string, string>[] { new KeyValuePair<string, string>("attributes", "nickname,status,registration_date,seller_experience,id") });                    
                     var productDetail = await _mercadoLivreService.GetItemDetails(item.item_id, new KeyValuePair<string, string>[] { new KeyValuePair<string, string>("attributes", "id,title,price,thumbnail") });
 
-                    if (questionDetail == null || productDetail == null)
+                    if (productDetail == null)
                     {
                         await new MessageDialog(_resourceLoader.GetString("PerguntasComprasPageMsgErrorLoadQuestionDetail"), _resourceLoader.GetString("ApplicationName")).ShowAsync();
                         break;
                     }
 
-                    //item.answer = questionDetail.answer;
-                    item.date_created = questionDetail.date_created;
-                    item.id = questionDetail.id;
-                    item.seller_id = questionDetail.seller_id;
-                    item.status = questionDetail.status;
-                    item.text = questionDetail.text;
+                    item.date_created = item.date_created;
+                    item.id = item.id;
+                    item.seller_id = item.seller_id;
+                    item.status = item.status;
+                    item.text = item.text;
                     item.ProductInfo = productDetail;
                 }
 
-                Questions = new ObservableCollection<QuestionGroup>(questions.questions
-                    .GroupBy(c => new
-                    {
-                        id = c.ProductInfo.id,
-                        title = c.ProductInfo.title,
-                        price = c.ProductInfo.price,
-                        thumbnail = c.ProductInfo.thumbnail,
-                        available_quantity = c.ProductInfo.available_quantity
-                    })
+                var query = from item in questions.questions
+                            group item by new
+                            {
+                                title = item.ProductInfo.title,
+                                price = item.ProductInfo.price,
+                                thumbnail = item.ProductInfo.thumbnail
+                            } into g
+                            select new { GroupName = new Item() { title = g.Key.title, price = g.Key.price, thumbnail = g.Key.thumbnail }, Items = g.ToList() };
 
-                    .Select(x => new QuestionGroup()
+
+                foreach (var g in query)
+                {
+                    QuestionGroup2 info = new QuestionGroup2();
+                    info.Key = g.GroupName;
+                    foreach (var item in g.Items)
                     {
-                        Produto = new Item() { id = x.Key.id, title = x.Key.title, price = x.Key.price, thumbnail = x.Key.thumbnail, available_quantity = x.Key.available_quantity },
-                        Perguntas = new ObservableCollection<ProductQuestionContent>(x.Select(q => new ProductQuestionContent()
+                        info.Add(new ProductQuestionContent()
                         {
-                            answer = q.answer,
-                            date_created = q.date_created,
-                            id = q.id,
-                            item_id = q.item_id,
-                            seller_id = q.seller_id,
-                            status = q.status,
-                            text = q.text
-                        }).ToList())
-                    })
-                    .ToList());
-
+                            text = item.text,
+                            item_id = item.item_id,
+                            status = item.status,
+                            answer = item.answer,
+                            id = item.id,
+                            seller_id = item.seller_id,
+                            date_created = item.date_created,
+                            nickname = item.From.UserInfo.nickname,
+                            buyer_experience = item.From.UserInfo.seller_experience,
+                            registration_date = item.From.UserInfo.registration_date,
+                            buyer_id = item.From.UserInfo.id
+                        });
+                    }
+                    Questions.Add(info);
+                }
                 RaisePropertyChanged(() => Questions);
-
             }
             finally
             {
@@ -182,9 +173,9 @@ namespace MyML.UWP.ViewModels
         }
 
 
-        private ObservableCollection<QuestionGroup> _Questions = new ObservableCollection<QuestionGroup>();
+        private ObservableCollection<QuestionGroup2> _Questions = new ObservableCollection<QuestionGroup2>();
 
-        public ObservableCollection<QuestionGroup> Questions
+        public ObservableCollection<QuestionGroup2> Questions
         {
             get { return _Questions; }
             set { Set(() => Questions, ref _Questions, value); }

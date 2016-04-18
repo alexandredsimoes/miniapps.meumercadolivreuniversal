@@ -128,9 +128,11 @@ namespace MyML.UWP.ViewModels
     public class AboutPartViewModel : ViewModelBase
     {
         private readonly ResourceLoader _resourceLoader;
+        private readonly IDataService _dataService;
         public AboutPartViewModel()
         {
             _resourceLoader = SimpleIoc.Default.GetInstance<ResourceLoader>();
+            _dataService = SimpleIoc.Default.GetInstance<IDataService>();
 
             QualifyApp = new RelayCommand(async () =>
             {
@@ -147,7 +149,7 @@ namespace MyML.UWP.ViewModels
                 await EmailManager.ShowComposeNewEmailAsync(message);
             });           
 
-            SendLog = new RelayCommand(SendLogExecute);
+            SendLog = new RelayCommand<string>(SendLogExecute);
             RemoveAds = new RelayCommand(RemoverAdsExecute);
         }
 
@@ -159,7 +161,7 @@ namespace MyML.UWP.ViewModels
             return Task.CompletedTask;
         }
 
-        private async void SendLogExecute()
+        private async void SendLogExecute(string token)
         {
             var logExists = true;
             try
@@ -180,9 +182,13 @@ namespace MyML.UWP.ViewModels
             var dlg = new MessageDialog(_resourceLoader.GetString("MainPageViewModelMsgEmailLog"), _resourceLoader.GetString("ApplicationTitle"));
             dlg.Commands.Add(new UICommand(_resourceLoader.GetString("Yes"), async (o) =>
             {
+                var body = $"Segue em anexo meu log de erros.{Environment.NewLine}" +
+                $"Token de acesso: {_dataService.GetMLConfig(Consts.ML_CONFIG_KEY_ACCESS_TOKEN)}{Environment.NewLine}" +
+                $"Token de Atualizacao: {_dataService.GetMLConfig(Consts.ML_CONFIG_KEY_REFRESH_TOKEN)}{Environment.NewLine}" +
+                $"Data expiração do token: {_dataService.GetMLConfig(Consts.ML_CONFIG_KEY_EXPIRES)}";
                 var email = new Windows.ApplicationModel.Email.EmailMessage()
                 {
-                    Body = "Segue em anexo meu log de erro.",
+                    Body = (String.IsNullOrWhiteSpace(token) ? "Segue em anexo meu log de erro." : body),
                     Subject = "Meu MercadoLivre Universal - Log de erro",
                 };
 
@@ -266,7 +272,7 @@ namespace MyML.UWP.ViewModels
         public Uri RateMe => new Uri("http://bing.com");
         public RelayCommand QualifyApp { get; private set; }
         public RelayCommand SendEmail { get; private set; }
-        public RelayCommand SendLog { get; private set; }
+        public RelayCommand<string> SendLog { get; private set; }
         public RelayCommand RemoveAds { get; private set; }        
     }
 }

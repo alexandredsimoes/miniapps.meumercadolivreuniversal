@@ -169,7 +169,7 @@ namespace MyML.UWP.Models.Mercadolivre
         public List<int> installments { get; set; }
     }
 
-    public class Item
+    public class Item //: IComparable
     {
         public Item()
         {
@@ -220,10 +220,20 @@ namespace MyML.UWP.Models.Mercadolivre
         public bool IsFavorite { get; set; }
         public string status { get; set; }
 
-        public int CompareTo(Item other)
+        public int CompareTo(object obj)
         {
-            return this.title.CompareTo(other.title);
+            return ((Item)obj).title.CompareTo(this.title);
         }
+
+        //public int CompareTo(Item other)
+        //{
+        //    return this.id.CompareTo(other.id);
+        //}
+
+        //public int CompareTo(object obj)
+        //{
+        //    return ((IComparable)id).CompareTo(obj);
+        //}
     }
 
     public class Sort

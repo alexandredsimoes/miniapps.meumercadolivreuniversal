@@ -47,11 +47,16 @@
                         <MenuFlyout>
                             <MenuFlyoutItem Command="{Binding CopyTrackingCode}" CommandParameter="TrackingCode" Text="Copiar código de rastreio" />
                             <MenuFlyoutItem Command="{Binding CopyTrackingCode}" CommandParameter="Email" Text="Copiar e-mail do vendedor" />
+                            <MenuFlyoutSubItem Text="Outras opções">
+                                <MenuFlyoutSubItem.Items>
+                                    <MenuFlyoutItem Text="Rastrear mercadoria" Command="{Binding TrackOrder}"/>
+                                </MenuFlyoutSubItem.Items>
+                            </MenuFlyoutSubItem>
                         </MenuFlyout>
                     </AppBarButton.Flyout>
                 </AppBarButton>
 
-            </CommandBar.PrimaryCommands> 
+            </CommandBar.PrimaryCommands>
 
         </CommandBar>
     </Page.BottomAppBar>
@@ -62,13 +67,13 @@
                 <!--Exibe ou oculta alguns controls de acordo com o SHIPPING da compra -->
                 <VisualState x:Name="VisualsShipping">
                     <VisualState.Setters>
-                        <Setter Target="ShipDateTextBlock.Visibility" Value="Collapsed"/>
-                        <Setter Target="ShipMethodTextBlock.Visibility" Value="Collapsed"/>
-                        <Setter Target="ShipTrackNumberTextBlock.Visibility" Value="Collapsed"/>
+                        <Setter Target="ShipDateTextBlock.Visibility" Value="Visible"/>
+                        <Setter Target="ShipMethodTextBlock.Visibility" Value="Visible"/>
+                        <Setter Target="ShipTrackNumberTextBlock.Visibility" Value="Visible"/>
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
                         <!--<WindowsStateTriggers:NotEqualStateTrigger NotEqualTo="shipped" Value="{Binding OrderInfo.shipping.status}" />-->
-                        <WindowsStateTriggers:NotEqualStateTrigger NotEqualTo="delivered" Value="{Binding OrderInfo.shipping.status}" />
+                        <WindowsStateTriggers:RegexStateTrigger Expression="^shipped|delivered$" Value="{Binding OrderInfo.shipping.status}"  Options="IgnoreCase" />
                     </VisualState.StateTriggers>
                 </VisualState>
 
@@ -319,18 +324,73 @@
                             <TextBlock x:Name="ShipDateTextBlock" TextWrapping="Wrap" Text="{Binding OrderInfo.shipping.status_history.date_delivered}"  Style="{StaticResource BodyTextBlockStyle}"/>
                             <TextBlock x:Name="ShipMethodTextBlock" TextWrapping="Wrap"  Style="{StaticResource BodyTextBlockStyle}" >
 								<Run Text="Forma de envio" />
-								<Run Text=" ( " />
+								<Run Text="(" />
 								<Run Text="{Binding OrderInfo.shipping.tracking_method}"/>
-								<Run Text=" )" />
-
+								<Run Text=")" />
                             </TextBlock>
 
                             <TextBlock x:Name="ShipTrackNumberTextBlock" TextWrapping="Wrap"  Style="{StaticResource BodyTextBlockStyle}" >
 								<Run Text="Código" />
-								<Run Text=" ( " />
+								<Run Text="(" />
 								<Run Text="{Binding OrderInfo.shipping.tracking_number}"/>
-								<Run Text=" )" />
+								<Run Text=")" />
                             </TextBlock>
+
+                            <!--<Grid>
+                                <WebView MyBehaviors:WebBrowserHelper.Html="{Binding TrackingText}" Height="500" Margin="10"  />
+                            </Grid>-->
+
+                            <!--<TextBlock Text="{Binding TrackingText}"/>-->
+                            <ListView ItemsSource="{Binding TrackingList}" Margin="0,10,0,10">
+                                <ListView.Resources>
+                                    <Style x:Key="ListViewItemStyle1" TargetType="ListViewItem">
+                                        <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
+                                        <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="Margin" Value="0"/>
+                                        <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
+                                        <Setter Property="TabNavigation" Value="Local"/>
+                                        <Setter Property="IsHoldingEnabled" Value="True"/>
+                                        <Setter Property="Padding" Value="12,0,12,0"/>
+                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                        <Setter Property="MinWidth" Value="{ThemeResource ListViewItemMinWidth}"/>
+                                        <Setter Property="MinHeight" Value="{ThemeResource ListViewItemMinHeight}"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="ListViewItem">
+                                                    <ListViewItemPresenter CheckBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}" ContentMargin="{TemplateBinding Padding}" CheckMode="Inline" ContentTransitions="{TemplateBinding ContentTransitions}" CheckBoxBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}" DragForeground="{ThemeResource ListViewItemDragForegroundThemeBrush}" DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}" DragBackground="{ThemeResource ListViewItemDragBackgroundThemeBrush}" DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}" FocusBorderBrush="{ThemeResource SystemControlForegroundAltHighBrush}" FocusSecondaryBorderBrush="{ThemeResource SystemControlForegroundBaseHighBrush}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" PointerOverForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}" PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}" ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}" SelectionCheckMarkVisualEnabled="True" SelectedForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </ListView.Resources>
+                                <ListView.Background>
+                                    <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
+                                </ListView.Background>
+                                <ListView.ItemContainerStyle>
+                                    <StaticResource ResourceKey="ListViewItemStyle1"/>
+                                </ListView.ItemContainerStyle>
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid BorderThickness="0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="135" />
+                                                <ColumnDefinition Width="1*"/>
+                                                <ColumnDefinition Width="2*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Border BorderThickness="0,0,0,1" Grid.ColumnSpan="3">
+                                                <Border.BorderBrush>
+                                                    <SolidColorBrush Color="{ThemeResource SystemChromeHighColor}"/>
+                                                </Border.BorderBrush>
+                                            </Border>
+                                            <TextBlock Grid.ColumnSpan="{Binding ColSpan}" HorizontalAlignment="{Binding Alignment}" Grid.Column="0" Text="{Binding Col1}"/>
+                                            <TextBlock Grid.Column="1" Text="{Binding Col2}" TextWrapping="Wrap" />
+                                            <TextBlock Grid.Column="2" Text="{Binding Col3}" TextWrapping="Wrap"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
 
                             <TextBlock x:Name="ShipAddressTextBlock" TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}"  Text="{Binding OrderInfo.shipping.receiver_address.address_line}" />
 
@@ -340,10 +400,7 @@
 								<Run Text="-"/>
 								<Run Text="{Binding OrderInfo.shipping.receiver_address.state.name}"/>
                             </TextBlock>
-
-
                         </StackPanel>
-
                     </Grid>
                 </Border>
 

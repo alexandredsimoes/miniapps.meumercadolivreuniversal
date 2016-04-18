@@ -13,4 +13,11 @@ namespace MyML.UWP.Models
         public Item Produto { get; set; }
         public ObservableCollection<ProductQuestionContent> Perguntas { get; set; }
     }
+
+    public class QuestionGroup2 : ObservableCollection<ProductQuestionContent>
+    {
+        public Item Key { get; set; }
+        //public Item Produto { get; set; }
+        //public ObservableCollection<ProductQuestionContent> Perguntas { get; set; }
+    }
 }

@@ -102,6 +102,7 @@ namespace MyML.Web.Admin.Controllers
                                         {
                                             await SendNotificationAsyncQuestion(result.seller_id.ToString(), result.id.ToString(), productInfo.Title, productInfo.Id,
                                                 result.text);
+
                                             if (ConfigurationManager.AppSettings["enviarEmailNotificacao"] == "1")
                                             {
                                                 MailMessage mail = new MailMessage();
@@ -179,6 +180,12 @@ namespace MyML.Web.Admin.Controllers
 
         private async Task SendNotificationAsyncQuestion(string userId, string id, string title, long? productId, string message)
         {
+            if(String.IsNullOrWhiteSpace(userId) || string.IsNullOrWhiteSpace(id) 
+                || string.IsNullOrWhiteSpace(title) || productId == null 
+                || string.IsNullOrWhiteSpace(message))
+            {
+                return;
+            }
             //Debug.WriteLine("Processando notificacao " + userId + " msg " + message);
             //if (userId != "210358765" && userId != "210358789") return;
 

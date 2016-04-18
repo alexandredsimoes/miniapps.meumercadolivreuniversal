@@ -95,7 +95,9 @@ namespace MyML.UWP.ViewModels
                         _dataService.SaveConfig(Consts.ML_CONFIG_KEY_REFRESH_TOKEN, login.Refresh_Token);
                         _dataService.SaveConfig(Consts.ML_CONFIG_KEY_EXPIRES, DateTime.Now.AddSeconds(login.Expires_In ?? 0).ToString());
                         _dataService.SaveConfig(Consts.ML_CONFIG_KEY_ACCESS_TOKEN, login.Access_Token);
-                        _dataService.SaveConfig(Consts.ML_CONFIG_KEY_LOGIN_DATE, DateTime.Now.ToString());                       
+                        _dataService.SaveConfig(Consts.ML_CONFIG_KEY_LOGIN_DATE, DateTime.Now.ToString());
+
+                        await NotificationHelper.SubscribeNotification();                      
                     }
                     else
                     {

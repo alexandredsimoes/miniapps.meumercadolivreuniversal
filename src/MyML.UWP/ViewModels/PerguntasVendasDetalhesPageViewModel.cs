@@ -4,6 +4,7 @@ using MyML.UWP.Aggregattor;
 using MyML.UWP.Models.Mercadolivre;
 using MyML.UWP.Services;
 using MyML.UWP.Views;
+using MyML.UWP.Views.Secure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +38,10 @@ namespace MyML.UWP.ViewModels
             });
 
             SendAnswer = new RelayCommand(SendAnswerExecute);
+            OpenUserInfo = new RelayCommand<long?>((o) =>
+            {
+                NavigationService.Navigate(typeof(VendedorInfoPage), o);
+            });
 
             //SelectQuestion = new RelayCommand<object>((o) =>
             //{
@@ -51,7 +56,7 @@ namespace MyML.UWP.ViewModels
 
         private async void SendAnswerExecute()
         {
-           if(string.IsNullOrWhiteSpace(AnswerText))
+            if (string.IsNullOrWhiteSpace(AnswerText))
             {
                 await new MessageDialog(_resourceLoader.GetString("PerguntasVendasDetalhesPageMsgEmptyAnswer"),
                     _resourceLoader.GetString("ApplicationTitle")).ShowAsync();
@@ -59,12 +64,12 @@ namespace MyML.UWP.ViewModels
             }
 
             if (await _mercadoLivreService.AnswerQuestion(QuestionId, AnswerText))
-            {                
+            {
                 Messenger.Default.Send<MessengerDetails>(new MessengerDetails()
                 {
-                   Id = QuestionId,
-                   SubId = ProductId,
-                   Source = SourceDetail.sdSellAnswer
+                    Id = QuestionId,
+                    SubId = ProductId,
+                    Source = SourceDetail.sdSellAnswer
                 });
 
                 if (NavigationService.CanGoBack)
@@ -89,7 +94,8 @@ namespace MyML.UWP.ViewModels
 
         private async Task LoadQuestions(string questionId)
         {
-            QuestionId = questionId;
+            var id = questionId.Split(new[] { ';' });
+            QuestionId = id[0];
             if (!_dataService.IsAuthenticated())
             {
                 await new MessageDialog(_resourceLoader.GetString("MsgNotAuthenticated"),
@@ -98,13 +104,13 @@ namespace MyML.UWP.ViewModels
                 NavigationService.Navigate(typeof(LoginPage), null, new Windows.UI.Xaml.Media.Animation.ContinuumNavigationTransitionInfo());
                 return;
             }
-                                  
+
             try
             {
                 Views.Shell.SetBusy(true, "Carregando informações");
                 var question = await _mercadoLivreService.GetQuestionDetails(questionId);
 
-                if(question != null)
+                if (question != null)
                 {
                     ProductId = question.item_id;
                     question.Item = await _mercadoLivreService.GetItemDetails(question.item_id,
@@ -113,57 +119,13 @@ namespace MyML.UWP.ViewModels
                             new KeyValuePair<string, string>("attributes","title,thumbnail,price,available_quantity")
                         });
 
+                    var userInfo = await _mercadoLivreService.GetUserInfo(id[1],
+                        new KeyValuePair<string, string>[] { new KeyValuePair<string, string>("attributes", "nickname,id") });
+                    question.nickname = userInfo?.nickname;
+                    question.buyer_id = userInfo?.id;
+
                     QuestionInfo = question;
                 }
-                //foreach (var item in questions.questions)
-                //{
-                //    //Tenta obter os detalhes da questao
-                //    var questionDetail = await _mercadoLivreService.GetQuestionDetails(item.id.ToString(), new KeyValuePair<string, object>[] { });
-                //    var productDetail = await _mercadoLivreService.GetItemDetails(item.item_id, new KeyValuePair<string, string>[] { new KeyValuePair<string, string>("attributes", "id,title,price,thumbnail") });
-
-                //    if (questionDetail == null || productDetail == null)
-                //    {
-                //        await new MessageDialog(_resourceLoader.GetString("PerguntasComprasPageMsgErrorLoadQuestionDetail"), _resourceLoader.GetString("ApplicationName")).ShowAsync();
-                //        break;
-                //    }
-
-                //    //item.answer = questionDetail.answer;
-                //    item.date_created = questionDetail.date_created;
-                //    item.id = questionDetail.id;
-                //    item.seller_id = questionDetail.seller_id;
-                //    item.status = questionDetail.status;
-                //    item.text = questionDetail.text;
-                //    item.ProductInfo = productDetail;
-                //}
-
-                //Questions = questions.questions
-                //    .GroupBy(c => new
-                //    {
-                //        id = c.ProductInfo.id,
-                //        title = c.ProductInfo.title,
-                //        price = c.ProductInfo.price,
-                //        thumbnail = c.ProductInfo.thumbnail,
-                //        available_quantity = c.ProductInfo.available_quantity
-                //    })
-
-                //    .Select(x => new QuestionGroup()
-                //    {
-                //        Produto = new Item() { id = x.Key.id, title = x.Key.title, price = x.Key.price, thumbnail = x.Key.thumbnail, available_quantity = x.Key.available_quantity },
-                //        Perguntas = x.Select(q => new ProductQuestionContent()
-                //        {
-                //            answer = q.answer,
-                //            date_created = q.date_created,
-                //            id = q.id,
-                //            item_id = q.item_id,
-                //            seller_id = q.seller_id,
-                //            status = q.status,
-                //            text = q.text
-                //        }).ToList()
-                //    })
-                //    .ToList();
-
-                //RaisePropertyChanged(() => Questions);
-
             }
             finally
             {
@@ -201,7 +163,8 @@ namespace MyML.UWP.ViewModels
 
         public RelayCommand SendAnswer { get; set; }
         public RelayCommand<object> SelectProduct { get; set; }
-        
+        public RelayCommand<long?> OpenUserInfo { get; set; }
+
 
     }
 }

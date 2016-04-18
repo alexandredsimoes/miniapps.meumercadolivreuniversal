@@ -7,6 +7,8 @@ using MyML.UWP.Views;
 using MyML.UWP.Views.Secure;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -17,6 +19,7 @@ using Windows.ApplicationModel.DataTransfer;
 using Windows.ApplicationModel.Email;
 using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
+using Windows.System;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Navigation;
 
@@ -34,15 +37,102 @@ namespace MyML.UWP.ViewModels
             _resourceLoader = resourceLoader;
             _dataService = dataService;
 
+            TrackOrder = new RelayCommand(async () =>
+            {
+
+                var client = SimpleIoc.Default.GetInstance<HttpClient>();
+                try
+                {
+                    string url = $"http://websro.correios.com.br/sro_bin/txect01$.QueryList?P_LINGUA=001&P_TIPO=001&P_COD_UNI={OrderInfo.shipping.tracking_number}";
+                    var response = await client.GetAsync(url);
+                    if(response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        var content = await response.Content.ReadAsStringAsync();                        
+                        
+                        HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+                        doc.LoadHtml(content);
+                        var nodes = doc.DocumentNode.ChildNodes.ToList();
+                        var rows = doc.DocumentNode.ChildNodes["html"].Descendants("tr").ToList();
+
+                        if(rows == null  || rows.Count == 0)
+                        {
+                            await new MessageDialog("Não há informações sobre rastreamento desse objeto. Tente novamente mais tarde",
+                                _resourceLoader.GetString("ApplicationTitle")).ShowAsync();
+                            return;
+                        }
+
+
+                        //TrackingText = $"<html><body>{htmlTable}</body></html>";
+                        //return;
+                        var linha = 1;
+                        //StringBuilder saida = new StringBuilder();
+                        TrackingList = new ObservableCollection<TrackingStatus>();
+                        foreach (var row in rows)
+                        {
+                            if(linha > 1)
+                            {
+                                var textos = row.Descendants("#text").ToList();
+
+                                var trackingList = new TrackingStatus();
+                                for (int i = 0; i < textos.Count; i++)
+                                {
+                                    if (i == 0)
+                                    {
+                                        trackingList.Col1 = textos[i].InnerHtml;
+
+                                        var td = textos[0].ParentNode;
+                                        if (td?.OuterHtml.Contains("colspan=\"2\"") ?? false)
+                                        {
+                                            trackingList.ColSpan = 3;
+                                            trackingList.Alignment = "Center";
+                                        }
+                                        else
+                                        {
+                                            trackingList.ColSpan = 1;
+                                            trackingList.Alignment = "Left";
+                                        }
+                                    }
+                                    if (i == 1) trackingList.Col2 = textos[i].InnerHtml;
+                                    if (i == 2) trackingList.Col3 = textos[i].InnerHtml;
+                                    
+                                    //if (textos.Count == 1)
+                                      //  TrackingList.Add(new TrackingStatus() { });
+                                }
+                                TrackingList.Add(trackingList);
+                                //foreach (var item in textos)
+                                //{
+                                //    saida.Append($"{item.InnerHtml}\t");
+                                //    if (textos.Count == 1)
+                                //        saida.AppendLine();
+                                //}
+                                //saida.AppendLine();
+                                // Debug.WriteLine(row.InnerHtml);
+                                //var s = Windows.Data.Html.HtmlUtilities.ConvertToText(row.InnerHtml);
+                                //Debug.WriteLine(s);
+                            }
+                            linha++;
+                        }
+                        //Debug.WriteLine(saida.ToString());
+                        //TrackingText = saida.ToString();
+                        RaisePropertyChanged(() => TrackingList);
+                    }
+                    
+                    var uri = new Uri(url);
+                    //await Launcher.LaunchUriAsync(uri);
+                }
+                finally
+                {
+
+                }               
+            });
             BuyerAction = new RelayCommand<string>(BuyerActionExecute);
             QualifyProduct = new RelayCommand(() =>
             {
                 NavigationService.Navigate(typeof(CompraQualificarPage), OrderInfo.id);
             });
+            
             CopyTrackingCode = new RelayCommand<string>( async(o) =>
-            {
-               
-
+            {              
                 var dataPackage = new DataPackage();
                 dataPackage.RequestedOperation = DataPackageOperation.Copy;
                 if (o == "TrackingCode")
@@ -74,6 +164,7 @@ namespace MyML.UWP.ViewModels
             {
                 if(parameter != null)
                 {
+                    if (TrackingList != null) TrackingList.Clear();
                     OrderId = parameter.ToString();
                     await LoadOrderInfo(OrderId);
                 }                
@@ -232,11 +323,35 @@ namespace MyML.UWP.ViewModels
             get { return _HasPurchaseFeedback; }
             set { Set(() => HasPurchaseFeedback, ref _HasPurchaseFeedback, value); }
         }
+        private string _TrackingText = "";
+        public string TrackingText
+        {
+            get { return _TrackingText; }
+            set { Set(() => TrackingText, ref _TrackingText, value); }
+        }
+
+        private ObservableCollection<TrackingStatus>  _TrackingList;
+        public ObservableCollection<TrackingStatus> TrackingList
+        {
+            get { return _TrackingList; }
+            set { Set(() => TrackingList, ref _TrackingList, value); }
+        }
+
 
 
         public RelayCommand<string> BuyerAction { get; private set; }
         public RelayCommand QualifyProduct { get; private set; }
         public RelayCommand<string> CopyTrackingCode { get; private set; }
+        public RelayCommand TrackOrder { get; set; }
 
+    }
+
+    public struct TrackingStatus
+    {
+        public string Col1 { get; set; }
+        public string Col2 { get; set; }
+        public string Col3 { get; set; }
+        public int ColSpan { get; set; }
+        public string Alignment { get; set; }
     }
 }

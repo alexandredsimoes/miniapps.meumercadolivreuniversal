@@ -17,6 +17,7 @@ using Windows.UI.Notifications;
 using Microsoft.ApplicationInsights;
 using Windows.UI.Popups;
 using Windows.ApplicationModel.Resources;
+using Windows.ApplicationModel;
 
 namespace MyML.UWP
 {
@@ -52,16 +53,22 @@ namespace MyML.UWP
 
         private async void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            e.Handled = true;
-            var resourceLoader = ResourceLoader.GetForCurrentView();
-            var telemetryClient = new TelemetryClient();
-            telemetryClient.TrackException(e.Exception);
+            try
+            {
+                e.Handled = true;
+                var resourceLoader = ResourceLoader.GetForCurrentView();
+                var telemetryClient = new TelemetryClient();
+                telemetryClient.TrackException(e.Exception);
 
-            var dialog = new MessageDialog("Houve um erro inesperado", resourceLoader.GetString("ApplicationTitle"));
-            await dialog.ShowAsync();
+                if (e.Exception != null)
+                    AppLogs.WriteError("App_UnhandledException", e.Exception);
 
-            if (e.Exception != null)
-                AppLogs.WriteError("App_UnhandledException", e.Exception);
+                var dialog = new MessageDialog("Houve um erro inesperado", resourceLoader.GetString("ApplicationTitle"));
+                await dialog.ShowAsync();
+            }
+            catch { }
+            
+           
             /*
 
             if (e != null)
@@ -120,6 +127,7 @@ namespace MyML.UWP
         public override async Task OnInitializeAsync(IActivatedEventArgs args)
         {
 
+
             //Armazena a quantidade de execuções do aplicativo
             if (ApplicationData.Current.LocalSettings.Values.ContainsKey(Consts.CONFIG_KEY_EXECUCOES))
             {
@@ -169,7 +177,31 @@ namespace MyML.UWP
         public override async Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)
         {
             if (startKind == StartKind.Launch)
+            {
                 await RegisterBackgroundTask();
+
+                try
+                {
+                    // Install the main VCD. 
+                    StorageFile vcdStorageFile =
+                     await Package.Current.InstalledLocation.GetFileAsync(
+                       @"MeuMercadoLivreUniversalCommands.xml");
+
+                    await Windows.ApplicationModel.VoiceCommands.VoiceCommandDefinitionManager.
+                     InstallCommandDefinitionsFromStorageFileAsync(vcdStorageFile);
+
+                    // Update phrase list.
+                    //ViewModel.ViewModelLocator locator = App.Current.Resources["ViewModelLocator"] as ViewModel.ViewModelLocator;
+                    //if (locator != null)
+                    //{
+                      //  await locator.TripViewModel.UpdateDestinationPhraseList();
+                    //}
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("Installing Voice Commands Failed: " + ex.ToString());
+                }
+            }
 
             if(args.Kind == ActivationKind.ToastNotification)
             {
@@ -188,6 +220,16 @@ namespace MyML.UWP
                     if (toastArgs.Argument.Contains("openQuestion"))
                         NavigationService.Navigate(typeof(Views.Secure.PerguntasVendasPage));
                 }
+            }
+            else if(args.Kind == ActivationKind.VoiceCommand)
+            {
+                // Event args can represent many different activation types. 
+                // Cast it so we can get the parameters we care about out.
+                var commandArgs = args as VoiceCommandActivatedEventArgs;
+
+                Windows.Media.SpeechRecognition.SpeechRecognitionResult speechRecognitionResult = commandArgs.Result;
+
+                NavigationService.Navigate(typeof(Views.BuscaPage));
             }
             else
             {

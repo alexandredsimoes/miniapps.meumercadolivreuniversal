@@ -43,8 +43,6 @@
                             VerticalAlignment="{TemplateBinding VerticalAlignment}"
                             Background="{TemplateBinding Background}">
                             <Grid.Resources>
-
-
                                 <Style x:Key="BaseContentControlStyle" TargetType="ContentControl">
                                     <Setter Property="FontFamily" Value="Segoe UI" />
                                     <Setter Property="FontWeight" Value="SemiBold" />
