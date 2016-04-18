@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<VoiceCommands xmlns="http://schemas.microsoft.com/voicecommands/1.2">
+  <CommandSet xml:lang="pt-br" Name="MeuMercadoLivreUniversalCommandsSet_ptbr">
+    <AppName>MercadoLivre</AppName>
+    <Example>Procurar Xbox One</Example>  
+    
+    <!--<Command Name="buscarProduto">
+      <Example>Buscar por Lumia 640</Example>
+      <ListenFor RequireAppName="ExplicitlySpecified">{builtin:AppName} procurar por {termo}</ListenFor>
+      --><!--<ListenFor RequireAppName="ExplicitlySpecified"> show [my] {builtin:AppName} trip to {destination} </ListenFor>--><!--
+      <Feedback>Opa, procurando por {termo}...  </Feedback>
+      <Navigate />
+    </Command>-->
+    <Command Name="PlaceSearch">
+      <Example>Procurar por xbox one</Example>
+      <ListenFor RequireAppName="ExplicitlySpecified">{builtin:AppName} [procurar] {dictatedSearchTerms}</ListenFor>      
+      <ListenFor RequireAppName="ExplicitlySpecified">{builtin:AppName} [pesquisar] {dictatedSearchTerms}</ListenFor>      
+      <Feedback>Pesquisando por {dictatedSearchTerms}</Feedback>
+      <Navigate />
+    </Command>
+
+    <!--<Command Name="whenIsTripToDestination">
+      <Example> When is my trip to Las Vegas?</Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase"> when is [my] trip to {destination}</ListenFor>
+      <ListenFor RequireAppName="ExplicitlySpecified"> when is [my] {builtin:AppName} trip to {destination} </ListenFor>
+      <Feedback> Looking for trip to {destination}</Feedback>
+      <VoiceCommandService Target="AdventureWorksVoiceCommandService"/>
+    </Command>
+
+    <Command Name="cancelTripToDestination">
+      <Example> Cancel my trip to Las Vegas </Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase"> cancel [my] trip to {destination}</ListenFor>
+      <ListenFor RequireAppName="ExplicitlySpecified"> cancel [my] {builtin:AppName} trip to {destination} </ListenFor>
+      <Feedback> Cancelling trip to {destination}</Feedback>
+      <VoiceCommandService Target="AdventureWorksVoiceCommandService"/>
+    </Command>
+    -->
+    <!--<PhraseTopic Label="termo" Scenario="Search">
+      <Subject>Person Names</Subject>
+    </PhraseTopic>-->
+    <!--<PhraseList Label="termo">
+      <Item>xbox</Item>      
+      <Item>lumia</Item>      
+      <Item>samsung</Item>    
+    </PhraseList>-->
+    <PhraseTopic Label="dictatedSearchTerms" Scenario="Commands">
+    </PhraseTopic>
+
+  </CommandSet>
+</VoiceCommands>
