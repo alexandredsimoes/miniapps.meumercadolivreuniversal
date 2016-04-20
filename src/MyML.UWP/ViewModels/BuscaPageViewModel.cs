@@ -60,7 +60,7 @@ namespace MyML.UWP.ViewModels
             BuscaExecute(new[] { ResultQuery + "&" + obj.Result, "search" });
         }
 
-        public override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
+        public async override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             //if (state.ContainsKey("Searchterm"))
             //    Searchterm = (string)state["Searchterm"];
@@ -69,11 +69,12 @@ namespace MyML.UWP.ViewModels
             //    ScrollPosition = (int)state["SCROLL_POSITION"];
             //}
 
+            await new Windows.UI.Popups.MessageDialog(parameter.ToString(), "param").ShowAsync();
             if (mode == NavigationMode.Back)
             {
                 //Items.GetEnumerator().
             }
-            return Task.CompletedTask;
+            //return Task.CompletedTask;
         }
 
         public override Task OnNavigatingFromAsync(NavigatingEventArgs args)

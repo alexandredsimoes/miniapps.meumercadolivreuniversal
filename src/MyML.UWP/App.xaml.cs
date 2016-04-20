@@ -229,7 +229,27 @@ namespace MyML.UWP
 
                 Windows.Media.SpeechRecognition.SpeechRecognitionResult speechRecognitionResult = commandArgs.Result;
 
-                NavigationService.Navigate(typeof(Views.BuscaPage));
+                // Get the name of the voice command and the text spoken. See AdventureWorksCommands.xml for
+                // the <Command> tags this can be filled with.
+                string voiceCommandName = speechRecognitionResult.RulePath[0];
+                string textSpoken = speechRecognitionResult.Text;
+
+                // The commandMode is either "voice" or "text", and it indictes how the voice command
+                // was entered by the user.
+                // Apps should respect "text" mode by providing feedback in silent form.
+                //string commandMode = this.SemanticInterpretation("commandMode", speechRecognitionResult);
+
+                
+                //foreach (var item in speechRecognitionResult.SemanticInterpretation.Properties)
+                //{
+                //    items += $"{item.Key}={item.Value}";
+                //}
+                
+                if(speechRecognitionResult != null)
+                {
+                    Debug.WriteLine("FALOW => " + speechRecognitionResult.SemanticInterpretation.Properties);
+                }
+                NavigationService.Navigate(typeof(Views.BuscaPage), voiceCommandName + "-"+  textSpoken, new Windows.UI.Xaml.Media.Animation.SlideNavigationTransitionInfo());
             }
             else
             {

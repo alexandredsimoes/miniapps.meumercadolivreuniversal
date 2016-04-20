@@ -1,0 +1,9 @@
+﻿{
+  "$schema": "http://schemastore.org/schemas/json/webjob-publish-settings.json",
+  "webJobName": "MyML-BackendServices-Jobs",
+  "startTime": "2016-04-20T15:00:00-03:00",
+  "endTime": null,
+  "jobRecurrenceFrequency": "Minute",
+  "interval": 10,
+  "runMode": "Scheduled"
+}

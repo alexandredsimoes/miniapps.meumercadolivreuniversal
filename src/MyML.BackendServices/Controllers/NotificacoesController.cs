@@ -1,4 +1,8 @@
-﻿using Microsoft.Azure.NotificationHubs;
+﻿using Microsoft.Azure;
+using Microsoft.Azure.NotificationHubs;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Table;
+using MyML.BackendServices;
 using MyML.BackendServices.Models;
 using Newtonsoft.Json;
 using System;
@@ -19,7 +23,7 @@ namespace MyML.Web.Admin.Controllers
     public class NotificacoesController : ApiController
     {
         private string ML_QUESTION_DETAIL_URL = "https://api.mercadolibre.com/questions/{0}?access_token={1}";
-        public const string ML_MY_ITEM_DETAIL = "https://api.mercadolibre.com/items/{0}?attributes=title";
+        public const string ML_MY_ITEM_DETAIL = "https://api.mercadolibre.com/items/{0}?attributes=title,id";
         private string ML_ACCESS_TOKEN = "";
         private string ML_USER_ID = "";
         private string ML_REFRESH_TOKEN_URL = "https://api.mercadolibre.com/oauth/token?grant_type=refresh_token&client_id={0}&client_secret={1}&refresh_token={2}";
@@ -28,6 +32,8 @@ namespace MyML.Web.Admin.Controllers
         private string ML_CLIENT_ID = "8765232316929095";
         private string NOTIFICATION_HUB = "";
         private string NOTIFICATION_CONNECTION_STRING = "";
+        MailMessage _mail;
+        SmtpClient _smtpClient;
 
         HttpClient _client;
         DataService _dataService;
@@ -44,6 +50,8 @@ namespace MyML.Web.Admin.Controllers
             ML_REFRESH_TOKEN_URL = string.Format(ML_REFRESH_TOKEN_URL,
                 ML_CLIENT_ID, ML_API_KEY, ML_REFRESH_TOKEN);
 
+            _mail = new MailMessage();
+            _smtpClient = new SmtpClient();
             _client = new HttpClient();
             _dataService = new DataService();
         }
@@ -87,7 +95,7 @@ namespace MyML.Web.Admin.Controllers
 
                                 url = string.Format(ML_MY_ITEM_DETAIL, result.item_id);
                                 response = await _client.GetAsync(url, HttpCompletionOption.ResponseContentRead);
-                                if (response.StatusCode == HttpStatusCode.OK)
+                                if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Accepted)
                                 {
                                     var productInfo = await response.Content.ReadAsAsync<Item>();
                                     if (productInfo != null)
@@ -100,32 +108,63 @@ namespace MyML.Web.Admin.Controllers
                                         }
                                         else
                                         {
-                                            await SendNotificationAsyncQuestion(result.seller_id.ToString(), result.id.ToString(), productInfo.Title, productInfo.Id,
+                                            //var toastXML = new StringBuilder();
+                                            //toastXML.AppendLine($"<toast launch=\"action=openQuestion&amp;questionId={id}&amp;itemId={productInfo.Id}\">");
+                                            //toastXML.AppendLine("<visual>");
+                                            //toastXML.AppendLine("<binding template=\"ToastGeneric\">");
+                                            //toastXML.AppendLine($"<text hint-wrap=\"false\">{productInfo.Title.Replace("\"", "").Replace("&", "and").Replace("<", "").Replace(">", "")}</text>");
+                                            //toastXML.AppendLine($"<text>{result.text.Replace("\"", "").Replace("&", "and").Replace("<", "").Replace(">", "")}</text>");                                            
+                                            //toastXML.AppendLine("</binding>");
+                                            //toastXML.AppendLine("</visual>");
+                                            //toastXML.AppendLine("<actions>");
+                                            //toastXML.AppendLine("<input id=\"textBox\" type=\"text\" placeHolderContent=\"responder\"/>");
+                                            //toastXML.AppendLine("<action");
+                                            //toastXML.AppendLine("content=\"Responder\"");
+                                            //toastXML.AppendLine("activationType=\"background\"");
+                                            //toastXML.AppendLine($"arguments=\"action=enviar&amp;questionId={id}&amp;productId{productInfo.Id}\"/>");
+                                            //toastXML.AppendLine("<action");
+                                            //toastXML.AppendLine("content=\"Cancelar\"");
+                                            //toastXML.AppendLine("activationType=\"background\"");
+                                            //toastXML.AppendLine("arguments=\"cancel\"/>");
+                                            //toastXML.AppendLine("</actions>");
+                                            //toastXML.AppendLine("</toast>");
+
+                                            //lock (this)
+                                            //{
+                                            //    var cn = ConfigurationManager.AppSettings["table_connectionstring"];
+                                            //    CloudStorageAccount storageAccount = CloudStorageAccount.Parse(CloudConfigurationManager.GetSetting("table_connectionstring"));
+
+
+                                            //    // Create the table client.
+                                            //    CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
+
+                                            //    // Create the CloudTable object that represents the "people" table.
+                                            //    CloudTable table = tableClient.GetTableReference("notifications");
+
+                                            //    // Create a new customer entity.
+                                            //    NotificationMessage notification = new NotificationMessage(result.id.ToString(), result.seller_id.ToString());
+                                            //    notification.Content = toastXML.ToString();
+                                            //    notification.Processed = false;
+
+                                            //    // Create the TableOperation object that inserts the customer entity.
+                                            //    TableOperation insertOperation = TableOperation.Insert(notification);
+
+                                            //    // Execute the insert operation.
+                                            //    table.Execute(insertOperation);
+                                            //}
+
+                                            var r = await SendNotificationAsyncQuestion(result.seller_id.ToString(), result.id.ToString(), productInfo.Title, productInfo.Id,
                                                 result.text);
 
-                                            if (ConfigurationManager.AppSettings["enviarEmailNotificacao"] == "1")
-                                            {
-                                                MailMessage mail = new MailMessage();
-                                                mail.From = new MailAddress("alexandre.dias.simoes@outlook.com");
-                                                mail.To.Add(new MailAddress("alexandre.dias.simoes@outlook.com"));
-                                                mail.Subject = "HttpPost ML";
-                                                mail.Body = content;
+                                            var jason = JsonConvert.SerializeObject(r);
+                                            Debug.WriteLine($"NOTIFICACAO -> {result.seller_id} State ->{jason}");
 
-                                                SmtpClient client = new SmtpClient();
-                                                client.Credentials = new System.Net.NetworkCredential("alexandre.dias.simoes@outlook.com", "Ads7ficq$");
-                                                client.EnableSsl = true;
-                                                client.Port = 587;
-                                                client.Host = "smtp-mail.outlook.com";
-                                                client.Send(mail);
-                                            }
+                                            EnviarEmail("Resultado Notificação", jason);
                                         }
                                     }
                                 }
                             }
-                            content = JsonConvert.SerializeObject(result);
                         }
-
-
                     }
                 }
 
@@ -133,26 +172,8 @@ namespace MyML.Web.Admin.Controllers
             }
             catch (Exception ex)
             {
-                //return Ok();
-                // An exception is raised when the notification hub hasn't been 
-                // registered for the iOS, Windows Store, or Windows Phone platform. 
-                MailMessage mail = new MailMessage();
-                SmtpClient client = new SmtpClient();
-                try
-                {
-                    mail.From = new MailAddress("alexandre.dias.simoes@outlook.com");
-                    mail.To.Add(new MailAddress("alexandre.dias.simoes@outlook.com"));
-                    mail.Subject = "ERRO ---  HttpPost ML";
-                    mail.Body = ex.Message + "\r\n" + ex.StackTrace;
-                    
-                    client.Credentials = new System.Net.NetworkCredential("alexandre.dias.simoes@outlook.com", "Ads7ficq$");
-                    client.EnableSsl = true;
-                    client.Port = 587;
-                    client.Host = "smtp-mail.outlook.com";
-                    client.Send(mail);                    
-                }
-                catch { }
-                return InternalServerError();
+                EnviarEmail("Erro HttpPost", ex.Message + "\r\n" + ex.StackTrace, true);
+                return BadRequest();
             }
         }
 
@@ -178,38 +199,34 @@ namespace MyML.Web.Admin.Controllers
             return input.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries)[1];
         }
 
-        private async Task SendNotificationAsyncQuestion(string userId, string id, string title, long? productId, string message)
+        private async Task<NotificationOutcome> SendNotificationAsyncQuestion(string userId, string id, string title, string productId, string message)
         {
-            if(String.IsNullOrWhiteSpace(userId) || string.IsNullOrWhiteSpace(id) 
-                || string.IsNullOrWhiteSpace(title) || productId == null 
+            if (String.IsNullOrWhiteSpace(userId) || string.IsNullOrWhiteSpace(id)
+                || string.IsNullOrWhiteSpace(title) || productId == null
                 || string.IsNullOrWhiteSpace(message))
             {
-                return;
+                return null;
             }
             //Debug.WriteLine("Processando notificacao " + userId + " msg " + message);
-            //if (userId != "210358765" && userId != "210358789") return;
+            // if (userId != "210358765" && userId != "210358789") return null;
 
 #if DEBUG
             Debug.WriteLine("Processando notificacao do seu usuario " + userId + " msg " + message);
 #endif
 
-            // Define the notification hub.
-            NotificationHubClient hub =
-                NotificationHubClient.CreateClientFromConnectionString(
-                    NOTIFICATION_CONNECTION_STRING, NOTIFICATION_HUB);
 
-            // Create an array of breaking news categories.
             var categories = new string[] { userId };
 
+            var toastXML = new StringBuilder();
             try
             {
 
-                var toastXML = new StringBuilder();
+
                 toastXML.AppendLine($"<toast launch=\"action=openQuestion&amp;questionId={id}&amp;itemId={productId}\">");
                 toastXML.AppendLine("<visual>");
                 toastXML.AppendLine("<binding template=\"ToastGeneric\">");
-                toastXML.AppendLine($"<text hint-wrap=\"false\">{title}</text>");
-                toastXML.AppendLine($"<text>{message}</text>");
+                toastXML.AppendLine($"<text hint-wrap=\"false\">{title.Replace("\"", "").Replace("&", "and").Replace("<", "").Replace(">", "")}</text>");
+                toastXML.AppendLine($"<text>{message.Replace("\"", "").Replace("&", "and").Replace("<", "").Replace(">", "")}</text>");
                 //toastXML.Append("<!--<image placement="appLogoOverride" hint-crop="circle" src="https://unsplash.it/64?image=1027"/>-->");
                 //toastXML.Append("<image placement="hero" src="https://unsplash.it/360/180?image=1043"/>");
                 toastXML.AppendLine("</binding>");
@@ -219,49 +236,50 @@ namespace MyML.Web.Admin.Controllers
                 toastXML.AppendLine("<action");
                 toastXML.AppendLine("content=\"Responder\"");
                 toastXML.AppendLine("activationType=\"background\"");
-                toastXML.AppendLine($"arguments=\"action=enviar&amp;questionId={id}&amp;productId{productId}\"/>");
+                toastXML.AppendLine($"arguments=\"action=enviar&amp;questionId={id}&amp;productId={productId}\"/>");
                 toastXML.AppendLine("<action");
                 toastXML.AppendLine("content=\"Cancelar\"");
                 toastXML.AppendLine("activationType=\"background\"");
                 toastXML.AppendLine("arguments=\"cancel\"/>");
-
-
                 toastXML.AppendLine("</actions>");
                 toastXML.AppendLine("</toast>");
+
+
 
 #if DEBUG
                 Debug.WriteLine(toastXML.ToString());
 #endif
-                await hub.SendWindowsNativeNotificationAsync(toastXML.ToString(), categories);
+
+                var r = await Notifications.Instance.Hub.SendWindowsNativeNotificationAsync(toastXML.ToString(), categories.AsEnumerable());
+                var s = JsonConvert.SerializeObject(r);
+                EnviarEmail("Envio OK", toastXML.ToString() + "\r\n\r\n" + s, false);
+                return r;
             }
             catch (Exception argEx)
             {
-                throw argEx;
+                throw new Exception($"Erro no envio da notificacao\r\n\r\n{toastXML.ToString()}", argEx);
             }
         }
 
-        private static async Task SendNotificationAsyncDebugInfo(ML mlObject)
+        private void EnviarEmail(string assunto, string conteudo, bool forcarEnvio = false)
         {
-            // Define the notification hub.
-            NotificationHubClient hub =
-                NotificationHubClient.CreateClientFromConnectionString(
-                    "Endpoint=sb://meumercadolivre.servicebus.windows.net/;SharedAccessKeyName=DefaultFullSharedAccessSignature;SharedAccessKey=GU2Z3pqiTyGwo9tTyh4p/3R3Vn/6RUkHwsn5r2iv5Tg=", "notifications");
-
-            // Create an array of breaking news categories.
-            var categories = new string[] { mlObject.user_id.ToString() };
-
-            try
+            if (ConfigurationManager.AppSettings["enviarEmailNotificacao"] == "1" || forcarEnvio)
             {
-                // Define a Windows Store toast.
-                var wnsToast = "<toast><visual><binding template=\"ToastText01\">"
-                    + "<text id=\"1\">" + mlObject.user_id + " - " + mlObject.topic
-                    + "</text></binding></visual></toast>";
-                await hub.SendWindowsNativeNotificationAsync(wnsToast, categories);
-            }
-            catch (ArgumentException)
-            {
-                // An exception is raised when the notification hub hasn't been 
-                // registered for the iOS, Windows Store, or Windows Phone platform. 
+                try
+                {
+                    _mail.To.Clear();
+                    _mail.From = new MailAddress("alexandre.dias.simoes@outlook.com");
+                    _mail.To.Add(new MailAddress("alexandre.dias.simoes@outlook.com"));
+                    _mail.Subject = "NOTIFICATIONS - " + assunto;
+                    _mail.Body = conteudo;
+
+                    _smtpClient.Credentials = new System.Net.NetworkCredential("alexandre.dias.simoes@outlook.com", "Ads7ficq$");
+                    _smtpClient.EnableSsl = true;
+                    _smtpClient.Port = 587;
+                    _smtpClient.Host = "smtp-mail.outlook.com";
+                    _smtpClient.Send(_mail);
+                }
+                catch { }
             }
         }
     }
