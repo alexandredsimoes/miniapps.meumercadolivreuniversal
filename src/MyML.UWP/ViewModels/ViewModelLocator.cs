@@ -1,5 +1,4 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
-using Microsoft.ApplicationInsights;
 using Microsoft.Practices.ServiceLocation;
 using MyML.UWP.Models;
 using MyML.UWP.Services;
@@ -57,13 +56,7 @@ namespace MyML.UWP.ViewModels
             SimpleIoc.Default.Register<CompraQualificarPageViewModel>();
             SimpleIoc.Default.Register<VenderPageViewModel>();
             SimpleIoc.Default.Register<ProdutoDetalheEnvioPageViewModel>();
-            SimpleIoc.Default.Register<OrdernarBuscaPageViewModel>();
-            
-
-
-            var telemetryClient = new TelemetryClient();
-            SimpleIoc.Default.Register(() => telemetryClient);
-            
+            SimpleIoc.Default.Register<OrdernarBuscaPageViewModel>();                                   
         }
 
         public MainPageViewModel MainPage => ServiceLocator.Current.GetInstance<MainPageViewModel>();

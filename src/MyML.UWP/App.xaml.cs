@@ -6,18 +6,14 @@ using Windows.ApplicationModel.Activation;
 using MyML.UWP.Models;
 using System.Linq;
 using System.Diagnostics;
-using Windows.UI.Xaml.Markup;
-using System.Xml;
-using GalaSoft.MvvmLight.Threading;
 using MyML.UWP.Services;
 using MyML.UWP.AppStorage;
 using Windows.Storage;
 using Windows.ApplicationModel.Background;
-using Windows.UI.Notifications;
-using Microsoft.ApplicationInsights;
 using Windows.UI.Popups;
 using Windows.ApplicationModel.Resources;
 using Windows.ApplicationModel;
+using Microsoft.HockeyApp;
 using Template10.Controls;
 
 namespace MyML.UWP
@@ -29,9 +25,10 @@ namespace MyML.UWP
     {
         public App()
         {
-            Microsoft.ApplicationInsights.WindowsAppInitializer.InitializeAsync(
-                Microsoft.ApplicationInsights.WindowsCollectors.Metadata |
-                Microsoft.ApplicationInsights.WindowsCollectors.Session);
+
+            Microsoft.HockeyApp.HockeyClient.Current.Configure("046d5d06bf8e4703a1bdc2f201875c9a", 
+             new TelemetryConfiguration() { EnableDiagnostics = true });
+
             InitializeComponent();
 
             Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "pt-BR";
@@ -43,11 +40,11 @@ namespace MyML.UWP
 
             #region App settings
 
-            var _settings = SettingsService.Instance;
-            RequestedTheme = _settings.AppTheme;
+            var settings = SettingsService.Instance;
+            RequestedTheme = settings.AppTheme;
             //RequestedTheme = ApplicationTheme.Light;
-            CacheMaxDuration = _settings.CacheMaxDuration;
-            ShowShellBackButton = _settings.UseShellBackButton;
+            CacheMaxDuration = settings.CacheMaxDuration;
+            ShowShellBackButton = settings.UseShellBackButton;
 
             #endregion
         }
@@ -58,8 +55,6 @@ namespace MyML.UWP
             {
                 e.Handled = true;
                 var resourceLoader = ResourceLoader.GetForCurrentView();
-                var telemetryClient = new TelemetryClient();
-                telemetryClient.TrackException(e.Exception);
 
                 if (e.Exception != null)
                     AppLogs.WriteError("App_UnhandledException", e.Exception);

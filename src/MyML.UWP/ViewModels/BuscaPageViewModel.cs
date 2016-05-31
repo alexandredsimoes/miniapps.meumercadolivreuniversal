@@ -1,6 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using Microsoft.ApplicationInsights;
 using MyML.UWP.Adapters;
 using MyML.UWP.Adapters.Search;
 using MyML.UWP.Aggregattor;
@@ -18,19 +17,19 @@ using Template10.Services.NavigationService;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Navigation;
+using Microsoft.HockeyApp;
 
 namespace MyML.UWP.ViewModels
 {
     public class BuscaPageViewModel : ViewModelBase
     {
-        private readonly TelemetryClient _telemetryClient;
+        
         private readonly IMercadoLivreService _mercadoLivreService;
         public IList<AvailableFilter> SelectedFilters { get; set; } = new List<AvailableFilter>();
 
-        public BuscaPageViewModel(IMercadoLivreService mercadoLivreService, TelemetryClient telemetryClient)
+        public BuscaPageViewModel(IMercadoLivreService mercadoLivreService)
         {
             _mercadoLivreService = mercadoLivreService;
-            _telemetryClient = telemetryClient;
 
             Messenger.Default.Register<MessengerFilterResult>(this, GetFilterResult);
             Buscar = new RelayCommand<string>((s) =>
@@ -174,7 +173,8 @@ namespace MyML.UWP.ViewModels
             Items.LoadMoreItemsCompleted += Items_LoadMoreItemsCompleted;
             Items.LoadMoreItemsStarted += Items_LoadMoreItemsStarted;            
 
-            _telemetryClient.TrackEvent("BuscaPageViewModel", new Dictionary<string, string>() { { "Pesquisa", query } });
+            HockeyClient.Current.TrackEvent("BuscaPageViewModel.BuscarExecute()");
+            //_telemetryClient.TrackEvent("BuscaPageViewModel", new Dictionary<string, string>() { { "Pesquisa", query } });
             
         }
 
