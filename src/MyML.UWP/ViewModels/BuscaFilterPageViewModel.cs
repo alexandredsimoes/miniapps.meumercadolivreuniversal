@@ -43,13 +43,22 @@ namespace MyML.UWP.ViewModels
            });
 
             AddFilter = new RelayCommand<object>(AddFilterExecute);
+
+            SelectSortItem = new RelayCommand<object>((obj) =>
+            {
+                var item = obj as AvailableSort;
+
+                if (item == null) return;
+                SelectedSorts.Clear();
+                SelectedSorts.Add(item);
+            });
         }
 
         private void AddFilterExecute(object _obj)
         {
             var obj = _obj as Value2;
 
-            if(obj is Value2)
+            if (obj is Value2)
             {
                 AvailableFilter filterAdd = new AvailableFilter();
                 if (SelectedFilters.Any(c => c.id == obj.filter.id))
@@ -91,7 +100,7 @@ namespace MyML.UWP.ViewModels
                 //Nosso filtro boolean
                 var objFilter = _obj as AvailableFilter;
 
-                if(objFilter != null)
+                if (objFilter != null)
                 {
                     if (SelectedFilters.Any(c => c.id == objFilter.id))
                     {
@@ -106,7 +115,7 @@ namespace MyML.UWP.ViewModels
                         SelectedFilters.Add(objFilter);
                     }
                 }
-            }            
+            }
         }
 
         private void SaveFilterExecute()
@@ -121,8 +130,16 @@ namespace MyML.UWP.ViewModels
                 sb.Append($"{SelectedFilters[i].id}={SelectedFilters[i].values[0].id}" + (i < SelectedFilters.Count - 1 ? "&" : ""));
             }
 
+            //Monta a ordenação
+            if (sb.Length > 0)
+                sb.Append("&");
+            for (int i = 0; i < SelectedSorts.Count; i++)
+            {
+                sb.Append($"sort={SelectedSorts[i].id}" + (i < SelectedSorts.Count - 1 ? "&" : ""));
+            }
+
             //Notifica a página anterior com o filtro montado
-            Messenger.Default.Send<MessengerFilterResult>(new MessengerFilterResult() { Result = sb.ToString(), SelectedFilters = this.SelectedFilters });
+            Messenger.Default.Send<MessengerFilterResult>(new MessengerFilterResult() { Result = sb.ToString(), SelectedFilters = this.SelectedFilters, SelectedSorts = this.SelectedSorts });
             sb.Clear();
 
             NavigationService.GoBack();
@@ -146,7 +163,7 @@ namespace MyML.UWP.ViewModels
             if (Sorts != null) Sorts.Clear();
 
 
-            if (obj.Filters == null || obj.Sorts == null) return;
+            if (obj.Filters == null /*|| obj.Sorts == null*/) return;
 
             if (!GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic)
             {
@@ -161,8 +178,8 @@ namespace MyML.UWP.ViewModels
 
 
                 //Insere os valores default
-                if (!Sorts.Any(c => c.id == "-1"))
-                    Sorts.Insert(0, new AvailableSort() { id = "-1", name = "Mais relevantes" });
+                if (!Sorts.Any(c => c.id == "relevance"))
+                    Sorts.Insert(0, new AvailableSort() { id = "relevance", name = "Mais relevantes" });
 
 
                 foreach (var item in Filters.Where(c => c.type == "text" || c.type == "range"))
@@ -199,11 +216,17 @@ namespace MyML.UWP.ViewModels
         }
 
         private IList<AvailableFilter> _SelectedFilters = new List<AvailableFilter>();
-
         public IList<AvailableFilter> SelectedFilters
         {
             get { return _SelectedFilters; }
             set { Set(() => SelectedFilters, ref _SelectedFilters, value); }
+        }
+
+        private IList<AvailableSort> _SelectedSorts = new List<AvailableSort>();
+        public IList<AvailableSort> SelectedSorts
+        {
+            get { return _SelectedSorts; }
+            set { Set(() => SelectedSorts, ref _SelectedSorts, value); }
         }
 
 
@@ -211,8 +234,7 @@ namespace MyML.UWP.ViewModels
         public RelayCommand SaveFilter { get; private set; }
         public RelayCommand<object> SelectOrder { get; private set; }
         public RelayCommand<object> AddFilter { get; private set; }
-
-
+        public RelayCommand<object> SelectSortItem { get; set; }
 
     }
 }

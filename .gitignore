@@ -4,11 +4,17 @@
 #pasta upload
 wwwroot/uploads/
 
+#pasta BundleArtifacts
+[Bb]undleArtifacts/
+
+
+
 # User-specific files
 *.suo
 *.user
 *.userosscache
 *.sln.docstates
+*.appx
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

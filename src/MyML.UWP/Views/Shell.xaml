@@ -1,163 +1,1172 @@
 ﻿<Page x:Class="MyML.UWP.Views.Shell"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:Controls="using:Template10.Controls"
-      xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
-      xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+      xmlns:controls="using:Template10.Controls"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:local="using:MyML.UWP.Views"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:views="using:MyML.UWP.Views"
       xmlns:viewsSecure="using:MyML.UWP.Views.Secure"
-      xmlns:converters="using:MyML.UWP.Converters"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
       mc:Ignorable="d">
 
     <Page.Resources>
-        <converters:BoolToVisibilityConverter x:Name="BoolToVisibilityConverter" />
+
     </Page.Resources>
-    <Controls:ModalDialog x:Name="ModalContainer" CanBackButtonDismiss="False"
+    <controls:ModalDialog x:Name="ModalContainer" CanBackButtonDismiss="False"
                           DisableBackButtonWhenModal="False">
-        <Controls:ModalDialog.ModalBackground>
+        <controls:ModalDialog.ModalBackground>
             <SolidColorBrush Color="#99000000" Opacity="0.800000011920929"/>
-        </Controls:ModalDialog.ModalBackground>
-        <Controls:ModalDialog.Content>
-            <!--<Controls:HamburgerMenu PaneClosed="MyHamburgerMenu_PaneClosed" PaneOpened="MyHamburgerMenu_PaneOpened" x:Name="MyHamburgerMenu"
-                                    HamburgerBackground="{StaticResource MercadoLivreBackgroundColor}"
-                                    HamburgerForeground="{StaticResource MercadoLivreForegroundColor}" 
-                                    NavAreaBackground="{StaticResource MercadoLivreBackgroundColor}" 
-                                    NavButtonForeground="{StaticResource MercadoLivreForegroundColor}"
-                                    NavButtonHoverBackground="#A5FFF8F8"
-                                    NavButtonCheckedBackground="#D8DCD200" 
-                                    NavButtonCheckedForeground="#A5494949" 
-                                    NavButtonPressedBackground="#A5494949">-->
-            <Controls:HamburgerMenu PaneClosed="MyHamburgerMenu_PaneClosed" PaneOpened="MyHamburgerMenu_PaneOpened" x:Name="MyHamburgerMenu">
-                <Controls:HamburgerMenu.PrimaryButtons>
+        </controls:ModalDialog.ModalBackground>
+        <controls:ModalDialog.Content>
+            <controls:HamburgerMenu x:Name="MyHamburgerMenu">
+                <controls:HamburgerMenu.PrimaryButtons>
                     <!--  mainpage button  -->
-                    <Controls:HamburgerButtonInfo  ClearHistory="True" PageType="views:MainPage">
+                    <controls:HamburgerButtonInfo  ClearHistory="True" PageType="views:MainPage">
                         <StackPanel Orientation="Horizontal">
                             <SymbolIcon Width="48" Height="48" Symbol="Home" />
                             <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Text="Início" />
                         </StackPanel>
-                    </Controls:HamburgerButtonInfo>
+                    </controls:HamburgerButtonInfo>
                     <!--  busca button  -->
-                    <Controls:HamburgerButtonInfo ClearHistory="False" PageType="views:BuscaPage">
+                    <controls:HamburgerButtonInfo ClearHistory="False" PageType="views:BuscaPage">
                         <StackPanel Orientation="Horizontal">
                             <SymbolIcon Width="48" Height="48" Symbol="Zoom" />
                             <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Text="Busca" />
                         </StackPanel>
-                    </Controls:HamburgerButtonInfo>
+                    </controls:HamburgerButtonInfo>
                     <!--  favoritos button  -->
-                    <Controls:HamburgerButtonInfo ClearHistory="False" PageType="viewsSecure:FavoritesPage">
+                    <controls:HamburgerButtonInfo ClearHistory="False" PageType="viewsSecure:FavoritesPage">
                         <StackPanel Orientation="Horizontal">
                             <FontIcon  Width="48" Height="48" Glyph="" />
                             <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Text="Favoritos" />
                         </StackPanel>
-                    </Controls:HamburgerButtonInfo>
+                    </controls:HamburgerButtonInfo>
                     
                     <!-- ********************************** REATIVAR QUANDO ESTIVER PRONTO ************************************************ -->
                     <!--  vender button  -->
-                    <Controls:HamburgerButtonInfo ClearHistory="False" PageType="viewsSecure:VenderPage">
+                    <controls:HamburgerButtonInfo ClearHistory="False" PageType="viewsSecure:VenderPage">
                         <StackPanel Orientation="Horizontal">
                             <FontIcon  Width="48" Height="48" Glyph="" />
                             <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Text="Vender" />
                         </StackPanel>
-                    </Controls:HamburgerButtonInfo>
+                    </controls:HamburgerButtonInfo>
                     <!-- ********************************** REATIVAR QUANDO ESTIVER PRONTO ************************************************ -->
                     
                     <!--Separador?-->
-                    <Controls:HamburgerButtonInfo  IsEnabled="False" x:Name="SeparadorCompras" Visibility="Collapsed">
+                    <controls:HamburgerButtonInfo  IsEnabled="False" x:Name="SeparadorCompras" Visibility="Collapsed">
                         <TextBlock Margin="12,10,0,0" VerticalAlignment="Center" Text="Compras" />
-                    </Controls:HamburgerButtonInfo>
+                    </controls:HamburgerButtonInfo>
 
                     <!--  Perguntas - button  -->
-                    <Controls:HamburgerButtonInfo ClearHistory="False" PageType="viewsSecure:PerguntasComprasPage">
-                        <Controls:HamburgerButtonInfo.NavigationTransitionInfo>
+                    <controls:HamburgerButtonInfo ClearHistory="False" PageType="viewsSecure:PerguntasComprasPage">
+                        <controls:HamburgerButtonInfo.NavigationTransitionInfo>
                             <SuppressNavigationTransitionInfo />
-                        </Controls:HamburgerButtonInfo.NavigationTransitionInfo>
+                        </controls:HamburgerButtonInfo.NavigationTransitionInfo>
                         <StackPanel  Orientation="Horizontal">
                             <SymbolIcon Width="48" Height="48" Symbol="Help" />
                             <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Text="Perguntas" />
                         </StackPanel>
-                    </Controls:HamburgerButtonInfo>
+                    </controls:HamburgerButtonInfo>
                     <!--  Compras  button  -->
-                    <Controls:HamburgerButtonInfo ClearHistory="False" PageType="viewsSecure:ComprasPage">
-                        <Controls:HamburgerButtonInfo.NavigationTransitionInfo>
+                    <controls:HamburgerButtonInfo ClearHistory="False" PageType="viewsSecure:ComprasPage">
+                        <controls:HamburgerButtonInfo.NavigationTransitionInfo>
                             <SuppressNavigationTransitionInfo />
-                        </Controls:HamburgerButtonInfo.NavigationTransitionInfo>
+                        </controls:HamburgerButtonInfo.NavigationTransitionInfo>
                         <StackPanel Orientation="Horizontal">
                             <SymbolIcon Width="48" Height="48" Symbol="Shop" />
                             <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Text="Compras" />
                         </StackPanel>
-                    </Controls:HamburgerButtonInfo>
+                    </controls:HamburgerButtonInfo>
 
                     <!--Separador?-->
-                    <Controls:HamburgerButtonInfo  IsEnabled="False" x:Name="SeparadorVendas" Visibility="Collapsed">
+                    <controls:HamburgerButtonInfo  IsEnabled="False" x:Name="SeparadorVendas" Visibility="Collapsed">
                         <TextBlock Margin="12,10,0,0" VerticalAlignment="Center" Text="Vendas" />
-                    </Controls:HamburgerButtonInfo>
+                    </controls:HamburgerButtonInfo>
                     <!--  Anúncios  button  -->
-                    <Controls:HamburgerButtonInfo ClearHistory="False" PageType="viewsSecure:AnunciosPage">
-                        <Controls:HamburgerButtonInfo.NavigationTransitionInfo>
+                    <controls:HamburgerButtonInfo ClearHistory="False" PageType="viewsSecure:AnunciosPage">
+                        <controls:HamburgerButtonInfo.NavigationTransitionInfo>
                             <SuppressNavigationTransitionInfo />
-                        </Controls:HamburgerButtonInfo.NavigationTransitionInfo>
+                        </controls:HamburgerButtonInfo.NavigationTransitionInfo>
                         <StackPanel Orientation="Horizontal">
                             <FontIcon Width="48" Height="48" Glyph="" />
                             <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Text="Anúncios" />
                         </StackPanel>
-                    </Controls:HamburgerButtonInfo>
+                    </controls:HamburgerButtonInfo>
                     <!--  Perguntas (Vendas) - button  -->
-                    <Controls:HamburgerButtonInfo ClearHistory="False" PageType="viewsSecure:PerguntasVendasPage">
-                        <Controls:HamburgerButtonInfo.NavigationTransitionInfo>
+                    <controls:HamburgerButtonInfo ClearHistory="False" PageType="viewsSecure:PerguntasVendasPage">
+                        <controls:HamburgerButtonInfo.NavigationTransitionInfo>
                             <SuppressNavigationTransitionInfo />
-                        </Controls:HamburgerButtonInfo.NavigationTransitionInfo>
+                        </controls:HamburgerButtonInfo.NavigationTransitionInfo>
                         <StackPanel  Orientation="Horizontal">
                             <SymbolIcon Width="48" Height="48" Symbol="Help" />
                             <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Text="Perguntas" />
                         </StackPanel>
-                    </Controls:HamburgerButtonInfo>
+                    </controls:HamburgerButtonInfo>
                     <!--  Vendas  button  -->
-                    <Controls:HamburgerButtonInfo ClearHistory="False" PageType="viewsSecure:VendasPage">
-                        <Controls:HamburgerButtonInfo.NavigationTransitionInfo>
+                    <controls:HamburgerButtonInfo ClearHistory="False" PageType="viewsSecure:VendasPage">
+                        <controls:HamburgerButtonInfo.NavigationTransitionInfo>
                             <SuppressNavigationTransitionInfo />
-                        </Controls:HamburgerButtonInfo.NavigationTransitionInfo>
+                        </controls:HamburgerButtonInfo.NavigationTransitionInfo>
                         <StackPanel Orientation="Horizontal">
                             <SymbolIcon Width="48" Height="48" Symbol="CellPhone" />
                             <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Text="Vendas" />
                         </StackPanel>
-                    </Controls:HamburgerButtonInfo>
+                    </controls:HamburgerButtonInfo>
 
-                </Controls:HamburgerMenu.PrimaryButtons>
+                </controls:HamburgerMenu.PrimaryButtons>
 
-                <Controls:HamburgerMenu.SecondaryButtons>
+                <controls:HamburgerMenu.SecondaryButtons>
                     
                     <!--  settingspage button  -->
-                    <Controls:HamburgerButtonInfo x:Name="SettingsButton" PageType="views:SettingsPage">
-                        <Controls:HamburgerButtonInfo.NavigationTransitionInfo>
+                    <controls:HamburgerButtonInfo x:Name="SettingsButton" PageType="views:SettingsPage">
+                        <controls:HamburgerButtonInfo.NavigationTransitionInfo>
                             <SuppressNavigationTransitionInfo />
-                        </Controls:HamburgerButtonInfo.NavigationTransitionInfo>
+                        </controls:HamburgerButtonInfo.NavigationTransitionInfo>
                         <StackPanel Orientation="Horizontal">
                             <SymbolIcon Width="48" Height="48" Symbol="Setting" />
                             <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Text="Configurações" />
                         </StackPanel>
-                    </Controls:HamburgerButtonInfo>
+                    </controls:HamburgerButtonInfo>
                     <!--  Login button  -->
-                    <Controls:HamburgerButtonInfo ClearHistory="False" PageType="views:LoginPage">
+                    <controls:HamburgerButtonInfo ClearHistory="False" PageType="views:LoginPage">
                         <StackPanel Orientation="Horizontal">
                             <SymbolIcon Width="48" Height="48" Symbol="Permissions" />
                             <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Text="Login" />
                         </StackPanel>
-                    </Controls:HamburgerButtonInfo>
+                    </controls:HamburgerButtonInfo>
 
-                    <Controls:HamburgerButtonInfo IsEnabled="False">
-                    </Controls:HamburgerButtonInfo>
-                </Controls:HamburgerMenu.SecondaryButtons>
-            </Controls:HamburgerMenu>
-        </Controls:ModalDialog.Content>
+                    <controls:HamburgerButtonInfo IsEnabled="False">
+                    </controls:HamburgerButtonInfo>
+                </controls:HamburgerMenu.SecondaryButtons>
+            </controls:HamburgerMenu>
+        </controls:ModalDialog.Content>
 
-        <Controls:ModalDialog.ModalContent>
+        <controls:ModalDialog.ModalContent>
             <views:Busy x:Name="BusyView"/>
-        </Controls:ModalDialog.ModalContent>
+        </controls:ModalDialog.ModalContent>
 
-    </Controls:ModalDialog>
+    </controls:ModalDialog>
 </Page>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

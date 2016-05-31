@@ -37,6 +37,7 @@
         <CommandBar IsSticky="False" >
             <CommandBar.PrimaryCommands>
                 <AppBarButton Label="Filtrar" Icon="Filter" Command="{Binding OpenFilter}" />
+                <AppBarButton Label="Ordenar" Icon="Sort" Command="{Binding OpenSort}" />
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </Page.BottomAppBar>

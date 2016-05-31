@@ -18,6 +18,7 @@ using Microsoft.ApplicationInsights;
 using Windows.UI.Popups;
 using Windows.ApplicationModel.Resources;
 using Windows.ApplicationModel;
+using Template10.Controls;
 
 namespace MyML.UWP
 {
@@ -66,7 +67,10 @@ namespace MyML.UWP
                 var dialog = new MessageDialog("Houve um erro inesperado", resourceLoader.GetString("ApplicationTitle"));
                 await dialog.ShowAsync();
             }
-            catch { }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex.Message);    
+            }
             
            
             /*
@@ -126,48 +130,52 @@ namespace MyML.UWP
         // runs even if restored from state
         public override async Task OnInitializeAsync(IActivatedEventArgs args)
         {
-
-
-            //Armazena a quantidade de execuções do aplicativo
-            if (ApplicationData.Current.LocalSettings.Values.ContainsKey(Consts.CONFIG_KEY_EXECUCOES))
+            if (!(Window.Current.Content is ModalDialog))
             {
-                var qtde = 1;
-                if (int.TryParse(ApplicationData.Current.LocalSettings.Values[Consts.CONFIG_KEY_EXECUCOES].ToString(), out qtde))
+                // create a new frame 
+                var nav = NavigationServiceFactory(BackButton.Attach, ExistingContent.Include);
+
+                // create modal root
+                Window.Current.Content = new ModalDialog
                 {
-                    if (qtde != -1)
-                    {
-                        qtde++;
-                        ApplicationData.Current.LocalSettings.Values[Consts.CONFIG_KEY_EXECUCOES] = qtde;
-                    }
-                }
-                else
-                    ApplicationData.Current.LocalSettings.Values[Consts.CONFIG_KEY_EXECUCOES] = 1;
-            }
-            else
-            {
-                ApplicationData.Current.LocalSettings.Values.Add(Consts.CONFIG_KEY_EXECUCOES, 1);
-            }
+                    DisableBackButtonWhenModal = true,
+                    Content = new Views.Shell(nav),
+                    ModalContent = new Views.Busy(),
+                };
 
-            //Efetua a verificação da licença do usuário (remover ADS)
-            VerifyLicense();
+                //if (args.Kind == ActivationKind.Launch &&
+                //    args.PreviousExecutionState == ApplicationExecutionState.NotRunning)
+                //{
+                //    DataService ds = new DataService();
+                //    ds.Initialize();
+                //}
+
+                if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
+                {
+                    var statusBar = Windows.UI.ViewManagement.StatusBar.GetForCurrentView();
+                    await statusBar.HideAsync();
+                }
+            }
+            await Task.CompletedTask;
+
 
             // content may already be shell when resuming
-            if ((Window.Current.Content as Views.Shell) == null)
-            {
-                // setup hamburger shell
-                var nav = NavigationServiceFactory(BackButton.Attach, ExistingContent.Include);
-                Window.Current.Content = new Views.Shell(nav);
-            }
+            //if ((Window.Current.Content as Views.Shell) == null)
+            //{
+            //    // setup hamburger shell
+            //    var nav = NavigationServiceFactory(BackButton.Attach, ExistingContent.Include);
+            //    Window.Current.Content = new Views.Shell(nav);
+            //}
 
-            DataService ds = new DataService();
-            ds.Initialize();
+            //DataService ds = new DataService();
+            //ds.Initialize();
 
 
-            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
-            {
-                var statusBar = Windows.UI.ViewManagement.StatusBar.GetForCurrentView();
-                await statusBar.HideAsync();
-            }
+            //if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
+            //{
+            //    var statusBar = Windows.UI.ViewManagement.StatusBar.GetForCurrentView();
+            //    await statusBar.HideAsync();
+            //}
 
             //DispatcherHelper.Initialize();
             //return Task.CompletedTask;
@@ -178,6 +186,35 @@ namespace MyML.UWP
         {
             if (startKind == StartKind.Launch)
             {
+                //Armazena a quantidade de execuções do aplicativo
+                if (ApplicationData.Current.LocalSettings.Values.ContainsKey(Consts.CONFIG_KEY_EXECUCOES))
+                {
+                    var qtde = 1;
+                    if (int.TryParse(ApplicationData.Current.LocalSettings.Values[Consts.CONFIG_KEY_EXECUCOES].ToString(), out qtde))
+                    {
+                        if (qtde != -1)
+                        {
+                            qtde++;
+                            ApplicationData.Current.LocalSettings.Values[Consts.CONFIG_KEY_EXECUCOES] = qtde;
+                        }
+                    }
+                    else
+                        ApplicationData.Current.LocalSettings.Values[Consts.CONFIG_KEY_EXECUCOES] = 1;
+                }
+                else
+                {
+                    ApplicationData.Current.LocalSettings.Values.Add(Consts.CONFIG_KEY_EXECUCOES, 1);
+
+                    //Nunca executamos, cria o banco de dados
+                    DataService ds = new DataService();
+                    ds.Initialize();
+                }
+
+                
+
+                //Efetua a verificação da licença do usuário (remover ADS)
+                VerifyLicense();
+
                 await RegisterBackgroundTask();
 
                 try
@@ -188,13 +225,13 @@ namespace MyML.UWP
                        @"MeuMercadoLivreUniversalCommands.xml");
 
                     await Windows.ApplicationModel.VoiceCommands.VoiceCommandDefinitionManager.
-                     InstallCommandDefinitionsFromStorageFileAsync(vcdStorageFile);
+                        InstallCommandDefinitionsFromStorageFileAsync(vcdStorageFile);
 
                     // Update phrase list.
                     //ViewModel.ViewModelLocator locator = App.Current.Resources["ViewModelLocator"] as ViewModel.ViewModelLocator;
                     //if (locator != null)
                     //{
-                      //  await locator.TripViewModel.UpdateDestinationPhraseList();
+                    //  await locator.TripViewModel.UpdateDestinationPhraseList();
                     //}
                 }
                 catch (Exception ex)
@@ -205,7 +242,7 @@ namespace MyML.UWP
 
             if(args.Kind == ActivationKind.ToastNotification)
             {
-                //Verifica de onde veio esse toast
+                //Verifica de onde veio esse toast/
                 var toastArgs = args as ToastNotificationActivatedEventArgs;
                 if(toastArgs != null)
                 {
@@ -227,29 +264,29 @@ namespace MyML.UWP
                 // Cast it so we can get the parameters we care about out.
                 var commandArgs = args as VoiceCommandActivatedEventArgs;
 
-                Windows.Media.SpeechRecognition.SpeechRecognitionResult speechRecognitionResult = commandArgs.Result;
-
-                // Get the name of the voice command and the text spoken. See AdventureWorksCommands.xml for
-                // the <Command> tags this can be filled with.
-                string voiceCommandName = speechRecognitionResult.RulePath[0];
-                string textSpoken = speechRecognitionResult.Text;
-
-                // The commandMode is either "voice" or "text", and it indictes how the voice command
-                // was entered by the user.
-                // Apps should respect "text" mode by providing feedback in silent form.
-                //string commandMode = this.SemanticInterpretation("commandMode", speechRecognitionResult);
-
-                
-                //foreach (var item in speechRecognitionResult.SemanticInterpretation.Properties)
-                //{
-                //    items += $"{item.Key}={item.Value}";
-                //}
-                
-                if(speechRecognitionResult != null)
+                if (commandArgs != null)
                 {
+                    Windows.Media.SpeechRecognition.SpeechRecognitionResult speechRecognitionResult = commandArgs.Result;
+
+                    // Get the name of the voice command and the text spoken. See AdventureWorksCommands.xml for
+                    // the <Command> tags this can be filled with.
+                    string voiceCommandName = speechRecognitionResult.RulePath[0];
+                    string textSpoken = speechRecognitionResult.Text;
+
+                    // The commandMode is either "voice" or "text", and it indictes how the voice command
+                    // was entered by the user.
+                    // Apps should respect "text" mode by providing feedback in silent form.
+                    //string commandMode = this.SemanticInterpretation("commandMode", speechRecognitionResult);
+
+                
+                    //foreach (var item in speechRecognitionResult.SemanticInterpretation.Properties)
+                    //{
+                    //    items += $"{item.Key}={item.Value}";
+                    //}
+
                     Debug.WriteLine("FALOW => " + speechRecognitionResult.SemanticInterpretation.Properties);
+                    NavigationService.Navigate(typeof(Views.BuscaPage), voiceCommandName + "-"+  textSpoken, new Windows.UI.Xaml.Media.Animation.SlideNavigationTransitionInfo());
                 }
-                NavigationService.Navigate(typeof(Views.BuscaPage), voiceCommandName + "-"+  textSpoken, new Windows.UI.Xaml.Media.Animation.SlideNavigationTransitionInfo());
             }
             else
             {
@@ -257,7 +294,7 @@ namespace MyML.UWP
             }
 
             
-            //return Task.CompletedTask;
+            await Task.CompletedTask;
         }
 
         private void VerifyLicense()
@@ -279,8 +316,7 @@ namespace MyML.UWP
         {
             var task = BackgroundTaskRegistration.AllTasks.Values.FirstOrDefault(i => i.Name.Equals(Consts.BACKGROUND_TASKNAME_QUESTIONS));
 
-            if (task != null)
-                task.Unregister(true);
+            task?.Unregister(true);
         }
 
         private async Task<bool> RegisterBackgroundTask()

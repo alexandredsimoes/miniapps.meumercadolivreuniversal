@@ -36,17 +36,17 @@ namespace MyML.UWP.Views
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            _viewModel.ZoomModeChanged += _viewModel_ZoomModeChanged;    
+            _viewModel.ZoomModeChanged += _viewModel_ZoomModeChanged;
         }
 
         private void _viewModel_ZoomModeChanged(bool isZoomEnabled)
         {
-            if (isZoomEnabled)
-            {
-                Storyboard2.Begin();
-            }
-            else
-                Storyboard3.Begin();
+            ////////////////if (isZoomEnabled)
+            ////////////////{
+            ////////////////    Storyboard2.Begin();
+            ////////////////}
+            ////////////////else
+            ////////////////    Storyboard3.Begin();
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -69,7 +69,7 @@ namespace MyML.UWP.Views
                 transform.CenterX = transformedCenter.X;
 
                 // TransformToVisual doesn't account for ScrollViewer offset
-                transform.CenterY = transformedCenter.Y - ParallaxRoot.VerticalOffset;
+                transform.CenterY = transformedCenter.Y - ParallaxRoot. VerticalOffset;
 
                 // This could be done statically in markup but it's easier to show here.
                 transform.ScaleX = transform.ScaleY =
@@ -79,7 +79,7 @@ namespace MyML.UWP.Views
 
         private void RootGrid_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            NormalizeParallax(FlipImage);
+            // NormalizeParallax(FlipImage);
         }
     }
 }

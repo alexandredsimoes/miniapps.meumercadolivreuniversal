@@ -81,6 +81,10 @@ namespace MyML.UWP.ViewModels
                     return;
                 }
 
+                ////Valida o anuncio antes
+                //await _mercadoLivreServices.ValidateNewItem(_ProductInfo);
+                //return;
+
                 var r = await _mercadoLivreServices.ListNewItem(_ProductInfo);
 
                 if (r != null)

@@ -30,11 +30,11 @@ namespace MyML.UWP.Views
         public BuscaPage()
         {
             this.InitializeComponent();
-            //NavigationCacheMode = NavigationCacheMode.Enabled;
+            NavigationCacheMode = NavigationCacheMode.Enabled;
 
             _viewModel = DataContext as BuscaPageViewModel;
-            ProdutosListView.SelectionChanged += ProdutosListView_SelectionChanged;
-            BuscaTextBox.GotFocus += BuscaTextBox_GotFocus;
+            //ProdutosListView.SelectionChanged += ProdutosListView_SelectionChanged;
+            this.BuscaTextBox.GotFocus += BuscaTextBox_GotFocus;
             //BuscaTextBox.LostFocus += BuscaTextBox_LostFocus;
            
         }
@@ -53,8 +53,8 @@ namespace MyML.UWP.Views
         {
             if (e.NavigationMode == NavigationMode.Back && _viewModel?.SelectedItem != null)
             {
-                this.UpdateLayout();
-                ProdutosListView.ScrollIntoView(_viewModel.SelectedItem, ScrollIntoViewAlignment.Leading);
+               // this.UpdateLayout();
+                //ProdutosListView.ScrollIntoView(_viewModel.SelectedItem, ScrollIntoViewAlignment.Leading);
             }
         }
 

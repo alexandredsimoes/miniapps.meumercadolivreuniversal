@@ -1,7 +1,7 @@
-MainPackage=E:\_BACKUP PROJETOS\Git 01-04-2016\MyML.UWP\src\MyML.UWP\bin\ARM\Release\MyML.UWP_1.1.103.0_ARM.appx
-SymbolPackage=E:\_BACKUP PROJETOS\Git 01-04-2016\MyML.UWP\src\MyML.UWP\AppPackages\MyML.UWP_1.1.103.0_Test\MyML.UWP_1.1.103.0_ARM.appxsym
-ResourcePack=E:\_BACKUP PROJETOS\Git 01-04-2016\MyML.UWP\src\MyML.UWP\bin\ARM\Release\MyML.UWP_1.1.103.0_language-pt.appx
-ResourcePack=E:\_BACKUP PROJETOS\Git 01-04-2016\MyML.UWP\src\MyML.UWP\bin\ARM\Release\MyML.UWP_1.1.103.0_scale-100.appx
-ResourcePack=E:\_BACKUP PROJETOS\Git 01-04-2016\MyML.UWP\src\MyML.UWP\bin\ARM\Release\MyML.UWP_1.1.103.0_scale-125.appx
-ResourcePack=E:\_BACKUP PROJETOS\Git 01-04-2016\MyML.UWP\src\MyML.UWP\bin\ARM\Release\MyML.UWP_1.1.103.0_scale-150.appx
-ResourcePack=E:\_BACKUP PROJETOS\Git 01-04-2016\MyML.UWP\src\MyML.UWP\bin\ARM\Release\MyML.UWP_1.1.103.0_scale-400.appx
+MainPackage=C:\Users\Alexandre\git\MyML.UWP\src\MyML.UWP\bin\ARM\Release\MyML.UWP_1.1.116.0_ARM.appx
+SymbolPackage=C:\Users\Alexandre\git\MyML.UWP\src\MyML.UWP\AppPackages\MyML.UWP_1.1.116.0_Test\MyML.UWP_1.1.116.0_ARM.appxsym
+ResourcePack=C:\Users\Alexandre\git\MyML.UWP\src\MyML.UWP\bin\ARM\Release\MyML.UWP_1.1.116.0_language-pt.appx
+ResourcePack=C:\Users\Alexandre\git\MyML.UWP\src\MyML.UWP\bin\ARM\Release\MyML.UWP_1.1.116.0_scale-100.appx
+ResourcePack=C:\Users\Alexandre\git\MyML.UWP\src\MyML.UWP\bin\ARM\Release\MyML.UWP_1.1.116.0_scale-125.appx
+ResourcePack=C:\Users\Alexandre\git\MyML.UWP\src\MyML.UWP\bin\ARM\Release\MyML.UWP_1.1.116.0_scale-150.appx
+ResourcePack=C:\Users\Alexandre\git\MyML.UWP\src\MyML.UWP\bin\ARM\Release\MyML.UWP_1.1.116.0_scale-400.appx

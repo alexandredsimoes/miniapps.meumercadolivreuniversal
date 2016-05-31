@@ -15,6 +15,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Template10.Mvvm;
 using Template10.Services.NavigationService;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Navigation;
 
@@ -50,6 +51,19 @@ namespace MyML.UWP.ViewModels
                 });
             });
 
+            OpenSort = new RelayCommand(() =>
+            {
+                if (Items == null || Items.Count == 0) return;
+                NavigationService.Navigate(typeof(OrdernarBuscaPage));
+                Messenger.Default.Send<MessengerFilterDetails>(new MessengerFilterDetails()
+                {
+                    Filters = this.Filters,
+                    Sorts = this.Sorts,
+
+                });
+            });
+
+          
 
         }
 
@@ -57,10 +71,10 @@ namespace MyML.UWP.ViewModels
         {
             if (obj == null) return;
 
-            BuscaExecute(new[] { ResultQuery + "&" + obj.Result, "search" });
+            BuscaExecute(new[] { Searchterm + "&" + obj.Result, "search" });
         }
 
-        public async override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
+        public  override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             //if (state.ContainsKey("Searchterm"))
             //    Searchterm = (string)state["Searchterm"];
@@ -69,12 +83,12 @@ namespace MyML.UWP.ViewModels
             //    ScrollPosition = (int)state["SCROLL_POSITION"];
             //}
 
-            await new Windows.UI.Popups.MessageDialog(parameter.ToString(), "param").ShowAsync();
+            //await new Windows.UI.Popups.MessageDialog(parameter.ToString(), "param").ShowAsync();
             if (mode == NavigationMode.Back)
             {
                 //Items.GetEnumerator().
             }
-            //return Task.CompletedTask;
+            return Task.CompletedTask;
         }
 
         public override Task OnNavigatingFromAsync(NavigatingEventArgs args)
@@ -114,7 +128,10 @@ namespace MyML.UWP.ViewModels
 
         private void SelecionarProdutoExecute(object obj)
         {
-            var item = obj as Item;
+            var eArgs = obj as RoutedEventArgs;
+            var element = eArgs?.OriginalSource as FrameworkElement;
+            
+            var item = element?.DataContext as Item;
 
             if (item == null) return;
 
@@ -151,7 +168,7 @@ namespace MyML.UWP.ViewModels
             if (family.Equals("Windows.Desktop") || family.Equals("Windows.Xbox"))
                 pageSize = 30;
 
-            Items = new IncrementalSearchSource<SearchDataSource, Item>(0, pageSize, query, parametro[1] == "category" ? false : true);
+            Items = new IncrementalSearchSource<SearchDataSource, Item>(0, pageSize, query, parametro[1] != "category");
 
             Items.FiltersAvailable += Items_FiltersAvailable;
             Items.LoadMoreItemsCompleted += Items_LoadMoreItemsCompleted;
@@ -237,6 +254,7 @@ namespace MyML.UWP.ViewModels
         public RelayCommand<object> SelecionarProduto { get; private set; }
         public RelayCommand OpenFilter { get; private set; }
         public MLMyItemsSearchResult Items2 { get; private set; }
+        public RelayCommand OpenSort { get; set; }        
     }
     //public class FilterInfo : AvailableFilter
     //{

@@ -208,7 +208,7 @@ namespace MyML.UWP.ViewModels
 
                     var favorites = await _mercadoLivreService.GetBookmarkItems();
                     if (favorites != null)
-                        SelectedProduct.IsFavorite = favorites.Where(c => c.item_id == SelectedProduct.id).FirstOrDefault() != null;
+                        SelectedProduct.IsFavorite = favorites.FirstOrDefault(c => c.item_id == SelectedProduct.id) != null;
                     else
                         SelectedProduct.IsFavorite = false;
 
@@ -274,7 +274,7 @@ namespace MyML.UWP.ViewModels
                     }
                     else
                     {
-                        if (SelectedProduct.shipping != null && SelectedProduct.shipping.id != null)
+                        if (SelectedProduct.shipping?.id != null)
                         {
                             var shippingInfo = await _mercadoLivreService.GetShippingDetails(SelectedProduct.shipping.ToString());
                         }
@@ -362,6 +362,7 @@ namespace MyML.UWP.ViewModels
             get { return _ZoomMode; }
             set { Set(() => ZoomMode, ref _ZoomMode, value); }
         }
+
 
 
 

@@ -62,7 +62,7 @@ namespace MyML.UWP.ViewModels
 
         public RelayCommand<string> LoadProduto { get; private set; }
 
-        public async override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
+        public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             //await new MessageDialog("QUESTION_DETAIL = " + ApplicationData.Current.LocalSettings.Values["QUESTION_ID"]).ShowAsync();
             if (state.Any())
@@ -86,7 +86,7 @@ namespace MyML.UWP.ViewModels
                 if (!String.IsNullOrWhiteSpace(refreshToken))
                 {
                     var login = await _mercadoLivreServices.TryRefreshToken();
-                    if (login != null && !String.IsNullOrWhiteSpace(login.Refresh_Token))
+                    if (login != null && !string.IsNullOrWhiteSpace(login.Refresh_Token))
                     {
 #if DEBUG
                         Debug.WriteLine("LOGIN RESTAURADO ************************ ");
@@ -177,7 +177,6 @@ namespace MyML.UWP.ViewModels
 
             Shell.SetBusy(false);
             return Task.CompletedTask;
-
         }
 
         private async Task LoadSummary()

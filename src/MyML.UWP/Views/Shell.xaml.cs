@@ -15,55 +15,27 @@ namespace MyML.UWP.Views
     {
         double InitialManipulationPointX = 0;
         public static Shell Instance { get; set; }
-        public static HamburgerMenu HamburgerMenu { get { return Instance.MyHamburgerMenu; } }
+        public static HamburgerMenu HamburgerMenu => Instance.MyHamburgerMenu;
 
         public Shell()
         {
             Instance = this;
             InitializeComponent();
-            Loaded += Shell_Loaded;
-            ManipulationMode = ManipulationModes.TranslateX;
-            ManipulationStarted += Shell_ManipulationStarted;
-            ManipulationDelta += Shell_ManipulationDelta;
-            ManipulationCompleted += Shell_ManipulationCompleted;
-
-            //MyHamburgerMenu.PaneOpened += (sender, e) =>
-            //{
-            //    SeparadorVendas.Visibility = Windows.UI.Xaml.Visibility.Visible;
-            //    SeparadorCompras.Visibility = Windows.UI.Xaml.Visibility.Visible;
-            //};
-            //MyHamburgerMenu.PaneClosed += (sender, e) =>
-            //{
-            //    SeparadorVendas.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-            //    SeparadorCompras.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-            //};
+            MyHamburgerMenu.PaneOpened += (sender, e) =>
+            {
+                SeparadorVendas.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                SeparadorCompras.Visibility = Windows.UI.Xaml.Visibility.Visible;
+            };
+            MyHamburgerMenu.PaneClosed += (sender, e) =>
+            {
+                SeparadorVendas.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                SeparadorCompras.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            };
         }
 
-        private void Shell_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
-        {
-            InitialManipulationPointX = e.Position.X;
-            Debug.WriteLine("X -> " + InitialManipulationPointX);
-        }
 
-        private void Shell_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        public Shell(INavigationService navigationService) : this()
         {
-        }
-
-        private void Shell_ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
-        {
-            InitialManipulationPointX = e.Position.X;
-            Debug.WriteLine("X -> " + InitialManipulationPointX);
-        }
-
-        private void Shell_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            SettingsButton.IsEnabled = false;
-        }
-
-        public Shell(INavigationService navigationService)
-        {
-            Instance = this;
-            InitializeComponent();
             SetNavigationService(navigationService);
         }
 
@@ -79,18 +51,6 @@ namespace MyML.UWP.Views
                 Instance.BusyView.BusyText = text;
                 Instance.ModalContainer.IsModal = Instance.BusyView.IsBusy = busy;
             });
-        }
-
-        private void MyHamburgerMenu_PaneClosed(object sender, System.EventArgs e)
-        {
-            SeparadorVendas.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-            SeparadorCompras.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-        }
-
-        private void MyHamburgerMenu_PaneOpened(object sender, System.EventArgs e)
-        {
-            SeparadorVendas.Visibility = Windows.UI.Xaml.Visibility.Visible;
-            SeparadorCompras.Visibility = Windows.UI.Xaml.Visibility.Visible;
         }
     }
 }

@@ -92,11 +92,12 @@ namespace MyML.UWP.ViewModels.Design
 
 
 
-            Items = new MLMyItemsSearchResult();
-            Items.results_graph = new List<Item>();
+            //Items = new MLMyItemsSearchResult();
+            //Items.results_graph = new List<Item>();
+            Items = new List<Item>();
             for (int i = 0; i < 10; i++)
             {
-                Items.results_graph.Add(new Item()
+                Items.Add(new Item()
                 {
                     accepts_mercadopago = true,
                     available_quantity = 1,
@@ -122,7 +123,16 @@ namespace MyML.UWP.ViewModels.Design
                     {
 
                     },
-                    thumbnail = "ms-appx:///assets/memoria-kingston-1gb-ddr2-800mhz-kvr800d2n61g-15190-MLB20098034628_052014-F.jpg"
+                    thumbnail = "ms-appx:///assets/memoria-kingston-1gb-ddr2-800mhz-kvr800d2n61g-15190-MLB20098034628_052014-F.jpg",
+                    installments = new Installments()
+                    {
+                        amount =  400,
+                        quantity =  12
+                    },
+                    shipping = new Shipping()
+                    {
+                        free_shipping =  true,                        
+                    }
 
                 });
             }
@@ -555,7 +565,7 @@ namespace MyML.UWP.ViewModels.Design
         {
             get; set;
         }
-        public MLMyItemsSearchResult Items
+        public IList<Item> Items
         {
             get;
             set;

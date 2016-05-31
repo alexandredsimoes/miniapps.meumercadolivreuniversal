@@ -91,6 +91,11 @@ namespace MyML.UWP.Models
         /// Parametros: AccessToken
         /// </summary>
         public const string ML_UPLOAD_IMAGE = "https://api.mercadolibre.com/pictures?access_token={0}";
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string ML_VALIDATE_NEW_ITEM = "https://api.mercadolibre.com/items/validate?access_token={0}";
         #endregion
 
         #region Urls referente aos dados do usuario

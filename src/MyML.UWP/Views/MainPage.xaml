@@ -1,16 +1,11 @@
 ﻿<Page x:Class="MyML.UWP.Views.MainPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:Behaviors="using:Template10.Behaviors"
-      xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
-      xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
       xmlns:controls="using:Template10.Controls"
       xmlns:converters="using:MyML.UWP.Converters"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:local="using:MyML.UWP.Views"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:vm="using:MyML.UWP.ViewModels" mc:Ignorable="d"
-      xmlns:Universal="using:Microsoft.Advertising.WinRT.UI"
+      mc:Ignorable="d"
       xmlns:uc="using:MyML.UWP.Usercontrols">
 
     <Page.DataContext>
@@ -88,14 +83,14 @@
 
         <!--  page content  -->
         <ScrollViewer Grid.Row="2" VerticalAlignment="Top" 
-                    Padding="12,8,15,0" Visibility="{Binding IsAuthenticated, Converter={StaticResource BoolToVisibilityConverter}}">
-            <Grid >
-                <Grid.RowDefinitions>
+                    Padding="12,8,10,0" Visibility="{Binding IsAuthenticated, Converter={StaticResource BoolToVisibilityConverter}}">
+            <StackPanel>
+                <!--<Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
+                </Grid.RowDefinitions>-->
                 <TextBlock Text="Saldo no MercadoPago"  Grid.Row="0" Style="{StaticResource SubheaderTextBlockStyle}" Margin="10,19.8,0,10"/>
                 <Border Grid.Row="1" Margin="10" BorderBrush="#66A6A5A5" BorderThickness="0.5">
                     <Border.Background>
@@ -104,7 +99,7 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="2*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -133,8 +128,8 @@
                     </Border.Background>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="2*" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -155,7 +150,7 @@
                         <TextBlock Text="{Binding FinalizedItems, FallbackValue=0}" Grid.Row="2" Grid.Column="1" Margin="0,8,10,8" Style="{StaticResource BodyTextBlockStyle}" HorizontalAlignment="Right" />
                     </Grid>
                 </Border>
-            </Grid>
+            </StackPanel>
         </ScrollViewer>
 
 

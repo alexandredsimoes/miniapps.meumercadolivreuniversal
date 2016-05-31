@@ -6,16 +6,18 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    xmlns:Behaviors="using:Template10.Behaviors"
-    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
-    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:behaviors="using:Template10.Behaviors"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:controls="using:Template10.Controls"
+    xmlns:uwpControls="using:AppStudio.Uwp.Controls"
     xmlns:converters="using:MyML.UWP.Converters"
-    xmlns:convertersML="using:MyML.UWP.Converters.MercadoLivre"
+    xmlns:convertersMl="using:MyML.UWP.Converters.MercadoLivre"
     xmlns:designViewModels="using:MyML.UWP.ViewModels.Design"
     d:DataContext="{d:DesignInstance designViewModels:BuscaPageDesignViewModel, IsDesignTimeCreatable=True}"
     x:Name="ThePage"
-    xmlns:uc="using:MyML.UWP.Usercontrols">
+    xmlns:uc="using:MyML.UWP.Usercontrols"
+    xmlns:mercadolivre="using:MyML.UWP.Models.Mercadolivre">
     <Page.DataContext>
         <Binding Source="{StaticResource Locator}" Path="BuscaPage" />
     </Page.DataContext>
@@ -26,7 +28,7 @@
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
         <converters:InvertedBoolToVisibilityConverter x:Key="InvertedBoolToVisibilityConverter" />
         <converters:NullToVisibilitConverter x:Key="NullToVisibilitConverter" />
-        <convertersML:FavoritesOpacityConverter x:Key="FavoritesOpacityConverter" />
+        <convertersMl:FavoritesOpacityConverter x:Key="FavoritesOpacityConverter" />
         <converters:SelectedRangesToIntConverter x:Key="SelectedRangesToIntConverter" />
 
         <!--<ResourceDictionary Source="..\Styles\CustomListView.xaml" x:Key="CustomListView" />-->
@@ -36,6 +38,7 @@
         <CommandBar>
             <CommandBar.PrimaryCommands>
                 <AppBarButton Label="Filtrar" Icon="Filter" Command="{Binding OpenFilter}" />
+                <!--<AppBarButton Label="Ordenar" Icon="Sort" Command="{Binding OpenSort}" />-->
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </Page.BottomAppBar>
@@ -86,12 +89,14 @@
             </controls:PageHeader.Background>-->
             <!--<controls:PageHeader.PrimaryCommands>
                 <AppBarButton Label="Filtrar" Icon="Filter" Command="{Binding OpenFilter}" >
-                    --><!--<AppBarButton.Foreground>
+                    -->
+            <!--<AppBarButton.Foreground>
                         <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
-                    </AppBarButton.Foreground>--><!--
+                    </AppBarButton.Foreground>-->
+            <!--
                 </AppBarButton>
             </controls:PageHeader.PrimaryCommands>-->
-        </controls:PageHeader>       
+        </controls:PageHeader>
 
         <uc:AdsControl Grid.Row="1"/>
 
@@ -104,15 +109,70 @@
 
                 </Grid.RowDefinitions>
                 <TextBox Grid.Row="0" PlaceholderText="Entre aqui o que procura" x:Name="BuscaTextBox" Text="{Binding Searchterm, Mode=TwoWay}" x:Uid="BuscaTextBox" Margin="0,15,10,10" BorderBrush="#7F7A7A7A" BorderThickness="0,0,0,1" InputScope="Search">
-                    <Interactivity:Interaction.Behaviors>
-                        <Behaviors:KeyBehavior Key="Enter">
-                            <Core:InvokeCommandAction Command="{Binding Buscar}" CommandParameter="{Binding ElementName=BuscaTextBox, Path=Text}" />
-                        </Behaviors:KeyBehavior>
-                    </Interactivity:Interaction.Behaviors>
+                    <interactivity:Interaction.Behaviors>
+                        <behaviors:KeyBehavior Key="Enter">
+                            <core:InvokeCommandAction Command="{Binding Buscar}" CommandParameter="{Binding ElementName=BuscaTextBox, Path=Text}" />
+                        </behaviors:KeyBehavior>
+                    </interactivity:Interaction.Behaviors>
                 </TextBox>
 
                 <!--Resultado-->
-                <ListView  Visibility="Visible" Grid.Row="1" ItemsSource="{Binding Items}" x:Name="ProdutosListView" 
+                <uwpControls:ResponsiveGridView
+                    Visibility="Visible" Grid.Row="1" ItemsSource="{Binding Items}" x:Name="ProdutosListView" 
+                    Margin="12,12,6,12"                                        
+                    ItemHeight="200"  
+                    DesiredWidth="300">
+                    <uwpControls:ResponsiveGridView.Transitions>
+                        <TransitionCollection>
+                            <ReorderThemeTransition/>
+                        </TransitionCollection>
+                    </uwpControls:ResponsiveGridView.Transitions>
+                    <interactivity:Interaction.Behaviors>
+                        <core:EventTriggerBehavior EventName="Tapped">
+                            <core:InvokeCommandAction Command="{Binding ElementName=ThePage,Path=DataContext.SelecionarProduto}"  />
+                        </core:EventTriggerBehavior>
+                    </interactivity:Interaction.Behaviors>
+                    <uwpControls:ResponsiveGridView.ItemTemplate>
+                        <DataTemplate x:DataType="mercadolivre:Item">
+                            <Border BorderThickness="0,0,0,1" Padding="0" Margin="0,0,0,8">
+                                
+                                <!--<Border.Background>
+                                    <SolidColorBrush Color="{ThemeResource SystemChromeLowColor}"/>
+                                </Border.Background>-->
+                                
+                                <Border.BorderBrush>
+                                    <SolidColorBrush Color="{ThemeResource SystemChromeMediumLowColor}"/>
+                                </Border.BorderBrush>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="140"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <uwpControls:ImageEx Source="{Binding thumbnail}" Grid.Column="0" Foreground="{x:Null}" Background="{x:Null}"  />
+                                    <StackPanel Orientation="Vertical" Grid.Column="1" Margin="10,0,0,0">
+
+                                        <Grid Visibility="{Binding original_price, Converter={StaticResource NullToVisibilitConverter}}">
+                                            <TextBlock x:Name="OldPriceTextBlock" Text="{Binding original_price, ConverterParameter=\{0:c2\}, Converter={StaticResource StringFormatConverter}}" Style="{StaticResource BodyTextBlockStyle}" Opacity="0.455" />
+                                            <Line Stretch="Fill" StrokeThickness="2"  Stroke="{Binding ElementName=OldPriceTextBlock, Path=Foreground}" X1="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,3,0,0" Opacity="0.41" Width="120" />
+                                        </Grid>
+
+                                        <TextBlock Text="{Binding price, ConverterParameter=\{0:c2\}, Converter={StaticResource StringFormatConverter}}" Style="{StaticResource SubtitleTextBlockStyle}" />
+                                        <StackPanel Orientation="Horizontal" Visibility="{Binding installments, Converter={StaticResource NullToVisibilitConverter}}">
+                                            <uwpControls:ImageEx Source="assets\Transport-Van.128.png" Background="{x:Null}" Width="32" Height="32" Visibility="{Binding shipping.free_shipping, Converter={StaticResource BoolToVisibilityConverter}}" />
+                                            <TextBlock Text="{Binding installments.quantity}" VerticalAlignment="Center" />
+                                            <TextBlock Text="x" Margin="0,0,3,0" VerticalAlignment="Center" />
+                                            <TextBlock Text="{Binding installments.amount, ConverterParameter=\{0:c2\}, Converter={StaticResource StringFormatConverter}}" VerticalAlignment="Center" />
+                                        </StackPanel>
+                                        <TextBlock Text="{Binding title}" TextAlignment="Left" Margin="0,10,5,0" TextWrapping="Wrap" />
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </uwpControls:ResponsiveGridView.ItemTemplate>
+                </uwpControls:ResponsiveGridView>
+
+                <!--<ListView  Visibility="Collapsed" Grid.Row="1" ItemsSource="{Binding Items}" x:Name="ProdutosListView2" 
                            IsMultiSelectCheckBoxEnabled="False">
                     <Interactivity:Interaction.Behaviors>
                         <Core:EventTriggerBehavior EventName="Tapped">
@@ -160,9 +220,11 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Border BorderThickness="0,0,0,1" Padding="0" Margin="0,0,0,8">
-                                <!--<Border.Background>
+                                -->
+                <!--<Border.Background>
                                     <SolidColorBrush Color="{ThemeResource SystemChromeLowColor}"/>
                                 </Border.Background>-->
+                <!--
                                 <Border.BorderBrush>
                                     <SolidColorBrush Color="{ThemeResource SystemChromeMediumLowColor}"/>
                                 </Border.BorderBrush>
@@ -192,10 +254,11 @@
                             </Border>
                         </DataTemplate>
                     </ListView.ItemTemplate>
-                </ListView>
+                </ListView>-->
             </Grid>
         </Grid>
     </Grid>
 
 
 </Page>
+

@@ -4,7 +4,7 @@
                      xmlns:vm="using:MyML.UWP.ViewModels">
 
     <Application.Resources>
-        <ResourceDictionary Source="Styles\Custom.xaml" x:Key="CustomStyles" />
+        <ResourceDictionary Source="Styles\Custom.xaml"  />
     </Application.Resources>
 
 </common:BootStrapper>

@@ -13,10 +13,10 @@ namespace MyML.UWP.Views
         {
             InitializeComponent();
             NavigationCacheMode = NavigationCacheMode.Enabled;
-            ManipulationMode = ManipulationModes.TranslateX;
-            ManipulationStarted += Shell_ManipulationStarted;
-            ManipulationDelta += Shell_ManipulationDelta;
-            ManipulationCompleted += Shell_ManipulationCompleted;
+            //ManipulationMode = ManipulationModes.TranslateX;
+            //ManipulationStarted += Shell_ManipulationStarted;
+            //ManipulationDelta += Shell_ManipulationDelta;
+            //ManipulationCompleted += Shell_ManipulationCompleted;
 
             //AdMediator_DESKTOP.Visibility = App.ExibirAds ? Windows.UI.Xaml.Visibility.Visible : Windows.UI.Xaml.Visibility.Collapsed;
             //AdMediator_MOBILE.Visibility = App.ExibirAds ? Windows.UI.Xaml.Visibility.Visible : Windows.UI.Xaml.Visibility.Collapsed;

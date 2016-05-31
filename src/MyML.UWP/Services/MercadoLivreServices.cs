@@ -1493,5 +1493,64 @@ namespace MyML.UWP.Services
                 return false;
             }
         }
+
+        public async Task<bool> ValidateNewItem(SellItem itemInfo)
+        {
+            //
+            try
+            {
+                var accessToken = _dataService.GetMLConfig(Consts.ML_CONFIG_KEY_ACCESS_TOKEN);
+                var url = Consts.GetUrl(Consts.ML_VALIDATE_NEW_ITEM, accessToken);
+
+                _httpClient.DefaultRequestHeaders.Accept.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var obj = new
+                {
+                    title = itemInfo.Title,
+                    price = itemInfo.ProductValue,
+                    available_quantity = itemInfo.Quantity,
+                    condition = itemInfo.IsNew ?? false ? "new" : "used",
+                    description = itemInfo.ProductDescription,
+                    buying_mode = itemInfo.BuyingMode,
+                    currency_id = itemInfo.CurrencyId,
+                    category_id = itemInfo.ProductCategory,
+                    listing_type_id = itemInfo.ListType.id
+
+                };
+                var json = new StringContent(JsonConvert.SerializeObject(obj));
+
+
+                var response = await _httpClient.PostAsync(url, json);
+                var result = await response.Content.ReadAsStringAsync();
+                if (response.StatusCode == System.Net.HttpStatusCode.Created)
+                {
+                    return false;//await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<Item>(result));
+                }
+                else
+                {
+                    //Convertemos para o formato de erro
+                    var error = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<MLErrorRequest>(result));
+
+                    if (error != null)
+                    {
+
+                        await AppLogs.WriteLog("MercadoLivreServices.ListNewItem()", "Erro durante a criação do novo item", "");
+                        foreach (var item in error.cause)
+                        {
+                            await AppLogs.WriteLog("     ", item.code + " - " + item.message, "");
+                        }
+                    }
+
+                    AppLogs.WriteWarning("MercadoLivreServices.ListNewItem()", result);
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                AppLogs.WriteError("MercadoLivreServices.ListNewItem()", ex);
+                return false;
+            }
+        }
     }
 }

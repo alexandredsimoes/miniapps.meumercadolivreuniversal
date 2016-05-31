@@ -12,5 +12,6 @@ namespace MyML.UWP.Aggregattor
         public string Query { get; set; }
         public string Result { get; set; }
         public IList<AvailableFilter> SelectedFilters { get; set; }
+        public IList<AvailableSort> SelectedSorts { get; set; }
     }
 }

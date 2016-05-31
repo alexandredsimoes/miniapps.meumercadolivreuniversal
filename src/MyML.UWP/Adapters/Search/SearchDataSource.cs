@@ -42,7 +42,7 @@ namespace MyML.UWP.Adapters.Search
                     items = await _mercadoLivreServices.ListProductsByName(query, pageIndex, pageSize);                
 
 
-                bool success = items == null ? false : items.results.Count > 0;
+                bool success = items != null && items.results.Count > 0;
 
                 if (success)
                 {

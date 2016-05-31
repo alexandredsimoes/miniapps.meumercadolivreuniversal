@@ -55,7 +55,7 @@ namespace MyML.UWP.ViewModels
 
         }
 
-        public async override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
+        public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             if (!_dataService.IsAuthenticated())
             {

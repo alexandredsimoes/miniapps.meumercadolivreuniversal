@@ -19,11 +19,15 @@ namespace MyML.UWP.ViewModels
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-            SimpleIoc.Default.Register<IDataService, DataService>();
-            SimpleIoc.Default.Register<IMercadoLivreService, MercadoLivreServices>();
-            SimpleIoc.Default.Register(() => new ResourceLoader());
-            SimpleIoc.Default.Register(() => new HttpClient(), false);
-            
+
+            if(!GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic)
+            {
+                SimpleIoc.Default.Register<IDataService, DataService>();
+                SimpleIoc.Default.Register<IMercadoLivreService, MercadoLivreServices>();
+                SimpleIoc.Default.Register(() => new ResourceLoader());
+                SimpleIoc.Default.Register(() => new HttpClient(), false);
+            }
+
 
             SimpleIoc.Default.Register<MainPageViewModel>();
             SimpleIoc.Default.Register<DetailPageViewModel>();
@@ -53,6 +57,9 @@ namespace MyML.UWP.ViewModels
             SimpleIoc.Default.Register<CompraQualificarPageViewModel>();
             SimpleIoc.Default.Register<VenderPageViewModel>();
             SimpleIoc.Default.Register<ProdutoDetalheEnvioPageViewModel>();
+            SimpleIoc.Default.Register<OrdernarBuscaPageViewModel>();
+            
+
 
             var telemetryClient = new TelemetryClient();
             SimpleIoc.Default.Register(() => telemetryClient);
@@ -86,6 +93,8 @@ namespace MyML.UWP.ViewModels
         public VenderPageViewModel VenderPage => ServiceLocator.Current.GetInstance<VenderPageViewModel>();
         public ProdutoDetalheEnvioPageViewModel ProdutoDetalheEnvioPage => ServiceLocator.Current.GetInstance<ProdutoDetalheEnvioPageViewModel>();
         public SettingsPageViewModel SettingsPage => ServiceLocator.Current.GetInstance<SettingsPageViewModel>();
+        public OrdernarBuscaPageViewModel OrdernarBuscaPage => ServiceLocator.Current.GetInstance<OrdernarBuscaPageViewModel>();
+
         
 
 
