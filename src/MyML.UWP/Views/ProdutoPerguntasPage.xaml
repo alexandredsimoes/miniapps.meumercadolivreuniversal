@@ -58,7 +58,7 @@
         </Grid.RowDefinitions>
 
         <!--  page header  -->
-        <controls:PageHeader Content="Perguntas ao vendedor">
+        <controls:PageHeader Content="Perguntas ao vendedor" Background="{StaticResource MercadoLivreBackgroundColor}" Foreground="{StaticResource MercadoLivreForegroundColor}">
             <!--<controls:PageHeader.Foreground>
                 <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
             </controls:PageHeader.Foreground>

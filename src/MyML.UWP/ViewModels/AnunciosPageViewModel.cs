@@ -70,7 +70,7 @@ namespace MyML.UWP.ViewModels
             {
                 await LoadAdverts();
             }
-        }
+        }        
 
         public override Task OnNavigatedFromAsync(IDictionary<string, object> pageState, bool suspending)
         {
@@ -124,6 +124,14 @@ namespace MyML.UWP.ViewModels
             get { return _HasClosedItems; }
             set { Set(() => HasClosedItems, ref _HasClosedItems, value); }
         }
+
+        private int _SelectedIndex;
+        public int SelectedIndex
+        {
+            get { return _SelectedIndex; }
+            set { _SelectedIndex = value; }
+        }
+
 
         private IncrementalSearchSource<AdvertsDataSource, Item> _Items;
         public IncrementalSearchSource<AdvertsDataSource, Item> Items

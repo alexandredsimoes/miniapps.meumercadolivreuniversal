@@ -61,6 +61,12 @@ namespace MyML.UWP.Services
         Task<MLOrder> ListRecentOrders(int pageIndex = 0, int pageSize = 0, params KeyValuePair<string, string>[] attributes);
         Task<MLImage> UploadProductImage(ProductImage image);
         Task<bool> AddPicture(string pictureId, string itemId);
-        Task<bool> ValidateNewItem(SellItem itemInfo);
+        Task<MLErrorRequest> ValidateNewItem(SellItem itemInfo);
+
+        Task<MLOrder> ListArchivedSellerOrders(int pageIndex = 0, int pageSize = 0,
+            params KeyValuePair<string, string>[] attributes);
+
+        Task<MLOrder> ListArchivedBuyerOrders(int pageIndex = 0, int pageSize = 0,
+            params KeyValuePair<string, string>[] attributes);
     }
 }

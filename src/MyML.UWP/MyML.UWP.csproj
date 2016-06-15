@@ -11,7 +11,7 @@
     <AssemblyName>MyML.UWP</AssemblyName>
     <DefaultLanguage>pt-BR</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
+    <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
@@ -115,7 +115,9 @@
     <Compile Include="Adapters\MercadoLivreIncrementalLoadingClass.cs" />
     <Compile Include="Adapters\Search\AdvertsDataSource.cs" />
     <Compile Include="Adapters\Search\IncrementalSearchSource.cs" />
+    <Compile Include="Adapters\Search\OrdersArchivedDataSource.cs" />
     <Compile Include="Adapters\Search\OrdersDataSource.cs" />
+    <Compile Include="Adapters\Search\OrdersResponse.cs" />
     <Compile Include="Adapters\Search\QuestionDataSource.cs" />
     <Compile Include="Adapters\Search\SearchDataSource.cs" />
     <Compile Include="Aggregattor\MessengerDetails.cs" />
@@ -231,6 +233,7 @@
     <Compile Include="ViewModels\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\VendaDetalhePageViewModel.cs" />
     <Compile Include="ViewModels\VendaQualificarPageViewModel.cs" />
+    <Compile Include="ViewModels\VendasArquivadasPageViewModel.cs" />
     <Compile Include="ViewModels\VendasPageViewModel.cs" />
     <Compile Include="ViewModels\VendedorInfoPageViewModel.cs" />
     <Compile Include="ViewModels\VenderPageViewModel.cs" />
@@ -312,6 +315,9 @@
     </Compile>
     <Compile Include="Views\Secure\VendaDetalhePage.xaml.cs">
       <DependentUpon>VendaDetalhePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Secure\VendasArquivadasPage.xaml.cs">
+      <DependentUpon>VendasArquivadasPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Secure\VendasPage.xaml.cs">
       <DependentUpon>VendasPage.xaml</DependentUpon>
@@ -538,6 +544,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Secure\VendasArquivadasPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Secure\VendasPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -580,10 +590,10 @@
     <SDKReference Include="SQLite.UWP.2015, Version=3.13.0">
       <Name>SQLite for Universal Windows Platform</Name>
     </SDKReference>
-    <SDKReference Include="WindowsMobile, Version=10.0.10240.0">
+    <SDKReference Include="WindowsMobile, Version=10.0.10586.0">
       <Name>Windows Mobile Extensions for the UWP</Name>
     </SDKReference>
-    <SDKReference Include="WindowsTeam, Version=10.0.10240.0">
+    <SDKReference Include="WindowsTeam, Version=10.0.10586.0">
       <Name>Windows Team Extensions for the UWP</Name>
     </SDKReference>
   </ItemGroup>

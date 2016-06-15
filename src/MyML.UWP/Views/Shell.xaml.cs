@@ -5,6 +5,7 @@ using Template10.Common;
 using Template10.Controls;
 using Template10.Services.NavigationService;
 using Windows.UI.Core;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 
@@ -31,6 +32,35 @@ namespace MyML.UWP.Views
                 SeparadorVendas.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
                 SeparadorCompras.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             };
+
+
+            if (App.ExibirAds == false)
+            {
+                AdMediatorMobile.Visibility = Visibility.Collapsed;
+                AdMediatorMobile.Opacity = 0;
+            }
+            else
+            {
+                var family = Windows.System.Profile.AnalyticsInfo.VersionInfo.DeviceFamily;
+                if (family.Equals("Windows.Desktop") || family.Equals("Windows.Xbox") || family.Equals("Windows.IoT"))
+                {
+                    AdMediatorMobile.Height = 90;
+                    AdMediatorMobile.Width = 728;
+                }
+                else if (family.Equals("Windows.Mobile"))
+                {
+                    AdMediatorMobile.Height = 50;
+                    AdMediatorMobile.Width = 300;
+                }
+                else
+                {
+                    AdMediatorMobile.Height = 50;
+                    AdMediatorMobile.Width = 300;
+                }
+
+                AdMediatorMobile.Visibility = Visibility.Visible;
+                AdMediatorMobile.Opacity = 1;
+            }
         }
 
 

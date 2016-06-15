@@ -198,7 +198,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition />
         </Grid.RowDefinitions>
-        <controls:PageHeader Content="Vender">
+        <controls:PageHeader Content="Vender" Background="{StaticResource MercadoLivreBackgroundColor}" Foreground="{StaticResource MercadoLivreForegroundColor}">
 
         </controls:PageHeader>
 

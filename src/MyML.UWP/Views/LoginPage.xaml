@@ -54,7 +54,7 @@
         </Grid.RowDefinitions>
 
         <!--  page header  -->
-        <controls:PageHeader Content="Autenticação" x:Uid="PageTitleHeader">
+        <controls:PageHeader Content="Autenticação" x:Uid="PageTitleHeader" Background="{StaticResource MercadoLivreBackgroundColor}" Foreground="{StaticResource MercadoLivreForegroundColor}">
             <!--<controls:PageHeader.Foreground>
                 <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
             </controls:PageHeader.Foreground>

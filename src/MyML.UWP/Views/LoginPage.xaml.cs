@@ -68,13 +68,15 @@ namespace MyML.UWP.Views
 #endif
                         //LoginWebview.Opacity = 0;
                         //LoginWebview.Stop();
-                        List<KeyValuePair<string, string>> parametros = new List<KeyValuePair<string, string>>();
+                        List<KeyValuePair<string, string>> parametros = new List<KeyValuePair<string, string>>
+                        {
+                            new KeyValuePair<string, string>("client_id", Consts.ML_CLIENT_ID),
+                            new KeyValuePair<string, string>("client_secret", Consts.ML_API_KEY),
+                            new KeyValuePair<string, string>("redirect_uri", Consts.ML_RETURN_URL),
+                            new KeyValuePair<string, string>("code", code),
+                            new KeyValuePair<string, string>("grant_type", "authorization_code")
+                        };
 
-                        parametros.Add(new KeyValuePair<string, string>("client_id", Consts.ML_CLIENT_ID));
-                        parametros.Add(new KeyValuePair<string, string>("client_secret", Consts.ML_API_KEY));
-                        parametros.Add(new KeyValuePair<string, string>("redirect_uri", Consts.ML_RETURN_URL));
-                        parametros.Add(new KeyValuePair<string, string>("code", code));
-                        parametros.Add(new KeyValuePair<string, string>("grant_type", "authorization_code"));
 
 #if DEBUG
                         Debug.WriteLine("Enviando codigo recebido " + code);

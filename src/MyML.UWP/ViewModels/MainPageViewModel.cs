@@ -18,6 +18,7 @@ using Windows.ApplicationModel.Email;
 using System.Diagnostics;
 using Windows.ApplicationModel.Background;
 using Windows.UI.Notifications;
+using MyML.UWP.Views.Secure;
 
 namespace MyML.UWP.ViewModels
 {
@@ -32,6 +33,10 @@ namespace MyML.UWP.ViewModels
             _dataService = dataService;
             _mercadoLivreServices = mercadoLivreService;
             _resourceLoader = resourceLoader;
+            GotoItem = new RelayCommand<string>((s) =>
+            {
+                NavigationService.Navigate(typeof(AnunciosPage), s);
+            });
 
             LoadProduto = new RelayCommand<string>((parametro) =>
            {
@@ -283,6 +288,7 @@ namespace MyML.UWP.ViewModels
 
         public RelayCommand RevokeAccess { get; private set; }
         public RelayCommand DoLogin { get; private set; }
+        public RelayCommand<string> GotoItem { get; private set; }
     }
 }
 

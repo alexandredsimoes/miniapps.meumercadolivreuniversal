@@ -409,11 +409,11 @@
                             </ImageBrush>
                         </Ellipse.Fill>
                     </Ellipse>
-                    <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                    <StackPanel Grid.Row="0" Grid.Column="1" Margin="10,0,0,0">
                         <TextBlock Text="{Binding order_items[0].item.title}" TextWrapping="Wrap" Style="{StaticResource BaseTextBlockStyle}" />
                         <TextBlock x:Name="PrecoTextBlock" Grid.Row="1" Text="{Binding total_amount, ConverterParameter=\{0:c2\}, Converter={StaticResource StringFormatConverter}}" Style="{StaticResource BodyTextBlockStyle}"  TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FFBB0000" FontWeight="Bold" />
                     </StackPanel>
-                    <Border Grid.ColumnSpan="2" Grid.Row="2" BorderThickness="0,0.5,0,0" Margin="0,10,0,0" >
+                    <Border Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="2" BorderThickness="0,0.5,0,0" Margin="0,10,0,0" >
                         <Border.BorderBrush>
                             <SolidColorBrush Color="{ThemeResource SystemBaseMediumLowColor}"/>
                         </Border.BorderBrush>
@@ -495,13 +495,8 @@
         </Grid.RowDefinitions>
 
         <!--  page header  -->
-        <controls:PageHeader Content="Vendas">
-            <!--<controls:PageHeader.Foreground>
-                <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
-            </controls:PageHeader.Foreground>
-            <controls:PageHeader.Background>
-                <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
-            </controls:PageHeader.Background>-->
+        <controls:PageHeader Content="Vendas" Background="{StaticResource MercadoLivreBackgroundColor}" Foreground="{StaticResource MercadoLivreForegroundColor}">
+
         </controls:PageHeader>
 
         <uc:AdsControl Grid.Row="1"/>
@@ -525,6 +520,7 @@
                     <StackPanel  Grid.Row="2" Margin="20" x:Name="EmptyMsg" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock Text="Você ainda não tem vendas abertas" Style="{StaticResource SubheaderTextBlockStyle}" />
                         <TextBlock Text="Você já revisou suas vendas encerradas?" Style="{StaticResource BodyTextBlockStyle}" />
+                        <HyperlinkButton Content="Veja também suas vendas arquivadas"  Command="{Binding ShowAchivedOrders}" />
                     </StackPanel>
                     
                 </Grid>

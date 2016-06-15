@@ -805,7 +805,7 @@ namespace MyML.UWP.Services
             {
                 var accessToken = _dataService.GetMLConfig(Consts.ML_CONFIG_KEY_ACCESS_TOKEN);
                 var userId = _dataService.GetMLConfig(Consts.ML_CONFIG_KEY_USER_ID);
-                var url = Consts.GetUrl(Consts.ML_MYORDERS_LIST_URL, userId, accessToken);
+                var url = Consts.GetUrl(Consts.MlMyordersListUrl, userId, accessToken);
 
                 if (pageIndex > 0)
                 {
@@ -858,7 +858,7 @@ namespace MyML.UWP.Services
             {
                 var accessToken = _dataService.GetMLConfig(Consts.ML_CONFIG_KEY_ACCESS_TOKEN);
                 var userId = _dataService.GetMLConfig(Consts.ML_CONFIG_KEY_USER_ID);
-                var url = Consts.GetUrl(Consts.ML_ORDERS_LIST, userId, accessToken);
+                var url = Consts.GetUrl(Consts.MlOrdersList, userId, accessToken);
 
                 if (pageIndex >= 0)
                 {
@@ -911,7 +911,7 @@ namespace MyML.UWP.Services
             {
                 var accessToken = _dataService.GetMLConfig(Consts.ML_CONFIG_KEY_ACCESS_TOKEN);
                 var userId = _dataService.GetMLConfig(Consts.ML_CONFIG_KEY_USER_ID);
-                var url = Consts.GetUrl(Consts.ML_RECENT_ORDERS_LIST, userId, accessToken);
+                var url = Consts.GetUrl(Consts.MlRecentOrdersList, userId, accessToken);
 
                 if (pageIndex >= 0)
                 {
@@ -963,7 +963,7 @@ namespace MyML.UWP.Services
             try
             {
                 var accessToken = _dataService.GetMLConfig(Consts.ML_CONFIG_KEY_ACCESS_TOKEN);
-                var url = Consts.GetUrl(Consts.ML_URL_ORDER_FEEDBACK, orderId, accessToken);
+                var url = Consts.GetUrl(Consts.MlUrlOrderFeedback, orderId, accessToken);
 
 
                 var response = await _httpClient.GetAsync(url, HttpCompletionOption.ResponseContentRead).ConfigureAwait(false);
@@ -977,6 +977,112 @@ namespace MyML.UWP.Services
             catch (Exception ex)
             {
                 AppLogs.WriteError("MercadoLivreServices.GetOrderFeedback()", ex);
+                return null;
+            }
+        }
+
+        public async Task<MLOrder> ListArchivedSellerOrders(int pageIndex = 0, int pageSize = 0, params KeyValuePair<string, string>[] attributes)
+        {
+            try
+            {
+                var accessToken = _dataService.GetMLConfig(Consts.ML_CONFIG_KEY_ACCESS_TOKEN);
+                var userId = _dataService.GetMLConfig(Consts.ML_CONFIG_KEY_USER_ID);
+                var url = Consts.GetUrl(Consts.MlUrlOrderSellerArchived, userId, accessToken);
+
+                if (pageIndex > 0)
+                {
+                    url = String.Concat(url, String.Format("&limit={0}&offset={1}", pageSize, pageIndex));
+                }
+
+                if (attributes != null && attributes.Length > 0)
+                {
+                    for (int i = 0; i < attributes.Length; i++)
+                    {
+                        //Concatena com & + chave + = + valor e virgula se for necessario
+                        url = string.Concat(url, "&", attributes[i].Key, "=", attributes[i].Value, i < (attributes.Length - 1) ? "," : string.Empty);
+                    }
+                }
+
+                var response = await _httpClient.GetAsync(url, HttpCompletionOption.ResponseContentRead);
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    var result = JsonConvert.DeserializeObject<MLOrder>(await response.Content.ReadAsStringAsync());
+
+                    if (result != null)
+                    {
+                        foreach (var item in result.results)
+                        {
+                            foreach (var order in item.order_items)
+                            {
+                                if (order.item != null)
+                                {
+                                    var thumbmnail = await GetItemDetails(order.item.id, new KeyValuePair<string, string>[] { new KeyValuePair<string, string>("attributes", "thumbnail") });
+                                    if (thumbmnail != null)
+                                        order.item.thumbnail = thumbmnail.thumbnail;
+                                }
+                            }
+                        }
+                    }
+                    return result;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                AppLogs.WriteError("MercadoLivreServices.ListMyOrders()", ex);
+                return null;
+            }
+        }
+
+        public async Task<MLOrder> ListArchivedBuyerOrders(int pageIndex = 0, int pageSize = 0, params KeyValuePair<string, string>[] attributes)
+        {
+            try
+            {
+                var accessToken = _dataService.GetMLConfig(Consts.ML_CONFIG_KEY_ACCESS_TOKEN);
+                var userId = _dataService.GetMLConfig(Consts.ML_CONFIG_KEY_USER_ID);
+                var url = Consts.GetUrl(Consts.MlUrlOrderBuyerArchived, userId, accessToken);
+
+                if (pageIndex > 0)
+                {
+                    url = String.Concat(url, String.Format("&limit={0}&offset={1}", pageSize, pageIndex));
+                }
+
+                if (attributes != null && attributes.Length > 0)
+                {
+                    for (int i = 0; i < attributes.Length; i++)
+                    {
+                        //Concatena com & + chave + = + valor e virgula se for necessario
+                        url = string.Concat(url, "&", attributes[i].Key, "=", attributes[i].Value, i < (attributes.Length - 1) ? "," : string.Empty);
+                    }
+                }
+
+                var response = await _httpClient.GetAsync(url, HttpCompletionOption.ResponseContentRead);
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    var result = JsonConvert.DeserializeObject<MLOrder>(await response.Content.ReadAsStringAsync());
+
+                    if (result != null)
+                    {
+                        foreach (var item in result.results)
+                        {
+                            foreach (var order in item.order_items)
+                            {
+                                if (order.item != null)
+                                {
+                                    var thumbmnail = await GetItemDetails(order.item.id, new KeyValuePair<string, string>[] { new KeyValuePair<string, string>("attributes", "thumbnail") });
+                                    if (thumbmnail != null)
+                                        order.item.thumbnail = thumbmnail.thumbnail;
+                                }
+                            }
+                        }
+                    }
+                    return result;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                AppLogs.WriteError("MercadoLivreServices.ListMyOrders()", ex);
                 return null;
             }
         }
@@ -1197,7 +1303,7 @@ namespace MyML.UWP.Services
             try
             {
                 var accessToken = _dataService.GetMLConfig(Consts.ML_CONFIG_KEY_ACCESS_TOKEN);
-                var url = Consts.GetUrl(Consts.ML_ORDER_DETAILS, orderId, accessToken);
+                var url = Consts.GetUrl(Consts.MlOrderDetails, orderId, accessToken);
 
                 var response = await _httpClient.GetAsync(url, HttpCompletionOption.ResponseContentRead).ConfigureAwait(true);
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
@@ -1338,7 +1444,7 @@ namespace MyML.UWP.Services
                 _httpClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
                 var accessToken = _dataService.GetMLConfig(Consts.ML_CONFIG_KEY_ACCESS_TOKEN);
-                var url = Consts.GetUrl(Consts.ML_URL_ORDER_FEEDBACK, orderId, accessToken);
+                var url = Consts.GetUrl(Consts.MlUrlOrderFeedback, orderId, accessToken);
 
 
                 var jason = string.Empty;
@@ -1385,7 +1491,7 @@ namespace MyML.UWP.Services
                 _httpClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
                 var accessToken = _dataService.GetMLConfig(Consts.ML_CONFIG_KEY_ACCESS_TOKEN);
-                var url = Consts.GetUrl(Consts.ML_URL_ORDER_FEEDBACK, orderId, accessToken);
+                var url = Consts.GetUrl(Consts.MlUrlOrderFeedback, orderId, accessToken);
 
 
                 var jason = string.Empty;
@@ -1494,7 +1600,7 @@ namespace MyML.UWP.Services
             }
         }
 
-        public async Task<bool> ValidateNewItem(SellItem itemInfo)
+        public async Task<MLErrorRequest> ValidateNewItem(SellItem itemInfo)
         {
             //
             try
@@ -1523,9 +1629,9 @@ namespace MyML.UWP.Services
 
                 var response = await _httpClient.PostAsync(url, json);
                 var result = await response.Content.ReadAsStringAsync();
-                if (response.StatusCode == System.Net.HttpStatusCode.Created)
+                if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
                 {
-                    return false;//await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<Item>(result));
+                    return null;
                 }
                 else
                 {
@@ -1544,12 +1650,12 @@ namespace MyML.UWP.Services
 
                     AppLogs.WriteWarning("MercadoLivreServices.ListNewItem()", result);
                 }
-                return false;
+                return null;
             }
             catch (Exception ex)
             {
                 AppLogs.WriteError("MercadoLivreServices.ListNewItem()", ex);
-                return false;
+                return null;
             }
         }
     }

@@ -125,6 +125,9 @@ namespace MyML.UWP
         // runs even if restored from state
         public override async Task OnInitializeAsync(IActivatedEventArgs args)
         {
+            //Efetua a verificação da licença do usuário (remover ADS)
+            VerifyLicense();
+
             if (!(Window.Current.Content is ModalDialog))
             {
                 // create a new frame 
@@ -205,11 +208,7 @@ namespace MyML.UWP
                     ds.Initialize();
                 }
 
-                
-
-                //Efetua a verificação da licença do usuário (remover ADS)
-                VerifyLicense();
-
+               
                 await RegisterBackgroundTask();
 
                 try

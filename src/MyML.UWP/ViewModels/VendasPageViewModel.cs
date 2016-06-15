@@ -14,6 +14,8 @@ using Template10.Mvvm;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Navigation;
+using GalaSoft.MvvmLight.Views;
+using MyML.UWP.Models;
 
 namespace MyML.UWP.ViewModels
 {
@@ -22,6 +24,7 @@ namespace MyML.UWP.ViewModels
         private readonly IMercadoLivreService _mercadoLivreService;
         private readonly ResourceLoader _resourceLoader;
         private readonly IDataService _dataService;
+
         public VendasPageViewModel(IMercadoLivreService mercadoLivreService, ResourceLoader resourceLoader,
             IDataService dataService)
         {
@@ -38,8 +41,13 @@ namespace MyML.UWP.ViewModels
                 NavigationService.Navigate(typeof(VendaDetalhePage), item.id);
             });
 
+            ShowAchivedOrders = new RelayCommand(() =>
+            {
+                NavigationService.Navigate(typeof(VendasArquivadasPage));
+            });
+
         }
-        public async override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
+        public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             if (mode != NavigationMode.Back)
                 await LoadShopping();
@@ -97,6 +105,7 @@ namespace MyML.UWP.ViewModels
 
         public RelayCommand Refresh { get; private set; }
         public RelayCommand<object> SelectOrder { get; private set; }
+        public RelayCommand ShowAchivedOrders { get; private set; }
 
         private IncrementalSearchSource<OrdersDataSource, MLOrderInfo> _Orders;
         public IncrementalSearchSource<OrdersDataSource, MLOrderInfo> Orders
@@ -111,5 +120,7 @@ namespace MyML.UWP.ViewModels
             get { return _OrdersClosed; }
             set { Set(() => OrdersClosed, ref _OrdersClosed, value); }
         }
+
+        public bool ArchivedMode { get; set; } = false;
     }
 }

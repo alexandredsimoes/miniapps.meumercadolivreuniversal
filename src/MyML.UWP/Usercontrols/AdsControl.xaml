@@ -40,7 +40,7 @@
 
     <Grid>
 
-        <universal:AdMediatorControl Height="50" Width="300" Margin="0,5,0,5" x:Name="AdMediatorMobile" Id="AdMediatorTopMobile" />
+        <!--<universal:AdMediatorControl Height="50" Width="300" Margin="0,5,0,5" x:Name="AdMediatorMobile" Id="AdMediatorTopMobile" />-->
 
         <!--<adduplex:AdControl  Margin="5" x:Name="AdMediator_MOBILE"  />-->
     </Grid>

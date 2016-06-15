@@ -225,24 +225,36 @@ namespace MyML.UWP.Models
         /// <summary>
         /// Parâmetros UserId, Access Token
         /// </summary>
-        public const string ML_ORDERS_LIST = "https://api.mercadolibre.com/orders/search?seller={0}&access_token={1}";
-        public const string ML_RECENT_ORDERS_LIST = "https://api.mercadolibre.com/orders/search/recent/?seller={0}&access_token={1}";
+        public const string MlOrdersList = "https://api.mercadolibre.com/orders/search?seller={0}&access_token={1}";
+        public const string MlRecentOrdersList = "https://api.mercadolibre.com/orders/search/recent/?seller={0}&access_token={1}";
 
         /// <summary>
         /// 
         /// </summary>
-        public const string ML_ORDER_DETAILS = "https://api.mercadolibre.com/orders/{0}?access_token={1}";
+        public const string MlOrderDetails = "https://api.mercadolibre.com/orders/{0}?access_token={1}";
         
 
         /// <summary>
         /// Parâmetros UserId, Access Token
         /// </summary>
-        public const string ML_MYORDERS_LIST_URL = "https://api.mercadolibre.com/orders/search?buyer={0}&access_token={1}";
+        public const string MlMyordersListUrl = "https://api.mercadolibre.com/orders/search?buyer={0}&access_token={1}";
 
         /// <summary>
         /// Parametros OrderId, AccessToken
         /// </summary>
-        public const string ML_URL_ORDER_FEEDBACK = "https://api.mercadolibre.com/orders/{0}/feedback?access_token={1}";
+        public const string MlUrlOrderFeedback = "https://api.mercadolibre.com/orders/{0}/feedback?access_token={1}";
+
+        /// <summary>
+        /// Vendas arquivadas
+        /// Parametros: SellerId, AccessToken
+        /// </summary>
+        public const string MlUrlOrderSellerArchived = "https://api.mercadolibre.com/orders/search/archived?seller={0}&access_token={1}";
+
+        /// <summary>
+        /// Compras arquivadas
+        /// Parametros: BuyerId, AccessToken
+        /// </summary>
+        public const string MlUrlOrderBuyerArchived = "https://api.mercadolibre.com/orders/search/archived?buyer={0}&access_token={1}";
 
 
         #endregion

@@ -56,7 +56,9 @@ namespace MyML.UWP.ViewModels
             SimpleIoc.Default.Register<CompraQualificarPageViewModel>();
             SimpleIoc.Default.Register<VenderPageViewModel>();
             SimpleIoc.Default.Register<ProdutoDetalheEnvioPageViewModel>();
-            SimpleIoc.Default.Register<OrdernarBuscaPageViewModel>();                                   
+            SimpleIoc.Default.Register<OrdernarBuscaPageViewModel>();
+            SimpleIoc.Default.Register<VendasArquivadasPageViewModel>();
+            
         }
 
         public MainPageViewModel MainPage => ServiceLocator.Current.GetInstance<MainPageViewModel>();
@@ -87,8 +89,11 @@ namespace MyML.UWP.ViewModels
         public ProdutoDetalheEnvioPageViewModel ProdutoDetalheEnvioPage => ServiceLocator.Current.GetInstance<ProdutoDetalheEnvioPageViewModel>();
         public SettingsPageViewModel SettingsPage => ServiceLocator.Current.GetInstance<SettingsPageViewModel>();
         public OrdernarBuscaPageViewModel OrdernarBuscaPage => ServiceLocator.Current.GetInstance<OrdernarBuscaPageViewModel>();
+        public VendasArquivadasPageViewModel VendasArquivadasPage => ServiceLocator.Current.GetInstance<VendasArquivadasPageViewModel>();
 
         
+
+
 
 
     }

@@ -82,8 +82,20 @@ namespace MyML.UWP.ViewModels
                 }
 
                 ////Valida o anuncio antes
-                //await _mercadoLivreServices.ValidateNewItem(_ProductInfo);
-                //return;
+                var result = await _mercadoLivreServices.ValidateNewItem(_ProductInfo);
+
+                if (result != null)
+                {
+                    var message = new StringBuilder();
+
+                    foreach (var item in result.cause)
+                    {
+                        message.Append($"{item.code}-{item.message}{Environment.NewLine}");
+                    }
+                    await new MessageDialog($"Ocorreu o seguinte erro:{Environment.NewLine}{message.ToString()}",
+                                                _resourceLoader.GetString("ApplicationTitle")).ShowAsync();
+                    return;
+                }
 
                 var r = await _mercadoLivreServices.ListNewItem(_ProductInfo);
 
@@ -263,11 +275,17 @@ namespace MyML.UWP.ViewModels
                 return;
             }
 
+            if (ActualPart == 9 && SelectedListingPrice == null)
+            {
+                await new MessageDialog("Selecione o tipo de anúncio.", _resourceLoader.GetString("ApplicationTitle")).ShowAsync();
+                return;
+            }
+
 
             ActualPart++;
 
             var handler = PartChanged;
-            if (handler != null) handler(ActualPart);
+            handler?.Invoke(ActualPart);
 
 
             if (ActualPart == 7)

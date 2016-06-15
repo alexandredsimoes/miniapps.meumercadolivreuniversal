@@ -9,8 +9,8 @@
 
 
     <!--<SolidColorBrush x:Key="MercadoLivreBackgroundColor" Color="#FF494949" />-->
-    <SolidColorBrush x:Key="MercadoLivreBackgroundColor" Color="{ThemeResource SystemChromeHighColor}" />
-    <SolidColorBrush x:Key="MercadoLivreForegroundColor" Color="#B2FFFFFF" />
+    <SolidColorBrush x:Key="MercadoLivreBackgroundColor" Color="#FFF7CD0E" />
+    <SolidColorBrush x:Key="MercadoLivreForegroundColor" Color="#FF010F66" />
     <!--<SolidColorBrush x:Key="MercadoLivreForegroundColor" Color="#B2FFFFFF" />-->
     
     

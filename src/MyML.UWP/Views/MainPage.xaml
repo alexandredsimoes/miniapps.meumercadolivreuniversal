@@ -69,7 +69,7 @@
         </Grid.RowDefinitions>
 
         <!--  page header  -->
-        <controls:PageHeader Grid.Row="0" Content="Meu MercadoLivre Universal" x:Uid="PageTitleHeader">
+        <controls:PageHeader Grid.Row="0" Content="Meu MercadoLivre Universal" x:Uid="PageTitleHeader" Background="{StaticResource MercadoLivreBackgroundColor}" Foreground="{StaticResource MercadoLivreForegroundColor}">
             <!--<controls:PageHeader.Foreground>
                 <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
             </controls:PageHeader.Foreground>
@@ -141,9 +141,19 @@
                         <Line Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" X1="3000" VerticalAlignment="Bottom" Stroke="#B2000000" StrokeThickness="0.5" X2="0.5" Y1="0.5" Y2="0.5" />
                         <Line Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" X1="3000" VerticalAlignment="Bottom" Stroke="#B2000000" StrokeThickness="0.5" X2="0.5" Y1="0.5" Y2="0.5" />
 
-                        <TextBlock Text="Ativos" Grid.Row="0" Grid.Column="0" Style="{StaticResource BodyTextBlockStyle}" FontWeight="Bold" Margin="10,8,0,8" />
-                        <TextBlock Text="Pausados" Grid.Row="1" Grid.Column="0"  Margin="10,8,0,8"/>
-                        <TextBlock Text="Finalizados" Grid.Row="2" Grid.Column="0"  Margin="10,8,0,8"/>
+                        <Button Grid.Row="0" Grid.Column="0" Command="{Binding GotoItem}" CommandParameter="Active"  Margin="10,8,0,8" Style="{StaticResource TextBlockButtonStyle}">
+                            <TextBlock Text="Ativos" Style="{StaticResource BodyTextBlockStyle}" FontWeight="Bold" />
+                        </Button>
+
+                        <Button Grid.Row="1" Grid.Column="0" Command="{Binding GotoItem}" CommandParameter="Paused"  Margin="10,8,0,8" Style="{StaticResource TextBlockButtonStyle}">
+                            <TextBlock Text="Pausados" Style="{StaticResource BodyTextBlockStyle}" FontWeight="Bold" />
+                        </Button>
+
+                        <Button Grid.Row="2" Grid.Column="0" Command="{Binding GotoItem}" CommandParameter="Finalized"  Margin="10,8,0,8" Style="{StaticResource TextBlockButtonStyle}">
+                            <TextBlock Text="Finalizados" Style="{StaticResource BodyTextBlockStyle}" FontWeight="Bold" />
+                        </Button>
+                        <!--<TextBlock Text="Pausados" Grid.Row="1" Grid.Column="0"  Margin="10,8,0,8"/>
+                        <TextBlock Text="Finalizados" Grid.Row="2" Grid.Column="0"  Margin="10,8,0,8"/>-->
 
                         <TextBlock Text="{Binding ActiveItems, FallbackValue=0}" Grid.Row="0" Grid.Column="1" Margin="0,8,10,8" Style="{StaticResource BodyTextBlockStyle}" HorizontalAlignment="Right" />
                         <TextBlock Text="{Binding PausedItems, FallbackValue=0}" Grid.Row="1" Grid.Column="1" Margin="0,8,10,8" Style="{StaticResource BodyTextBlockStyle}" HorizontalAlignment="Right" />

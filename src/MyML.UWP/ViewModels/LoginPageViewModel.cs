@@ -28,7 +28,7 @@ namespace MyML.UWP.ViewModels
             RevokeAccess = new RelayCommand(RevokeAccessExecute);
         }
 
-        public async override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
+        public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             if(_dataService.IsAuthenticated())
             {
@@ -46,10 +46,10 @@ namespace MyML.UWP.ViewModels
 #endif
                     //Tenta atualizar o token de autenticação, caso já tenha sido autenticado em algum momento.
                     var refreshToken = _dataService.GetMLConfig(Consts.ML_CONFIG_KEY_REFRESH_TOKEN);
-                    if (!String.IsNullOrWhiteSpace(refreshToken))
+                    if (!string.IsNullOrWhiteSpace(refreshToken))
                     {
                         var login = await _mercadoLivreServices.TryRefreshToken();
-                        if (login != null && !String.IsNullOrWhiteSpace(login.Refresh_Token))
+                        if (!string.IsNullOrWhiteSpace(login?.Refresh_Token))
                         {
 #if DEBUG
                             Debug.WriteLine("LOGIN RESTAURADO ************************ ");

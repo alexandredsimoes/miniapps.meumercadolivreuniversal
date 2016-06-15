@@ -1,1 +1,1 @@
-C:\Users\Alexandre\git\MyML.UWP\src\MyML.UWP\AppPackages\MyML.UWP_1.1.116.0\MyML.UWP_1.1.116.0_x86_x64_arm.appxbundle
+C:\Users\Alexandre\git\MyML.UWP\src\MyML.UWP\AppPackages\MyML.UWP_1.1.118.0\MyML.UWP_1.1.118.0_x86_x64_arm.appxbundle
