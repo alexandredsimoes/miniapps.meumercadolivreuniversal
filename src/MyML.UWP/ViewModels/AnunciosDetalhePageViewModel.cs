@@ -19,13 +19,13 @@ namespace MyML.UWP.ViewModels
     {
         private readonly IMercadoLivreService _mercadoLivreService;
         private readonly ResourceLoader _resourceLoader;
-        private readonly IDataService _dataService;
+        
+
         public AnunciosDetalhePageViewModel(IMercadoLivreService mercadoLivreService, ResourceLoader resourceLoader,
             IDataService dataService)
         {
             _mercadoLivreService = mercadoLivreService;
             _resourceLoader = resourceLoader;
-            _dataService = dataService;
 
 
             DoCommand = new RelayCommand<string>(DoCommandExecute);
@@ -39,6 +39,12 @@ namespace MyML.UWP.ViewModels
             //    if (item == null) return;
             //    NavigationService.Navigate(typeof(AnunciosDetalhePage), item.id);
             //});
+
+            OpenImage = new RelayCommand<object>(o =>
+            {
+                var item = o as Picture;
+                if (item != null) NavigationService.Navigate(typeof(ImagemPage), item.url);
+            });
         }
 
         private async void DoCommandExecute(string command)
@@ -107,7 +113,7 @@ namespace MyML.UWP.ViewModels
 
         }
 
-        public async override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
+        public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             if (mode != NavigationMode.Back)
             {
@@ -195,5 +201,6 @@ namespace MyML.UWP.ViewModels
 
         public RelayCommand<string> DoCommand { get; set; }
         public RelayCommand<string> ChangeAttribute { get; set; }
+        public RelayCommand<object> OpenImage { get; private set; }
     }
 }

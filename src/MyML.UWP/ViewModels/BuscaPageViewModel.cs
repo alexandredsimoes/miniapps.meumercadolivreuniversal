@@ -87,6 +87,12 @@ namespace MyML.UWP.ViewModels
             {
                 //Items.GetEnumerator().
             }
+
+            if (parameter != null && mode == NavigationMode.New)
+            {
+                Searchterm = parameter as string;
+                BuscaExecute(new []{Searchterm, "search"});
+            }
             return Task.CompletedTask;
         }
 

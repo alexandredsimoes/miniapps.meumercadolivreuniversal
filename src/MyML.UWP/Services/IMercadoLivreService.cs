@@ -68,5 +68,7 @@ namespace MyML.UWP.Services
 
         Task<MLOrder> ListArchivedBuyerOrders(int pageIndex = 0, int pageSize = 0,
             params KeyValuePair<string, string>[] attributes);
+
+        Task<bool> ChangeProductDescription(string productId, string text);
     }
 }

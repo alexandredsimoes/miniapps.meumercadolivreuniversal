@@ -202,7 +202,6 @@
 
         </controls:PageHeader>
 
-        <uc:AdsControl Grid.Row="1"/>
 
         <ScrollViewer Margin="15" Grid.Row="2">
             <StackPanel>

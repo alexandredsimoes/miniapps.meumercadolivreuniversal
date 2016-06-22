@@ -489,7 +489,6 @@
 
         </controls:PageHeader>
 
-        <uc:AdsControl Grid.Row="1"/>
 
         <Grid Grid.Row="2">
             <ListView ItemsSource="{Binding Orders}"  x:Name="ProdutosListView"

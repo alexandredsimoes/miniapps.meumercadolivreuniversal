@@ -1,6 +1,6 @@
 ﻿{
   "dependencies": {
-    "AdDuplexWin10": "10.0.1.5",
+    "AdDuplexWin10": "10.0.1.4",
     "HockeySDK.UWP": "4.0.0",
     "HtmlAgilityPack": "1.4.9",
     "Microsoft.AdMediator.Universal.AdDuplex": "2.1.3",
@@ -9,12 +9,12 @@
     "MvvmLight": "5.3.0",
     "MvvmLightLibs": "5.3.0",
     "Newtonsoft.Json": "8.0.4-beta1",
-    "NotificationsExtensions.Win10": "14332.0.0",
+    "NotificationsExtensions.Win10": "14332.0.1",
     "SQLite.Net.Async-PCL": "3.0.5",
     "SQLiteNetExtensions.Async": "1.3.0",
     "Template10": "1.1.11",
     "Win2D.uwp": "1.16.0",
-    "WindowsAppStudio.Uwp": "1.4.4",
+    "WindowsAppStudio.Uwp": "1.4.5",
     "WindowsAzure.Messaging.Managed": "0.1.7.9",
     "WindowsStateTriggers": "1.1.0"
   },

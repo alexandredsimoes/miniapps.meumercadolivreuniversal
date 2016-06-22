@@ -128,7 +128,6 @@
     </Compile>
     <Compile Include="AppStorage\AppLogs.cs" />
     <Compile Include="AppStorage\UserStorage.cs" />
-    <Compile Include="Behaviors\ParallaxBehavior.cs" />
     <Compile Include="Behaviors\WebBrowserHelper.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\DecimalStringConverter.cs" />
@@ -216,6 +215,8 @@
     <Compile Include="ViewModels\CompraQualificarPageViewModel.cs" />
     <Compile Include="ViewModels\ComprarItemPageViewModel.cs" />
     <Compile Include="ViewModels\ComprasPageViewModel.cs" />
+    <Compile Include="ViewModels\Design\AlterarAtributoPageDesignViewModel.cs" />
+    <Compile Include="ViewModels\Design\AnunciosDetalhesPageDesignViewModel.cs" />
     <Compile Include="ViewModels\Design\BuscaPageDesignViewModel.cs" />
     <Compile Include="ViewModels\OrdernarBuscaPageViewModel.cs" />
     <Compile Include="ViewModels\PerguntasVendasDetalhesPageViewModel.cs" />
@@ -230,6 +231,7 @@
     <Compile Include="ViewModels\ProdutoDetalheEnvioPageViewModel.cs" />
     <Compile Include="ViewModels\ProdutoDetalheViewModel.cs" />
     <Compile Include="ViewModels\ProdutoPerguntasPageViewModel.cs" />
+    <Compile Include="ViewModels\SaldoPageViewModel.cs" />
     <Compile Include="ViewModels\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\VendaDetalhePageViewModel.cs" />
     <Compile Include="ViewModels\VendaQualificarPageViewModel.cs" />
@@ -252,6 +254,9 @@
     </Compile>
     <Compile Include="Views\CategoriaPage.xaml.cs">
       <DependentUpon>CategoriaPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ImagemPage.xaml.cs">
+      <DependentUpon>ImagemPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
@@ -312,6 +317,9 @@
     </Compile>
     <Compile Include="Views\Secure\PerguntasVendasPage.xaml.cs">
       <DependentUpon>PerguntasVendasPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Secure\SaldoPage.xaml.cs">
+      <DependentUpon>SaldoPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Secure\VendaDetalhePage.xaml.cs">
       <DependentUpon>VendaDetalhePage.xaml</DependentUpon>
@@ -460,6 +468,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ImagemPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\LoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -537,6 +549,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Secure\PerguntasVendasPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Secure\SaldoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

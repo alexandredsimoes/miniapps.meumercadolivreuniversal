@@ -1,0 +1,71 @@
+﻿<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MyML.UWP.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:controls="using:Template10.Controls"
+    xmlns:converters="using:MyML.UWP.Converters"
+    xmlns:designViewModels="using:MyML.UWP.ViewModels.Design"
+    xmlns:windowsStateTriggers="using:WindowsStateTriggers"
+    x:Class="MyML.UWP.Views.Secure.SaldoPage"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance designViewModels:BuscaPageDesignViewModel, IsDesignTimeCreatable=True}"
+    x:Name="This">
+
+    <Page.Resources>
+        <converters:StringFormatConverter x:Key="StringFormatConverter" />
+    </Page.Resources>
+
+    <Page.DataContext>
+        <Binding Source="{StaticResource Locator}" Path="SaldoPage" />
+    </Page.DataContext>
+
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <!--  page header  -->
+        <controls:PageHeader Content="Saldo no MercadoPago" Background="{StaticResource MercadoLivreBackgroundColor}" Foreground="{StaticResource MercadoLivreForegroundColor}">
+            <!--<controls:PageHeader.PrimaryCommands>
+                <AppBarButton Icon="Accept"></AppBarButton>
+            </controls:PageHeader.PrimaryCommands>-->
+        </controls:PageHeader>
+        <Border Grid.Row="1" Margin="10" BorderBrush="#66A6A5A5" BorderThickness="0.5">
+            <Border.Background>
+                <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
+            </Border.Background>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Line Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" X1="3000" VerticalAlignment="Bottom" Stroke="#B2000000" StrokeThickness="0.5" X2="0.5" Y1="0.5" Y2="0.5" />
+                <Line Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" X1="3000" VerticalAlignment="Bottom" Stroke="#B2000000" StrokeThickness="0.5" X2="0.5" Y1="0.5" Y2="0.5" />
+                <Line Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" X1="3000" VerticalAlignment="Bottom" Stroke="#B2000000" StrokeThickness="0.5" X2="0.5" Y1="0.5" Y2="0.5" />
+
+                <TextBlock Text="Disponível" Grid.Row="0" Grid.Column="0" Style="{StaticResource BodyTextBlockStyle}" FontWeight="Bold" Margin="10,8,0,8" />
+                <TextBlock Text="Em conta" Grid.Row="1" Grid.Column="0"  Margin="10,8,0,8"/>
+                <TextBlock Text="Não disponível" Grid.Row="2" Grid.Column="0"  Margin="10,8,0,8"/>
+
+                <TextBlock  Text="{Binding Balance, FallbackValue=0\,0, ConverterParameter=\{0:c2\}, Converter={StaticResource StringFormatConverter}}" Grid.Row="0" Grid.Column="1" Margin="0,8,10,8" Style="{StaticResource BodyTextBlockStyle}" HorizontalAlignment="Right" />
+                <TextBlock  Text="{Binding BalanceWithDraw, FallbackValue=0\,0, ConverterParameter=\{0:c2\}, Converter={StaticResource StringFormatConverter}}" Grid.Row="1" Grid.Column="1" Margin="0,8,10,8" Style="{StaticResource BodyTextBlockStyle}" HorizontalAlignment="Right" />
+                <TextBlock  Text="{Binding UnavailableBalance, FallbackValue=0\,0, ConverterParameter=\{0:c2\}, Converter={StaticResource StringFormatConverter}}" Grid.Row="2" Grid.Column="1" Margin="0,8,10,8" Style="{StaticResource BodyTextBlockStyle}" HorizontalAlignment="Right" />
+            </Grid>
+        </Border>
+
+    </Grid>
+</Page>
+

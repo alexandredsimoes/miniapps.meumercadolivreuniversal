@@ -13,6 +13,8 @@
     xmlns:windowsTriggers="using:WindowsStateTriggers"
     xmlns:models="using:MyML.UWP.Models.Mercadolivre"
     xmlns:media3D="using:Windows.UI.Xaml.Media.Media3D"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     d:DataContext="{d:DesignInstance designViewModels:BuscaPageDesignViewModel, IsDesignTimeCreatable=True}"
     x:Name="ThePage">
     <Page.DataContext>
@@ -316,19 +318,25 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition />
-                        <RowDefinition Height="Auto" />
+                        <RowDefinition  />
                     </Grid.RowDefinitions>
 
-                    <StackPanel  Grid.Row="0"  Margin="0" Padding="0" x:Name="FlipImageWrap">
-                        <uwpControls:Carousel
-                              
+                    <StackPanel Grid.Row="0"  Margin="0" Padding="0" x:Name="FlipImageWrap">
+                        
+                        <uwpControls:Carousel                              
                               ItemsSource="{Binding ElementName=ThePage, Path=DataContext.SelectedProduct.pictures}"                              
                               MaxItems="3"
                               AspectRatio="1.5"
                               AlignmentX="Center"
                               MinHeight="240"
                               MaxHeight="480"
-                              GradientOpacity="0.3">
+                              GradientOpacity="0.3"
+                              ItemClickCommand="{Binding OpenImage}">
+                            <!--<interactivity:Interaction.Behaviors>
+                                <core:EventTriggerBehavior EventName="Tapped">
+                                    <core:InvokeCommandAction Command="" CommandParameter="a" />
+                                </core:EventTriggerBehavior>
+                            </interactivity:Interaction.Behaviors>-->
                             <uwpControls:Carousel.ContentTemplate>
                                 <DataTemplate x:DataType="models:Picture">
                                     <Grid Background="Black">
@@ -384,7 +392,7 @@
                         </uwpControls:Indicator>
 
                     </StackPanel>
-                    <StackPanel Grid.Row="1">
+                    <StackPanel Grid.Row="1" Visibility="{Binding ZoomMode, Converter={StaticResource InvertedBoolToVisibilityConverter}}">
                         <StackPanel.Background>
                             <SolidColorBrush Color="{ThemeResource SystemChromeMediumLowColor}"/>
                         </StackPanel.Background>

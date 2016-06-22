@@ -4,36 +4,20 @@
     xmlns:local="using:MyML.UWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:Behaviors="using:Template10.Behaviors"
-    xmlns:MyBehaviors="using:MyML.UWP.Behaviors"
-    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
-    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:controls="using:Template10.Controls"
     xmlns:converters="using:MyML.UWP.Converters"
-    xmlns:convertersML="using:MyML.UWP.Converters.MercadoLivre"
     xmlns:designViewModels="using:MyML.UWP.ViewModels.Design"
-    xmlns:uc="using:MyML.UWP.Usercontrols"
-    xmlns:WindowsStateTriggers="using:WindowsStateTriggers"
+    xmlns:windowsStateTriggers="using:WindowsStateTriggers"
     x:Class="MyML.UWP.Views.Secure.FavoritesPage"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance designViewModels:BuscaPageDesignViewModel, IsDesignTimeCreatable=True}"
-    x:Name="This"
-    xmlns:Universal="using:Microsoft.Advertising.WinRT.UI">
+    x:Name="This">
 
     <Page.Resources>
 
-        <converters:NullToVisibilitConverter x:Key="NullToVisibilitConverter"/>
-        <converters:InverterNullToVisibilityConverter x:Key="InverterNullToVisibilityConverter"/>
-        <convertersML:MLStringDateConveter x:Key="MLStringDateConveter" />
-        <converters:ObjetctToPropertyConverter x:Key="ObjetctToPropertyConverter" />
         <converters:StringFormatConverter x:Key="StringFormatConverter" />
-        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
-        <converters:InvertedBoolToVisibilityConverter x:Key="InvertedBoolToVisibilityConverter" />
-        <convertersML:OrderStatusToStringConverter x:Key="OrderStatusToStringConverter" />
-        <convertersML:OrderPaymentTypeConverter x:Key="OrderPaymentTypeConverter" />
-        <convertersML:OrderPaymentStatusDetailConverter x:Key="OrderPaymentStatusDetailConverter" />
-        <convertersML:OrderShipStatusDetailConverter x:Key="OrderShipStatusDetailConverter" />
-        <convertersML:FeedbackRatingConverter x:Key="FeedbackRatingConverter" />
 
         <Style x:Key="ListViewItemStyle1" TargetType="ListViewItem">
             <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
@@ -122,7 +106,7 @@
                         <Setter Target="FavoritesListView.Visibility" Value="Collapsed"/>
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
-                        <WindowsStateTriggers:EqualsStateTrigger EqualTo="0" Value="{Binding Bookmarks.Count}" />
+                        <windowsStateTriggers:EqualsStateTrigger EqualTo="0" Value="{Binding Bookmarks.Count}" />
                     </VisualState.StateTriggers>
                 </VisualState>
             </VisualStateGroup>
@@ -163,15 +147,15 @@
         <controls:PageHeader Content="Favoritos" Background="{StaticResource MercadoLivreBackgroundColor}" Foreground="{StaticResource MercadoLivreForegroundColor}">
 
         </controls:PageHeader>
-        <uc:AdsControl Grid.Row="1"/>
 
         <ListView ItemTemplate="{StaticResource ListViewItemTemplate1}" ItemContainerStyle="{StaticResource ListViewItemStyle1}" ItemsSource="{Binding Bookmarks}" Grid.Row="2" x:Name="FavoritesListView">
-            <Interactivity:Interaction.Behaviors>
-                <Core:EventTriggerBehavior EventName="Tapped">
-                    <Core:InvokeCommandAction Command="{Binding SelectItem}" CommandParameter="{Binding SelectedItem, ElementName=FavoritesListView}" />
-                </Core:EventTriggerBehavior>
-            </Interactivity:Interaction.Behaviors>
+            <interactivity:Interaction.Behaviors>
+                <core:EventTriggerBehavior EventName="Tapped">
+                    <core:InvokeCommandAction Command="{Binding SelectItem}" CommandParameter="{Binding SelectedItem, ElementName=FavoritesListView}" />
+                </core:EventTriggerBehavior>
+            </interactivity:Interaction.Behaviors>
         </ListView>
         <TextBlock Grid.Row="2" Margin="20" x:Name="EmptyMsg" Visibility="Collapsed" Text="Nenhum item marcado como favorito." Style="{StaticResource SubheaderTextBlockStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     </Grid>
 </Page>
+

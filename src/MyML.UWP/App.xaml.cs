@@ -13,6 +13,8 @@ using Windows.ApplicationModel.Background;
 using Windows.UI.Popups;
 using Windows.ApplicationModel.Resources;
 using Windows.ApplicationModel;
+using Windows.Foundation.Metadata;
+using Windows.UI;
 using Microsoft.HockeyApp;
 using Template10.Controls;
 
@@ -26,7 +28,7 @@ namespace MyML.UWP
         public App()
         {
 
-            Microsoft.HockeyApp.HockeyClient.Current.Configure("046d5d06bf8e4703a1bdc2f201875c9a", 
+            Microsoft.HockeyApp.HockeyClient.Current.Configure("046d5d06bf8e4703a1bdc2f201875c9a",
              new TelemetryConfiguration() { EnableDiagnostics = true });
 
             InitializeComponent();
@@ -36,7 +38,7 @@ namespace MyML.UWP
             //System.Globalization.CultureInfo.CurrentUICulture = new System.Globalization.CultureInfo("pt");
 
             UnhandledException += App_UnhandledException;
-            SplashFactory = (e) => new Views.Splash(e);            
+            SplashFactory = (e) => new Views.Splash(e);
 
             #region App settings
 
@@ -62,12 +64,12 @@ namespace MyML.UWP
                 var dialog = new MessageDialog("Houve um erro inesperado", resourceLoader.GetString("ApplicationTitle"));
                 await dialog.ShowAsync();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message);    
+                Debug.WriteLine(ex.Message);
             }
-            
-           
+
+
             /*
 
             if (e != null)
@@ -153,6 +155,23 @@ namespace MyML.UWP
                     var statusBar = Windows.UI.ViewManagement.StatusBar.GetForCurrentView();
                     await statusBar.HideAsync();
                 }
+
+                //windows title bar      
+                Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar.BackgroundColor = Color.FromArgb(100, 254, 220, 19);
+                Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar.ForegroundColor =
+                    Colors.White;
+                Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar.ButtonBackgroundColor = Color.FromArgb(100, 254, 220, 19);
+                Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar.ButtonForegroundColor =
+                    Colors.White;
+
+                //StatusBar for Mobile
+
+                if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
+                {
+                    Windows.UI.ViewManagement.StatusBar.GetForCurrentView().BackgroundColor = Color.FromArgb(100, 254, 220, 19);
+                    Windows.UI.ViewManagement.StatusBar.GetForCurrentView().BackgroundOpacity = 1;
+                    Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = Colors.White;
+                }
             }
             await Task.CompletedTask;
 
@@ -208,7 +227,7 @@ namespace MyML.UWP
                     ds.Initialize();
                 }
 
-               
+
                 await RegisterBackgroundTask();
 
                 try
@@ -234,15 +253,16 @@ namespace MyML.UWP
                 }
             }
 
-            if(args.Kind == ActivationKind.ToastNotification)
+            if (args.Kind == ActivationKind.ToastNotification)
             {
                 //Verifica de onde veio esse toast/
                 var toastArgs = args as ToastNotificationActivatedEventArgs;
-                if(toastArgs != null)
+                if (toastArgs != null)
                 {
 #if DEBUG
                     var items = String.Empty;
-                    toastArgs.UserInput.ToList().ForEach(c => {
+                    toastArgs.UserInput.ToList().ForEach(c =>
+                    {
                         items += $"{c.Key}={c.Value}\r\n";
                     });
                     await AppLogs.WriteInfo("Start", toastArgs.Argument);
@@ -252,7 +272,7 @@ namespace MyML.UWP
                         NavigationService.Navigate(typeof(Views.Secure.PerguntasVendasPage));
                 }
             }
-            else if(args.Kind == ActivationKind.VoiceCommand)
+            else if (args.Kind == ActivationKind.VoiceCommand)
             {
                 // Event args can represent many different activation types. 
                 // Cast it so we can get the parameters we care about out.
@@ -272,14 +292,14 @@ namespace MyML.UWP
                     // Apps should respect "text" mode by providing feedback in silent form.
                     //string commandMode = this.SemanticInterpretation("commandMode", speechRecognitionResult);
 
-                
+
                     //foreach (var item in speechRecognitionResult.SemanticInterpretation.Properties)
                     //{
                     //    items += $"{item.Key}={item.Value}";
                     //}
 
                     Debug.WriteLine("FALOW => " + speechRecognitionResult.SemanticInterpretation.Properties);
-                    NavigationService.Navigate(typeof(Views.BuscaPage), voiceCommandName + "-"+  textSpoken, new Windows.UI.Xaml.Media.Animation.SlideNavigationTransitionInfo());
+                    NavigationService.Navigate(typeof(Views.BuscaPage), voiceCommandName + "-" + textSpoken, new Windows.UI.Xaml.Media.Animation.SlideNavigationTransitionInfo());
                 }
             }
             else
@@ -287,7 +307,7 @@ namespace MyML.UWP
                 NavigationService.Navigate(typeof(Views.MainPage));
             }
 
-            
+
             await Task.CompletedTask;
         }
 

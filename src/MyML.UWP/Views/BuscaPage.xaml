@@ -98,7 +98,6 @@
             </controls:PageHeader.PrimaryCommands>-->
         </controls:PageHeader>
 
-        <uc:AdsControl Grid.Row="1"/>
 
         <!--  page content  -->
         <Grid Margin="15" Grid.Row="2">

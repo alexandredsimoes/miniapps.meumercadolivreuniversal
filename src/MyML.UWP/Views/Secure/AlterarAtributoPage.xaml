@@ -6,38 +6,22 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    xmlns:Behaviors="using:Template10.Behaviors"
-    xmlns:MyBehaviors="using:MyML.UWP.Behaviors"
-    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
-    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:controls="using:Template10.Controls"
     xmlns:converters="using:MyML.UWP.Converters"
-    xmlns:convertersML="using:MyML.UWP.Converters.MercadoLivre"
+    xmlns:convertersMl="using:MyML.UWP.Converters.MercadoLivre"
     xmlns:designViewModels="using:MyML.UWP.ViewModels.Design"
-    xmlns:uc="using:MyML.UWP.Usercontrols"
-    d:DataContext="{d:DesignInstance designViewModels:BuscaPageDesignViewModel, IsDesignTimeCreatable=True}">
+    Name="ThePage"
+    d:DataContext="{d:DesignInstance designViewModels:AlterarAtributoPageDesignViewModel, IsDesignTimeCreatable=True}">
 
     <Page.DataContext>
         <Binding Source="{StaticResource Locator}" Path="AlterarAtributoPage" />
     </Page.DataContext>
 
     <Page.Resources>
-
-
-        <converters:NullToVisibilitConverter x:Key="NullToVisibilitConverter"/>
         <converters:DoubleStringConverter x:Key="DoubleStringConverter"/>
         <converters:IntStringConverter x:Key="IntStringConverter"/>
-        <converters:InverterNullToVisibilityConverter x:Key="InverterNullToVisibilityConverter"/>
-        <convertersML:MLStringDateConveter x:Key="MLStringDateConveter" />
-        <converters:ObjetctToPropertyConverter x:Key="ObjetctToPropertyConverter" />
-        <converters:StringFormatConverter x:Key="StringFormatConverter" />
-        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
-        <converters:InvertedBoolToVisibilityConverter x:Key="InvertedBoolToVisibilityConverter" />
-        <convertersML:OrderStatusToStringConverter x:Key="OrderStatusToStringConverter" />
-        <convertersML:OrderPaymentTypeConverter x:Key="OrderPaymentTypeConverter" />
-        <convertersML:OrderPaymentStatusDetailConverter x:Key="OrderPaymentStatusDetailConverter" />
-        <convertersML:OrderShipStatusDetailConverter x:Key="OrderShipStatusDetailConverter" />
-        <convertersML:FeedbackRatingConverter x:Key="FeedbackRatingConverter" />
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -101,14 +85,14 @@
                     </Line>
                     <TextBox Margin="10,5,10,10" Text="{Binding Title, Mode=TwoWay}" />
                 </StackPanel>
-                <Interactivity:Interaction.Behaviors>
-                    <Core:DataTriggerBehavior Binding="{Binding SourceInfo}" Value="title" ComparisonCondition="NotEqual">
-                        <Core:ChangePropertyAction TargetObject="{Binding ElementName=TitleBorder}" PropertyName="Visibility" Value="Collapsed" />
-                    </Core:DataTriggerBehavior>
-                    <Core:DataTriggerBehavior Binding="{Binding SourceInfo}" Value="title" ComparisonCondition="Equal">
-                        <Core:ChangePropertyAction TargetObject="{Binding ElementName=TitleBorder}" PropertyName="Visibility" Value="Visible" />
-                    </Core:DataTriggerBehavior>
-                </Interactivity:Interaction.Behaviors>
+                <interactivity:Interaction.Behaviors>
+                    <core:DataTriggerBehavior Binding="{Binding SourceInfo}" Value="title" ComparisonCondition="NotEqual">
+                        <core:ChangePropertyAction TargetObject="{Binding ElementName=TitleBorder}" PropertyName="Visibility" Value="Collapsed" />
+                    </core:DataTriggerBehavior>
+                    <core:DataTriggerBehavior Binding="{Binding SourceInfo}" Value="title" ComparisonCondition="Equal">
+                        <core:ChangePropertyAction TargetObject="{Binding ElementName=TitleBorder}" PropertyName="Visibility" Value="Visible" />
+                    </core:DataTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
             </Border>
             <Border Padding="0" x:Name="PriceBorder">
                 <Border.Background>
@@ -126,14 +110,14 @@
                     </Line>
                     <TextBox Margin="10,5,10,10" Text="{Binding Price, Mode=TwoWay, Converter={StaticResource DoubleStringConverter}}" InputScope="Number" />
                 </StackPanel>
-                <Interactivity:Interaction.Behaviors>
-                    <Core:DataTriggerBehavior Binding="{Binding SourceInfo}" Value="price" ComparisonCondition="NotEqual">
-                        <Core:ChangePropertyAction TargetObject="{Binding ElementName=PriceBorder}" PropertyName="Visibility" Value="Collapsed" />
-                    </Core:DataTriggerBehavior>
-                    <Core:DataTriggerBehavior Binding="{Binding SourceInfo}" Value="price" ComparisonCondition="Equal">
-                        <Core:ChangePropertyAction TargetObject="{Binding ElementName=PriceBorder}" PropertyName="Visibility" Value="Visible" />
-                    </Core:DataTriggerBehavior>
-                </Interactivity:Interaction.Behaviors>
+                <interactivity:Interaction.Behaviors>
+                    <core:DataTriggerBehavior Binding="{Binding SourceInfo}" Value="price" ComparisonCondition="NotEqual">
+                        <core:ChangePropertyAction TargetObject="{Binding ElementName=PriceBorder}" PropertyName="Visibility" Value="Collapsed" />
+                    </core:DataTriggerBehavior>
+                    <core:DataTriggerBehavior Binding="{Binding SourceInfo}" Value="price" ComparisonCondition="Equal">
+                        <core:ChangePropertyAction TargetObject="{Binding ElementName=PriceBorder}" PropertyName="Visibility" Value="Visible" />
+                    </core:DataTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
             </Border>
             <Border Padding="0" x:Name="QuantityBorder">
                 <Border.Background>
@@ -149,18 +133,181 @@
                             <SolidColorBrush Color="{ThemeResource SystemBaseMediumLowColor}"/>
                         </Line.Fill>
                     </Line>
-                    <TextBox Margin="10,5,10,10" Text="{Binding Quantity, Mode=TwoWay, Converter={StaticResource IntStringConverter}}" InputScope="Number" />
+                    <TextBox Margin="10,5,10,10"  Text="{Binding Quantity, Mode=TwoWay, Converter={StaticResource IntStringConverter}}" InputScope="Number" />
                 </StackPanel>
-                <Interactivity:Interaction.Behaviors>
-                    <Core:DataTriggerBehavior Binding="{Binding SourceInfo}" Value="quantity" ComparisonCondition="NotEqual">
-                        <Core:ChangePropertyAction TargetObject="{Binding ElementName=QuantityBorder}" PropertyName="Visibility" Value="Collapsed" />
-                    </Core:DataTriggerBehavior>
-                    <Core:DataTriggerBehavior Binding="{Binding SourceInfo}" Value="quantity" ComparisonCondition="Equal">
-                        <Core:ChangePropertyAction TargetObject="{Binding ElementName=QuantityBorder}" PropertyName="Visibility" Value="Visible" />
-                    </Core:DataTriggerBehavior>
-                </Interactivity:Interaction.Behaviors>
+                <interactivity:Interaction.Behaviors>
+                    <core:DataTriggerBehavior Binding="{Binding SourceInfo}" Value="quantity" ComparisonCondition="NotEqual">
+                        <core:ChangePropertyAction TargetObject="{Binding ElementName=QuantityBorder}" PropertyName="Visibility" Value="Collapsed" />
+                    </core:DataTriggerBehavior>
+                    <core:DataTriggerBehavior Binding="{Binding SourceInfo}" Value="quantity" ComparisonCondition="Equal">
+                        <core:ChangePropertyAction TargetObject="{Binding ElementName=QuantityBorder}" PropertyName="Visibility" Value="Visible" />
+                    </core:DataTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+            </Border>
+            <Border Padding="0" x:Name="ImagesBorder">
+                <Border.Background>
+                    <SolidColorBrush Color="{ThemeResource SystemChromeLowColor}"/>
+                </Border.Background>
+                <StackPanel>
+                    <TextBlock Text="Fotos do seu produto" Margin="10,5,5,5" />
+                    <Line X1="999.7" X2="1" Margin="0,5" >
+                        <Line.Stroke>
+                            <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
+                        </Line.Stroke>
+                        <Line.Fill>
+                            <SolidColorBrush Color="{ThemeResource SystemBaseMediumLowColor}"/>
+                        </Line.Fill>
+                    </Line>
+                    <!--Parte 2 - Fotos -->
+                    <StackPanel x:Name="PartTwo" RenderTransformOrigin="0.5,0.5" >
+                        <StackPanel.RenderTransform>
+                            <CompositeTransform/>
+                        </StackPanel.RenderTransform>
+                        
+                        <Button Width="125" Padding="0" Margin="0" BorderThickness="0">
+                            <Button.Flyout>
+                                <MenuFlyout Placement="Bottom">
+                                    <MenuFlyout.Items>
+                                        <MenuFlyoutItem Text="Câmera" Command="{Binding GetImage}" CommandParameter="Camera" />
+                                        <MenuFlyoutItem Text="Galeria" Command="{Binding GetImage}" CommandParameter="Gallery"/>
+                                    </MenuFlyout.Items>
+                                </MenuFlyout>
+                            </Button.Flyout>
+                            <Button.ContentTemplate>
+                                <DataTemplate>
+                                    <Grid Padding="5" Margin="0,5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+                                        <FontIcon Glyph="" Grid.Column="0" FontSize="40" />
+                                        <FontIcon Glyph="" Grid.Row="0" Grid.Column="1" FontSize="32"/>
+
+                                        <TextBlock Style="{StaticResource BodyTextBlockStyle}" Grid.ColumnSpan="2"
+                                                   Grid.Column="0" Grid.Row="1"  TextWrapping="Wrap">
+                                    <Run Text="{Binding AvailablePhotos}"/>
+                                    <Run Text="fotos disponíveis" />
+                                        </TextBlock>
+                                    </Grid>
+                                </DataTemplate>
+                            </Button.ContentTemplate>
+
+                        </Button>
+                        <GridView  ItemsSource="{Binding ElementName=ThePage, Path=DataContext.Pictures}" Margin="0,10,0,0" >
+                            <GridView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <!--<TextBlock Text="{Binding LocalPath}" Visibility="Visible"/>-->
+                                        <Image Source="{Binding Source}" Width="100" Height="100"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                        </GridView>
+
+                    </StackPanel>
+                </StackPanel>
+                <interactivity:Interaction.Behaviors>
+                    <core:DataTriggerBehavior Binding="{Binding SourceInfo}" Value="images" ComparisonCondition="NotEqual">
+                        <core:ChangePropertyAction TargetObject="{Binding ElementName=ImagesBorder}" PropertyName="Visibility" Value="Collapsed" />
+                    </core:DataTriggerBehavior>
+                    <core:DataTriggerBehavior Binding="{Binding SourceInfo}" Value="images" ComparisonCondition="Equal">
+                        <core:ChangePropertyAction TargetObject="{Binding ElementName=ImagesBorder}" PropertyName="Visibility" Value="Visible" />
+                    </core:DataTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+            </Border>
+            <Border Padding="0" x:Name="DescriptionBorder">
+                <Border.Background>
+                    <SolidColorBrush Color="{ThemeResource SystemChromeLowColor}"/>
+                </Border.Background>
+                <Border.BorderBrush>
+                    <SolidColorBrush Color="{ThemeResource SystemChromeLowColor}"/>
+                </Border.BorderBrush>
+                <StackPanel>
+                    <TextBlock Text="Descrição do anúncio" Margin="10,5,5,5" />
+                    <Line X1="999.7" X2="1" Margin="0,5" >
+                        <Line.Stroke>
+                            <SolidColorBrush Color="{ThemeResource SystemBaseMediumLowColor}"/>
+                        </Line.Stroke>
+                    </Line>
+                    <TextBox Margin="10,5,10,10" TextWrapping="Wrap" Height="100" Text="{Binding Description, Mode=TwoWay}" />
+                </StackPanel>
+                <interactivity:Interaction.Behaviors>
+                    <core:DataTriggerBehavior Binding="{Binding SourceInfo}" Value="description" ComparisonCondition="NotEqual">
+                        <core:ChangePropertyAction TargetObject="{Binding ElementName=DescriptionBorder}" PropertyName="Visibility" Value="Collapsed" />
+                    </core:DataTriggerBehavior>
+                    <core:DataTriggerBehavior Binding="{Binding SourceInfo}" Value="description" ComparisonCondition="Equal">
+                        <core:ChangePropertyAction TargetObject="{Binding ElementName=DescriptionBorder}" PropertyName="Visibility" Value="Visible" />
+                    </core:DataTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
             </Border>
             <Button Content="Continuar" Command="{Binding DoCommand}" Padding="10" HorizontalAlignment="Stretch" Margin="5,20,5,5" />
         </StackPanel>
     </Grid>
 </Page>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -167,6 +167,11 @@ namespace MyML.UWP.Models
         public const string ML_PRODUCT_DESCRIPTION = "https://api.mercadolibre.com/items/{0}/description";
 
         /// <summary>
+        /// Parametros: ItemId, AccessToken
+        /// </summary>
+        public const string ML_CHANGE_PRODUCT_DESCRIPTION = "https://api.mercadolibre.com/items/{0}/description?access_token={1}";
+
+        /// <summary>
         /// Parametros: ItemId
         /// </summary>
         public const string ML_PRODUCT_QUESTIONS = "https://api.mercadolibre.com/questions/search?item_id={0}";

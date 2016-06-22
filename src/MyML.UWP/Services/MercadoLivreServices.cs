@@ -1641,7 +1641,58 @@ namespace MyML.UWP.Services
                     if (error != null)
                     {
 
-                        await AppLogs.WriteLog("MercadoLivreServices.ListNewItem()", "Erro durante a criação do novo item", "");
+                        await AppLogs.WriteLog("MercadoLivreServices.ValidateNewItem()", "Erro durante a criação do novo item", "");
+                        foreach (var item in error.cause)
+                        {
+                            await AppLogs.WriteLog("     ", item.code + " - " + item.message, "");
+                        }
+                    }
+
+                    AppLogs.WriteWarning("MercadoLivreServices.ValidateNewItem()", result);
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                AppLogs.WriteError("MercadoLivreServices.ValidateNewItem()", ex);
+                return null;
+            }
+        }
+
+
+        public async Task<bool> ChangeProductDescription(string productId, string text)
+        {
+            //
+            try
+            {
+                var accessToken = _dataService.GetMLConfig(Consts.ML_CONFIG_KEY_ACCESS_TOKEN);
+                var url = Consts.GetUrl(Consts.ML_CHANGE_PRODUCT_DESCRIPTION, productId, accessToken);
+
+                _httpClient.DefaultRequestHeaders.Accept.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var obj = new
+                {
+                    text = text
+                };
+                var json = new StringContent(JsonConvert.SerializeObject(obj));
+
+
+                var response = await _httpClient.PutAsync(url, json);
+                var result = await response.Content.ReadAsStringAsync();
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    return true;
+                }
+                else
+                {
+                    //Convertemos para o formato de erro
+                    var error = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<MLErrorRequest>(result));
+
+                    if (error != null)
+                    {
+
+                        await AppLogs.WriteLog("MercadoLivreServices.ChangeProductDescription()", "Erro durante a criação do novo item", "");
                         foreach (var item in error.cause)
                         {
                             await AppLogs.WriteLog("     ", item.code + " - " + item.message, "");
@@ -1650,13 +1701,14 @@ namespace MyML.UWP.Services
 
                     AppLogs.WriteWarning("MercadoLivreServices.ListNewItem()", result);
                 }
-                return null;
+                return false;
             }
             catch (Exception ex)
             {
-                AppLogs.WriteError("MercadoLivreServices.ListNewItem()", ex);
-                return null;
+                AppLogs.WriteError("MercadoLivreServices.ChangeProductDescription()", ex);
+                return false;
             }
         }
+
     }
 }

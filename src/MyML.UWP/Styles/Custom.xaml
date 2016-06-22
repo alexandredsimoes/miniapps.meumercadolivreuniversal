@@ -9,7 +9,7 @@
 
 
     <!--<SolidColorBrush x:Key="MercadoLivreBackgroundColor" Color="#FF494949" />-->
-    <SolidColorBrush x:Key="MercadoLivreBackgroundColor" Color="#FFF7CD0E" />
+    <SolidColorBrush x:Key="MercadoLivreBackgroundColor" Color="#FFFEDC13" />
     <SolidColorBrush x:Key="MercadoLivreForegroundColor" Color="#FF010F66" />
     <!--<SolidColorBrush x:Key="MercadoLivreForegroundColor" Color="#B2FFFFFF" />-->
     

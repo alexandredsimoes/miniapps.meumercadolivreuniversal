@@ -88,7 +88,6 @@
         </controls:PageHeader>
 
 
-        <uc:AdsControl Grid.Row="1"/>
 
 
         <!--Produtos relacionados nas perguntas-->

@@ -27,7 +27,7 @@
             <SolidColorBrush Color="#99000000" Opacity="0.800000011920929"/>
         </controls:ModalDialog.ModalBackground>
             <controls:ModalDialog.Content>
-                <controls:HamburgerMenu Grid.Row="0" x:Name="MyHamburgerMenu" HamburgerBackground="#FFF7CD0E" NavAreaBackground="#FFF7CD0E" HamburgerForeground="#FF010F66" NavButtonCheckedForeground="#FF010F66" NavButtonCheckedIndicatorBrush="#FF010F66" NavButtonForeground="#FF010F66" NavButtonHoverForeground="#FF010F66" NavButtonPressedForeground="White" NavButtonHoverBackground="White" NavButtonPressedBackground="#FF010F66" Foreground="#FF010F66">
+                <controls:HamburgerMenu Grid.Row="0" x:Name="MyHamburgerMenu" HamburgerBackground="{StaticResource MercadoLivreBackgroundColor}" NavAreaBackground="{StaticResource MercadoLivreBackgroundColor}" HamburgerForeground="#FF010F66" NavButtonCheckedForeground="#FF010F66" NavButtonCheckedIndicatorBrush="#FF010F66" NavButtonForeground="#FF010F66" NavButtonHoverForeground="#FF010F66" NavButtonPressedForeground="White" NavButtonHoverBackground="White" NavButtonPressedBackground="#FF010F66" Foreground="#FF010F66">
                     <controls:HamburgerMenu.PrimaryButtons>
                         <!--  mainpage button  -->
                         <controls:HamburgerButtonInfo  ClearHistory="True" PageType="views:MainPage">
@@ -91,6 +91,7 @@
                         <controls:HamburgerButtonInfo  IsEnabled="False" x:Name="SeparadorVendas" Visibility="Collapsed">
                             <TextBlock Margin="12,10,0,0" VerticalAlignment="Center" Text="Vendas" />
                         </controls:HamburgerButtonInfo>
+                        
                         <!--  Anúncios  button  -->
                         <controls:HamburgerButtonInfo ClearHistory="False" PageType="viewsSecure:AnunciosPage">
                             <controls:HamburgerButtonInfo.NavigationTransitionInfo>
@@ -122,6 +123,21 @@
                             </StackPanel>
                         </controls:HamburgerButtonInfo>
 
+                        <!--Separador?-->
+                        <controls:HamburgerButtonInfo  IsEnabled="False" x:Name="SeparadorConfiguracao" Visibility="Collapsed">
+                            <TextBlock Margin="12,10,0,0" VerticalAlignment="Center" Text="Configurações" />
+                        </controls:HamburgerButtonInfo>
+                        <!--  Saldo  button  -->
+                        <controls:HamburgerButtonInfo ClearHistory="False" PageType="viewsSecure:SaldoPage">
+                            <controls:HamburgerButtonInfo.NavigationTransitionInfo>
+                                <SuppressNavigationTransitionInfo />
+                            </controls:HamburgerButtonInfo.NavigationTransitionInfo>
+                            <StackPanel Orientation="Horizontal">
+                                <SymbolIcon Width="48" Height="48" Symbol="Calculator" />
+                                <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Text="Saldo MP" />
+                            </StackPanel>
+                        </controls:HamburgerButtonInfo>
+                        
                     </controls:HamburgerMenu.PrimaryButtons>
 
                     <controls:HamburgerMenu.SecondaryButtons>

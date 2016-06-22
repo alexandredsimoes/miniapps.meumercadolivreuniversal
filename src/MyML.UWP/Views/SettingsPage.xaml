@@ -486,8 +486,7 @@
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition  />
                     </Grid.RowDefinitions>
                     <Image Margin="8" Grid.Row="0" MaxHeight="100" MaxWidth="100" Grid.Column="1" Source="{Binding Logo}" Stretch="None" VerticalAlignment="Center" HorizontalAlignment="Center" />
 
@@ -499,24 +498,28 @@
                             <Run Text="{Binding Version}" />
                         </TextBlock>
                     </StackPanel>
-                    <StackPanel Orientation="Vertical" Grid.Row="2" Grid.ColumnSpan="2">
-                        <Button Command="{Binding QualifyApp}" Content="Qualificar aplicativo na loja" Margin="10" Padding="5" HorizontalAlignment="Stretch" />
-                        <Button Command="{Binding SendEmail}" Content="Sugestões" Margin="10" Padding="5" HorizontalAlignment="Stretch"  />
-                        <Button  Content="Enviar log de erros" Margin="10" Padding="5" HorizontalAlignment="Stretch">
-                            <Button.Flyout>
-                                <MenuFlyout>
-                                    <MenuFlyoutItem Command="{Binding SendLog}" Text="Enviar apenas o log"/>
-                                    <MenuFlyoutItem Command="{Binding SendLog}" CommandParameter="token" Text="Enviar log e token de autenticação* (LEIA O TEXTO ABAIXO COM ATENÇÃO)"/>
-                                </MenuFlyout>
-                            </Button.Flyout>
-                        </Button>
-                        <TextBlock TextWrapping="Wrap" Text="* Ao enviar o token de autenticação, você irá permitir o desenvolvedor simular o uso do aplicativo com os seus dados. 
+                    <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                        <StackPanel Orientation="Vertical">
+
+
+                            <Button Command="{Binding RemoveAds}" Visibility="Visible" Content="Não quero ver propagandas" Margin="10" Padding="5" HorizontalAlignment="Stretch"  />
+                            <Line X1="1000" Stroke="Black" Margin="5"/>
+                            <Button Command="{Binding QualifyApp}" Content="Qualificar aplicativo na loja" Margin="10" Padding="5" HorizontalAlignment="Stretch" />
+                            <Button Command="{Binding SendEmail}" Content="Sugestões" Margin="10" Padding="5" HorizontalAlignment="Stretch"  />
+                            <Button  Content="Enviar log de erros" Margin="10" Padding="5" HorizontalAlignment="Stretch">
+                                <Button.Flyout>
+                                    <MenuFlyout>
+                                        <MenuFlyoutItem Command="{Binding SendLog}" Text="Enviar apenas o log"/>
+                                        <MenuFlyoutItem Command="{Binding SendLog}" CommandParameter="token" Text="Enviar log e token de autenticação* (LEIA O TEXTO ABAIXO COM ATENÇÃO)"/>
+                                    </MenuFlyout>
+                                </Button.Flyout>
+                            </Button>
+                            <TextBlock TextWrapping="Wrap" Text="* Ao enviar o token de autenticação, você irá permitir o desenvolvedor simular o uso do aplicativo com os seus dados. 
                                    Porém nenhuma informação de usuário e senha é enviada. NUNCA envie seu token para outras pessoas e envie somente se o DESENVOLVEDOR solicitar."/>
 
-                        <Line X1="1000" Stroke="Black" Margin="5"/>
 
-                        <Button Command="{Binding RemoveAds}" Visibility="Visible" Content="Não quero ver propagandas" Margin="10" Padding="5" HorizontalAlignment="Stretch"  />
-                    </StackPanel>
+                        </StackPanel>
+                    </ScrollViewer>
                 </Grid>
             </PivotItem>
         </Pivot>

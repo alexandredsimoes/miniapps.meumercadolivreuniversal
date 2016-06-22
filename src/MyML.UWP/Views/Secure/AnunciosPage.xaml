@@ -479,7 +479,6 @@
         </controls:PageHeader>
         
 
-        <uc:AdsControl Grid.Row="1"/>
 
         <Pivot Grid.Row="2" SelectedIndex="{Binding SelectedIndex}" x:Name="PivotMenu" Style="{StaticResource TabsStylePivotStyle}">
             <PivotItem>

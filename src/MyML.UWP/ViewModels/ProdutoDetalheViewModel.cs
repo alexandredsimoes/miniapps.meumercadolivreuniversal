@@ -108,6 +108,12 @@ namespace MyML.UWP.ViewModels
                 var handler = ZoomModeChanged;
                 if (handler != null) handler(ZoomMode);
             });
+
+            OpenImage = new RelayCommand<object>(o =>
+            {
+                var item = o as Picture;
+                if (item != null) NavigationService.Navigate(typeof(ImagemPage), item.url);
+            });
         }
 
         private async void BuyItemExecute(string origin)
@@ -175,7 +181,7 @@ namespace MyML.UWP.ViewModels
                 args.Cancel = true;
 
                 var handler = ZoomModeChanged;
-                if (handler != null) handler(ZoomMode);
+                handler?.Invoke(ZoomMode);
                 ZoomMode = false;
             }
             return Task.CompletedTask;
@@ -373,5 +379,6 @@ namespace MyML.UWP.ViewModels
         public RelayCommand<string> OpenOptions { get; set; }
         public RelayCommand OpenShipping { get; set; }
         public RelayCommand ShowZoom { get; private set; }
+        public RelayCommand<object> OpenImage { get; private set; }
     }
 }

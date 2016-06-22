@@ -47,6 +47,11 @@ namespace MyML.UWP.ViewModels
 
             RevokeAccess = new RelayCommand(RevokeAccessExecute);
 
+            DoSearch = new RelayCommand<object>((o) =>
+            {
+                NavigationService.Navigate(typeof(BuscaPage), o);   
+            });
+
             if (GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic)
                 IsAuthenticated = true;            
 
@@ -76,43 +81,41 @@ namespace MyML.UWP.ViewModels
             }
                       
 
-            IsAuthenticated = _dataService.IsAuthenticated();
-            if (IsAuthenticated)
-            {
-                await LoadSummary();
-            }
-            else
-            {
-#if DEBUG
-                Debug.WriteLine("TENTANDO RESTAURAR TOKEN DO ML ************************ ");
-#endif
-                //Tenta atualizar o token de autenticação, caso já tenha sido autenticado em algum momento.
-                var refreshToken = _dataService.GetMLConfig(Consts.ML_CONFIG_KEY_REFRESH_TOKEN);
-                if (!String.IsNullOrWhiteSpace(refreshToken))
-                {
-                    var login = await _mercadoLivreServices.TryRefreshToken();
-                    if (login != null && !string.IsNullOrWhiteSpace(login.Refresh_Token))
-                    {
-#if DEBUG
-                        Debug.WriteLine("LOGIN RESTAURADO ************************ ");
-#endif
-                        _dataService.SaveConfig(Consts.ML_CONFIG_KEY_USER_ID, login.user_id);
-                        _dataService.SaveConfig(Consts.ML_CONFIG_KEY_REFRESH_TOKEN, login.Refresh_Token);
-                        _dataService.SaveConfig(Consts.ML_CONFIG_KEY_EXPIRES, DateTime.Now.AddSeconds(login.Expires_In ?? 0).ToString());
-                        _dataService.SaveConfig(Consts.ML_CONFIG_KEY_ACCESS_TOKEN, login.Access_Token);
-                        _dataService.SaveConfig(Consts.ML_CONFIG_KEY_LOGIN_DATE, DateTime.Now.ToString());
+//            IsAuthenticated = _dataService.IsAuthenticated();
+//            if (IsAuthenticated)
+//            {
+                
+//            }
+//            else
+//            {
+//#if DEBUG
+//                Debug.WriteLine("TENTANDO RESTAURAR TOKEN DO ML ************************ ");
+//#endif
+//                //Tenta atualizar o token de autenticação, caso já tenha sido autenticado em algum momento.
+//                var refreshToken = _dataService.GetMLConfig(Consts.ML_CONFIG_KEY_REFRESH_TOKEN);
+//                if (!String.IsNullOrWhiteSpace(refreshToken))
+//                {
+//                    var login = await _mercadoLivreServices.TryRefreshToken();
+//                    if (login != null && !string.IsNullOrWhiteSpace(login.Refresh_Token))
+//                    {
+//#if DEBUG
+//                        Debug.WriteLine("LOGIN RESTAURADO ************************ ");
+//#endif
+//                        _dataService.SaveConfig(Consts.ML_CONFIG_KEY_USER_ID, login.user_id);
+//                        _dataService.SaveConfig(Consts.ML_CONFIG_KEY_REFRESH_TOKEN, login.Refresh_Token);
+//                        _dataService.SaveConfig(Consts.ML_CONFIG_KEY_EXPIRES, DateTime.Now.AddSeconds(login.Expires_In ?? 0).ToString());
+//                        _dataService.SaveConfig(Consts.ML_CONFIG_KEY_ACCESS_TOKEN, login.Access_Token);
+//                        _dataService.SaveConfig(Consts.ML_CONFIG_KEY_LOGIN_DATE, DateTime.Now.ToString());
 
-                        await NotificationHelper.SubscribeNotification();                      
-                    }
-                    else
-                    {
+//                        await NotificationHelper.SubscribeNotification();                      
+//                    }
+//                    else
+//                    {
                         
-                    }
-                }
-                IsAuthenticated = _dataService.IsAuthenticated();
-                if (IsAuthenticated)
-                    await LoadSummary();
-            }
+//                    }
+//                }
+//                IsAuthenticated = _dataService.IsAuthenticated();
+//            }
             await VerifyExecutions();
         }
 
@@ -184,35 +187,6 @@ namespace MyML.UWP.ViewModels
             return Task.CompletedTask;
         }
 
-        private async Task LoadSummary()
-        {
-            try
-            {
-                //Pega os dados do balanço
-                var accountBalance = await _mercadoLivreServices.GetUserAccountBalance();
-
-                if (accountBalance != null)
-                {
-                    BalanceWithDraw = accountBalance.available_balance;
-                    Balance = accountBalance.total_amount;
-                    UnavailableBalance = accountBalance.unavailable_balance;
-                }
-
-                //Pega os dados dos anuncios
-                var items = await _mercadoLivreServices.ListMyItems(new KeyValuePair<string, string>[] { new KeyValuePair<string, string>("attributes", "available_filters") });
-                var status = items?.available_filters?.FirstOrDefault(c => c.id == "status");
-                if (status != null)
-                {
-                    ActiveItems = status.values.FirstOrDefault(c => c.id == "active")?.results;
-                    PausedItems = status.values.FirstOrDefault(c => c.id == "paused")?.results;
-                    FinalizedItems = status.values.FirstOrDefault(c => c.id == "closed")?.results;
-                }
-            }
-            catch (Exception ex)
-            {
-                AppLogs.WriteError("MainPageViewModel.LoadSummary()", ex);
-            }
-        }
 
         public override Task OnNavigatingFromAsync(NavigatingEventArgs args)
         {
@@ -233,29 +207,7 @@ namespace MyML.UWP.ViewModels
         {
             var result = await _mercadoLivreServices.RevokeAccess();
 
-        }
-
-        private double? _UnavailableBalance = 0;
-        public double? UnavailableBalance
-        {
-            get { return _UnavailableBalance; }
-            set { Set(() => UnavailableBalance, ref _UnavailableBalance, value); }
-        }
-
-
-        private double? _Balance = 0;
-        public double? Balance
-        {
-            get { return _Balance; }
-            set { Set(() => Balance, ref _Balance, value); }
-        }
-
-        private double? _BalanceWithDraw = 0;
-        public double? BalanceWithDraw
-        {
-            get { return _BalanceWithDraw; }
-            set { Set(() => BalanceWithDraw, ref _BalanceWithDraw, value); }
-        }
+        }     
 
 
         private bool _IsAuthenticated = false;
@@ -289,6 +241,7 @@ namespace MyML.UWP.ViewModels
         public RelayCommand RevokeAccess { get; private set; }
         public RelayCommand DoLogin { get; private set; }
         public RelayCommand<string> GotoItem { get; private set; }
+        public RelayCommand<object> DoSearch { get; private set; }
     }
 }
 

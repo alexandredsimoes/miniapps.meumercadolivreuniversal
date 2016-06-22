@@ -14,7 +14,6 @@ namespace MyML.UWP.Views
     // DOCS: https://github.com/Windows-XAML/Template10/wiki/Docs-%7C-SplitView
     public sealed partial class Shell : Page
     {
-        double InitialManipulationPointX = 0;
         public static Shell Instance { get; set; }
         public static HamburgerMenu HamburgerMenu => Instance.MyHamburgerMenu;
 
@@ -26,11 +25,13 @@ namespace MyML.UWP.Views
             {
                 SeparadorVendas.Visibility = Windows.UI.Xaml.Visibility.Visible;
                 SeparadorCompras.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                SeparadorConfiguracao.Visibility = Visibility.Visible;
             };
             MyHamburgerMenu.PaneClosed += (sender, e) =>
             {
                 SeparadorVendas.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
                 SeparadorCompras.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                SeparadorConfiguracao.Visibility = Visibility.Collapsed;
             };
 
 

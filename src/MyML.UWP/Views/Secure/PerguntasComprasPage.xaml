@@ -84,7 +84,6 @@
 
         </controls:PageHeader>
 
-        <uc:AdsControl Grid.Row="1"/>
 
         <!--Produtos relacionados nas perguntas-->
         <ListView ItemsSource="{Binding Questions}" Grid.Row="2" x:Name="ProdutosListView" Margin="0,10,0,0">

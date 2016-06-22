@@ -58,7 +58,8 @@ namespace MyML.UWP.ViewModels
             SimpleIoc.Default.Register<ProdutoDetalheEnvioPageViewModel>();
             SimpleIoc.Default.Register<OrdernarBuscaPageViewModel>();
             SimpleIoc.Default.Register<VendasArquivadasPageViewModel>();
-            
+            SimpleIoc.Default.Register<SaldoPageViewModel>();
+
         }
 
         public MainPageViewModel MainPage => ServiceLocator.Current.GetInstance<MainPageViewModel>();
@@ -90,11 +91,7 @@ namespace MyML.UWP.ViewModels
         public SettingsPageViewModel SettingsPage => ServiceLocator.Current.GetInstance<SettingsPageViewModel>();
         public OrdernarBuscaPageViewModel OrdernarBuscaPage => ServiceLocator.Current.GetInstance<OrdernarBuscaPageViewModel>();
         public VendasArquivadasPageViewModel VendasArquivadasPage => ServiceLocator.Current.GetInstance<VendasArquivadasPageViewModel>();
-
+        public SaldoPageViewModel SaldoPage => ServiceLocator.Current.GetInstance<SaldoPageViewModel>();
         
-
-
-
-
     }
 }

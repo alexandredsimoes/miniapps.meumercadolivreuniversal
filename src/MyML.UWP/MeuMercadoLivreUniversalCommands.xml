@@ -13,8 +13,8 @@
     </Command>-->
     <Command Name="PlaceSearch">
       <Example>Procurar por xbox one</Example>
-      <ListenFor RequireAppName="ExplicitlySpecified">{builtin:AppName} {dictatedSearchTerms}</ListenFor>
-      <ListenFor RequireAppName="ExplicitlySpecified">{builtin:AppName} {dictatedSearchTerms}</ListenFor>
+      <ListenFor RequireAppName="ExplicitlySpecified">{builtin:AppName} procure por {dictatedSearchTerms}</ListenFor>
+      <ListenFor RequireAppName="ExplicitlySpecified">{builtin:AppName} pesquise por {dictatedSearchTerms}</ListenFor>
       <Feedback>Pesquisando por {dictatedSearchTerms}</Feedback>
       <Navigate />
     </Command>

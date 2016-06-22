@@ -1,4 +1,4 @@
-MainPackage=C:\Users\Alexandre\git\MyML.UWP\src\MyML.UWP\bin\ARM\Release\Upload\MyML.UWP_1.1.118.0_ARM.appx
+MainPackage=C:\Users\Alexandre\git\MyML.UWP\src\MyML.UWP\bin\ARM\Release\Upload\MyML.UWP_1.1.122.0_ARM.appx
 ResourcePack=C:\Users\Alexandre\git\MyML.UWP\src\MyML.UWP\_language-pt.appx
 ResourcePack=C:\Users\Alexandre\git\MyML.UWP\src\MyML.UWP\_scale-100.appx
 ResourcePack=C:\Users\Alexandre\git\MyML.UWP\src\MyML.UWP\_scale-125.appx
