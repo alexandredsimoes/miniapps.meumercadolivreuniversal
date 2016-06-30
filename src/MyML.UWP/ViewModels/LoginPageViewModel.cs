@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Navigation;
 using MyML.UWP.Views;
 using MyML.UWP.AppStorage;
 using System.Diagnostics;
+using System.Globalization;
 using Windows.Networking.PushNotifications;
 using Microsoft.WindowsAzure.Messaging;
 
@@ -48,29 +49,37 @@ namespace MyML.UWP.ViewModels
                     var refreshToken = _dataService.GetMLConfig(Consts.ML_CONFIG_KEY_REFRESH_TOKEN);
                     if (!string.IsNullOrWhiteSpace(refreshToken))
                     {
-                        var login = await _mercadoLivreServices.TryRefreshToken();
-                        if (!string.IsNullOrWhiteSpace(login?.Refresh_Token))
+                        try
                         {
+                            Shell.SetBusy(true, "Tentando restaurar o login");
+                            var login = await _mercadoLivreServices.TryRefreshToken();
+                            if (!string.IsNullOrWhiteSpace(login?.Refresh_Token))
+                            {
 #if DEBUG
-                            Debug.WriteLine("LOGIN RESTAURADO ************************ ");
+                                Debug.WriteLine("LOGIN RESTAURADO ************************ ");
 #endif
-                            _dataService.SaveConfig(Consts.ML_CONFIG_KEY_USER_ID, login.user_id);
-                            _dataService.SaveConfig(Consts.ML_CONFIG_KEY_REFRESH_TOKEN, login.Refresh_Token);
-                            _dataService.SaveConfig(Consts.ML_CONFIG_KEY_EXPIRES, DateTime.Now.AddSeconds(login.Expires_In ?? 0).ToString());
-                            _dataService.SaveConfig(Consts.ML_CONFIG_KEY_ACCESS_TOKEN, login.Access_Token);
-                            _dataService.SaveConfig(Consts.ML_CONFIG_KEY_LOGIN_DATE, DateTime.Now.ToString());
+                                _dataService.SaveConfig(Consts.ML_CONFIG_KEY_USER_ID, login.user_id);
+                                _dataService.SaveConfig(Consts.ML_CONFIG_KEY_REFRESH_TOKEN, login.Refresh_Token);
+                                _dataService.SaveConfig(Consts.ML_CONFIG_KEY_EXPIRES, DateTime.Now.AddSeconds(login.Expires_In ?? 0).ToString(CultureInfo.InvariantCulture));
+                                _dataService.SaveConfig(Consts.ML_CONFIG_KEY_ACCESS_TOKEN, login.Access_Token);
+                                _dataService.SaveConfig(Consts.ML_CONFIG_KEY_LOGIN_DATE, DateTime.Now.ToString(CultureInfo.InvariantCulture));
 
-                            await NotificationHelper.SubscribeNotification();
+                                await NotificationHelper.SubscribeNotification();
 
-                            if (NavigationService.CanGoBack)
-                                NavigationService.GoBack();
+                                if (NavigationService.CanGoBack)
+                                    NavigationService.GoBack();
+                                else
+                                    NavigationService.Navigate(typeof(MainPage), "login");
+                            }
                             else
-                                NavigationService.Navigate(typeof(MainPage), "login");
+                            {
+                                //Se não conseguir restaurar o token, redireciona para o login
+                                NavigationUrl = Consts.GetUrl(Consts.ML_URL_AUTHENTICATION, Consts.ML_CLIENT_ID, "");
+                            }
                         }
-                        else
+                        finally
                         {
-                            //Se não conseguir restaurar o token, redireciona para o login
-                            NavigationUrl = Consts.GetUrl(Consts.ML_URL_AUTHENTICATION, Consts.ML_CLIENT_ID, "");
+                            Shell.SetBusy(false);
                         }
                     }
                     else

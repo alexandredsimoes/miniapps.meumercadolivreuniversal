@@ -189,6 +189,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CacheHelper.cs" />
     <Compile Include="Services\DataService.cs" />
+    <Compile Include="Services\DesignDataService.cs" />
+    <Compile Include="Services\DesignMercadoLivreServices.cs" />
     <Compile Include="Services\IDataService.cs" />
     <Compile Include="Services\IMercadoLivreService.cs" />
     <Compile Include="Services\MercadoLivreServices.cs" />

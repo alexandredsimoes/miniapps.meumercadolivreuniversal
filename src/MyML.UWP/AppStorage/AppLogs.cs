@@ -7,13 +7,10 @@ namespace MyML.UWP.AppStorage
 {
     public class AppLogs
     {
-        static public async void WriteError(string source, Exception exception)
+        public static async void WriteError(string source, Exception exception)
         {
-            string appVersion = string.Format("Versão: {0}.{1}.{2}.{3}",
-                    Package.Current.Id.Version.Major,
-                    Package.Current.Id.Version.Minor,
-                    Package.Current.Id.Version.Build,
-                    Package.Current.Id.Version.Revision);
+            string appVersion =
+                $"Versão: {Package.Current.Id.Version.Major}.{Package.Current.Id.Version.Minor}.{Package.Current.Id.Version.Build}.{Package.Current.Id.Version.Revision}";
 
             var ex = exception;
             int pass = 0;
@@ -35,46 +32,37 @@ namespace MyML.UWP.AppStorage
             
         }
 
-        static public async void WriteError(string source, string message)
+        public static async void WriteError(string source, string message)
         {
-            string appVersion = string.Format("Versão: {0}.{1}.{2}.{3}",
-                        Package.Current.Id.Version.Major,
-                        Package.Current.Id.Version.Minor,
-                        Package.Current.Id.Version.Build,
-                        Package.Current.Id.Version.Revision);
+            string appVersion =
+                $"Versão: {Package.Current.Id.Version.Major}.{Package.Current.Id.Version.Minor}.{Package.Current.Id.Version.Build}.{Package.Current.Id.Version.Revision}";
 
             await WriteLog($"{appVersion} - {source}", message, "Error");
         }
 
-        static public async void WriteWarning(string source, string message)
+        public static async void WriteWarning(string source, string message)
         {
-            string appVersion = string.Format("Versão: {0}.{1}.{2}.{3}",
-                        Package.Current.Id.Version.Major,
-                        Package.Current.Id.Version.Minor,
-                        Package.Current.Id.Version.Build,
-                        Package.Current.Id.Version.Revision);
+            string appVersion =
+                $"Versão: {Package.Current.Id.Version.Major}.{Package.Current.Id.Version.Minor}.{Package.Current.Id.Version.Build}.{Package.Current.Id.Version.Revision}";
             await WriteLog($"{appVersion} - {source}", message, "Warning");
             //await WriteLog(source, message, "Warning");
         }
 
-        static public async Task WriteInfo(string source, string message)
+        public static async Task WriteInfo(string source, string message)
         {
-            string appVersion = string.Format("Versão: {0}.{1}.{2}.{3}",
-                                    Package.Current.Id.Version.Major,
-                                    Package.Current.Id.Version.Minor,
-                                    Package.Current.Id.Version.Build,
-                                    Package.Current.Id.Version.Revision);
+            string appVersion =
+                $"Versão: {Package.Current.Id.Version.Major}.{Package.Current.Id.Version.Minor}.{Package.Current.Id.Version.Build}.{Package.Current.Id.Version.Revision}";
             await WriteLog($"{appVersion} - {source}", message, "Info");
             //await WriteLog(source, message, "Info");
         }
 
-        static public async Task WriteLog(string source, string message, string messageType)
+        public static async Task WriteLog(string source, string message, string messageType)
         {
             try
             {
-
                 message = CleanLogMessage(message);
-                string logMessage = String.Format("{0}\t{1}\t{2}\t{3}: {4}\r\n", DateTime.Now.Ticks, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"), messageType, source, message);
+                string logMessage =
+                    $"{DateTime.Now.Ticks}\t{DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}\t{messageType}\t{source}: {message}\r\n";
                 await UserStorage.AppendLineToFile("AppLogs.txt", logMessage);
             }
             catch { /* Avoid any exception at this point. */ }
@@ -87,7 +75,7 @@ namespace MyML.UWP.AppStorage
                           .Replace("\t", string.Empty);
         }
 
-        static public async Task Clear()
+        public static async Task Clear()
         {
             try
             {

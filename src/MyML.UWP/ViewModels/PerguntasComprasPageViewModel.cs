@@ -49,7 +49,7 @@ namespace MyML.UWP.ViewModels
             Refresh = new RelayCommand(async () => await LoadQuestions());
         }
 
-        public async override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
+        public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             if(mode != NavigationMode.Back)
             {
@@ -82,7 +82,8 @@ namespace MyML.UWP.ViewModels
             try
             {
                 Questions.Clear();
-                foreach (var item in questions)
+                var productQuestionContents = questions as ProductQuestionContent[] ?? questions.ToArray();
+                foreach (var item in productQuestionContents)
                 {
                     //Tenta obter os detalhes da questao
                     var questionDetail = await _mercadoLivreService.GetQuestionDetails(item.id.ToString(), new KeyValuePair<string, object>[] { });
@@ -103,7 +104,7 @@ namespace MyML.UWP.ViewModels
                     item.Item = productDetail;
                 }
 
-                Questions = questions
+                Questions = productQuestionContents
                     .GroupBy(c => new { id = c.Item.id, title = c.Item.title, price = c.Item.price, thumbnail = c.Item.thumbnail, available_quantity = c.Item.available_quantity })
 
                     .Select(x => new QuestionGroup()
@@ -139,12 +140,12 @@ namespace MyML.UWP.ViewModels
         }
 
 
-        private IList<QuestionGroup> _Questions = new List<QuestionGroup>();
+        private IList<QuestionGroup> _questions = new List<QuestionGroup>();
 
         public IList<QuestionGroup> Questions
         {
-            get { return _Questions; }
-            set { Set(() => Questions, ref _Questions, value); }
+            get { return _questions; }
+            set { Set(() => Questions, ref _questions, value); }
         }
 
         public RelayCommand<object> SelectProduct { get; private set; }

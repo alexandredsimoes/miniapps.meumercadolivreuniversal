@@ -19,14 +19,18 @@ namespace MyML.UWP.ViewModels
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-            if(!GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic)
-            {
+            //if (!GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic)
+            //{
                 SimpleIoc.Default.Register<IDataService, DataService>();
                 SimpleIoc.Default.Register<IMercadoLivreService, MercadoLivreServices>();
                 SimpleIoc.Default.Register(() => new ResourceLoader());
                 SimpleIoc.Default.Register(() => new HttpClient(), false);
-            }
-
+            //}
+            //else
+            //{
+            //    SimpleIoc.Default.Register<IDataService, DesignDataService>();
+            //    SimpleIoc.Default.Register<IMercadoLivreService, DesignMercadoLivreServices>();                
+            //}
 
             SimpleIoc.Default.Register<MainPageViewModel>();
             SimpleIoc.Default.Register<DetailPageViewModel>();

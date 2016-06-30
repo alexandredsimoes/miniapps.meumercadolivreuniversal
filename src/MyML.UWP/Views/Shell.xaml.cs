@@ -8,6 +8,7 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Navigation;
 
 namespace MyML.UWP.Views
 {
@@ -21,17 +22,21 @@ namespace MyML.UWP.Views
         {
             Instance = this;
             InitializeComponent();
-            MyHamburgerMenu.PaneOpened += (sender, e) =>
+
+             MyHamburgerMenu.IsOpenChanged += (sender, args) =>
             {
-                SeparadorVendas.Visibility = Windows.UI.Xaml.Visibility.Visible;
-                SeparadorCompras.Visibility = Windows.UI.Xaml.Visibility.Visible;
-                SeparadorConfiguracao.Visibility = Visibility.Visible;
-            };
-            MyHamburgerMenu.PaneClosed += (sender, e) =>
-            {
-                SeparadorVendas.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-                SeparadorCompras.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-                SeparadorConfiguracao.Visibility = Visibility.Collapsed;
+                if (!args.NewValue)
+                {
+                    SeparadorVendas.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                    SeparadorCompras.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                    SeparadorConfiguracao.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    SeparadorVendas.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                    SeparadorCompras.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                    SeparadorConfiguracao.Visibility = Visibility.Visible;
+                }
             };
 
 
@@ -82,7 +87,7 @@ namespace MyML.UWP.Views
                 Instance.BusyView.BusyText = text;
                 Instance.ModalContainer.IsModal = Instance.BusyView.IsBusy = busy;
             });
-        }
+        }        
     }
 }
 
