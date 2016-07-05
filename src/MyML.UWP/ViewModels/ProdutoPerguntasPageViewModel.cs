@@ -41,7 +41,7 @@ namespace MyML.UWP.ViewModels
 
         private  Task LoadQuestions(string id)
         {
-            Items = new IncrementalSearchSource<QuestionDataSource, ProductQuestionContent>(0, 15, id);
+            Items = new IncrementalSearchSource<QuestionDataSource, ProductQuestionContent>(0, 15, id, false);
 
             
             Items.LoadMoreItemsStarted += () =>

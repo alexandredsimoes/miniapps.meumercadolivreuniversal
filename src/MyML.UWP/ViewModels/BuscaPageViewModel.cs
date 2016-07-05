@@ -18,6 +18,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Navigation;
 using Microsoft.HockeyApp;
+using MyML.UWP.Services.SettingsServices;
 
 namespace MyML.UWP.ViewModels
 {
@@ -173,7 +174,9 @@ namespace MyML.UWP.ViewModels
             if (family.Equals("Windows.Desktop") || family.Equals("Windows.Xbox"))
                 pageSize = 40;
 
-            Items = new IncrementalSearchSource<SearchDataSource, Item>(0, pageSize, query, parametro[1] != "category");
+            var settings = SettingsService.Instance;
+            Items = new IncrementalSearchSource<SearchDataSource, Item>(0, pageSize, query, parametro[1] != "category",
+                settings.UseHighQualityImages ?? false);
 
             Items.FiltersAvailable += Items_FiltersAvailable;
             Items.LoadMoreItemsCompleted += Items_LoadMoreItemsCompleted;

@@ -122,6 +122,13 @@ namespace MyML.UWP.ViewModels
             set { Set(() => ReceiveNotifications, ref _ReceiveNotifications, value); }
         }
 
+
+        public bool? UseHighQualityImages
+        {
+            get { return _settings.UseHighQualityImages; }
+            set { _settings.UseHighQualityImages = value; base.RaisePropertyChanged(); }
+        }
+
         public RelayCommand TrySigninNotifications { get; private set; }
     }
 

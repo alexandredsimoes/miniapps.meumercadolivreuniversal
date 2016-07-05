@@ -23,18 +23,23 @@ namespace MyML.UWP.Adapters.Search
 {
     public class SearchDataSource : IPagedSource<Item>
     {
-        private IMercadoLivreService _mercadoLivreServices;
+        private readonly IMercadoLivreService _mercadoLivreServices;
 
         public SearchDataSource()
         {
             _mercadoLivreServices = SimpleIoc.Default.GetInstance<IMercadoLivreService>();            
         }
 
-        public async Task<IPagedResponse<Item>> GetPage(string query, int pageIndex, int pageSize, bool searchByName)
+        public Task<IPagedResponse<Item>> GetPage(string query, int pageIndex, int pageSize, bool searchByName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<IPagedResponse<Item>> GetPage(string query, int pageIndex, int pageSize, bool searchByName, bool? highResolutionImages)
         {                        
             try
             {
-                var items = new MLSearchResult();
+                MLSearchResult items;
 
                 if (!searchByName)
                     items = await _mercadoLivreServices.ListProductsByCategory(query, pageIndex, pageSize);
@@ -46,6 +51,19 @@ namespace MyML.UWP.Adapters.Search
 
                 if (success)
                 {
+                    if (highResolutionImages ?? false)
+                    {
+                        //Tenta obter as imagens dos produtos
+                        foreach (var result in items.results)
+                        {
+                            var pictures =
+                                await _mercadoLivreServices.GetItemDetails(result.id, new KeyValuePair<string, string>[]
+                                {
+                                    new KeyValuePair<string, string>("attributes", "pictures"),
+                                }).ConfigureAwait(false);
+                            result.thumbnail = pictures.pictures[0].url;
+                        }
+                    }
                     var sorts = items.available_sorts;
                     var filters = items.available_filters;
                     int virtualCount;

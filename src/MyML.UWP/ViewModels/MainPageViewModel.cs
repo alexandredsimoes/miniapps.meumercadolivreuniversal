@@ -117,6 +117,8 @@ namespace MyML.UWP.ViewModels
 //                IsAuthenticated = _dataService.IsAuthenticated();
 //            }
             await VerifyExecutions();
+
+            var categories = await _mercadoLivreServices.ListCategories("MLB");
         }
 
 

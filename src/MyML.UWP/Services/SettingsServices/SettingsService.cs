@@ -34,6 +34,17 @@ namespace MyML.UWP.Services.SettingsServices
                 });
             }
         }
+        
+
+        public bool? UseHighQualityImages
+        {
+            get { return _helper.Read<bool?>(nameof(UseHighQualityImages), false); }
+            set
+            {
+                _helper.Write(nameof(UseHighQualityImages), value);                
+            }
+        }
+
 
         public ApplicationTheme AppTheme
         {

@@ -29,15 +29,21 @@ namespace MyML.UWP.Services
         {
             try
             {
+                IList<MLCategorySearchResult> result = null;
                 var url = String.Format(Consts.ML_URL_CATEGORIAS, Consts.ML_ID_BRASIL);
-                var r = await _httpClient.GetAsync(url, HttpCompletionOption.ResponseContentRead).ConfigureAwait(false);
+                await _httpClient.GetAsync(url, HttpCompletionOption.ResponseContentRead)
+                    .ContinueWith(async c =>
+                    {
+                        var r = c.Result;
+                        if (r.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            var s = await r.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            result = JsonConvert.DeserializeObject<IList<MLCategorySearchResult>>(s);
+                            //return lista;
+                        }
+                    }).ConfigureAwait(false);
+                return result;
 
-                if (r.StatusCode == System.Net.HttpStatusCode.OK)
-                {
-                    var s = await r.Content.ReadAsStringAsync();
-                    var lista = JsonConvert.DeserializeObject<IList<MLCategorySearchResult>>(s);
-                    return lista;
-                }
             }
             catch (Exception ex)
             {
@@ -68,7 +74,9 @@ namespace MyML.UWP.Services
                 var response = await _httpClient.GetAsync(url, HttpCompletionOption.ResponseContentRead).ConfigureAwait(false);
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
-                    var result = JsonConvert.DeserializeObject<MLQuestionResultSearch>(await response.Content.ReadAsStringAsync());
+                    var result =
+                        JsonConvert.DeserializeObject<MLQuestionResultSearch>(
+                            await response.Content.ReadAsStringAsync().ConfigureAwait(false));
                     return result;
                 }
                 return null;

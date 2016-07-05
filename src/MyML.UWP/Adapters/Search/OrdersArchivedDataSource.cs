@@ -42,5 +42,10 @@ namespace MyML.UWP.Adapters.Search
                 throw ex;
             }
         }
+
+        public Task<IPagedResponse<MLOrderInfo>> GetPage(string query, int pageIndex, int pageSize, bool searchByName, bool? highResolutionImages)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

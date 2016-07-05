@@ -25,8 +25,23 @@ namespace MyML.UWP.Adapters
         private int CurrentPage { get; set; }
         private int PageSize { get; set; }
         private IPagedSource<K> Source { get; set; }
+        private bool? UseHighResolutionImages { get; set; } = false;
 
-        public IncrementalSearchSource(int pageIndex, int pageSize, string query = null, bool searchByProductName = false)
+        public IncrementalSearchSource(int pageIndex, int pageSize, string query, bool searchByProductName, bool? highResolutionImages)
+        {
+            this.Source = new T();
+
+            //((OrdersDataSource)this.Source).GetFilters += IncrementalSource_GetFilters;
+
+            this.CurrentPage = pageIndex;
+            this.PageSize = pageSize;
+            this.CategoryName = query;
+            this.VirtualCount = int.MaxValue;
+            this.SearchByName = searchByProductName;
+            UseHighResolutionImages = highResolutionImages;
+        }
+
+        public IncrementalSearchSource(int pageIndex, int pageSize, string query, bool searchByProductName)
         {
             this.Source = new T();
 
@@ -67,7 +82,7 @@ namespace MyML.UWP.Adapters
                     //    OnLoadMoreItemsStarted();
                     //});
 
-                    IPagedResponse<K> result = await Source.GetPage(CategoryName, CurrentPage++, PageSize, SearchByName);
+                    IPagedResponse<K> result = await Source.GetPage(CategoryName, CurrentPage++, PageSize, SearchByName, UseHighResolutionImages);
                     this.VirtualCount = result == null ? 0 : result.VirtualCount;
 
 

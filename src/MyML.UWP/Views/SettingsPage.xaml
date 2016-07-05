@@ -408,6 +408,11 @@
                                       OnContent="Tema claro"
                                       RelativePanel.Below="UseShellDrawnBackButtonToggleSwtich" Visibility="Visible" />
 
+                        <ToggleSwitch x:Name="UseQualityImagesToggleSwitch" Header="Usar imagens de alta qualidade na busca"
+                                      IsOn="{Binding UseHighQualityImages, Mode=TwoWay}" OffContent="Baixa qualidade"
+                                      OnContent="Alta qualidade"
+                                      RelativePanel.Below="UseLightThemeToggleSwitch" Visibility="Visible" />
+
                         <!--<ToggleSwitch x:Name="ReceiveNotificationsToggleSwitch" Header="Receber notificações"
                                       IsOn="{Binding ReceiveNotifications, Mode=TwoWay}" OffContent="Não"
                                       OnContent="Sim"
@@ -420,7 +425,7 @@
                                 </Core:EventTriggerBehavior>
                             </Interactivity:Interaction.Behaviors>
                         </ToggleSwitch>-->
-                        <Button Command="{Binding TrySigninNotifications}" x:Name="ReceiveNotificationsToggleSwitch" RelativePanel.Below="UseLightThemeToggleSwitch" Visibility="Visible" Margin="0,0,5,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Button Command="{Binding TrySigninNotifications}" x:Name="ReceiveNotificationsToggleSwitch" RelativePanel.Below="UseQualityImagesToggleSwitch" Visibility="Visible" Margin="0,0,5,0" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <StackPanel>
                                 <TextBlock Text="Ativar notificações" Style="{StaticResource SubtitleTextBlockStyle}" />
                                 <TextBlock Text="Use apenas se não estiver recebendo notificações" TextWrapping="Wrap" />
