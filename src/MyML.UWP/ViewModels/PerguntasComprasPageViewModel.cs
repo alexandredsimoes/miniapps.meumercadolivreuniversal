@@ -87,7 +87,7 @@ namespace MyML.UWP.ViewModels
                 {
                     //Tenta obter os detalhes da questao
                     var questionDetail = await _mercadoLivreService.GetQuestionDetails(item.id.ToString(), new KeyValuePair<string, object>[] { });
-                    var productDetail = await _mercadoLivreService.GetItemDetails(item.item_id, new KeyValuePair<string, string>[] { new KeyValuePair<string, string>("attributes", "id,title,price,thumbnail") });
+                    var productDetail = await _mercadoLivreService.GetItemDetails(item.item_id, new KeyValuePair<string, object>[] { new KeyValuePair<string, object>("attributes", "id,title,price,thumbnail") });
 
                     if (questionDetail == null || productDetail == null)
                     {

@@ -61,7 +61,7 @@ namespace MyML.UWP.ViewModels
             }
 
             Views.Shell.SetBusy(true, "Carregando informações");
-            Orders = await _mercadoLivreService.ListMyOrders(0, 0, new KeyValuePair<string, string>[] { });
+            Orders = await _mercadoLivreService.ListMyOrders(0, 0, new KeyValuePair<string, object>[] { });
             Views.Shell.SetBusy(false);
         }
 

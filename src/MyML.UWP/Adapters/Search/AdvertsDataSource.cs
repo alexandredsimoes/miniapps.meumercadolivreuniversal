@@ -40,7 +40,15 @@ namespace MyML.UWP.Adapters.Search
 
                 foreach (var item in items.results)
                 {
-                    var product = await _mercadoLivreService.GetItemDetails(item, new KeyValuePair<string, string>[] { new KeyValuePair<string, string>("attributes", "id,title,price,thumbnail,stop_time,available_quantity") });
+                    var product = await _mercadoLivreService
+                        .GetItemDetails(item,
+                            new KeyValuePair<string, object>[]
+                            {
+                                new KeyValuePair<string, object>("attributes",
+                                    "id,title,price,thumbnail,stop_time,available_quantity")
+                            })
+                        .ConfigureAwait(false);
+
                     if (product != null)
                     {
                         if (items.ListTypes != null)
@@ -68,9 +76,9 @@ namespace MyML.UWP.Adapters.Search
             }
         }
 
-        public Task<IPagedResponse<Item>> GetPage(string query, int pageIndex, int pageSize, bool searchByName, bool? highResolutionImages)
+        public async Task<IPagedResponse<Item>> GetPage(string query, int pageIndex, int pageSize, bool searchByName, bool? highResolutionImages)
         {
-            throw new NotImplementedException();
+            return await GetPage(query, pageIndex, pageSize, searchByName);
         }
     }
     public class AdvertsResponse : IPagedResponse<Item>

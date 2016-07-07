@@ -82,9 +82,9 @@ namespace MyML.UWP.ViewModels
             try
             {
 
-                Items = new IncrementalSearchSource<AdvertsDataSource, Item>(0, 10, "active", true);
-                ItemsPaused = new IncrementalSearchSource<AdvertsDataSource, Item>(0, 10, "paused", true);
-                ItemsClosed = new IncrementalSearchSource<AdvertsDataSource, Item>(0, 10, "closed", true);
+                Items = new IncrementalSearchSource<AdvertsDataSource, Item>(0, 10, "active", true, false);
+                ItemsPaused = new IncrementalSearchSource<AdvertsDataSource, Item>(0, 10, "paused", true, false);
+                ItemsClosed = new IncrementalSearchSource<AdvertsDataSource, Item>(0, 10, "closed", true, false);
 
                 Items.LoadMoreItemsStarted += () => { Shell.SetBusy(true); };
                 ItemsPaused.LoadMoreItemsStarted += () => { Shell.SetBusy(true); };

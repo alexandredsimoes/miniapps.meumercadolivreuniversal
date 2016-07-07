@@ -36,6 +36,21 @@ namespace MyML.UWP.ViewModels
             _dataService = dataService;
             _resourceLoader = resourceLoader;
 
+            CopiarLinkAnuncio = new RelayCommand(async () =>
+            {
+                
+                if (String.IsNullOrWhiteSpace(SelectedProduct?.permalink))
+                {
+                    await new MessageDialog("Nenhum produto encontrado", _resourceLoader.GetString("ApplicationTitle")).ShowAsync();
+                    return;
+                }
+
+                var dataPackage = new DataPackage {RequestedOperation = DataPackageOperation.Copy};
+                dataPackage.SetText(SelectedProduct.permalink);
+                Clipboard.SetContent(dataPackage);
+                await new MessageDialog("Informação copiada para Área de transferência.", _resourceLoader.GetString("ApplicationTitle")).ShowAsync();
+            });
+
             Perguntar = new RelayCommand(() =>
             {
                 NavigationService.Navigate(typeof(PerguntarPage), SelectedProduct.id);
@@ -202,21 +217,25 @@ namespace MyML.UWP.ViewModels
             try
             {
                 Shell.SetBusy(true, "Carregando informações");
-                SelectedProduct = await _mercadoLivreService.GetItemDetails(parameter.ToString(), new KeyValuePair<string, string>[] { });
+                SelectedProduct = await _mercadoLivreService.GetItemDetails(parameter.ToString(), new KeyValuePair<string, object>[] { });
 
                 if (SelectedProduct != null)
                 {
                     //Pega os dados do vendedor
                     var sellerId = SelectedProduct.seller == null ? SelectedProduct.seller_id : SelectedProduct.seller.id;
                     SellerInfo = await _mercadoLivreService.GetUserInfo(sellerId.ToString(),
-                        new KeyValuePair<string, string>[] { /*new KeyValuePair<string, string>("attributes", "seller_reputation,points")*/ });
+                        new KeyValuePair<string, object>[] { /*new KeyValuePair<string, string>("attributes", "seller_reputation,points")*/ });
 
 
-                    var favorites = await _mercadoLivreService.GetBookmarkItems();
-                    if (favorites != null)
-                        SelectedProduct.IsFavorite = favorites.FirstOrDefault(c => c.item_id == SelectedProduct.id) != null;
-                    else
-                        SelectedProduct.IsFavorite = false;
+                    if (_dataService.IsAuthenticated())
+                    {
+                        var favorites = await _mercadoLivreService.GetBookmarkItems();
+                        if (favorites != null)
+                            SelectedProduct.IsFavorite =
+                                favorites.FirstOrDefault(c => c.item_id == SelectedProduct.id) != null;
+                        else
+                            SelectedProduct.IsFavorite = false;
+                    }
 
 
                     IsFavorite = SelectedProduct.IsFavorite; //Para atualizar a UI
@@ -380,5 +399,6 @@ namespace MyML.UWP.ViewModels
         public RelayCommand OpenShipping { get; set; }
         public RelayCommand ShowZoom { get; private set; }
         public RelayCommand<object> OpenImage { get; private set; }
+        public RelayCommand CopiarLinkAnuncio { get; set; }
     }
 }

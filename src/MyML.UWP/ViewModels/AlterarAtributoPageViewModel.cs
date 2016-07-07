@@ -44,7 +44,7 @@ namespace MyML.UWP.ViewModels
                 SourceInfo = values[1];
 
                 //Pega os detalhes do item
-                var item = await _mercadoLivreService.GetItemDetails(values[0], new KeyValuePair<string, string>[] { new KeyValuePair<string, string>("attributes", "title,price,id,available_quantity,pictures") });
+                var item = await _mercadoLivreService.GetItemDetails(values[0], new KeyValuePair<string, object>[] { new KeyValuePair<string, object>("attributes", "title,price,id,available_quantity,pictures") });
                 if (item != null)
                 {
                     foreach (var picture in item.pictures)

@@ -20,7 +20,7 @@ namespace MyML.UWP.ViewModels
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
             //if (!GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic)
-            //{
+            //{                
                 SimpleIoc.Default.Register<IDataService, DataService>();
                 SimpleIoc.Default.Register<IMercadoLivreService, MercadoLivreServices>();
                 SimpleIoc.Default.Register(() => new ResourceLoader());

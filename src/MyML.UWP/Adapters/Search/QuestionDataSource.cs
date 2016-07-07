@@ -18,9 +18,9 @@ namespace MyML.UWP.Adapters.Search
             _mercadoLivreServices = SimpleIoc.Default.GetInstance<IMercadoLivreService>();
         }
 
-        public Task<IPagedResponse<ProductQuestionContent>> GetPage(string query, int pageIndex, int pageSize, string status)
+        public async Task<IPagedResponse<ProductQuestionContent>> GetPage(string query, int pageIndex, int pageSize, string status)
         {
-            throw new NotImplementedException();
+            return await GetPage(query, pageIndex, pageSize, false);
         }
 
         public async Task<IPagedResponse<ProductQuestionContent>> GetPage(string query, int pageIndex, int pageSize, bool searchByName)
@@ -49,9 +49,9 @@ namespace MyML.UWP.Adapters.Search
             }
         }
 
-        public Task<IPagedResponse<ProductQuestionContent>> GetPage(string query, int pageIndex, int pageSize, bool searchByName, bool? highResolutionImages)
+        public async Task<IPagedResponse<ProductQuestionContent>> GetPage(string query, int pageIndex, int pageSize, bool searchByName, bool? highResolutionImages)
         {
-            throw new NotImplementedException();
+            return await GetPage(query, pageIndex, pageSize, false);
         }
     }
 

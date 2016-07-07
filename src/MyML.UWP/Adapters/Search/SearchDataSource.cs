@@ -57,9 +57,9 @@ namespace MyML.UWP.Adapters.Search
                         foreach (var result in items.results)
                         {
                             var pictures =
-                                await _mercadoLivreServices.GetItemDetails(result.id, new KeyValuePair<string, string>[]
+                                await _mercadoLivreServices.GetItemDetails(result.id, new KeyValuePair<string, object>[]
                                 {
-                                    new KeyValuePair<string, string>("attributes", "pictures"),
+                                    new KeyValuePair<string, object>("attributes", "pictures"),
                                 }).ConfigureAwait(false);
                             result.thumbnail = pictures.pictures[0].url;
                         }

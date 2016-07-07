@@ -70,7 +70,7 @@ namespace MyML.UWP.ViewModels
             try
             {
                 Views.Shell.SetBusy(true, "Listando opções");
-                var product = await _mercadoLivreService.GetItemDetails(itemId, new KeyValuePair<string, string>[] { new KeyValuePair<string, string>("attributes", "id,price,listing_type_id") });
+                var product = await _mercadoLivreService.GetItemDetails(itemId, new KeyValuePair<string, object>("attributes", "id,price,listing_type_id"));
 
                 if (product != null)
                 {

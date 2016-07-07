@@ -187,6 +187,7 @@
     <Compile Include="Models\SelectionList.cs" />
     <Compile Include="Models\SellItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\BaseServices.cs" />
     <Compile Include="Services\CacheHelper.cs" />
     <Compile Include="Services\DataService.cs" />
     <Compile Include="Services\DesignDataService.cs" />

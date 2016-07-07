@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="24720AlexandreDiasSimes.MeuMercadoLivreUniversal" Publisher="CN=6DD6F8EE-EEC3-42A8-A379-90A8F3BD80A5" Version="1.1.123.0" />
+  <Identity Name="24720AlexandreDiasSimes.MeuMercadoLivreUniversal" Publisher="CN=6DD6F8EE-EEC3-42A8-A379-90A8F3BD80A5" Version="1.1.124.0" />
   <mp:PhoneIdentity PhoneProductId="dc569046-fc58-4ea9-96df-04e70ec630f1" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Meu Mercado Livre Universal</DisplayName>

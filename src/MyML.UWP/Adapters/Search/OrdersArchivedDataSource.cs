@@ -43,9 +43,9 @@ namespace MyML.UWP.Adapters.Search
             }
         }
 
-        public Task<IPagedResponse<MLOrderInfo>> GetPage(string query, int pageIndex, int pageSize, bool searchByName, bool? highResolutionImages)
+        public async Task<IPagedResponse<MLOrderInfo>> GetPage(string query, int pageIndex, int pageSize, bool searchByName, bool? highResolutionImages)
         {
-            throw new NotImplementedException();
+            return await GetPage(query, pageIndex, pageSize, false);
         }
     }
 }

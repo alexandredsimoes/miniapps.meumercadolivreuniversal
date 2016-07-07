@@ -52,7 +52,7 @@ namespace MyML.UWP.ViewModels
             Refresh = new RelayCommand(async () => await LoadQuestions());
         }
 
-        public async override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
+        public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             if (mode != NavigationMode.Back)
             {
@@ -107,8 +107,8 @@ namespace MyML.UWP.ViewModels
                 foreach (var item in questions.questions)
                 {
                     //Tenta obter os detalhes da questao
-                    item.From.UserInfo = await _mercadoLivreService.GetUserInfo(item.From.id.ToString(), new KeyValuePair<string, string>[] { new KeyValuePair<string, string>("attributes", "nickname,status,registration_date,seller_experience,id") });                    
-                    var productDetail = await _mercadoLivreService.GetItemDetails(item.item_id, new KeyValuePair<string, string>[] { new KeyValuePair<string, string>("attributes", "id,title,price,thumbnail") });
+                    item.From.UserInfo = await _mercadoLivreService.GetUserInfo(item.From.id.ToString(), new KeyValuePair<string, object>[] { new KeyValuePair<string, object>("attributes", "nickname,status,registration_date,seller_experience,id") });                    
+                    var productDetail = await _mercadoLivreService.GetItemDetails(item.item_id, new KeyValuePair<string, object>[] { new KeyValuePair<string, object>("attributes", "id,title,price,thumbnail") });
 
                     if (productDetail == null)
                     {

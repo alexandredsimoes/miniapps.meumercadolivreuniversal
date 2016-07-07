@@ -75,6 +75,12 @@ namespace MyML.UWP.ViewModels
                 if (NavigationService.CanGoBack)
                     NavigationService.GoBack();
             }
+            else
+            {
+                await
+                    new MessageDialog("Não foi possível enviar sua resposta. Verifique se o item está ativo.",
+                        _resourceLoader.GetString("ApplicationTitle")).ShowAsync();
+            }
         }
 
         public async override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
@@ -114,13 +120,13 @@ namespace MyML.UWP.ViewModels
                 {
                     ProductId = question.item_id;
                     question.Item = await _mercadoLivreService.GetItemDetails(question.item_id,
-                        new KeyValuePair<string, string>[]
+                        new KeyValuePair<string, object>[]
                         {
-                            new KeyValuePair<string, string>("attributes","title,thumbnail,price,available_quantity")
+                            new KeyValuePair<string, object>("attributes","title,thumbnail,price,available_quantity")
                         });
 
                     var userInfo = await _mercadoLivreService.GetUserInfo(id[1],
-                        new KeyValuePair<string, string>[] { new KeyValuePair<string, string>("attributes", "nickname,id") });
+                        new KeyValuePair<string, object>[] { new KeyValuePair<string, object>("attributes", "nickname,id") });
                     question.nickname = userInfo?.nickname;
                     question.buyer_id = userInfo?.id;
 

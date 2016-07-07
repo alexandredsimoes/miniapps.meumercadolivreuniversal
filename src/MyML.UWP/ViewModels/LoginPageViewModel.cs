@@ -52,7 +52,7 @@ namespace MyML.UWP.ViewModels
                         try
                         {
                             Shell.SetBusy(true, "Tentando restaurar o login");
-                            var login = await _mercadoLivreServices.TryRefreshToken();
+                            var login = await _mercadoLivreServices.TryRefreshToken().ConfigureAwait(true);
                             if (!string.IsNullOrWhiteSpace(login?.Refresh_Token))
                             {
 #if DEBUG
@@ -60,11 +60,11 @@ namespace MyML.UWP.ViewModels
 #endif
                                 _dataService.SaveConfig(Consts.ML_CONFIG_KEY_USER_ID, login.user_id);
                                 _dataService.SaveConfig(Consts.ML_CONFIG_KEY_REFRESH_TOKEN, login.Refresh_Token);
-                                _dataService.SaveConfig(Consts.ML_CONFIG_KEY_EXPIRES, DateTime.Now.AddSeconds(login.Expires_In ?? 0).ToString(CultureInfo.InvariantCulture));
+                                _dataService.SaveConfig(Consts.ML_CONFIG_KEY_EXPIRES, DateTime.Now.AddSeconds(login.Expires_In ?? 0).ToString(CultureInfo.CurrentCulture));
                                 _dataService.SaveConfig(Consts.ML_CONFIG_KEY_ACCESS_TOKEN, login.Access_Token);
                                 _dataService.SaveConfig(Consts.ML_CONFIG_KEY_LOGIN_DATE, DateTime.Now.ToString(CultureInfo.InvariantCulture));
 
-                                await NotificationHelper.SubscribeNotification();
+                                await NotificationHelper.SubscribeNotification().ConfigureAwait(true);
 
                                 if (NavigationService.CanGoBack)
                                     NavigationService.GoBack();

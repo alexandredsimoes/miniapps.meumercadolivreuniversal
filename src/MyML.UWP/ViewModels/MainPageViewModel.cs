@@ -118,7 +118,7 @@ namespace MyML.UWP.ViewModels
 //            }
             await VerifyExecutions();
 
-            var categories = await _mercadoLivreServices.ListCategories("MLB");
+            //var categories = await _mercadoLivreServices.ListCategories("MLB");
         }
 
 

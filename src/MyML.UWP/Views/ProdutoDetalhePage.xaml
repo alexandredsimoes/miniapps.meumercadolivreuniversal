@@ -268,6 +268,9 @@
                     </AppBarButton.ContentTemplate>
                 </AppBarButton>
             </CommandBar.PrimaryCommands>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Label="Copiar link do anúncio" Command="{Binding CopiarLinkAnuncio}"/>
+            </CommandBar.SecondaryCommands>
         </CommandBar>
     </Page.BottomAppBar>
 
@@ -514,8 +517,8 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
                                 <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="Descrição" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,0,0,10"/>
                                 <Ellipse Width="80" Grid.Column="0" Height="80" Grid.Row="1">

@@ -40,6 +40,11 @@ namespace MyML.UWP.ViewModels
             TrackOrder = new RelayCommand(async () =>
             {
 
+                if (String.IsNullOrWhiteSpace(OrderInfo?.shipping?.tracking_number))
+                {
+                    await new MessageDialog("Nenhuma informação de rastreamento está disponível.").ShowAsync();
+                    return;
+                }
                 var client = SimpleIoc.Default.GetInstance<HttpClient>();
                 try
                 {
@@ -158,7 +163,7 @@ namespace MyML.UWP.ViewModels
                 
             });
         }
-        public async override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
+        public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             if(mode != NavigationMode.Back)
             {

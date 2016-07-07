@@ -23,7 +23,7 @@ namespace MyML.UWP.Services
             throw new NotImplementedException();
         }
 
-        public Task<MLMyItemsSearchResult> ListMyItems(params KeyValuePair<string, string>[] attributes)
+        public Task<MLMyItemsSearchResult> ListMyItems(params KeyValuePair<string, object>[] attributes)
         {
             throw new NotImplementedException();
         }
@@ -38,7 +38,7 @@ namespace MyML.UWP.Services
             throw new NotImplementedException();
         }
 
-        public Task<MLUserInfoSearchResult> GetUserInfo(string userId, params KeyValuePair<string, string>[] attributesOrFilters)
+        public Task<MLUserInfoSearchResult> GetUserInfo(string userId, params KeyValuePair<string, object>[] attributesOrFilters)
         {
             throw new NotImplementedException();
         }
@@ -63,7 +63,7 @@ namespace MyML.UWP.Services
             throw new NotImplementedException();
         }
 
-        public Task<Item> GetItemDetails(string itemId, params KeyValuePair<string, string>[] attributes)
+        public Task<Item> GetItemDetails(string itemId, params KeyValuePair<string, object>[] attributes)
         {
             throw new NotImplementedException();
         }
@@ -104,12 +104,12 @@ namespace MyML.UWP.Services
             throw new NotImplementedException();
         }
 
-        public Task<MLOrder> ListOrders(int pageIndex = 0, int pageSize = 0, params KeyValuePair<string, string>[] attributes)
+        public Task<MLOrder> ListOrders(int pageIndex = 0, int pageSize = 0, params KeyValuePair<string, object>[] attributes)
         {
             throw new NotImplementedException();
         }
 
-        public Task<MLOrder> ListMyOrders(int pageIndex = 0, int pageSize = 0, params KeyValuePair<string, string>[] attributes)
+        public Task<MLOrder> ListMyOrders(int pageIndex = 0, int pageSize = 0, params KeyValuePair<string, object>[] attributes)
         {
             throw new NotImplementedException();
         }
@@ -240,7 +240,7 @@ namespace MyML.UWP.Services
             throw new NotImplementedException();
         }
 
-        public Task<MLOrder> ListRecentOrders(int pageIndex = 0, int pageSize = 0, params KeyValuePair<string, string>[] attributes)
+        public Task<MLOrder> ListRecentOrders(int pageIndex = 0, int pageSize = 0, params KeyValuePair<string, object>[] attributes)
         {
             throw new NotImplementedException();
         }
@@ -260,12 +260,12 @@ namespace MyML.UWP.Services
             throw new NotImplementedException();
         }
 
-        public Task<MLOrder> ListArchivedSellerOrders(int pageIndex = 0, int pageSize = 0, params KeyValuePair<string, string>[] attributes)
+        public Task<MLOrder> ListArchivedSellerOrders(int pageIndex = 0, int pageSize = 0, params KeyValuePair<string, object>[] attributes)
         {
             throw new NotImplementedException();
         }
 
-        public Task<MLOrder> ListArchivedBuyerOrders(int pageIndex = 0, int pageSize = 0, params KeyValuePair<string, string>[] attributes)
+        public Task<MLOrder> ListArchivedBuyerOrders(int pageIndex = 0, int pageSize = 0, params KeyValuePair<string, object>[] attributes)
         {
             throw new NotImplementedException();
         }

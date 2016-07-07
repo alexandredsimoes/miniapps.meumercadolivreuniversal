@@ -49,7 +49,7 @@ namespace MyML.UWP.ViewModels
             });
         }
 
-        public async override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
+        public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             if (!_dataService.IsAuthenticated())
             {
@@ -57,6 +57,7 @@ namespace MyML.UWP.ViewModels
                     _resourceLoader.GetString("ApplicationTitle")).ShowAsync();
 
                 NavigationService.Navigate(typeof(LoginPage), null, new Windows.UI.Xaml.Media.Animation.ContinuumNavigationTransitionInfo());
+                await Task.CompletedTask;
                 return;
             }
             if (mode != NavigationMode.Back && CacheHelper.IsExpired(nameof(FavoritesPageViewModel)))
@@ -77,13 +78,6 @@ namespace MyML.UWP.ViewModels
                 var items = await _mercadoLivreService.GetBookmarkItems();
                 if (items != null)
                 {
-                    foreach (var item in items)
-                    {
-                        item.ItemInfo = await _mercadoLivreService.GetItemDetails(item.item_id, new KeyValuePair<string, string>[]
-                        {
-                            new KeyValuePair<string, string>("attributes", "id,thumbnail,price,title")
-                        });
-                    }
                     Bookmarks = items;
                     HasItems = Bookmarks.Count > 0;
 
