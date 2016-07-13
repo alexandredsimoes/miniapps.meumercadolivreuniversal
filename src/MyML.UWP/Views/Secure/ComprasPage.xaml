@@ -55,7 +55,7 @@
                         <Setter Target="ProdutosListView.Visibility" Value="Collapsed"/>
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
-                        <WindowsStateTriggers:EqualsStateTrigger EqualTo="0" Value="{Binding Orders.results.Count}" />
+                        <WindowsStateTriggers:EqualsStateTrigger EqualTo="0" Value="{Binding Orders.Count}" />
                     </VisualState.StateTriggers>
                 </VisualState>
             </VisualStateGroup>
@@ -100,7 +100,7 @@
 
 
         <!--Produtos relacionados nas perguntas-->
-        <ListView ItemsSource="{Binding Orders.results}" Grid.Row="2" x:Name="ProdutosListView">
+        <ListView ItemsSource="{Binding Orders}" Grid.Row="2" x:Name="ProdutosListView">
             <Interactivity:Interaction.Behaviors>
                 <Core:EventTriggerBehavior EventName="Tapped">
                     <Core:InvokeCommandAction Command="{Binding SelectOrder}" CommandParameter="{Binding ElementName=ProdutosListView,Path=SelectedItem}" />

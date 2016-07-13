@@ -36,6 +36,7 @@ namespace MyML.UWP.ViewModels
             {
                 var item = obj as MLBookmarkItem;
                 if (item == null) return;
+                Shell.SetBusy(true, "Aguarde...");
                 NavigationService.Navigate(typeof(ProdutoDetalhePage), item.item_id);
             });
 

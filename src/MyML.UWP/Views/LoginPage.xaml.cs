@@ -96,7 +96,7 @@ namespace MyML.UWP.Views
                     catch (Exception ex)
                     {
                         //Tenta converter para o objeto de erro
-                        AppLogs.WriteError("LoginPage.NavigationStarting()", ex);
+                        await AppLogs.WriteError("LoginPage.NavigationStarting()", ex);
 
                         //Avisa o usuário sobre o erro
                         await new MessageDialog("Não foi possível conectar ao site do MercadoLivre. Verifique sua conexão com a internet.", "Meu MercadoLivre").ShowAsync();
@@ -112,7 +112,7 @@ namespace MyML.UWP.Views
                 if (!args.IsSuccess)
                 {
                     var message = String.Format("{0} - {1}", args.Uri.ToString(), args.WebErrorStatus.ToString());
-                    AppLogs.WriteError("ERRO->LoginWebview_NavigationCompleted", message);
+                    await AppLogs.WriteError("ERRO->LoginWebview_NavigationCompleted", message);
 
                     MessageDialog dialog = new MessageDialog("Não foi possível conectar ao site do MercadoLivre. Verifique sua conexão com a internet.", "Meu MercadoLivre");
                     await dialog.ShowAsync();
@@ -172,7 +172,7 @@ namespace MyML.UWP.Views
             }
             catch (Exception ex)
             {
-                AppLogs.WriteError("LoginWebView_NavigationCompleted", ex);
+                await AppLogs.WriteError("LoginWebView_NavigationCompleted", ex);
             }
             finally
             {

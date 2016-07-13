@@ -61,7 +61,7 @@ namespace MyML.UWP.Services
             }
             catch (Exception ex)
             {
-                AppLogs.WriteError("LoginPageViewModel.SubscribeNotification()", ex);
+                await AppLogs.WriteError("LoginPageViewModel.SubscribeNotification()", ex);
                 return false;
             }
         }

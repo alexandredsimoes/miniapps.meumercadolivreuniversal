@@ -97,7 +97,7 @@ namespace MyML.UWP.Services
         {
             var url = Consts.GetUrl(Consts.ML_PRODUCT_QUESTIONS, itemId);
 
-            if (pageSize > 0)
+            if (pageIndex >= 0 && pageSize > 0)
             {
                 url = String.Concat(url, String.Format("&limit={0}&offset={1}", pageSize, pageIndex));
             }
@@ -241,7 +241,7 @@ namespace MyML.UWP.Services
         {
             var url = Consts.GetUrl(Consts.ML_PRODUCTS_BY_CATEGORY, Consts.ML_ID_BRASIL, categoryId);
 
-            if (pageIndex > 0)
+            if (pageIndex >= 0 && pageSize > 0)
             {
                 url = String.Concat(url, String.Format("&limit={0}&offset={1}", pageSize, --pageIndex));
             }
@@ -290,7 +290,7 @@ namespace MyML.UWP.Services
             }
             catch (Exception ex)
             {
-                AppLogs.WriteError("MercadoLivreServices.AskQuestion()", ex);
+                await AppLogs.WriteError("MercadoLivreServices.AskQuestion()", ex);
                 return null;
             }
         }
@@ -348,13 +348,13 @@ namespace MyML.UWP.Services
                         }
                     }
 
-                    AppLogs.WriteWarning("MercadoLivreServices.ListNewItem()", result);
+                    await AppLogs.WriteWarning("MercadoLivreServices.ListNewItem()", result);
                 }
                 return null;
             }
             catch (Exception ex)
             {
-                AppLogs.WriteError("MercadoLivreServices.ListNewItem()", ex);
+                await AppLogs.WriteError("MercadoLivreServices.ListNewItem()", ex);
                 return null;
             }
         }
@@ -385,12 +385,12 @@ namespace MyML.UWP.Services
                 {
                     return true;
                 }
-                AppLogs.WriteWarning("MercadoLivreServices.GetProductStatus()", result);
+                await AppLogs.WriteWarning("MercadoLivreServices.GetProductStatus()", result);
                 return false;
             }
             catch (Exception ex)
             {
-                AppLogs.WriteError("MercadoLivreServices.GetProductStatus()", ex);
+                await AppLogs.WriteError("MercadoLivreServices.GetProductStatus()", ex);
                 return false;
             }
         }
@@ -417,12 +417,12 @@ namespace MyML.UWP.Services
                     return true;
                 }
 
-                AppLogs.WriteWarning("MercadoLivreServices.RemoveProduct()", result);
+                await AppLogs.WriteWarning("MercadoLivreServices.RemoveProduct()", result);
                 return false;
             }
             catch (Exception ex)
             {
-                AppLogs.WriteError("MercadoLivreServices.RemoveProduct()", ex);
+                await AppLogs.WriteError("MercadoLivreServices.RemoveProduct()", ex);
                 return false;
             }
         }
@@ -455,12 +455,12 @@ namespace MyML.UWP.Services
                 {
                     //Tentar converter para MLErrorRequest
                 }
-                AppLogs.WriteWarning("MercadoLivreServices.RelistProduct()", result);
+                await AppLogs.WriteWarning("MercadoLivreServices.RelistProduct()", result);
                 return false;
             }
             catch (Exception ex)
             {
-                AppLogs.WriteError("MercadoLivreServices.RelistProduct()", ex);
+                await AppLogs.WriteError("MercadoLivreServices.RelistProduct()", ex);
                 return false;
             }
         }
@@ -485,12 +485,12 @@ namespace MyML.UWP.Services
                 {
                     return true;
                 }
-                AppLogs.WriteWarning("MercadoLivreServices.ChangeProductAttributes()", result);
+                await AppLogs.WriteWarning("MercadoLivreServices.ChangeProductAttributes()", result);
                 return false;
             }
             catch (Exception ex)
             {
-                AppLogs.WriteError("MercadoLivreServices.ChangeProductAttributes()", ex);
+                await AppLogs.WriteError("MercadoLivreServices.ChangeProductAttributes()", ex);
                 return false;
             }
         }
@@ -529,7 +529,7 @@ namespace MyML.UWP.Services
             var userId = _dataService.GetMLConfig(Consts.ML_CONFIG_KEY_USER_ID);
             var url = Consts.GetUrl(Consts.MlMyordersListUrl, userId, accessToken);
 
-            if (pageIndex > 0)
+            if (pageIndex >= 0 && pageSize > 0)
             {
                 url = String.Concat(url, String.Format("&limit={0}&offset={1}", pageSize, pageIndex));
             }
@@ -559,7 +559,7 @@ namespace MyML.UWP.Services
             var userId = _dataService.GetMLConfig(Consts.ML_CONFIG_KEY_USER_ID);
             var url = Consts.GetUrl(Consts.MlOrdersList, userId, accessToken);
 
-            if (pageIndex >= 0)
+            if (pageIndex >= 0 && pageSize > 0)
             {
                 url = String.Concat(url, String.Format("&limit={0}&offset={1}", pageSize, pageIndex));
             }
@@ -590,7 +590,7 @@ namespace MyML.UWP.Services
             var userId = _dataService.GetMLConfig(Consts.ML_CONFIG_KEY_USER_ID);
             var url = Consts.GetUrl(Consts.MlRecentOrdersList, userId, accessToken);
 
-            if (pageIndex >= 0)
+            if (pageIndex >= 0 && pageSize > 0)
             {
                 url = String.Concat(url, String.Format("&limit={0}&offset={1}", pageSize, pageIndex));
             }
@@ -628,7 +628,7 @@ namespace MyML.UWP.Services
             var userId = _dataService.GetMLConfig(Consts.ML_CONFIG_KEY_USER_ID);
             var url = Consts.GetUrl(Consts.MlUrlOrderSellerArchived, userId, accessToken);
 
-            if (pageIndex > 0)
+            if (pageIndex >= 0 && pageSize > 0)
             {
                 url = String.Concat(url, String.Format("&limit={0}&offset={1}", pageSize, pageIndex));
             }
@@ -660,7 +660,7 @@ namespace MyML.UWP.Services
             var userId = _dataService.GetMLConfig(Consts.ML_CONFIG_KEY_USER_ID);
             var url = Consts.GetUrl(Consts.MlUrlOrderBuyerArchived, userId, accessToken);
 
-            if (pageIndex > 0)
+            if (pageIndex >= 0 && pageSize > 0)
             {
                 url = String.Concat(url, String.Format("&limit={0}&offset={1}", pageSize, pageIndex));
             }
@@ -713,7 +713,7 @@ namespace MyML.UWP.Services
 
             var url = Consts.GetUrl(Consts.ML_MY_ITEMS_URL, userId, accessToken);
 
-            if (pageIndex > 0)
+            if (pageIndex >= 0 && pageSize > 0)
             {
                 url = String.Concat(url, String.Format("&limit={0}&offset={1}", pageSize, --pageIndex));
             }
@@ -766,7 +766,7 @@ namespace MyML.UWP.Services
             }
             catch (Exception ex)
             {
-                AppLogs.WriteError("MeuMercadoLivreServices.TryRefreshToken()", ex);
+                await AppLogs.WriteError("MeuMercadoLivreServices.TryRefreshToken()", ex);
                 return null;
             }
         }
@@ -788,7 +788,7 @@ namespace MyML.UWP.Services
             }
             catch (Exception ex)
             {
-                AppLogs.WriteError("MercadoLivreServices.BookmarkItem()", ex);
+                await AppLogs.WriteError("MercadoLivreServices.BookmarkItem()", ex);
                 return false;
             }
         }
@@ -810,7 +810,7 @@ namespace MyML.UWP.Services
             }
             catch (Exception ex)
             {
-                AppLogs.WriteError("MercadoLivreServices.RemoveBookmarkItem()", ex);
+                await AppLogs.WriteError("MercadoLivreServices.RemoveBookmarkItem()", ex);
                 return false;
             }
         }
@@ -863,7 +863,7 @@ namespace MyML.UWP.Services
             }
             catch (Exception ex)
             {
-                AppLogs.WriteError("MercadoLivreServices.RevokeAccess()", ex);
+                await AppLogs.WriteError("MercadoLivreServices.RevokeAccess()", ex);
                 return false;
             }
         }
@@ -896,7 +896,7 @@ namespace MyML.UWP.Services
             }
             catch (Exception ex)
             {
-                AppLogs.WriteError("MercadoLivreServices.RemoveBookmarkItem()", ex);
+                await AppLogs.WriteError("MercadoLivreServices.RemoveBookmarkItem()", ex);
                 return false;
             }
         }
@@ -944,7 +944,7 @@ namespace MyML.UWP.Services
             }
             catch (Exception ex)
             {
-                AppLogs.WriteError("MercadoLivreServices.SendSellerOrderFeedback()", ex);
+                await AppLogs.WriteError("MercadoLivreServices.SendSellerOrderFeedback()", ex);
                 return false;
             }
         }
@@ -989,7 +989,7 @@ namespace MyML.UWP.Services
             }
             catch (Exception ex)
             {
-                AppLogs.WriteError("MercadoLivreServices.SendBuyerOrderFeedback()", ex);
+                await AppLogs.WriteError("MercadoLivreServices.SendBuyerOrderFeedback()", ex);
                 return false;
             }
         }
@@ -1028,7 +1028,7 @@ namespace MyML.UWP.Services
             }
             catch (Exception ex)
             {
-                AppLogs.WriteError("MercadoLivreServices.UploadProductImage()", ex);
+                await AppLogs.WriteError("MercadoLivreServices.UploadProductImage()", ex);
                 return null;
             }
 
@@ -1061,7 +1061,7 @@ namespace MyML.UWP.Services
             }
             catch (Exception ex)
             {
-                AppLogs.WriteError("MercadoLivreServices.AddPicture()", ex);
+                await AppLogs.WriteError("MercadoLivreServices.AddPicture()", ex);
                 return false;
             }
         }
@@ -1114,13 +1114,13 @@ namespace MyML.UWP.Services
                         }
                     }
 
-                    AppLogs.WriteWarning("MercadoLivreServices.ValidateNewItem()", result);
+                    await AppLogs.WriteWarning("MercadoLivreServices.ValidateNewItem()", result);
                 }
                 return null;
             }
             catch (Exception ex)
             {
-                AppLogs.WriteError("MercadoLivreServices.ValidateNewItem()", ex);
+                await AppLogs.WriteError("MercadoLivreServices.ValidateNewItem()", ex);
                 return null;
             }
         }
@@ -1165,16 +1165,26 @@ namespace MyML.UWP.Services
                         }
                     }
 
-                    AppLogs.WriteWarning("MercadoLivreServices.ListNewItem()", result);
+                    await AppLogs.WriteWarning("MercadoLivreServices.ListNewItem()", result);
                 }
                 return false;
             }
             catch (Exception ex)
             {
-                AppLogs.WriteError("MercadoLivreServices.ChangeProductDescription()", ex);
+                await AppLogs.WriteError("MercadoLivreServices.ChangeProductDescription()", ex);
                 return false;
             }
         }
 
+        public async Task<MLSearchResult> ListProductsByUser(string userId, int pageIndex = 0, int pageSize = 0)
+        {
+            var url = Consts.GetUrl(Consts.ML_PRODUCTS_BY_USER, Consts.ML_ID_BRASIL, userId);
+
+            if (pageIndex >= 0 && pageSize > 0)
+            {
+                url = String.Concat(url, String.Format("&limit={0}&offset={1}", pageSize, (pageIndex * pageSize)));
+            }
+            return await BaseServices<MLSearchResult>.GetAsync(url).ConfigureAwait(false);
+        }
     }
 }

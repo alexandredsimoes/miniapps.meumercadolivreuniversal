@@ -79,7 +79,7 @@ namespace MyML.UWP.Services
             }
             catch (Exception ex)
             {
-                AppLogs.WriteError("DataService.IsAuthenticated", ex);
+                //AppLogs.WriteError("DataService.IsAuthenticated", ex);
             }
             return result;         
         }

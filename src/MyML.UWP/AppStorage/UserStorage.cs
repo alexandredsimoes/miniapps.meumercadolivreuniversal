@@ -31,7 +31,7 @@ namespace MyML.UWP.AppStorage
             }
             catch (Exception ex)
             {
-                AppLogs.WriteError("UserStorage.ReadTextFromFile", ex);
+                //await AppLogs.WriteError("UserStorage.ReadTextFromFile", ex);
             }
             return String.Empty;
         }
@@ -57,7 +57,7 @@ namespace MyML.UWP.AppStorage
             }
             catch (Exception ex)
             {
-                AppLogs.WriteError("UserStorage.WriteText", ex);
+                //await AppLogs.WriteError("UserStorage.WriteText", ex);
                 return;
             }                      
         }
@@ -78,7 +78,7 @@ namespace MyML.UWP.AppStorage
             }
             catch (Exception ex)
             {
-                AppLogs.WriteError("UserStorage.DeleteFileIfExists", ex);
+                //AppLogs.WriteError("UserStorage.DeleteFileIfExists", ex);
             }
         }
 

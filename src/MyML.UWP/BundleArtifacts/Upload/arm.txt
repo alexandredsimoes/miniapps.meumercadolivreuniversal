@@ -1,5 +1,5 @@
-MainPackage=C:\Users\Alexandre\Git\meumercadolivre.universal\src\MyML.UWP\bin\ARM\Release\Upload\MyML.UWP_1.1.124.0_ARM.appx
-SymbolPackage=C:\Users\Alexandre\Git\meumercadolivre.universal\src\MyML.UWP\AppPackages\MyML.UWP_1.1.124.0\MyML.UWP_1.1.124.0_ARM.appxsym
+MainPackage=C:\Users\Alexandre\Git\meumercadolivre.universal\src\MyML.UWP\bin\ARM\Release\Upload\MyML.UWP_1.1.126.0_ARM.appx
+SymbolPackage=C:\Users\Alexandre\Git\meumercadolivre.universal\src\MyML.UWP\AppPackages\MyML.UWP_1.1.126.0\MyML.UWP_1.1.126.0_ARM.appxsym
 ResourcePack=C:\Users\Alexandre\Git\meumercadolivre.universal\src\MyML.UWP\_language-pt.appx
 ResourcePack=C:\Users\Alexandre\Git\meumercadolivre.universal\src\MyML.UWP\_scale-100.appx
 ResourcePack=C:\Users\Alexandre\Git\meumercadolivre.universal\src\MyML.UWP\_scale-125.appx

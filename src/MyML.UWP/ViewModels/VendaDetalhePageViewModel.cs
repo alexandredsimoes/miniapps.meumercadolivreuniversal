@@ -165,7 +165,7 @@ namespace MyML.UWP.ViewModels
             }
             catch (Exception ex)
             {
-                AppLogs.WriteError("VendaDetalhePageViewModel.LoadOrderInfo()", ex);
+                await AppLogs.WriteError("VendaDetalhePageViewModel.LoadOrderInfo()", ex);
             }
             finally
             {

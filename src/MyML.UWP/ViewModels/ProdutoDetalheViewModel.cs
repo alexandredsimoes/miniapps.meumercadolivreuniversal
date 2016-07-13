@@ -36,7 +36,12 @@ namespace MyML.UWP.ViewModels
             _dataService = dataService;
             _resourceLoader = resourceLoader;
 
-            CopiarLinkAnuncio = new RelayCommand(async () =>
+            SeeMoreFromThisUser = new RelayCommand(() =>
+            {
+                NavigationService.Navigate(typeof(ProdutoUsuarioPage),SellerInfo?.id, null);
+            });
+
+            CopyLink = new RelayCommand(async () =>
             {
                 
                 if (String.IsNullOrWhiteSpace(SelectedProduct?.permalink))
@@ -79,7 +84,7 @@ namespace MyML.UWP.ViewModels
                 }
             });
 
-            ShareProduct = new RelayCommand(() =>
+            ShareProduct = new RelayCommand(async() =>
             {
                 try
                 {
@@ -88,7 +93,7 @@ namespace MyML.UWP.ViewModels
                 }
                 catch (Exception ex)
                 {
-                    AppLogs.WriteError("ShareProduct Command", ex);
+                    await AppLogs.WriteError("ShareProduct Command", ex);
                 }
                 finally
                 {
@@ -108,6 +113,7 @@ namespace MyML.UWP.ViewModels
                 }
                 else if (o == "questions")
                 {
+                    Shell.SetBusy(true, "Aguarde...");
                     NavigationService.Navigate(typeof(ProdutoPerguntasPage), SelectedProduct.id);
                 }
             });
@@ -120,8 +126,7 @@ namespace MyML.UWP.ViewModels
             ShowZoom = new RelayCommand(() =>
             {
                 ZoomMode = !ZoomMode;
-                var handler = ZoomModeChanged;
-                if (handler != null) handler(ZoomMode);
+                ZoomModeChanged?.Invoke(ZoomMode);
             });
 
             OpenImage = new RelayCommand<object>(o =>
@@ -166,7 +171,7 @@ namespace MyML.UWP.ViewModels
             args.Request.Data.SetWebLink(new Uri(SelectedProduct.permalink));
         }
 
-        public async override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
+        public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             _dataTransferManager = DataTransferManager.GetForCurrentView();
             if (_dataTransferManager != null)
@@ -223,6 +228,7 @@ namespace MyML.UWP.ViewModels
                 {
                     //Pega os dados do vendedor
                     var sellerId = SelectedProduct.seller == null ? SelectedProduct.seller_id : SelectedProduct.seller.id;
+                    
                     SellerInfo = await _mercadoLivreService.GetUserInfo(sellerId.ToString(),
                         new KeyValuePair<string, object>[] { /*new KeyValuePair<string, string>("attributes", "seller_reputation,points")*/ });
 
@@ -399,6 +405,7 @@ namespace MyML.UWP.ViewModels
         public RelayCommand OpenShipping { get; set; }
         public RelayCommand ShowZoom { get; private set; }
         public RelayCommand<object> OpenImage { get; private set; }
-        public RelayCommand CopiarLinkAnuncio { get; set; }
+        public RelayCommand CopyLink { get; set; }
+        public RelayCommand SeeMoreFromThisUser { get; set; }
     }
 }

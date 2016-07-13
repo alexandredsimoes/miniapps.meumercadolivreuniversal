@@ -83,7 +83,7 @@ namespace MyML.UWP.ViewModels
             }
             catch (Exception ex)
             {
-                AppLogs.WriteError("CompraQualificarPageViewModel.SendFulNotFilledFeedback()", ex);
+                await AppLogs.WriteError("CompraQualificarPageViewModel.SendFulNotFilledFeedback()", ex);
                 await new MessageDialog("Erro ao enviar qualificação. Envie o log de erros para o desenvolvedor.").ShowAsync();
             }
             finally
@@ -105,7 +105,7 @@ namespace MyML.UWP.ViewModels
             }
             catch (Exception ex)
             {
-                AppLogs.WriteError("CompraQualificarPageViewModel.SendFulFilledFeedback()", ex);
+                await AppLogs.WriteError("CompraQualificarPageViewModel.SendFulFilledFeedback()", ex);
                 await new MessageDialog("Erro ao enviar qualificação. Envie o log de erros para o desenvolvedor.").ShowAsync();
             }
             finally
@@ -132,7 +132,7 @@ namespace MyML.UWP.ViewModels
             }
             catch (Exception ex)
             {
-                AppLogs.WriteError("CompraQualificarPageViewModel.OnNavigatedToAsync()", ex);
+                await AppLogs.WriteError("CompraQualificarPageViewModel.OnNavigatedToAsync()", ex);
             }
             finally
             {

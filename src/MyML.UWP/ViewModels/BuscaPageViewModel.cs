@@ -263,7 +263,7 @@ namespace MyML.UWP.ViewModels
         public RelayCommand<object> SelecionarProduto { get; private set; }
         public RelayCommand OpenFilter { get; private set; }
         public MLMyItemsSearchResult Items2 { get; private set; }
-        public RelayCommand OpenSort { get; set; }        
+        public RelayCommand OpenSort { get; private set; }        
     }
     //public class FilterInfo : AvailableFilter
     //{

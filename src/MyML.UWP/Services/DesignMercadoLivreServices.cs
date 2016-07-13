@@ -274,5 +274,10 @@ namespace MyML.UWP.Services
         {
             throw new NotImplementedException();
         }
+
+        public Task<MLSearchResult> ListProductsByUser(string userId, int pageIndex = 0, int pageSize = 0)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -7,7 +7,7 @@ namespace MyML.UWP.AppStorage
 {
     public class AppLogs
     {
-        public static async void WriteError(string source, Exception exception)
+        public static async Task WriteError(string source, Exception exception)
         {
             string appVersion =
                 $"Versão: {Package.Current.Id.Version.Major}.{Package.Current.Id.Version.Minor}.{Package.Current.Id.Version.Build}.{Package.Current.Id.Version.Revision}";
@@ -32,7 +32,7 @@ namespace MyML.UWP.AppStorage
             
         }
 
-        public static async void WriteError(string source, string message)
+        public static async Task WriteError(string source, string message)
         {
             string appVersion =
                 $"Versão: {Package.Current.Id.Version.Major}.{Package.Current.Id.Version.Minor}.{Package.Current.Id.Version.Build}.{Package.Current.Id.Version.Revision}";
@@ -40,7 +40,7 @@ namespace MyML.UWP.AppStorage
             await WriteLog($"{appVersion} - {source}", message, "Error");
         }
 
-        public static async void WriteWarning(string source, string message)
+        public static async Task WriteWarning(string source, string message)
         {
             string appVersion =
                 $"Versão: {Package.Current.Id.Version.Major}.{Package.Current.Id.Version.Minor}.{Package.Current.Id.Version.Build}.{Package.Current.Id.Version.Revision}";

@@ -70,5 +70,7 @@ namespace MyML.UWP.Services
             params KeyValuePair<string, object>[] attributes);
 
         Task<bool> ChangeProductDescription(string productId, string text);
+
+        Task<MLSearchResult> ListProductsByUser(string userId, int pageIndex = 0, int pageSize = 0);
     }
 }

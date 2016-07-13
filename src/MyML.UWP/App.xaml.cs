@@ -59,7 +59,7 @@ namespace MyML.UWP
                 var resourceLoader = ResourceLoader.GetForCurrentView();
 
                 if (e.Exception != null)
-                    AppLogs.WriteError("App_UnhandledException", e.Exception);
+                    await AppLogs.WriteError("App_UnhandledException", e.Exception);
 
                 var dialog = new MessageDialog("Houve um erro inesperado", resourceLoader.GetString("ApplicationTitle"));
                 await dialog.ShowAsync();
@@ -357,7 +357,7 @@ namespace MyML.UWP
             }
             catch (Exception ex)
             {
-                AppLogs.WriteError("MainPage.xaml.cs - RegisterBackgroundTask", ex);
+                await AppLogs.WriteError("MainPage.xaml.cs - RegisterBackgroundTask", ex);
                 return false;
             }
             finally

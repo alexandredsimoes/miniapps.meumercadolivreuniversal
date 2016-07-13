@@ -31,8 +31,7 @@ namespace MyML.UWP.Extensions
             var parent = VisualTreeHelper.GetParent(depObj);
 
             var result = (parent as T) ?? GetParentOfType<T>(parent);
-            if (result != null) return result;
-            return null;
+            return result;
         }
     }
 }

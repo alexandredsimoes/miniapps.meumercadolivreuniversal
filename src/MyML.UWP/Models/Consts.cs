@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
+﻿using System.Diagnostics;
 
 namespace MyML.UWP.Models
 {
@@ -155,6 +152,11 @@ namespace MyML.UWP.Models
         /// Parametros: LojaId, Query
         /// </summary>
         public const string ML_PRODUCTS_BY_NAME = "https://api.mercadolibre.com/sites/{0}/search?q={1}";
+
+        /// <summary>
+        /// Parametros: PaisId, UserId
+        /// </summary>
+        public const string ML_PRODUCTS_BY_USER = "https://api.mercadolibre.com/sites/{0}/search?seller_id={1}";
 
         /// <summary>
         /// Parametros: LojaId, CategoryId

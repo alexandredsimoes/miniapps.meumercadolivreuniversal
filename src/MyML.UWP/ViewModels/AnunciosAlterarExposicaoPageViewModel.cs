@@ -90,7 +90,7 @@ namespace MyML.UWP.ViewModels
             }
             catch (Exception ex)
             {
-                AppLogs.WriteError("", ex);
+                await AppLogs.WriteError("", ex);
             }
             finally
             {

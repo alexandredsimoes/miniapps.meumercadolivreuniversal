@@ -269,7 +269,8 @@
                 </AppBarButton>
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
-                <AppBarButton Label="Copiar link do anúncio" Command="{Binding CopiarLinkAnuncio}"/>
+                <AppBarButton Label="Copiar link do anúncio" Command="{Binding CopyLink}"/>
+                <AppBarButton Label="Outros produtos do vendedor" Command="{Binding SeeMoreFromThisUser}"/>
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </Page.BottomAppBar>

@@ -10,6 +10,8 @@ using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml.Navigation;
 using MyML.UWP.Models.Mercadolivre;
 using Windows.UI.Popups;
+using MyML.UWP.Adapters;
+using MyML.UWP.Adapters.Search;
 using MyML.UWP.Views;
 using MyML.UWP.Views.Secure;
 
@@ -38,7 +40,7 @@ namespace MyML.UWP.ViewModels
 
         }
 
-        public async override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
+        public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             if (mode != NavigationMode.Back)
                 await LoadShopping();
@@ -60,27 +62,47 @@ namespace MyML.UWP.ViewModels
                 return;
             }
 
-            Views.Shell.SetBusy(true, "Carregando informações");
-            Orders = await _mercadoLivreService.ListMyOrders(0, 0, new KeyValuePair<string, object>[] { });
-            Views.Shell.SetBusy(false);
+
+            //Orders = await _mercadoLivreService.ListMyOrders(0, 0, new KeyValuePair<string, object>[] { });
+            Orders = new IncrementalSearchSource<MyOrdersDataSource, MLOrderInfo>(0, 15, null, true);
+
+
+            Orders.LoadMoreItemsStarted += () =>
+            {
+                Views.Shell.SetBusy(true, "Carregando informações");
+            };
+
+            Orders.LoadMoreItemsCompleted += (paging) =>
+            {
+                Views.Shell.SetBusy(false);
+            };
+
+
         }
 
         public RelayCommand Refresh { get; private set; }
         public RelayCommand<object> SelectOrder { get; private set; }
 
-        private MLOrder _Orders;
+        private IncrementalSearchSource<MyOrdersDataSource, MLOrderInfo> _orders;
+        public IncrementalSearchSource<MyOrdersDataSource, MLOrderInfo> Orders
+        {
+            get { return _orders; }
+            set { Set(() => Orders, ref _orders, value); }
+        }
+
+        /*private MLOrder _Orders;
         public MLOrder Orders
         {
             get { return _Orders; }
             set { Set(() => Orders, ref _Orders, value); }
-        }
+        }*/
 
-        private bool _HasOrders;
+        private bool _hasOrders;
 
         public bool HasOrders
         {
-            get { return _HasOrders; }
-            set { Set(() => HasOrders, ref _HasOrders, value); }
+            get { return _hasOrders; }
+            set { Set(() => HasOrders, ref _hasOrders, value); }
         }
 
     }

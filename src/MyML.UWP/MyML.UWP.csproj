@@ -115,11 +115,13 @@
     <Compile Include="Adapters\MercadoLivreIncrementalLoadingClass.cs" />
     <Compile Include="Adapters\Search\AdvertsDataSource.cs" />
     <Compile Include="Adapters\Search\IncrementalSearchSource.cs" />
+    <Compile Include="Adapters\Search\MyOrdersDataSource.cs" />
     <Compile Include="Adapters\Search\OrdersArchivedDataSource.cs" />
     <Compile Include="Adapters\Search\OrdersDataSource.cs" />
     <Compile Include="Adapters\Search\OrdersResponse.cs" />
     <Compile Include="Adapters\Search\QuestionDataSource.cs" />
     <Compile Include="Adapters\Search\SearchDataSource.cs" />
+    <Compile Include="Adapters\Search\SearchProductUserDataSource.cs" />
     <Compile Include="Aggregattor\MessengerDetails.cs" />
     <Compile Include="Aggregattor\MessengerFilterDetails.cs" />
     <Compile Include="Aggregattor\MessengerFilterResult.cs" />
@@ -205,6 +207,9 @@
       <DependentUpon>AdsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Usercontrols\MercadoLivreFilterTemplateSelector.cs" />
+    <Compile Include="Usercontrols\SearchResultControl.xaml.cs">
+      <DependentUpon>SearchResultControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Usercontrols\TabHeader.xaml.cs">
       <DependentUpon>TabHeader.xaml</DependentUpon>
     </Compile>
@@ -234,6 +239,7 @@
     <Compile Include="ViewModels\ProdutoDetalheEnvioPageViewModel.cs" />
     <Compile Include="ViewModels\ProdutoDetalheViewModel.cs" />
     <Compile Include="ViewModels\ProdutoPerguntasPageViewModel.cs" />
+    <Compile Include="ViewModels\ProdutoUsuarioPageViewModel.cs" />
     <Compile Include="ViewModels\SaldoPageViewModel.cs" />
     <Compile Include="ViewModels\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\VendaDetalhePageViewModel.cs" />
@@ -284,6 +290,9 @@
     </Compile>
     <Compile Include="Views\ProdutoPerguntasPage.xaml.cs">
       <DependentUpon>ProdutoPerguntasPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProdutoUsuarioPage.xaml.cs">
+      <DependentUpon>ProdutoUsuarioPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Secure\AlterarAtributoPage.xaml.cs">
       <DependentUpon>AlterarAtributoPage.xaml</DependentUpon>
@@ -447,6 +456,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Usercontrols\SearchResultControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Usercontrols\TabHeader.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -504,6 +517,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ProdutoPerguntasPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProdutoUsuarioPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

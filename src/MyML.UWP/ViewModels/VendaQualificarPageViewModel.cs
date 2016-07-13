@@ -90,7 +90,7 @@ namespace MyML.UWP.ViewModels
             }
             catch (Exception ex)
             {
-                AppLogs.WriteError("VendaQualificarPageViewMode.OnNavigatedToAsync()", ex);
+                await AppLogs.WriteError("VendaQualificarPageViewMode.OnNavigatedToAsync()", ex);
                 await new MessageDialog("Erro ao enviar qualificação. Envie o log de erros para o desenvolvedor.").ShowAsync();
             }
             finally
@@ -111,7 +111,7 @@ namespace MyML.UWP.ViewModels
             }
             catch (Exception ex)
             {
-                AppLogs.WriteError("VendaQualificarPageViewMode.OnNavigatedToAsync()", ex);
+                await AppLogs.WriteError("VendaQualificarPageViewMode.OnNavigatedToAsync()", ex);
                 await new MessageDialog("Erro ao enviar qualificação. Envie o log de erros para o desenvolvedor.").ShowAsync();
             }
             finally
@@ -137,7 +137,7 @@ namespace MyML.UWP.ViewModels
             }
             catch (Exception ex)
             {
-                AppLogs.WriteError("VendaQualificarPageViewMode.OnNavigatedToAsync()", ex);
+                await AppLogs.WriteError("VendaQualificarPageViewMode.OnNavigatedToAsync()", ex);
             }
             finally
             {

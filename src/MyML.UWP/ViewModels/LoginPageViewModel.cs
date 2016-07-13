@@ -90,7 +90,7 @@ namespace MyML.UWP.ViewModels
                 }
                 catch (Exception ex)
                 {
-                    AppLogs.WriteError("MainPageViewModel RefreshToken", ex);
+                    await AppLogs.WriteError("MainPageViewModel RefreshToken", ex);
                 }
             }                        
         }
@@ -129,7 +129,7 @@ namespace MyML.UWP.ViewModels
             }
             catch (Exception ex)
             {
-                AppLogs.WriteError("LoginPageViewModel.SaveAuthenticationInfo()", ex);
+                await AppLogs.WriteError("LoginPageViewModel.SaveAuthenticationInfo()", ex);
             }
         }
 

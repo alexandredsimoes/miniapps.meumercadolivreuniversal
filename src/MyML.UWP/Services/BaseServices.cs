@@ -40,7 +40,7 @@ namespace MyML.UWP.Services
             }
             catch (Exception ex)
             {
-                AppLogs.WriteError(url, ex);
+                //AppLogs.WriteError(url, ex);
             }
             return default(T);
         }

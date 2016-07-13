@@ -292,7 +292,7 @@ namespace MyML.UWP.ViewModels
             }
             catch (Exception ex)
             {
-                AppLogs.WriteError("CompraDetalhePageViewModel.LoadOrderInfo()", ex);
+                await AppLogs.WriteError("CompraDetalhePageViewModel.LoadOrderInfo()", ex);
                 await new MessageDialog("Não foi possível obter os dados da compra.", "Erro").ShowAsync();
             }
             finally
