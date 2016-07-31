@@ -15,6 +15,7 @@ using Windows.UI.Popups;
 using Windows.UI.Xaml.Navigation;
 using Template10.Services.NavigationService;
 using System.Collections.ObjectModel;
+using MyML.UWP.AppStorage;
 
 namespace MyML.UWP.ViewModels
 {
@@ -68,9 +69,10 @@ namespace MyML.UWP.ViewModels
         {
             if (!_dataService.IsAuthenticated())
             {
-                await new MessageDialog(_resourceLoader.GetString("MsgNotAuthenticated"),
-                    _resourceLoader.GetString("ApplicationTitle")).ShowAsync();
+                //await new MessageDialog(_resourceLoader.GetString("MsgNotAuthenticated"),
+                //    _resourceLoader.GetString("ApplicationTitle")).ShowAsync();
 
+                Questions?.Clear();
                 NavigationService.Navigate(typeof(LoginPage), null, new Windows.UI.Xaml.Media.Animation.ContinuumNavigationTransitionInfo());
                 return;
             }
@@ -81,50 +83,81 @@ namespace MyML.UWP.ViewModels
 
             try
             {
-                Questions.Clear();
+                Questions?.Clear();
                 var productQuestionContents = questions as ProductQuestionContent[] ?? questions.ToArray();
-                foreach (var item in productQuestionContents)
+                if (productQuestionContents != null)
                 {
-                    //Tenta obter os detalhes da questao
-                    var questionDetail = await _mercadoLivreService.GetQuestionDetails(item.id.ToString(), new KeyValuePair<string, object>[] { });
-                    var productDetail = await _mercadoLivreService.GetItemDetails(item.item_id, new KeyValuePair<string, object>[] { new KeyValuePair<string, object>("attributes", "id,title,price,thumbnail") });
-
-                    if (questionDetail == null || productDetail == null)
+                    foreach (var item in productQuestionContents)
                     {
-                        await new MessageDialog(_resourceLoader.GetString("PerguntasComprasPageMsgErrorLoadQuestionDetail"), _resourceLoader.GetString("ApplicationName")).ShowAsync();
-                        break;
+                        //Tenta obter os detalhes da questao
+                        var questionDetail = await _mercadoLivreService.GetQuestionDetails(item.id.ToString());
+                        var productDetail =
+                            await
+                                _mercadoLivreService.GetItemDetails(item.item_id,
+                                    new KeyValuePair<string, object>("attributes", "id,title,price,thumbnail"));
+
+                        if (questionDetail == null || productDetail == null)
+                        {
+                            await
+                                new MessageDialog(
+                                    _resourceLoader.GetString("PerguntasComprasPageMsgErrorLoadQuestionDetail"),
+                                    _resourceLoader.GetString("ApplicationName")).ShowAsync();
+                            break;
+                        }
+
+                        item.answer = questionDetail.answer;
+                        item.date_created = questionDetail.date_created;
+                        item.id = questionDetail.id;
+                        item.seller_id = questionDetail.seller_id;
+                        item.status = questionDetail.status;
+                        item.text = questionDetail.text;
+                        item.Item = productDetail;
                     }
 
-                    item.answer = questionDetail.answer;
-                    item.date_created = questionDetail.date_created;
-                    item.id = questionDetail.id;
-                    item.seller_id = questionDetail.seller_id;
-                    item.status = questionDetail.status;
-                    item.text = questionDetail.text;
-                    item.Item = productDetail;
-                }
+                    Questions = productQuestionContents
+                        .GroupBy(
+                            c =>
+                                new
+                                {
+                                    id = c.Item.id,
+                                    title = c.Item.title,
+                                    price = c.Item.price,
+                                    thumbnail = c.Item.thumbnail,
+                                    available_quantity = c.Item.available_quantity
+                                })
 
-                Questions = productQuestionContents
-                    .GroupBy(c => new { id = c.Item.id, title = c.Item.title, price = c.Item.price, thumbnail = c.Item.thumbnail, available_quantity = c.Item.available_quantity })
-
-                    .Select(x => new QuestionGroup()
-                    {
-                        Produto = new Item() { id = x.Key.id, title = x.Key.title, price = x.Key.price, thumbnail = x.Key.thumbnail, available_quantity = x.Key.available_quantity },
-                        Perguntas = new ObservableCollection<ProductQuestionContent>(x.Select(q => new ProductQuestionContent()
+                        .Select(x => new QuestionGroup()
                         {
-                            answer = q.answer,
-                            date_created = q.date_created,
-                            id = q.id,
-                            item_id = q.item_id,
-                            seller_id = q.seller_id,
-                            status = q.status,
-                            text = q.text
-                        }).ToList())
-                    })
-                    .ToList();
+                            Produto =
+                                new Item()
+                                {
+                                    id = x.Key.id,
+                                    title = x.Key.title,
+                                    price = x.Key.price,
+                                    thumbnail = x.Key.thumbnail,
+                                    available_quantity = x.Key.available_quantity
+                                },
+                            Perguntas =
+                                new ObservableCollection<ProductQuestionContent>(
+                                    x.Select(q => new ProductQuestionContent()
+                                    {
+                                        answer = q.answer,
+                                        date_created = q.date_created,
+                                        id = q.id,
+                                        item_id = q.item_id,
+                                        seller_id = q.seller_id,
+                                        status = q.status,
+                                        text = q.text
+                                    }).ToList())
+                        })
+                        .ToList();
 
-                RaisePropertyChanged(() => Questions);
-
+                    RaisePropertyChanged(() => Questions);
+                }
+            }
+            catch (Exception ex)
+            {
+                await AppLogs.WriteError("PerguntasComprasPageViewModel.LoadQuestions()", ex);
             }
             finally
             {
@@ -132,11 +165,11 @@ namespace MyML.UWP.ViewModels
             }
         }
 
-        private string _ProductId;
+        private string _productId;
         public string ProductId
         {
-            get { return _ProductId; }
-            set { Set(() => ProductId, ref _ProductId, value); }
+            get { return _productId; }
+            set { Set(() => ProductId, ref _productId, value); }
         }
 
 

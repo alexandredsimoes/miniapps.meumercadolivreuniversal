@@ -81,16 +81,17 @@ namespace MyML.UWP.ViewModels
             {
                 await Task.Delay(1000);
                 q.Remove(q2);
-            }               
+            }
         }
 
         private async Task LoadQuestions()
         {
             if (!_dataService.IsAuthenticated())
             {
-                await new MessageDialog(_resourceLoader.GetString("MsgNotAuthenticated"),
-                    _resourceLoader.GetString("ApplicationTitle")).ShowAsync();
+                //await new MessageDialog(_resourceLoader.GetString("MsgNotAuthenticated"),
+                //    _resourceLoader.GetString("ApplicationTitle")).ShowAsync();
 
+                Questions?.Clear();
                 NavigationService.Navigate(typeof(LoginPage), null, new Windows.UI.Xaml.Media.Animation.ContinuumNavigationTransitionInfo());
                 return;
             }
@@ -104,60 +105,68 @@ namespace MyML.UWP.ViewModels
             try
             {
                 Questions.Clear();
-                foreach (var item in questions.questions)
+                if (questions?.questions != null)
                 {
-                    //Tenta obter os detalhes da questao
-                    item.From.UserInfo = await _mercadoLivreService.GetUserInfo(item.From.id.ToString(), new KeyValuePair<string, object>[] { new KeyValuePair<string, object>("attributes", "nickname,status,registration_date,seller_experience,id") });                    
-                    var productDetail = await _mercadoLivreService.GetItemDetails(item.item_id, new KeyValuePair<string, object>[] { new KeyValuePair<string, object>("attributes", "id,title,price,thumbnail") });
-
-                    if (productDetail == null)
+                    foreach (var item in questions.questions)
                     {
-                        await new MessageDialog(_resourceLoader.GetString("PerguntasComprasPageMsgErrorLoadQuestionDetail"), _resourceLoader.GetString("ApplicationName")).ShowAsync();
-                        break;
-                    }
-
-                    item.date_created = item.date_created;
-                    item.id = item.id;
-                    item.seller_id = item.seller_id;
-                    item.status = item.status;
-                    item.text = item.text;
-                    item.ProductInfo = productDetail;
-                }
-
-                var query = from item in questions.questions
-                            group item by new
-                            {
-                                title = item.ProductInfo.title,
-                                price = item.ProductInfo.price,
-                                thumbnail = item.ProductInfo.thumbnail
-                            } into g
-                            select new { GroupName = new Item() { title = g.Key.title, price = g.Key.price, thumbnail = g.Key.thumbnail }, Items = g.ToList() };
-
-
-                foreach (var g in query)
-                {
-                    QuestionGroup2 info = new QuestionGroup2();
-                    info.Key = g.GroupName;
-                    foreach (var item in g.Items)
-                    {
-                        info.Add(new ProductQuestionContent()
+                        if (item.From != null)
                         {
-                            text = item.text,
-                            item_id = item.item_id,
-                            status = item.status,
-                            answer = item.answer,
-                            id = item.id,
-                            seller_id = item.seller_id,
-                            date_created = item.date_created,
-                            nickname = item.From.UserInfo.nickname,
-                            buyer_experience = item.From.UserInfo.seller_experience,
-                            registration_date = item.From.UserInfo.registration_date,
-                            buyer_id = item.From.UserInfo.id
-                        });
+                            //Tenta obter os detalhes da questao
+                            item.From.UserInfo = await _mercadoLivreService.GetUserInfo(item.From.id.ToString(), new KeyValuePair<string, object>[] { new KeyValuePair<string, object>("attributes", "nickname,status,registration_date,seller_experience,id") });
+                        }
+                        
+                        var productDetail = await _mercadoLivreService.GetItemDetails(item.item_id, new KeyValuePair<string, object>[] { new KeyValuePair<string, object>("attributes", "id,title,price,thumbnail") });
+
+                        if (productDetail == null)
+                        {
+                            await new MessageDialog(_resourceLoader.GetString("PerguntasComprasPageMsgErrorLoadQuestionDetail"), _resourceLoader.GetString("ApplicationName")).ShowAsync();
+                            break;
+                        }
+
+                        item.date_created = item.date_created;
+                        item.id = item.id;
+                        item.seller_id = item.seller_id;
+                        item.status = item.status;
+                        item.text = item.text;
+                        item.ProductInfo = productDetail;
                     }
-                    Questions.Add(info);
+
+                    var query = from item in questions.questions
+                                group item by new
+                                {
+                                    title = item.ProductInfo.title,
+                                    price = item.ProductInfo.price,
+                                    thumbnail = item.ProductInfo.thumbnail
+                                } into g
+                                select new { GroupName = new Item() { title = g.Key.title, price = g.Key.price, thumbnail = g.Key.thumbnail }, Items = g.ToList() };
+
+
+                    foreach (var g in query)
+                    {
+                        QuestionGroup2 info = new QuestionGroup2();
+                        info.Key = g.GroupName;
+                        foreach (var item in g.Items)
+                        {
+                            info.Add(new ProductQuestionContent()
+                            {
+                                text = item.text,
+                                item_id = item.item_id,
+                                status = item.status,
+                                answer = item.answer,
+                                id = item.id,
+                                seller_id = item.seller_id,
+                                date_created = item.date_created,
+                                nickname = item.From.UserInfo.nickname,
+                                buyer_experience = item.From.UserInfo.seller_experience,
+                                registration_date = item.From.UserInfo.registration_date,
+                                buyer_id = item.From.UserInfo.id
+                            });
+                        }
+                        Questions.Add(info);
+                    }
+                    RaisePropertyChanged(() => Questions);
                 }
-                RaisePropertyChanged(() => Questions);
+                
             }
             finally
             {

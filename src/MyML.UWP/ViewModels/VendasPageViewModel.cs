@@ -59,15 +59,17 @@ namespace MyML.UWP.ViewModels
             return Task.CompletedTask;
         }
 
-        private async Task LoadShopping()
+        private  Task LoadShopping()
         {
             if (!_dataService.IsAuthenticated())
             {
-                await new MessageDialog(_resourceLoader.GetString("MsgNotAuthenticated"),
-                    _resourceLoader.GetString("ApplicationTitle")).ShowAsync();
+                //await new MessageDialog(_resourceLoader.GetString("MsgNotAuthenticated"),
+                //    _resourceLoader.GetString("ApplicationTitle")).ShowAsync();
 
+                Orders?.Clear();
+                OrdersClosed?.Clear();
                 NavigationService.Navigate(typeof(LoginPage), null, new Windows.UI.Xaml.Media.Animation.ContinuumNavigationTransitionInfo());
-                return;
+                return Task.CompletedTask;
             }
 
             try
@@ -101,6 +103,7 @@ namespace MyML.UWP.ViewModels
             {
                 Views.Shell.SetBusy(false);
             }
+            return Task.CompletedTask;
         }
 
         public RelayCommand Refresh { get; private set; }

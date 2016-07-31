@@ -61,10 +61,7 @@ namespace MyML.UWP.ViewModels
                     Sorts = this.Sorts,
 
                 });
-            });
-
-          
-
+            });         
         }
 
         private void GetFilterResult(MessengerFilterResult obj)
@@ -265,14 +262,4 @@ namespace MyML.UWP.ViewModels
         public MLMyItemsSearchResult Items2 { get; private set; }
         public RelayCommand OpenSort { get; private set; }        
     }
-    //public class FilterInfo : AvailableFilter
-    //{
-    //    public string FilterId { get; set; }
-    //    public long Total { get; set; }
-    //    public FilterInfo()
-    //    {
-    //        Items = new List<FilterInfo>();
-    //    }
-    //    public List<FilterInfo> Items { get; set; }
-    //}
 }

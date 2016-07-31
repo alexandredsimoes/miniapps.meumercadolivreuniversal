@@ -54,8 +54,9 @@ namespace MyML.UWP.ViewModels
         {
             if (!_dataService.IsAuthenticated())
             {
-                await new MessageDialog(_resourceLoader.GetString("MsgNotAuthenticated"),
-                    _resourceLoader.GetString("ApplicationTitle")).ShowAsync();
+                Bookmarks?.Clear();
+                //await new MessageDialog(_resourceLoader.GetString("MsgNotAuthenticated"),
+                //    _resourceLoader.GetString("ApplicationTitle")).ShowAsync();
 
                 NavigationService.Navigate(typeof(LoginPage), null, new Windows.UI.Xaml.Media.Animation.ContinuumNavigationTransitionInfo());
                 await Task.CompletedTask;

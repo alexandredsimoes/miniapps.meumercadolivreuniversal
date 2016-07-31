@@ -32,11 +32,8 @@ namespace MyML.UWP.Views
             this.InitializeComponent();
             NavigationCacheMode = NavigationCacheMode.Enabled;
 
-            _viewModel = DataContext as BuscaPageViewModel;
-            //ProdutosListView.SelectionChanged += ProdutosListView_SelectionChanged;
-            this.BuscaTextBox.GotFocus += BuscaTextBox_GotFocus;
-            //BuscaTextBox.LostFocus += BuscaTextBox_LostFocus;
-           
+            _viewModel = DataContext as BuscaPageViewModel;            
+            this.BuscaTextBox.GotFocus += BuscaTextBox_GotFocus;                       
         }
 
         private void BuscaTextBox_LostFocus(object sender, RoutedEventArgs e)
@@ -47,25 +44,6 @@ namespace MyML.UWP.Views
         private void BuscaTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             Windows.UI.ViewManagement.InputPane.GetForCurrentView().TryShow();
-        }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            if (e.NavigationMode == NavigationMode.Back && _viewModel?.SelectedItem != null)
-            {
-               // this.UpdateLayout();
-                //ProdutosListView.ScrollIntoView(_viewModel.SelectedItem, ScrollIntoViewAlignment.Leading);
-            }
-        }
-
-
-        private void ProdutosListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Selector selector = sender as Selector;
-            if (selector is ListView)
-            {
-                _viewModel.SelectedItem = selector.SelectedItem as Item;
-            }
-        }
+        }        
     }
 }

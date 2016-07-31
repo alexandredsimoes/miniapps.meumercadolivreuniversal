@@ -201,10 +201,11 @@ namespace MyML.UWP.Services
 
             var url = Consts.GetUrl(Consts.ML_USER_BOOKMARKS_URL, accessToken);
             var items = await BaseServices<IList<MLBookmarkItem>>.GetAsync(url).ConfigureAwait(false);
-            foreach (var item in items)
-            {
-                item.ItemInfo = await GetItemDetails(item.item_id, new KeyValuePair<string, object>("attributes", "id,thumbnail,price,title")).ConfigureAwait(false);
-            }
+            if (items != null)
+                foreach (var item in items)
+                {
+                    item.ItemInfo = await GetItemDetails(item.item_id, new KeyValuePair<string, object>("attributes", "id,thumbnail,price,title")).ConfigureAwait(false);
+                }
             return items;
         }
 
@@ -338,14 +339,15 @@ namespace MyML.UWP.Services
                     //Convertemos para o formato de erro
                     var error = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<MLErrorRequest>(result));
 
-                    if (error != null)
+                    if (error?.cause != null)
                     {
 
                         await AppLogs.WriteLog("MercadoLivreServices.ListNewItem()", "Erro durante a criação do novo item", "");
-                        foreach (var item in error.cause)
-                        {
-                            await AppLogs.WriteLog("     ", item.code + " - " + item.message, "");
-                        }
+                        if (error.cause != null)
+                            foreach (var item in error.cause)
+                            {
+                                await AppLogs.WriteLog("     ", item.code + " - " + item.message, "");
+                            }
                     }
 
                     await AppLogs.WriteWarning("MercadoLivreServices.ListNewItem()", result);
@@ -535,19 +537,20 @@ namespace MyML.UWP.Services
             }
 
             var result = await BaseServices<MLOrder>.GetAsync(url, attributes).ConfigureAwait(false);
-            if (result != null)
+            if (result?.results != null)
             {
                 foreach (var item in result.results)
                 {
-                    foreach (var order in item.order_items)
-                    {
-                        if (order.item != null)
+                    if (item.order_items != null)
+                        foreach (var order in item.order_items)
                         {
-                            var thumbmnail = await GetItemDetails(order.item.id, new KeyValuePair<string, object>[] { new KeyValuePair<string, object>("attributes", "thumbnail") }).ConfigureAwait(false);
-                            if (thumbmnail != null)
-                                order.item.thumbnail = thumbmnail.thumbnail;
+                            if (order.item != null)
+                            {
+                                var thumbmnail = await GetItemDetails(order.item.id, new KeyValuePair<string, object>[] { new KeyValuePair<string, object>("attributes", "thumbnail") }).ConfigureAwait(false);
+                                if (thumbmnail != null)
+                                    order.item.thumbnail = thumbmnail.thumbnail;
+                            }
                         }
-                    }
                 }
             }
             return result;
@@ -565,20 +568,21 @@ namespace MyML.UWP.Services
             }
 
             var result = await BaseServices<MLOrder>.GetAsync(url, attributes).ConfigureAwait(false);
-            if (result != null)
+            if (result?.results != null)
             {
                 foreach (var item in result.results)
                 {
-                    foreach (var order in item.order_items)
-                    {
-                        if (order.item != null)
+                    if (item.order_items != null)
+                        foreach (var order in item.order_items)
                         {
-                            var thumbmnail = await GetItemDetails(order.item.id, new KeyValuePair<string, object>("attributes", "thumbnail")).ConfigureAwait(false);
-                            if (thumbmnail != null)
-                                order.item.thumbnail = thumbmnail.thumbnail;
+                            if (order.item != null)
+                            {
+                                var thumbmnail = await GetItemDetails(order.item.id, new KeyValuePair<string, object>("attributes", "thumbnail")).ConfigureAwait(false);
+                                if (thumbmnail != null)
+                                    order.item.thumbnail = thumbmnail.thumbnail;
+                            }
                         }
-                    }
-                }                
+                }
             }
             return result;
         }
@@ -597,19 +601,20 @@ namespace MyML.UWP.Services
 
             var result = await BaseServices<MLOrder>.GetAsync(url, attributes).ConfigureAwait(false);
 
-            if (result != null)
+            if (result?.results != null)
             {
                 foreach (var item in result.results)
                 {
-                    foreach (var order in item.order_items)
-                    {
-                        if (order.item != null)
+                    if (item.order_items != null)
+                        foreach (var order in item.order_items)
                         {
-                            var thumbmnail = await GetItemDetails(order.item.id, new KeyValuePair<string, object>[] { new KeyValuePair<string, object>("attributes", "thumbnail") });
-                            if (thumbmnail != null)
-                                order.item.thumbnail = thumbmnail.thumbnail;
+                            if (order.item != null)
+                            {
+                                var thumbmnail = await GetItemDetails(order.item.id, new KeyValuePair<string, object>[] { new KeyValuePair<string, object>("attributes", "thumbnail") });
+                                if (thumbmnail != null)
+                                    order.item.thumbnail = thumbmnail.thumbnail;
+                            }
                         }
-                    }
                 }
             }
             return result;
@@ -635,19 +640,20 @@ namespace MyML.UWP.Services
 
             var result = await BaseServices<MLOrder>.GetAsync(url).ConfigureAwait(false);
 
-            if (result != null)
+            if (result?.results != null)
             {
                 foreach (var item in result.results)
                 {
-                    foreach (var order in item.order_items)
-                    {
-                        if (order.item != null)
+                    if (item.order_items != null)
+                        foreach (var order in item.order_items)
                         {
-                            var thumbmnail = await GetItemDetails(order.item.id, new KeyValuePair<string, object>[] { new KeyValuePair<string, object>("attributes", "thumbnail") });
-                            if (thumbmnail != null)
-                                order.item.thumbnail = thumbmnail.thumbnail;
+                            if (order.item != null)
+                            {
+                                var thumbmnail = await GetItemDetails(order.item.id, new KeyValuePair<string, object>[] { new KeyValuePair<string, object>("attributes", "thumbnail") });
+                                if (thumbmnail != null)
+                                    order.item.thumbnail = thumbmnail.thumbnail;
+                            }
                         }
-                    }
                 }
             }
             return result;
@@ -666,24 +672,25 @@ namespace MyML.UWP.Services
             }
             var result = await BaseServices<MLOrder>.GetAsync(url, attributes).ConfigureAwait(false);
 
-            if (result != null)
+            if (result?.results != null)
             {
                 foreach (var item in result.results)
                 {
-                    foreach (var order in item.order_items)
-                    {
-                        if (order.item != null)
+                    if (item.order_items != null)
+                        foreach (var order in item.order_items)
                         {
-                            var thumbmnail =
-                                await
-                                    GetItemDetails(order.item.id,
-                                        new KeyValuePair<string, object>[]
-                                        {new KeyValuePair<string, object>("attributes", "thumbnail")})
-                                        .ConfigureAwait(false);
-                            if (thumbmnail != null)
-                                order.item.thumbnail = thumbmnail.thumbnail;
+                            if (order.item != null)
+                            {
+                                var thumbmnail =
+                                    await
+                                        GetItemDetails(order.item.id,
+                                            new KeyValuePair<string, object>[]
+                                            {new KeyValuePair<string, object>("attributes", "thumbnail")})
+                                            .ConfigureAwait(false);
+                                if (thumbmnail != null)
+                                    order.item.thumbnail = thumbmnail.thumbnail;
+                            }
                         }
-                    }
                 }
             }
             return result;
@@ -820,7 +827,7 @@ namespace MyML.UWP.Services
             var accessToken = _dataService.GetMLConfig(Consts.ML_CONFIG_KEY_ACCESS_TOKEN);
             var url = Consts.GetUrl(Consts.MlOrderDetails, orderId, accessToken);
             var result = await BaseServices<MLOrderInfo>.GetAsync(url).ConfigureAwait(false);
-            if (result != null)
+            if (result?.order_items != null)
             {
                 foreach (var order in result.order_items)
                 {
@@ -1108,10 +1115,11 @@ namespace MyML.UWP.Services
                     {
 
                         await AppLogs.WriteLog("MercadoLivreServices.ValidateNewItem()", "Erro durante a criação do novo item", "").ConfigureAwait(false);
-                        foreach (var item in error.cause)
-                        {
-                            await AppLogs.WriteLog("     ", item.code + " - " + item.message, "");
-                        }
+                        if (error.cause != null)
+                            foreach (var item in error.cause)
+                            {
+                                await AppLogs.WriteLog("     ", item.code + " - " + item.message, "");
+                            }
                     }
 
                     await AppLogs.WriteWarning("MercadoLivreServices.ValidateNewItem()", result);
@@ -1159,10 +1167,11 @@ namespace MyML.UWP.Services
                     {
 
                         await AppLogs.WriteLog("MercadoLivreServices.ChangeProductDescription()", "Erro durante a criação do novo item", "").ConfigureAwait(false);
-                        foreach (var item in error.cause)
-                        {
-                            await AppLogs.WriteLog("     ", item.code + " - " + item.message, "");
-                        }
+                        if (error.cause != null)
+                            foreach (var item in error.cause)
+                            {
+                                await AppLogs.WriteLog("     ", item.code + " - " + item.message, "");
+                            }
                     }
 
                     await AppLogs.WriteWarning("MercadoLivreServices.ListNewItem()", result);

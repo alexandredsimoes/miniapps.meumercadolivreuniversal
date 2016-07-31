@@ -68,60 +68,6 @@ namespace MyML.UWP
             {
                 Debug.WriteLine(ex.Message);
             }
-
-
-            /*
-
-            if (e != null)
-            {
-                Exception exception = e.Exception;
-                AppLogs.WriteError("App_UnhandledException", exception);
-                if ((exception is XmlException || exception is NullReferenceException) && exception.ToString().ToUpper().Contains("INNERACTIVE"))
-                {
-                    Debug.WriteLine("Handled Inneractive exception {0}", exception);
-                    e.Handled = true;
-                    return;
-                }
-                else if (exception is NullReferenceException && exception.ToString().ToUpper().Contains("SOMA"))
-                {
-                    Debug.WriteLine("Handled Smaato null reference exception {0}", exception);
-                    e.Handled = true;
-                    return;
-                }
-                else if ((exception is System.IO.IOException || exception is NullReferenceException) && exception.ToString().ToUpper().Contains("GOOGLE"))
-                {
-                    Debug.WriteLine("Handled Google exception {0}", exception);
-                    e.Handled = true;
-                    return;
-                }
-                else if (exception is ObjectDisposedException && exception.ToString().ToUpper().Contains("MOBFOX"))
-                {
-                    Debug.WriteLine("Handled Mobfox exception {0}", exception);
-                    e.Handled = true;
-                    return;
-                }
-                else if ((exception is NullReferenceException || exception is XamlParseException) && exception.ToString().ToUpper().Contains("MICROSOFT.ADVERTISING"))
-                {
-                    Debug.WriteLine("Handled Microsoft.Advertising exception {0}", exception);
-                    e.Handled = true;
-                    return;
-                }
-                else if ((exception is NullReferenceException || exception is XamlParseException) && exception.ToString().ToUpper().Contains("MICROSOFT.ADMEDIATOR"))
-                {
-                    Debug.WriteLine("Handled Microsoft.Advertising exception {0}", exception);
-                    e.Handled = true;
-                    return;
-                }
-                
-                if (Debugger.IsAttached)
-                {
-                    // An unhandled exception has occurred; break into the debugger
-                    Debugger.Break();
-                }
-
-                e.Handled = true;
-            }
-            */
         }
 
         // runs even if restored from state
@@ -282,24 +228,8 @@ namespace MyML.UWP
                 {
                     Windows.Media.SpeechRecognition.SpeechRecognitionResult speechRecognitionResult = commandArgs.Result;
 
-                    // Get the name of the voice command and the text spoken. See AdventureWorksCommands.xml for
-                    // the <Command> tags this can be filled with.
-                    string voiceCommandName = speechRecognitionResult.RulePath[0];
-                    string textSpoken = speechRecognitionResult.Text;
-
-                    // The commandMode is either "voice" or "text", and it indictes how the voice command
-                    // was entered by the user.
-                    // Apps should respect "text" mode by providing feedback in silent form.
-                    //string commandMode = this.SemanticInterpretation("commandMode", speechRecognitionResult);
-
-
-                    //foreach (var item in speechRecognitionResult.SemanticInterpretation.Properties)
-                    //{
-                    //    items += $"{item.Key}={item.Value}";
-                    //}
-
-                    Debug.WriteLine("FALOW => " + speechRecognitionResult.SemanticInterpretation.Properties);
-                    NavigationService.Navigate(typeof(Views.BuscaPage), voiceCommandName + "-" + textSpoken, new Windows.UI.Xaml.Media.Animation.SlideNavigationTransitionInfo());
+                    var textoBusca = speechRecognitionResult.SemanticInterpretation.Properties["dictatedSearchTerms"].FirstOrDefault();
+                    NavigationService.Navigate(typeof(Views.BuscaPage), textoBusca, new Windows.UI.Xaml.Media.Animation.SlideNavigationTransitionInfo());                                        
                 }
             }
             else

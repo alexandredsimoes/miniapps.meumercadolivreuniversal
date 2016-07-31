@@ -59,15 +59,23 @@ namespace MyML.UWP.ViewModels
 
         private async void RevokeAccessExecute()
         {
-            if (await _mercadoLivreServices.RevokeAccess())
+            try
             {
-                await _dataService.DeleteConfig(Consts.ML_CONFIG_KEY_ACCESS_TOKEN);
-                await _dataService.DeleteConfig(Consts.ML_CONFIG_KEY_EXPIRES);
-                await _dataService.DeleteConfig(Consts.ML_CONFIG_KEY_LOGIN_DATE);
-                await _dataService.DeleteConfig(Consts.ML_CONFIG_KEY_REFRESH_TOKEN);
-                await _dataService.DeleteConfig(Consts.ML_CONFIG_KEY_USER_ID);
-                IsAuthenticated = false;
+                Shell.SetBusy(true, "Revogando autenticação...");
+                if (await _mercadoLivreServices.RevokeAccess())
+                {
+                    await _dataService.DeleteConfig(Consts.ML_CONFIG_KEY_ACCESS_TOKEN);
+                    await _dataService.DeleteConfig(Consts.ML_CONFIG_KEY_EXPIRES);
+                    await _dataService.DeleteConfig(Consts.ML_CONFIG_KEY_LOGIN_DATE);
+                    await _dataService.DeleteConfig(Consts.ML_CONFIG_KEY_REFRESH_TOKEN);
+                    await _dataService.DeleteConfig(Consts.ML_CONFIG_KEY_USER_ID);
+                    IsAuthenticated = false;
+                }
             }
+            finally
+            {
+                Shell.SetBusy(false);
+            }            
         }
 
         public RelayCommand<string> LoadProduto { get; private set; }

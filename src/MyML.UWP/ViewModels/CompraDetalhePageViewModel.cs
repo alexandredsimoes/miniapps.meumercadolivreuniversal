@@ -21,6 +21,7 @@ using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
 using Windows.System;
 using Windows.UI.Popups;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml.Navigation;
 
 namespace MyML.UWP.ViewModels
@@ -169,7 +170,7 @@ namespace MyML.UWP.ViewModels
             {
                 if(parameter != null)
                 {
-                    if (TrackingList != null) TrackingList.Clear();
+                    TrackingList?.Clear();
                     OrderId = parameter.ToString();
                     await LoadOrderInfo(OrderId);
                 }                
@@ -184,14 +185,14 @@ namespace MyML.UWP.ViewModels
 
         private async void BuyerActionExecute(string arg)
         {
-            if(OrderInfo == null)
+            if(OrderInfo == null || string.IsNullOrWhiteSpace(arg))
             {
                 await new MessageDialog("Nenhuma informação de compra foi carregada", "Ação não disponível").ShowAsync();
                 return;
             }
-            var phoneNumber = String.Format("{0}{1}", OrderInfo.seller.phone.area_code, OrderInfo.seller.phone.number);
-            var buyerName = OrderInfo.seller.first_name;
-            var buyerEmail = OrderInfo.seller.email;
+            var phoneNumber = string.Format("{0}{1}", OrderInfo.seller?.phone?.area_code, OrderInfo.seller?.phone?.number);
+            var buyerName = OrderInfo.seller?.first_name;
+            var buyerEmail = OrderInfo.seller?.email;
 
 
             if (arg == "call")
@@ -205,46 +206,55 @@ namespace MyML.UWP.ViewModels
             }
             else if (arg == "email")
             {
-                var emailRecipient = new EmailRecipient();
-                emailRecipient.Address = buyerEmail;
-                emailRecipient.Name = buyerName;
-
-                await EmailManager.ShowComposeNewEmailAsync(new EmailMessage()
+                if (!string.IsNullOrWhiteSpace(buyerEmail) && !string.IsNullOrWhiteSpace(buyerName))
                 {
-                    Subject = OrderInfo.order_items[0].item.title,
-                    Sender = emailRecipient
-                });
+                    var emailRecipient = new EmailRecipient
+                    {
+                        Address = buyerEmail,
+                        Name = buyerName
+                    };
+
+                    var item = OrderInfo.order_items[0]?.item;
+                    if (item != null)
+                        await EmailManager.ShowComposeNewEmailAsync(new EmailMessage()
+                        {
+                            Subject = item?.title,
+                            Sender = emailRecipient
+                        });
+                }
             }
             else
             {
-                var contact = new Contact
+                if (buyerName != null && buyerEmail != null)
                 {
-                    FirstName = buyerName
-                };
-
-                if (!string.IsNullOrEmpty(buyerEmail))
-                {
-                    var homeEmail = new ContactEmail
+                    var contact = new Contact
                     {
-                        Address = buyerEmail,
-                        Kind = ContactEmailKind.Work
+                        FirstName = buyerName
                     };
-                    contact.Emails.Add(homeEmail);
-                }
-                if (!string.IsNullOrEmpty(phoneNumber))
-                {
-                    var workPhone = new ContactPhone
+
+                    if (!string.IsNullOrEmpty(buyerEmail))
                     {
-                        Number = phoneNumber,
-                        Kind = ContactPhoneKind.Work
-                    };
-                    contact.Phones.Add(workPhone);
-                }
+                        var homeEmail = new ContactEmail
+                        {
+                            Address = buyerEmail,
+                            Kind = ContactEmailKind.Work
+                        };
+                        contact.Emails.Add(homeEmail);
+                    }
+                    if (!string.IsNullOrEmpty(phoneNumber))
+                    {
+                        var workPhone = new ContactPhone
+                        {
+                            Number = phoneNumber,
+                            Kind = ContactPhoneKind.Work
+                        };
+                        contact.Phones.Add(workPhone);
+                    }
 
-                ContactManager.ShowContactCard(contact, new Rect(), Placement.Above);
-
-                //await _alertMessageService.ShowAsync(_resourceLoader.GetString("OrdersPageViewModelMsgAddContact"),
-                    //_resourceLoader.GetString("ApplicationTitle"), commands);
+                    ContactManager.ShowFullContactCard(contact,
+                        new FullContactCardOptions() {DesiredRemainingView = ViewSizePreference.Default});
+                    //ContactManager.ShowContactCard(contact, new Rect(), Placement.Above);
+                }                
             }
         }
 
@@ -253,7 +263,6 @@ namespace MyML.UWP.ViewModels
             try
             {
                 Shell.SetBusy(true, "Carregando informações");
-                var data = DateTime.MinValue;
                 var orderInfo = await _mercadoLivreService.GetOrderDetail(orderId);
 
                 if (orderInfo != null)
@@ -267,6 +276,7 @@ namespace MyML.UWP.ViewModels
                     {
                         var shippingDetails = await _mercadoLivreService.GetShippingDetails(orderInfo.shipping.id.ToString());
 
+                        DateTime data;
                         if (shippingDetails != null && DateTime.TryParse(shippingDetails.status_history.date_delivered, out data))
                             shippingDetails.status_history.date_delivered = data.ToString("dd/MMMM/yyyy");
 
@@ -301,45 +311,45 @@ namespace MyML.UWP.ViewModels
             }
         }
 
-        private string _OrderId;
+        private string _orderId;
         public string OrderId
         {
-            get { return _OrderId; }
-            set { _OrderId = value; }
+            get { return _orderId; }
+            set { _orderId = value; }
         }
 
-        private MLOrderInfo _OrderInfo;
+        private MLOrderInfo _orderInfo;
         public MLOrderInfo OrderInfo
         {
-            get { return _OrderInfo; }
-            set { Set(() => OrderInfo, ref _OrderInfo, value); }
+            get { return _orderInfo; }
+            set { Set(() => OrderInfo, ref _orderInfo, value); }
         }
 
-        private bool _HasSaleFeedback = false;
+        private bool _hasSaleFeedback = false;
         public bool HasSaleFeedback
         {
-            get { return _HasSaleFeedback; }
-            set { Set(() => HasSaleFeedback, ref _HasSaleFeedback, value); }
+            get { return _hasSaleFeedback; }
+            set { Set(() => HasSaleFeedback, ref _hasSaleFeedback, value); }
         }
 
-        private bool _HasPurchaseFeedback = false;
+        private bool _hasPurchaseFeedback = false;
         public bool HasPurchaseFeedback
         {
-            get { return _HasPurchaseFeedback; }
-            set { Set(() => HasPurchaseFeedback, ref _HasPurchaseFeedback, value); }
+            get { return _hasPurchaseFeedback; }
+            set { Set(() => HasPurchaseFeedback, ref _hasPurchaseFeedback, value); }
         }
-        private string _TrackingText = "";
+        private string _trackingText = "";
         public string TrackingText
         {
-            get { return _TrackingText; }
-            set { Set(() => TrackingText, ref _TrackingText, value); }
+            get { return _trackingText; }
+            set { Set(() => TrackingText, ref _trackingText, value); }
         }
 
-        private ObservableCollection<TrackingStatus>  _TrackingList;
+        private ObservableCollection<TrackingStatus>  _trackingList;
         public ObservableCollection<TrackingStatus> TrackingList
         {
-            get { return _TrackingList; }
-            set { Set(() => TrackingList, ref _TrackingList, value); }
+            get { return _trackingList; }
+            set { Set(() => TrackingList, ref _trackingList, value); }
         }
 
 

@@ -19,9 +19,12 @@ namespace MyML.UWP.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
-            if (value == null) return value;
+            if (value == null) return null;
+            double result;
+            if (double.TryParse(value as string, out result))
+                return result;
 
-            return double.Parse(value as string);
+            return null;
         }
     }
 }

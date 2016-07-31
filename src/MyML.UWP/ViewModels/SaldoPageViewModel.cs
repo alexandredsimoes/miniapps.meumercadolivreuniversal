@@ -24,6 +24,9 @@ namespace MyML.UWP.ViewModels
         {
             if (!_dataService.IsAuthenticated())
             {
+                Balance = 0;
+                BalanceWithDraw = 0;
+                UnavailableBalance = 0;
                 await NavigationService.NavigateAsync(typeof(LoginPage));
                 return;
             }
@@ -43,26 +46,26 @@ namespace MyML.UWP.ViewModels
             }
         }
 
-        private double? _UnavailableBalance = 0;
+        private double? _unavailableBalance = 0;
         public double? UnavailableBalance
         {
-            get { return _UnavailableBalance; }
-            set { Set(() => UnavailableBalance, ref _UnavailableBalance, value); }
+            get { return _unavailableBalance; }
+            set { Set(() => UnavailableBalance, ref _unavailableBalance, value); }
         }
 
 
-        private double? _Balance = 0;
+        private double? _balance = 0;
         public double? Balance
         {
-            get { return _Balance; }
-            set { Set(() => Balance, ref _Balance, value); }
+            get { return _balance; }
+            set { Set(() => Balance, ref _balance, value); }
         }
 
-        private double? _BalanceWithDraw = 0;
+        private double? _balanceWithDraw = 0;
         public double? BalanceWithDraw
         {
-            get { return _BalanceWithDraw; }
-            set { Set(() => BalanceWithDraw, ref _BalanceWithDraw, value); }
+            get { return _balanceWithDraw; }
+            set { Set(() => BalanceWithDraw, ref _balanceWithDraw, value); }
         }
     }
 }

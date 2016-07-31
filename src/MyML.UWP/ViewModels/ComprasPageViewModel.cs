@@ -42,6 +42,16 @@ namespace MyML.UWP.ViewModels
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
+            if (!_dataService.IsAuthenticated())
+            {
+                //await new MessageDialog(_resourceLoader.GetString("MsgNotAuthenticated"),
+                //    _resourceLoader.GetString("ApplicationTitle")).ShowAsync();
+
+                Orders?.Clear();
+                NavigationService.Navigate(typeof(LoginPage), null, new Windows.UI.Xaml.Media.Animation.ContinuumNavigationTransitionInfo());
+                return;
+            }
+
             if (mode != NavigationMode.Back)
                 await LoadShopping();
         }
@@ -53,16 +63,7 @@ namespace MyML.UWP.ViewModels
 
         private async Task LoadShopping()
         {
-            if (!_dataService.IsAuthenticated())
-            {
-                await new MessageDialog(_resourceLoader.GetString("MsgNotAuthenticated"),
-                    _resourceLoader.GetString("ApplicationTitle")).ShowAsync();
-
-                NavigationService.Navigate(typeof(LoginPage), null, new Windows.UI.Xaml.Media.Animation.ContinuumNavigationTransitionInfo());
-                return;
-            }
-
-
+           
             //Orders = await _mercadoLivreService.ListMyOrders(0, 0, new KeyValuePair<string, object>[] { });
             Orders = new IncrementalSearchSource<MyOrdersDataSource, MLOrderInfo>(0, 15, null, true);
 
