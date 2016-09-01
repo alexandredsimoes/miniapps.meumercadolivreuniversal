@@ -16,6 +16,7 @@ using Windows.ApplicationModel;
 using Windows.Foundation.Metadata;
 using Windows.UI;
 using Microsoft.HockeyApp;
+using Microsoft.Services.Store.Engagement;
 using Template10.Controls;
 
 namespace MyML.UWP
@@ -40,6 +41,8 @@ namespace MyML.UWP
             UnhandledException += App_UnhandledException;
             SplashFactory = (e) => new Views.Splash(e);
 
+            RegistrarAplicativoNoDevCenter();
+
             #region App settings
 
             var settings = SettingsService.Instance;
@@ -49,6 +52,11 @@ namespace MyML.UWP
             ShowShellBackButton = settings.UseShellBackButton;
 
             #endregion
+        }
+
+        private async void RegistrarAplicativoNoDevCenter()
+        {
+            await StoreServicesEngagementManager.GetDefault().RegisterNotificationChannelAsync();
         }
 
         private async void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)

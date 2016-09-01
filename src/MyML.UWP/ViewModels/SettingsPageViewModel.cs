@@ -129,6 +129,12 @@ namespace MyML.UWP.ViewModels
             set { _settings.UseHighQualityImages = value; base.RaisePropertyChanged(); }
         }
 
+        public bool? UseAdultContent
+        {
+            get { return _settings.UseAdultContent; }
+            set { _settings.UseAdultContent = value; base.RaisePropertyChanged(); }
+        }
+
         public RelayCommand TrySigninNotifications { get; private set; }
     }
 

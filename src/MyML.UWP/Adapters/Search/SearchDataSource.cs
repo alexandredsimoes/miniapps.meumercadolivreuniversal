@@ -40,7 +40,7 @@ namespace MyML.UWP.Adapters.Search
             try
             {
                 MLSearchResult items;
-
+                
                 if (!searchByName)
                     items = await _mercadoLivreServices.ListProductsByCategory(query, pageIndex, pageSize);
                 else

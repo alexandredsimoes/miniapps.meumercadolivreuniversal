@@ -12,6 +12,7 @@ using System.Net.Http.Headers;
 using MyML.UWP.AppStorage;
 using Windows.Globalization.NumberFormatting;
 using Windows.Storage;
+using MyML.UWP.Services.SettingsServices;
 
 namespace MyML.UWP.Services
 {
@@ -251,7 +252,8 @@ namespace MyML.UWP.Services
 
         public async Task<MLSearchResult> ListProductsByName(string productName, int pageIndex = 0, int pageSize = 0)
         {
-            var url = Consts.GetUrl(Consts.ML_PRODUCTS_BY_NAME, Consts.ML_ID_BRASIL, productName);
+            var settings = SettingsService.Instance;
+            var url = Consts.GetUrl(Consts.ML_PRODUCTS_BY_NAME, Consts.ML_ID_BRASIL, productName, settings.UseAdultContent ?? false ? "yes" : "no");
 
             if (pageIndex >= 0 && pageSize > 0)
             {

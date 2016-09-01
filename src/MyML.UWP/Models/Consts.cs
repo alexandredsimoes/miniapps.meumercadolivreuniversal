@@ -151,7 +151,7 @@ namespace MyML.UWP.Models
         /// <summary>
         /// Parametros: LojaId, Query
         /// </summary>
-        public const string ML_PRODUCTS_BY_NAME = "https://api.mercadolibre.com/sites/{0}/search?q={1}";
+        public const string ML_PRODUCTS_BY_NAME = "https://api.mercadolibre.com/sites/{0}/search?q={1}&adult_content={2}";
 
         /// <summary>
         /// Parametros: PaisId, UserId

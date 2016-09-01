@@ -45,6 +45,15 @@ namespace MyML.UWP.Services.SettingsServices
             }
         }
 
+        public bool? UseAdultContent
+        {
+            get { return _helper.Read<bool?>(nameof(UseAdultContent), false); }
+            set
+            {
+                _helper.Write(nameof(UseAdultContent), value);
+            }
+        }
+
 
         public ApplicationTheme AppTheme
         {

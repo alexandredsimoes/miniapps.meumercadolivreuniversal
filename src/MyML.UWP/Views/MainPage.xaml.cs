@@ -1,8 +1,11 @@
+using System;
 using MyML.UWP.ViewModels;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
+using Microsoft.Services.Store.Engagement;
 
 namespace MyML.UWP.Views
 {
@@ -20,6 +23,7 @@ namespace MyML.UWP.Views
 
             //AdMediator_DESKTOP.Visibility = App.ExibirAds ? Windows.UI.Xaml.Visibility.Visible : Windows.UI.Xaml.Visibility.Collapsed;
             //AdMediator_MOBILE.Visibility = App.ExibirAds ? Windows.UI.Xaml.Visibility.Visible : Windows.UI.Xaml.Visibility.Collapsed;
+            
         }
 
         private void Shell_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
