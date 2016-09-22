@@ -55,7 +55,8 @@
                         <Setter Target="ProdutosListView.Visibility" Value="Collapsed"/>
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
-                        <WindowsStateTriggers:EqualsStateTrigger EqualTo="0" Value="{Binding Orders.Count}" />
+                        <WindowsStateTriggers:IsFalseStateTrigger  Value="{Binding HasOrders}" />
+                        <!--<WindowsStateTriggers:EqualsStateTrigger EqualTo="" Value="{Binding HasOrders}" />-->
                     </VisualState.StateTriggers>
                 </VisualState>
             </VisualStateGroup>

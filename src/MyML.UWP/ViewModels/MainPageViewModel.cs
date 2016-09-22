@@ -133,10 +133,10 @@ namespace MyML.UWP.ViewModels
             //TG-57800daee4b07d84f29ee5ab-162927607
             //07/08/2016 23:31:41
 
-            //_dataService.SaveConfig(Consts.ML_CONFIG_KEY_ACCESS_TOKEN, "APP_USR-8765232316929095-080515-6d4afded9d5d7bd6fb55f98864f36f13__L_F__-218973043");
-            //_dataService.SaveConfig(Consts.ML_CONFIG_KEY_REFRESH_TOKEN, "TG-57a4ebbee4b08aeaf9157a53-218973043");
-            //_dataService.SaveConfig(Consts.ML_CONFIG_KEY_LOGIN_DATE, "05/08/2016 22:40:43");            
-            
+            //_dataService.SaveConfig(Consts.ML_CONFIG_KEY_ACCESS_TOKEN, "APP_USR-8765232316929095-090422-984c7cd17e11d39b4c87a9d4ec5f59ad__F_L__-227414143");
+            //_dataService.SaveConfig(Consts.ML_CONFIG_KEY_REFRESH_TOKEN, "TG-57ccd23fe4b07d84f9af0c3c-227414143");
+            //_dataService.SaveConfig(Consts.ML_CONFIG_KEY_LOGIN_DATE, "05/09/2016 05:02:28");
+
 #endif
             //var categories = await _mercadoLivreServices.ListCategories("MLB");
         }

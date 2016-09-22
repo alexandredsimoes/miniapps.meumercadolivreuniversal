@@ -74,6 +74,8 @@ namespace MyML.UWP.ViewModels
 
             try
             {
+                HasClosedOrders = false;
+                HasOrders = false;
                 Orders = new IncrementalSearchSource<OrdersDataSource, MLOrderInfo>(0, 15, null, true);
 
                 OrdersClosed = new IncrementalSearchSource<OrdersDataSource, MLOrderInfo>(0, 15, null, false);
@@ -82,6 +84,7 @@ namespace MyML.UWP.ViewModels
                 Orders.LoadMoreItemsStarted += () =>
                 {
                     Views.Shell.SetBusy(true, "Carregando informações");
+                    HasOrders = true;
                 };
 
                 Orders.LoadMoreItemsCompleted += (paging) =>
@@ -92,6 +95,7 @@ namespace MyML.UWP.ViewModels
                 OrdersClosed.LoadMoreItemsStarted += () =>
                 {
                     Views.Shell.SetBusy(true, "Carregando informações");
+                    HasClosedOrders = true;
                 };
 
                 OrdersClosed.LoadMoreItemsCompleted += (paging) =>
@@ -122,6 +126,20 @@ namespace MyML.UWP.ViewModels
         {
             get { return _OrdersClosed; }
             set { Set(() => OrdersClosed, ref _OrdersClosed, value); }
+        }
+
+        private bool _hasOrders;
+        public bool HasOrders
+        {
+            get { return _hasOrders; }
+            set { Set(() => HasOrders, ref _hasOrders, value); }
+        }
+
+        private bool _hasClosedOrders;
+        public bool HasClosedOrders
+        {
+            get { return _hasClosedOrders; }
+            set { Set(() => HasClosedOrders, ref _hasClosedOrders, value); }
         }
 
         public bool ArchivedMode { get; set; } = false;

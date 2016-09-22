@@ -47,10 +47,12 @@ namespace MyML.UWP.ViewModels
 
             try
             {
+                HasOrders = false;
                 Orders = new IncrementalSearchSource<OrdersArchivedDataSource, MLOrderInfo>(0, 15, null, true);                
                 Orders.LoadMoreItemsStarted += () =>
                 {
                     Views.Shell.SetBusy(true, "Carregando informações");
+                    HasOrders = true;
                 };
 
                 Orders.LoadMoreItemsCompleted += (paging) =>
@@ -64,6 +66,13 @@ namespace MyML.UWP.ViewModels
             }
         }
 
+        private bool _hasOrders;
+
+        public bool HasOrders
+        {
+            get { return _hasOrders; }
+            set { Set(() => HasOrders, ref _hasOrders, value); }
+        }
 
         private IncrementalSearchSource<OrdersArchivedDataSource, MLOrderInfo> _orders;
         public IncrementalSearchSource<OrdersArchivedDataSource, MLOrderInfo> Orders

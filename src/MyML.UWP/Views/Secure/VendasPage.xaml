@@ -448,7 +448,7 @@
                         <Setter Target="ProdutosListView.Visibility" Value="Collapsed"/>
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
-                        <WindowsStateTriggers:EqualsStateTrigger EqualTo="0" Value="{Binding Orders.Count}" />
+                        <WindowsStateTriggers:IsFalseStateTrigger Value="{Binding HasOrders}" />
                     </VisualState.StateTriggers>
                 </VisualState>
 
@@ -458,7 +458,7 @@
                         <Setter Target="ProdutosEncerradosListView.Visibility" Value="Collapsed"/>
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
-                        <WindowsStateTriggers:EqualsStateTrigger EqualTo="0" Value="{Binding OrdersClosed.Count}" />
+                        <WindowsStateTriggers:IsFalseStateTrigger Value="{Binding HasClosedOrders}" />
                     </VisualState.StateTriggers>
                 </VisualState>
             </VisualStateGroup>
@@ -529,7 +529,7 @@
                     <uc:TabHeader Label="Encerradas" Glyph="&#xE1F6;" />
                 </PivotItem.Header>
                 <Grid>
-                    <ListView ItemsSource="{Binding OrdersClosed}" Grid.Row="2" x:Name="ProdutosEncerradosListView"
+                    <ListView ItemsSource="{Binding OrdersClosed}"  x:Name="ProdutosEncerradosListView"
                               ItemContainerStyle="{StaticResource ListViewItemStyle1}"
                               ItemTemplate="{StaticResource ListViewItemTemplate}">
                         <Interactivity:Interaction.Behaviors>
@@ -538,7 +538,7 @@
                             </Core:EventTriggerBehavior>
                         </Interactivity:Interaction.Behaviors>
                     </ListView>
-                    <StackPanel  Grid.Row="2" Margin="20" x:Name="EmptyMsgClosed" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <StackPanel   Margin="20" x:Name="EmptyMsgClosed" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock  Text="Você ainda não tem vendas encerrada" Style="{StaticResource SubheaderTextBlockStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         <TextBlock Text="Você já revisou suas vendas abertas?" Style="{StaticResource BodyTextBlockStyle}" />
                     </StackPanel>

@@ -440,7 +440,7 @@
         </CommandBar>
     </Page.BottomAppBar>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <!--<VisualStateManager.VisualStateGroups>
+        <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="GenralVisualStateGroup">
                 <VisualState x:Name="Visuals">
                     <VisualState.Setters>
@@ -448,7 +448,7 @@
                         <Setter Target="ProdutosListView.Visibility" Value="Collapsed"/>
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
-                        <WindowsStateTriggers:EqualsStateTrigger EqualTo="0" Value="{Binding Orders.Count}" />
+                        <WindowsStateTriggers:IsFalseStateTrigger  Value="{Binding HasOrders}" />
                     </VisualState.StateTriggers>
                 </VisualState>
             </VisualStateGroup>
@@ -477,7 +477,7 @@
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>-->
+        </VisualStateManager.VisualStateGroups>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -501,8 +501,8 @@
                 </Interactivity:Interaction.Behaviors>
             </ListView>
             <StackPanel   Margin="20" x:Name="EmptyMsg" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock Text="Você ainda não tem vendas abertas" Style="{StaticResource SubheaderTextBlockStyle}" />
-                <TextBlock Text="Você já revisou suas vendas encerradas?" Style="{StaticResource BodyTextBlockStyle}" />
+                <TextBlock Text="Você ainda não tem vendas arquivadas" Style="{StaticResource SubheaderTextBlockStyle}" />
+                
                 
             </StackPanel>
 

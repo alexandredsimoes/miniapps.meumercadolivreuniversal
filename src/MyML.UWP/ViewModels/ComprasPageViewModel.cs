@@ -30,7 +30,7 @@ namespace MyML.UWP.ViewModels
             _dataService = dataService;
 
 
-            Refresh = new RelayCommand(async () => await LoadShopping());
+            Refresh = new RelayCommand(LoadShopping);
             SelectOrder = new RelayCommand<object>((obj) =>
             {
                 var item = obj as MLOrderInfo;
@@ -40,7 +40,7 @@ namespace MyML.UWP.ViewModels
 
         }
 
-        public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
+        public override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             if (!_dataService.IsAuthenticated())
             {
@@ -49,11 +49,13 @@ namespace MyML.UWP.ViewModels
 
                 Orders?.Clear();
                 NavigationService.Navigate(typeof(LoginPage), null, new Windows.UI.Xaml.Media.Animation.ContinuumNavigationTransitionInfo());
-                return;
+                return Task.CompletedTask;
             }
 
             if (mode != NavigationMode.Back)
-                await LoadShopping();
+                LoadShopping();
+
+            return Task.CompletedTask;
         }
         public override Task OnNavigatedFromAsync(IDictionary<string, object> pageState, bool suspending)
         {
@@ -61,16 +63,16 @@ namespace MyML.UWP.ViewModels
             return Task.CompletedTask;
         }
 
-        private async Task LoadShopping()
+        private void LoadShopping()
         {
-           
+            HasOrders = false;
             //Orders = await _mercadoLivreService.ListMyOrders(0, 0, new KeyValuePair<string, object>[] { });
             Orders = new IncrementalSearchSource<MyOrdersDataSource, MLOrderInfo>(0, 15, null, true);
-
 
             Orders.LoadMoreItemsStarted += () =>
             {
                 Views.Shell.SetBusy(true, "Carregando informações");
+                HasOrders = true;
             };
 
             Orders.LoadMoreItemsCompleted += (paging) =>

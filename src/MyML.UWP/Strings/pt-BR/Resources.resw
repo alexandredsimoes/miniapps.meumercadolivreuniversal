@@ -484,7 +484,7 @@
     <value>Sugestões - Meu MercadoLivre Universal</value>
   </data>
   <data name="SobreEmailBody" xml:space="preserve">
-    <value />
+    <value>...</value>
   </data>
   <data name="PerguntasVendasDetalhesPageMsgEmptyAnswer" xml:space="preserve">
     <value>Infome sua resposta antes de enviar.</value>
