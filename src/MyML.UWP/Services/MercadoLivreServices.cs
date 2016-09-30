@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using System.Threading.Tasks;
 using MyML.UWP.Models.Mercadolivre;
 using System.Diagnostics;
+using System.Linq;
 using System.Net.Http.Headers;
 using MyML.UWP.AppStorage;
 using Windows.Globalization.NumberFormatting;
@@ -20,6 +21,7 @@ namespace MyML.UWP.Services
     {
         private readonly HttpClient _httpClient;
         private readonly IDataService _dataService;
+        private SettingsService _settings = SettingsService.Instance;
         public MercadoLivreServices(HttpClient httpClient, IDataService dataService)
         {
             _httpClient = httpClient;
@@ -29,7 +31,7 @@ namespace MyML.UWP.Services
         public async Task<IList<MLCategorySearchResult>> ListCategories(string paisId)
         {
             return await BaseServices<IList<MLCategorySearchResult>>
-                .GetAsync(String.Format(Consts.ML_URL_CATEGORIAS, Consts.ML_ID_BRASIL)).ConfigureAwait(false);
+                .GetAsync(String.Format(Consts.ML_URL_CATEGORIAS, _settings.SelectedCountry)).ConfigureAwait(false);
         }
 
         #region Métodos referente as questões
@@ -241,7 +243,7 @@ namespace MyML.UWP.Services
 
         public async Task<MLSearchResult> ListProductsByCategory(string categoryId, int pageIndex = 0, int pageSize = 0)
         {
-            var url = Consts.GetUrl(Consts.ML_PRODUCTS_BY_CATEGORY, Consts.ML_ID_BRASIL, categoryId);
+            var url = Consts.GetUrl(Consts.ML_PRODUCTS_BY_CATEGORY, _settings.SelectedCountry, categoryId);
 
             if (pageIndex >= 0 && pageSize > 0)
             {
@@ -253,7 +255,7 @@ namespace MyML.UWP.Services
         public async Task<MLSearchResult> ListProductsByName(string productName, int pageIndex = 0, int pageSize = 0)
         {
             var settings = SettingsService.Instance;
-            var url = Consts.GetUrl(Consts.ML_PRODUCTS_BY_NAME, Consts.ML_ID_BRASIL, productName, settings.UseAdultContent ?? false ? "yes" : "no");
+            var url = Consts.GetUrl(Consts.ML_PRODUCTS_BY_NAME, settings.SelectedCountry, productName, settings.UseAdultContent ?? false ? "yes" : "no");
 
             if (pageIndex >= 0 && pageSize > 0)
             {
@@ -702,7 +704,7 @@ namespace MyML.UWP.Services
 
         public async Task<IList<PaymentMethod>> ListPaymentMethods(string paisId)
         {
-            var url = Consts.GetUrl(Consts.ML_PAYMENT_METHODS, Consts.ML_ID_BRASIL);
+            var url = Consts.GetUrl(Consts.ML_PAYMENT_METHODS, _settings.SelectedCountry);
             return await BaseServices<IList<PaymentMethod>>.GetAsync(url).ConfigureAwait(false);
         }
 
@@ -1189,13 +1191,22 @@ namespace MyML.UWP.Services
 
         public async Task<MLSearchResult> ListProductsByUser(string userId, int pageIndex = 0, int pageSize = 0)
         {
-            var url = Consts.GetUrl(Consts.ML_PRODUCTS_BY_USER, Consts.ML_ID_BRASIL, userId);
+            var url = Consts.GetUrl(Consts.ML_PRODUCTS_BY_USER, _settings.SelectedCountry, userId);
 
             if (pageIndex >= 0 && pageSize > 0)
             {
                 url = String.Concat(url, String.Format("&limit={0}&offset={1}", pageSize, (pageIndex * pageSize)));
             }
             return await BaseServices<MLSearchResult>.GetAsync(url).ConfigureAwait(false);
+        }
+
+        public async Task<IReadOnlyCollection<Country>> ListCountries()
+        {
+            var url = Consts.ML_URL_LIST_SITES;
+            
+            var result = await BaseServices<IReadOnlyCollection<Country>>.GetAsync(url).ConfigureAwait(false);
+            var orderedResult = result.OrderBy(c => c.name);
+            return orderedResult.ToList();
         }
     }
 }

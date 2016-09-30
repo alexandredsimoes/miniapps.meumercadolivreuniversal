@@ -80,14 +80,21 @@ namespace MyML.UWP.Services.SettingsServices
             }
         }
 
-        private bool _IsNotificationSigned;
-
         public bool IsNotificationSigned
         {
             get { return _helper.Read<bool>(nameof(IsNotificationSigned), false); }
             set
             {
                 _helper.Write(nameof(IsNotificationSigned), value);                
+            }
+        }
+
+        public string SelectedCountry
+        {
+            get { return _helper.Read<string>(nameof(SelectedCountry), "MLB"); }
+            set
+            {
+                _helper.Write(nameof(SelectedCountry), value);
             }
         }
 

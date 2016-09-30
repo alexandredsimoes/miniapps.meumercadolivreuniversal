@@ -20,7 +20,7 @@ namespace MyML.UWP.Models
         public const string ML_API_BASE_URL = "https://api.mercadolibre.com";
         public const string MP_API_BASE_URL = "https://api.mercadopago.com";
         
-        public const string ML_ID_BRASIL = "MLB";
+        //public const string ML_ID_BRASIL = "MLB";
         public const string ML_URL_CATEGORIAS = "https://api.mercadolibre.com/sites/{0}/categories";
         
         
@@ -28,6 +28,7 @@ namespace MyML.UWP.Models
         public const string ML_RETURN_URL = "https://meumercadolivre.azurewebsites.net/mercadolivre/login";
         public const string ML_CLIENT_ID = "8765232316929095";
         public const string ML_REFRESH_TOKEN_URL = "https://api.mercadolibre.com/oauth/token?grant_type=refresh_token&client_id={0}&client_secret={1}&refresh_token={2}";
+        public const string ML_URL_LIST_SITES = "https://api.mercadolibre.com/sites";
 
         /// <summary>
         /// Parâmetros: UserId, ClientId, AccessToken

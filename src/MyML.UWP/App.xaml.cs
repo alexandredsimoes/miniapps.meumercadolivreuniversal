@@ -33,8 +33,7 @@ namespace MyML.UWP
              new TelemetryConfiguration() { EnableDiagnostics = true });
 
             InitializeComponent();
-
-            Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "pt-BR";
+            
             //System.Globalization.CultureInfo.CurrentCulture = new System.Globalization.CultureInfo("pt");
             //System.Globalization.CultureInfo.CurrentUICulture = new System.Globalization.CultureInfo("pt");
 
@@ -50,7 +49,7 @@ namespace MyML.UWP
             //RequestedTheme = ApplicationTheme.Light;
             CacheMaxDuration = settings.CacheMaxDuration;
             ShowShellBackButton = settings.UseShellBackButton;
-
+            Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = settings.SelectedCountry;
             #endregion
         }
 

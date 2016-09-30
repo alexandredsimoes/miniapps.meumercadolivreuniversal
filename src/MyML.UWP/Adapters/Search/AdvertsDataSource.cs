@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MyML.UWP.Services.SettingsServices;
 
 namespace MyML.UWP.Adapters.Search
 {
@@ -26,6 +27,7 @@ namespace MyML.UWP.Adapters.Search
 
         public async Task<IPagedResponse<Item>> GetPage(string query, int pageIndex, int pageSize, bool searchByName)
         {
+            var settings = SettingsService.Instance;
             try
             {
                 var items = await _mercadoLivreService.ListMyItems(pageIndex, pageSize,
@@ -34,7 +36,7 @@ namespace MyML.UWP.Adapters.Search
                                         new KeyValuePair<string, object>("status",query)
                                     });
 
-                items.ListTypes = await _mercadoLivreService.ListTypes(Consts.ML_ID_BRASIL);
+                items.ListTypes = await _mercadoLivreService.ListTypes(settings.SelectedCountry);
                 if (items.results_graph == null)
                     items.results_graph = new List<Item>();
 

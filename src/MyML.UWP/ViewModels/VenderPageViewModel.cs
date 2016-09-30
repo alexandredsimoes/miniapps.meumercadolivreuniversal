@@ -15,6 +15,7 @@ using Windows.Storage.Streams;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+using MyML.UWP.Services.SettingsServices;
 using Template10.Services.NavigationService;
 
 namespace MyML.UWP.ViewModels
@@ -25,6 +26,7 @@ namespace MyML.UWP.ViewModels
         private readonly ResourceLoader _resourceLoader;
         private readonly IDataService _dataService;
         private IList<MLCategorySearchResult> _backupCategories;
+        private readonly SettingsService _settings = SettingsService.Instance;
 
         public event Action<int> PartChanged;
 
@@ -292,11 +294,12 @@ namespace MyML.UWP.ViewModels
             {
                 if (SelectedCategory == null)
                 {
+                    var settings = SettingsService.Instance;
                     try
                     {
                         Views.Shell.SetBusy(true, "carregando as categorias");
 
-                        var lista = await _mercadoLivreServices.ListCategories(Consts.ML_ID_BRASIL);
+                        var lista = await _mercadoLivreServices.ListCategories(settings.SelectedCountry);
                         if (lista != null)
                         {
                             Categories = new ObservableCollection<MLCategorySearchResult>(lista);
@@ -320,7 +323,7 @@ namespace MyML.UWP.ViewModels
                 {
                     Views.Shell.SetBusy(true, "carregando os tipos de anúncio");
                     //Carrega os tipos de anuncio
-                    ListingPrice = await _mercadoLivreServices.GetListingPrices(Consts.ML_ID_BRASIL, ProductInfo.ProductValue ?? 0,
+                    ListingPrice = await _mercadoLivreServices.GetListingPrices(_settings.SelectedCountry, ProductInfo.ProductValue ?? 0,
                         new KeyValuePair<string, object>[] { });
 
                     IsTypeOpen = false;
