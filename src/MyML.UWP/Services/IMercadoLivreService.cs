@@ -72,5 +72,7 @@ namespace MyML.UWP.Services
         Task<bool> ChangeProductDescription(string productId, string text);
 
         Task<MLSearchResult> ListProductsByUser(string userId, int pageIndex = 0, int pageSize = 0);
+
+        Task<IReadOnlyCollection<Country>> ListCountries();
     }
 }

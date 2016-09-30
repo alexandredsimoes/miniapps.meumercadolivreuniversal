@@ -279,5 +279,10 @@ namespace MyML.UWP.Services
         {
             throw new NotImplementedException();
         }
+
+        public Task<IReadOnlyCollection<Country>> ListCountries()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
