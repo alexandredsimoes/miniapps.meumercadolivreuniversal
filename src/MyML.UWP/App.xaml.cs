@@ -49,7 +49,70 @@ namespace MyML.UWP
             //RequestedTheme = ApplicationTheme.Light;
             CacheMaxDuration = settings.CacheMaxDuration;
             ShowShellBackButton = settings.UseShellBackButton;
-            Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = settings.SelectedCountry;
+
+            switch (settings.SelectedCountry)
+            {
+                case "MLA":
+                    Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "es-AR";
+                    break;
+                case "MLB":
+                    Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "pt-BR";
+                    break;
+                case "MBO":
+                    Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "es-BO";
+                    break;
+                case "MEC":
+                    Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "es-EC";
+                    break;
+                case "MPE":
+                    Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "es-PE";
+                    break;
+                case "MCR":
+                    Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "es-CR";
+                    break;
+                case "MLC":
+                    Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "es-CL";
+                    break;
+                case "MCO":
+                    Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "es-CO";
+                    break;
+                case "MPA":
+                    Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "es-PA";
+                    break;
+                case "MCU":
+                    Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "es-CU";
+                    break;
+                case "MSV":
+                    Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "es-SV";
+                    break;
+                case "MNI":
+                    Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "es-NI";
+                    break;
+                case "MPT":
+                    Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "pt-PT";
+                    break;
+                case "MGT":
+                    Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "es-GT";
+                    break;
+                case "MHN":
+                    Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "es-HN";
+                    break;
+                case "MLV":
+                    Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "es-VE";
+                    break;
+                case "MLM":
+                    Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "es-MX";
+                    break;
+                case "MRD":
+                    Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "es-DO";
+                    break;
+                case "MLU":
+                    Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "es-UY";
+                    break;
+                case "MPY":
+                    Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "es-PY";
+                    break;
+            }
             #endregion
         }
 
