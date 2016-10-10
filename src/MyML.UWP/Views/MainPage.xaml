@@ -5,12 +5,13 @@
       xmlns:converters="using:MyML.UWP.Converters"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      mc:Ignorable="d"
-      xmlns:uwp="using:AppStudio.Uwp.Controls"
       xmlns:uc="using:MyML.UWP.Usercontrols"
-      DataContext="{Binding Source={StaticResource Locator}, Path=MainPage}">
+      xmlns:uwp="using:AppStudio.Uwp.Controls"
+      DataContext="{Binding Source={StaticResource Locator},
+                            Path=MainPage}"
+      mc:Ignorable="d">
 
-    
+
     <Page.Resources>
         <converters:StringFormatConverter x:Name="StringFormatConverter" />
         <converters:BoolToVisibilityConverter x:Name="BoolToVisibilityConverter" />
@@ -20,14 +21,50 @@
     <Page.BottomAppBar>
         <CommandBar>
             <CommandBar.SecondaryCommands>
-                <AppBarButton Click="{x:Bind ViewModel.GotoPrivacy}" Label="Privacidade" />
-                <AppBarButton Click="{x:Bind ViewModel.GotoAbout}" Label="Sobre" />
+                <AppBarButton x:Uid="MainPagePrivacidadeButton"
+                              Click="{x:Bind ViewModel.GotoPrivacy}"
+                              Label="Privacidade" />
+                <AppBarButton x:Uid="MainPageSobreButton"
+                              Click="{x:Bind ViewModel.GotoAbout}"
+                              Label="Sobre" />
                 <AppBarSeparator />
-                <AppBarButton Label="Sair" Icon="Clear" Command="{Binding RevokeAccess}" />
+                <AppBarButton x:Uid="MainPageSairButton"
+                              Command="{Binding RevokeAccess}"
+                              Icon="Clear"
+                              Label="Sair" />
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </Page.BottomAppBar>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <!--  page header  -->
+        <controls:PageHeader x:Uid="PageTitleHeader"
+                             Grid.Row="0"
+                             Background="{StaticResource MercadoLivreBackgroundColor}"
+                             Content="Meu MercadoLivre Universal"
+                             Foreground="{StaticResource MercadoLivreForegroundColor}">
+            <!--<controls:PageHeader.Foreground>
+                <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
+            </controls:PageHeader.Foreground>
+            <controls:PageHeader.Background>
+                <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
+            </controls:PageHeader.Background>-->
+        </controls:PageHeader>
+
+
+
+        <!--  page content  -->
+        <StackPanel Grid.Row="2">
+            <uwp:SearchBox x:Uid="MainPageSearchBox"
+                           Margin="0,10,0,0"
+                           PlaceholderText="O que deseja procurar hoje?"
+                           SearchCommand="{Binding DoSearch}" />
+        </StackPanel>
 
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="AdaptiveVisualStateGroup">
@@ -60,30 +97,6 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-
-        <!--  page header  -->
-        <controls:PageHeader Grid.Row="0" Content="Meu MercadoLivre Universal" x:Uid="PageTitleHeader" Background="{StaticResource MercadoLivreBackgroundColor}" Foreground="{StaticResource MercadoLivreForegroundColor}">
-            <!--<controls:PageHeader.Foreground>
-                <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
-            </controls:PageHeader.Foreground>
-            <controls:PageHeader.Background>
-                <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
-            </controls:PageHeader.Background>-->
-        </controls:PageHeader>
-        
-
-
-        <!--  page content  -->
-        <StackPanel Grid.Row="2">
-            <uwp:SearchBox PlaceholderText="O que deseja procurar hoje?" SearchCommand="{Binding DoSearch}" Margin="0,10,0,0" />
-        </StackPanel>
-
     </Grid>
 </Page>
 

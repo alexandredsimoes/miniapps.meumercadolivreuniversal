@@ -53,7 +53,8 @@
                                 <SymbolIcon Width="48"
                                             Height="48"
                                             Symbol="Home" />
-                                <TextBlock Margin="12,0,0,0"
+                                <TextBlock x:Uid="ShellMenuInicio"
+                                           Margin="12,0,0,0"
                                            VerticalAlignment="Center"
                                            Text="Início" />
                             </StackPanel>
@@ -64,7 +65,8 @@
                                 <SymbolIcon Width="48"
                                             Height="48"
                                             Symbol="Zoom" />
-                                <TextBlock Margin="12,0,0,0"
+                                <TextBlock x:Uid="ShellMenuBusca"
+                                           Margin="12,0,0,0"
                                            VerticalAlignment="Center"
                                            Text="Busca" />
                             </StackPanel>
@@ -75,31 +77,32 @@
                                 <FontIcon Width="48"
                                           Height="48"
                                           Glyph="" />
-                                <TextBlock Margin="12,0,0,0"
+                                <TextBlock x:Uid="ShellMenuFavoritos"
+                                           Margin="12,0,0,0"
                                            VerticalAlignment="Center"
                                            Text="Favoritos" />
                             </StackPanel>
                         </controls:HamburgerButtonInfo>
 
-                        <!--  ********************************** REATIVAR QUANDO ESTIVER PRONTO ************************************************  -->
                         <!--  vender button  -->
                         <controls:HamburgerButtonInfo ClearHistory="False" PageType="viewsSecure:VenderPage">
                             <StackPanel Orientation="Horizontal">
                                 <FontIcon Width="48"
                                           Height="48"
                                           Glyph="" />
-                                <TextBlock Margin="12,0,0,0"
+                                <TextBlock x:Uid="ShellMenuVender"
+                                           Margin="12,0,0,0"
                                            VerticalAlignment="Center"
                                            Text="Vender" />
                             </StackPanel>
                         </controls:HamburgerButtonInfo>
-                        <!--  ********************************** REATIVAR QUANDO ESTIVER PRONTO ************************************************  -->
 
                         <!--  Separador?  -->
                         <controls:HamburgerButtonInfo x:Name="SeparadorCompras"
                                                       IsEnabled="False"
                                                       Visibility="Collapsed">
-                            <TextBlock Margin="12,10,0,0"
+                            <TextBlock x:Uid="ShellMenuComprar"
+                                       Margin="12,10,0,0"
                                        VerticalAlignment="Center"
                                        Text="Compras" />
                         </controls:HamburgerButtonInfo>
@@ -113,7 +116,8 @@
                                 <SymbolIcon Width="48"
                                             Height="48"
                                             Symbol="Help" />
-                                <TextBlock Margin="12,0,0,0"
+                                <TextBlock x:Uid="ShellMenuPerguntas"
+                                           Margin="12,0,0,0"
                                            VerticalAlignment="Center"
                                            Text="Perguntas" />
                             </StackPanel>
@@ -127,7 +131,8 @@
                                 <SymbolIcon Width="48"
                                             Height="48"
                                             Symbol="Shop" />
-                                <TextBlock Margin="12,0,0,0"
+                                <TextBlock x:Uid="ShellMenuCompras"
+                                           Margin="12,0,0,0"
                                            VerticalAlignment="Center"
                                            Text="Compras" />
                             </StackPanel>
@@ -137,7 +142,8 @@
                         <controls:HamburgerButtonInfo x:Name="SeparadorVendas"
                                                       IsEnabled="False"
                                                       Visibility="Collapsed">
-                            <TextBlock Margin="12,10,0,0"
+                            <TextBlock x:Uid="ShellMenuVendas"
+                                       Margin="12,10,0,0"
                                        VerticalAlignment="Center"
                                        Text="Vendas" />
                         </controls:HamburgerButtonInfo>
@@ -151,7 +157,8 @@
                                 <FontIcon Width="48"
                                           Height="48"
                                           Glyph="" />
-                                <TextBlock Margin="12,0,0,0"
+                                <TextBlock x:Uid="ShellMenuAnuncios"
+                                           Margin="12,0,0,0"
                                            VerticalAlignment="Center"
                                            Text="Anúncios" />
                             </StackPanel>
@@ -165,7 +172,8 @@
                                 <SymbolIcon Width="48"
                                             Height="48"
                                             Symbol="Help" />
-                                <TextBlock Margin="12,0,0,0"
+                                <TextBlock x:Uid="ShellMenuPerguntasVendas"
+                                           Margin="12,0,0,0"
                                            VerticalAlignment="Center"
                                            Text="Perguntas" />
                             </StackPanel>
@@ -179,7 +187,8 @@
                                 <SymbolIcon Width="48"
                                             Height="48"
                                             Symbol="CellPhone" />
-                                <TextBlock Margin="12,0,0,0"
+                                <TextBlock x:Uid="ShellMenuMinhasVendas"
+                                           Margin="12,0,0,0"
                                            VerticalAlignment="Center"
                                            Text="Vendas" />
                             </StackPanel>
@@ -189,7 +198,8 @@
                         <controls:HamburgerButtonInfo x:Name="SeparadorConfiguracao"
                                                       IsEnabled="False"
                                                       Visibility="Collapsed">
-                            <TextBlock Margin="12,10,0,0"
+                            <TextBlock x:Uid="ShellMenuConfiguracoes"
+                                       Margin="12,10,0,0"
                                        VerticalAlignment="Center"
                                        Text="Configurações" />
                         </controls:HamburgerButtonInfo>
@@ -202,7 +212,8 @@
                                 <SymbolIcon Width="48"
                                             Height="48"
                                             Symbol="Calculator" />
-                                <TextBlock Margin="12,0,0,0"
+                                <TextBlock x:Uid="ShellMenuSaldoMP"
+                                           Margin="12,0,0,0"
                                            VerticalAlignment="Center"
                                            Text="Saldo MP" />
                             </StackPanel>
@@ -221,7 +232,8 @@
                                 <SymbolIcon Width="48"
                                             Height="48"
                                             Symbol="Setting" />
-                                <TextBlock Margin="12,0,0,0"
+                                <TextBlock x:Uid="ShellMenuConfiguracao"
+                                           Margin="12,0,0,0"
                                            VerticalAlignment="Center"
                                            Text="Configurações" />
                             </StackPanel>
@@ -232,7 +244,8 @@
                                 <SymbolIcon Width="48"
                                             Height="48"
                                             Symbol="Permissions" />
-                                <TextBlock Margin="12,0,0,0"
+                                <TextBlock x:Uid="ShellMenuLogin"
+                                           Margin="12,0,0,0"
                                            VerticalAlignment="Center"
                                            Text="Login" />
                             </StackPanel>

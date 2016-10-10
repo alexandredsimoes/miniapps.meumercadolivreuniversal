@@ -166,10 +166,10 @@ namespace MyML.UWP.ViewModels
             }
 
             var family = Windows.System.Profile.AnalyticsInfo.VersionInfo.DeviceFamily;
-            var pageSize = 20;
+            var pageSize = 25;
 
             if (family.Equals("Windows.Desktop") || family.Equals("Windows.Xbox"))
-                pageSize = 40;
+                pageSize = 50;
 
             var settings = SettingsService.Instance;
             Items = new IncrementalSearchSource<SearchDataSource, Item>(0, pageSize, query, parametro[1] != "category",

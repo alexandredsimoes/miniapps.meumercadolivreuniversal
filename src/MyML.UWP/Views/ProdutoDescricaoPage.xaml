@@ -1,28 +1,58 @@
-﻿<Page
-    x:Class="MyML.UWP.Views.ProdutoDescricaoPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:MyML.UWP.Views"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    xmlns:Behaviors="using:Template10.Behaviors"
-    xmlns:MyBehaviors="using:MyML.UWP.Behaviors"
-    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
-    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
-    xmlns:controls="using:Template10.Controls"
-    xmlns:converters="using:MyML.UWP.Converters"
-    xmlns:convertersML="using:MyML.UWP.Converters.MercadoLivre"
-    xmlns:designViewModels="using:MyML.UWP.ViewModels.Design"
-    xmlns:uc="using:MyML.UWP.Usercontrols"
-    d:DataContext="{d:DesignInstance designViewModels:BuscaPageDesignViewModel, IsDesignTimeCreatable=True}"    
-    DataContext="{Binding Source={StaticResource Locator}, Path=ProdutoDescricaoPage}">
+﻿<Page x:Class="MyML.UWP.Views.ProdutoDescricaoPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:Behaviors="using:Template10.Behaviors"
+      xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+      xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+      xmlns:MyBehaviors="using:MyML.UWP.Behaviors"
+      xmlns:controls="using:Template10.Controls"
+      xmlns:converters="using:MyML.UWP.Converters"
+      xmlns:convertersML="using:MyML.UWP.Converters.MercadoLivre"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:designViewModels="using:MyML.UWP.ViewModels.Design"
+      xmlns:local="using:MyML.UWP.Views"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:uc="using:MyML.UWP.Usercontrols"
+      d:DataContext="{d:DesignInstance designViewModels:BuscaPageDesignViewModel,
+                                       IsDesignTimeCreatable=True}"
+      DataContext="{Binding Source={StaticResource Locator},
+                            Path=ProdutoDescricaoPage}"
+      mc:Ignorable="d">
     <Page.Resources>
         <converters:BoolToVisibilityConverter x:Name="BoolToVisibilityConverter" />
         <converters:InvertedBoolToVisibilityConverter x:Name="InvertedBoolToVisibilityConverter" />
-        
+
     </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <!--  page header  -->
+        <controls:PageHeader x:Uid="ProdutoDescricaoPagePageHeader"
+                             Background="{StaticResource MercadoLivreBackgroundColor}"
+                             Content="Descrição do anúncio"
+                             Foreground="{StaticResource MercadoLivreForegroundColor}">
+            <!--<controls:PageHeader.Foreground>
+                <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
+            </controls:PageHeader.Foreground>
+            <controls:PageHeader.Background>
+                <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
+            </controls:PageHeader.Background>-->
+        </controls:PageHeader>
+        <TextBlock Grid.Row="1"
+                   Margin="0"
+                   Padding="10,15,15,15"
+                   Text="{Binding Description}"
+                   TextWrapping="Wrap"
+                   Visibility="{Binding IsHtml,
+                                        Converter={StaticResource InvertedBoolToVisibilityConverter}}" />
+        <WebView Grid.Row="1"
+                 Margin="0"
+                 MyBehaviors:WebBrowserHelper.Html="{Binding Description}"
+                 Visibility="{Binding IsHtml,
+                                      Converter={StaticResource BoolToVisibilityConverter}}" />
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="AdaptiveVisualStateGroup">
                 <VisualState x:Name="VisualStateNarrow">
@@ -51,21 +81,5 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-
-        <!--  page header  -->
-        <controls:PageHeader Content="Descrição do anúncio" Background="{StaticResource MercadoLivreBackgroundColor}" Foreground="{StaticResource MercadoLivreForegroundColor}">
-            <!--<controls:PageHeader.Foreground>
-                <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
-            </controls:PageHeader.Foreground>
-            <controls:PageHeader.Background>
-                <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
-            </controls:PageHeader.Background>-->
-        </controls:PageHeader>
-        <TextBlock Grid.Row="1" Text="{Binding Description}"  Margin="0" TextWrapping="Wrap" Visibility="{Binding IsHtml, Converter={StaticResource InvertedBoolToVisibilityConverter}}" Padding="10,15,15,15" />
-        <WebView MyBehaviors:WebBrowserHelper.Html="{Binding Description}"  Margin="0" Visibility="{Binding IsHtml, Converter={StaticResource BoolToVisibilityConverter}}" Grid.Row="1"/>
     </Grid>
 </Page>

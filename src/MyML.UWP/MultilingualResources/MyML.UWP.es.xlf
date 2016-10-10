@@ -1,0 +1,792 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="pt-BR" target-language="es" original="MYML.UWP/STRINGS/PT-BR/RESOURCES.RESW" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1795.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="MYML.UWP/STRINGS/PT-BR/RESOURCES.RESW" datatype="resx">
+        <trans-unit id="ApplicationName" translate="no" xml:space="preserve">
+          <source>Meu MercadoLivre Universal</source>
+          <target state="new">Meu MercadoLivre Universal</target>
+        </trans-unit>
+        <trans-unit id="ApplicationTitle" translate="no" xml:space="preserve">
+          <source>Meu MercadoLivre</source>
+          <target state="new">Meu MercadoLivre</target>
+        </trans-unit>
+        <trans-unit id="BuscaTextBox.PlaceholderText" translate="yes" xml:space="preserve">
+          <source>O que você procura?</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">¿Qué están buscando?</target>
+        </trans-unit>
+        <trans-unit id="BuyProductPagePaymentMethod" translate="yes" xml:space="preserve">
+          <source>Pagamento: {0}</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Pago: {0}</target>
+        </trans-unit>
+        <trans-unit id="BuyProductPageSelectedQuantityContent" translate="yes" xml:space="preserve">
+          <source>Quantidade: {0}</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Cantidad: {0}</target>
+        </trans-unit>
+        <trans-unit id="BuyProductPageShippingMethod" translate="yes" xml:space="preserve">
+          <source>Forma de envio: {0}</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Forma de presentación: {0}</target>
+        </trans-unit>
+        <trans-unit id="BuyProductPageShippingMethodList" translate="yes" xml:space="preserve">
+          <source>Não selecionado;Combinar com o vendedor;Pagarei o frete</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">No seleccionado; Combinar con el vendedor; Pagar el flete</target>
+        </trans-unit>
+        <trans-unit id="BuyProductPageTitleTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Sua compra</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Su compra</target>
+        </trans-unit>
+        <trans-unit id="ConfigurationPagePersonalInfoTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Altere seus dados pessoais como nome, telefone, endereços</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Cambiar su información personal como nombre, teléfono, dirección</target>
+        </trans-unit>
+        <trans-unit id="ConfigurationPagePersonalInfoTextBlockTitle.Text" translate="yes" xml:space="preserve">
+          <source>Dados pessoais</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Nombre</target>
+        </trans-unit>
+        <trans-unit id="EmptyDataTemplateText.Text" translate="yes" xml:space="preserve">
+          <source>Nenhum item encontrado</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">No se encuentren</target>
+        </trans-unit>
+        <trans-unit id="ItensPageAvailableTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>disponível</source>
+          <target state="needs-review-translation" state-qualifier="exact-match">disponible</target>
+        </trans-unit>
+        <trans-unit id="ItensPageMenuItemFinalize.Text" translate="yes" xml:space="preserve">
+          <source>Isso mesmo, pode finalizar</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Así es, que usted puede terminar</target>
+        </trans-unit>
+        <trans-unit id="ItensPageMenuItemRemove.Text" translate="yes" xml:space="preserve">
+          <source>Isso mesmo, pode excluir</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Así es, que usted puede eliminar</target>
+        </trans-unit>
+        <trans-unit id="ItensPageMsgRemoveProductOK" translate="yes" xml:space="preserve">
+          <source>Seu produto foi excluído com sucesso!</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Su producto se ha eliminado con éxito.</target>
+        </trans-unit>
+        <trans-unit id="ItensPageStopTimeTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Finaliza em</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Termina en</target>
+        </trans-unit>
+        <trans-unit id="ItensPageTitle.Text" translate="yes" xml:space="preserve">
+          <source>Meus anúncios</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Mis anuncios</target>
+        </trans-unit>
+        <trans-unit id="MainPageAccountBalance.Text" translate="yes" xml:space="preserve">
+          <source>Em conta</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">En cuenta</target>
+        </trans-unit>
+        <trans-unit id="MainPageAccountBalanceUnavailable.Text" translate="yes" xml:space="preserve">
+          <source>Indisponível</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">No disponible</target>
+        </trans-unit>
+        <trans-unit id="MainPageAccountBalanceWithDraw.Text" translate="yes" xml:space="preserve">
+          <source>Disponível</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Disponible</target>
+        </trans-unit>
+        <trans-unit id="MainPageNotAuthenticatedButton.Content" translate="yes" xml:space="preserve">
+          <source>Entrar na minha conta</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Entrar en mi cuenta</target>
+        </trans-unit>
+        <trans-unit id="MainPageNotAuthenticatedTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Para visualizar sua área segura, é preciso que você efetue o login no Mercado Livre</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Para ver tu zona segura, usted debe entrar en el mercado libre</target>
+        </trans-unit>
+        <trans-unit id="MainPageViewModelMsgEmailLog" translate="yes" xml:space="preserve">
+          <source>Seu arquivo de log de erros será compatilhado com o desenvolvedor. Esse arquivo não contém suas informações pessoais. Deseja continuar?</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Su archivo de registro de error será baño compartido con el desarrollador. Este archivo no contiene su información personal. ¿Desea continuar?</target>
+        </trans-unit>
+        <trans-unit id="MainPageViewModelNotLogMessage" translate="yes" xml:space="preserve">
+          <source>Não foi gerado nenhum arquivo até o momento. Nada será enviado.</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Fue no generar ningún archivo hasta ahora. Nada será enviado.</target>
+        </trans-unit>
+        <trans-unit id="MLFeedbackRatingNegative" translate="yes" xml:space="preserve">
+          <source>Negativo</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Negativo</target>
+        </trans-unit>
+        <trans-unit id="MLFeedbackRatingNeutral" translate="yes" xml:space="preserve">
+          <source>Neutro</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Independiente del idioma</target>
+        </trans-unit>
+        <trans-unit id="MLFeedbackRatingPositive" translate="yes" xml:space="preserve">
+          <source>Positivo</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Positivo</target>
+        </trans-unit>
+        <trans-unit id="MLOrderPaymentStatusDetailAccredited" translate="yes" xml:space="preserve">
+          <source>Pagamento recebido</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Pago recibido</target>
+        </trans-unit>
+        <trans-unit id="MLOrderPaymentStatusDetailApproved" translate="yes" xml:space="preserve">
+          <source>Pagamento aprovado</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Pago aprobado</target>
+        </trans-unit>
+        <trans-unit id="MLOrderPaymentStatusDetailCancelled" translate="yes" xml:space="preserve">
+          <source>Pagamento cancelado</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Pago cancelado</target>
+        </trans-unit>
+        <trans-unit id="MLOrderPaymentStatusDetailInMediation" translate="yes" xml:space="preserve">
+          <source>Pagamento em mediação</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Pago en la mediación</target>
+        </trans-unit>
+        <trans-unit id="MLOrderPaymentStatusDetailInProcess" translate="yes" xml:space="preserve">
+          <source>Pagamento em processamento</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Procesamiento de pagos</target>
+        </trans-unit>
+        <trans-unit id="MLOrderPaymentStatusDetailPending" translate="yes" xml:space="preserve">
+          <source>Pagamento pendente</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Pago pendiente</target>
+        </trans-unit>
+        <trans-unit id="MLOrderPaymentStatusDetailRefunded" translate="yes" xml:space="preserve">
+          <source>Pagamento devolvido</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Pago devuelto</target>
+        </trans-unit>
+        <trans-unit id="MLOrderPaymentStatusDetailRejected" translate="yes" xml:space="preserve">
+          <source>Pagamento rejeitado</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Pago rechazado</target>
+        </trans-unit>
+        <trans-unit id="MLOrderPaymentTypeCreditCard" translate="yes" xml:space="preserve">
+          <source>Cartão de crédito</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Tarjeta de crédito</target>
+        </trans-unit>
+        <trans-unit id="MLOrderPaymentTypeMoney" translate="yes" xml:space="preserve">
+          <source>Dinheiro</source>
+          <target state="needs-review-translation" state-qualifier="exact-match">Dinero</target>
+        </trans-unit>
+        <trans-unit id="MLOrderPaymentTypeTicket" translate="yes" xml:space="preserve">
+          <source>Boleto</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Boleto</target>
+        </trans-unit>
+        <trans-unit id="MLOrderShipStatusCancelled" translate="yes" xml:space="preserve">
+          <source>Envio cancelado</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Envío cancelado</target>
+        </trans-unit>
+        <trans-unit id="MLOrderShipStatusDelivered" translate="yes" xml:space="preserve">
+          <source>Entregue</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Enviado</target>
+        </trans-unit>
+        <trans-unit id="MLOrderShipStatusHandling" translate="yes" xml:space="preserve">
+          <source>Pronto para o envio.</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Listo para enviar.</target>
+        </trans-unit>
+        <trans-unit id="MLOrderShipStatusNotDelivered" translate="yes" xml:space="preserve">
+          <source>Não entregue</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">No entregado</target>
+        </trans-unit>
+        <trans-unit id="MLOrderShipStatusNotVerified" translate="yes" xml:space="preserve">
+          <source>Não verificado</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">No comprobado</target>
+        </trans-unit>
+        <trans-unit id="MLOrderShipStatusPending" translate="yes" xml:space="preserve">
+          <source>Envio pendente</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Envío pendiente</target>
+        </trans-unit>
+        <trans-unit id="MLOrderShipStatusShipped" translate="yes" xml:space="preserve">
+          <source>Enviado</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Enviado</target>
+        </trans-unit>
+        <trans-unit id="MLStatusConfirmed" translate="yes" xml:space="preserve">
+          <source>Pedido confirmado</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Aplicación confirmado</target>
+        </trans-unit>
+        <trans-unit id="MLStatusPaid" translate="yes" xml:space="preserve">
+          <source>Pedido pago</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Aplicación pagada</target>
+        </trans-unit>
+        <trans-unit id="MLStatusPaymentCancelled" translate="yes" xml:space="preserve">
+          <source>Pagamento cancelado</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Pago cancelado</target>
+        </trans-unit>
+        <trans-unit id="MLStatusPaymentInvalid" translate="yes" xml:space="preserve">
+          <source>Pagamento inválido</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Pago válido</target>
+        </trans-unit>
+        <trans-unit id="MLStatusPaymentProccess" translate="yes" xml:space="preserve">
+          <source>Processamento pagamento</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Procesamiento de pagos</target>
+        </trans-unit>
+        <trans-unit id="MLStatusPaymentRequired" translate="yes" xml:space="preserve">
+          <source>Compra incompleta</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Compra incompleta</target>
+        </trans-unit>
+        <trans-unit id="ModifyItemMsg" translate="yes" xml:space="preserve">
+          <source>Deseja alterar os dados desse produto?</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">¿Quiero cambiar los datos de este producto?</target>
+        </trans-unit>
+        <trans-unit id="ModifyItemMsgNOK" translate="yes" xml:space="preserve">
+          <source>Não foi possível alterar seu produto. Tente novamente mais tarde.</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">No fue posible cambiar el producto. Inténtalo más tarde.</target>
+        </trans-unit>
+        <trans-unit id="ModifyItemMsgOK" translate="yes" xml:space="preserve">
+          <source>Seu produto foi alterado com sucesso! </source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">¡Su producto ha sido cambiado con éxito! </target>
+        </trans-unit>
+        <trans-unit id="ModifyItemMsgRelist" translate="yes" xml:space="preserve">
+          <source>Deseja recadastrar esse produto?</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">¿Desea volver a registrar ese producto?</target>
+        </trans-unit>
+        <trans-unit id="ModifyItemMsgRelistNOK" translate="yes" xml:space="preserve">
+          <source>Não foi possível recadastrar seu produto. Tente novamente mais tarde.</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">No ha sido posible volver a registrar su producto. Inténtalo más tarde.</target>
+        </trans-unit>
+        <trans-unit id="ModifyItemMsgRelistOK" translate="yes" xml:space="preserve">
+          <source>Seu produto foi recadastrado com sucesso! Em breve ele aparecerá na sua lista.</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Su producto fue volver con éxito. Pronto aparecerá en su lista.</target>
+        </trans-unit>
+        <trans-unit id="ModifyItemPageTitleTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Modificar</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Modificar</target>
+        </trans-unit>
+        <trans-unit id="ModifyItemRefreshButton.Label" translate="yes" xml:space="preserve">
+          <source>recarregar</source>
+          <target state="needs-review-translation" state-qualifier="exact-match">recargar</target>
+        </trans-unit>
+        <trans-unit id="ModifyItemRelistButton.Label" translate="yes" xml:space="preserve">
+          <source>confirmar</source>
+          <target state="needs-review-translation" state-qualifier="exact-match">confirmar</target>
+        </trans-unit>
+        <trans-unit id="MsgVotar5Estrelas" translate="yes" xml:space="preserve">
+          <source>Está gostando do nosso aplicativo? Aproveita e dê 5 estrelas pra ele, é rapidinho. :P</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">¿Disfruta de nuestra aplicación? Disfrutar y dar 5 estrellas, realmente rápido. : P</target>
+        </trans-unit>
+        <trans-unit id="MustLoggedMessage" translate="yes" xml:space="preserve">
+          <source>Você precisa logar antes para ver seus dados pessoais.</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Necesita conectarse para ver su información personal.</target>
+        </trans-unit>
+        <trans-unit id="MyOrdersPageTitleTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Minhas compras</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Mis compras</target>
+        </trans-unit>
+        <trans-unit id="MyOrdersStateBuyQualifiedTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Você qualificou </source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Calificado </target>
+        </trans-unit>
+        <trans-unit id="MyOrdersStateSellQualifiedTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>O vendedor qualificou você </source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">El vendedor le ha calificado </target>
+        </trans-unit>
+        <trans-unit id="NavMenuItemConfiguracoes" translate="yes" xml:space="preserve">
+          <source>Configurações</source>
+          <target state="needs-review-translation" state-qualifier="exact-match">Configuración</target>
+        </trans-unit>
+        <trans-unit id="No" translate="yes" xml:space="preserve">
+          <source>Não</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">No</target>
+        </trans-unit>
+        <trans-unit id="NotAuthenticatedMessage" translate="yes" xml:space="preserve">
+          <source>É preciso estar logado para utilizar esse recurso.</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Debe estar conectado para usar esta característica.</target>
+        </trans-unit>
+        <trans-unit id="OrdersPageTitleTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Minhas vendas</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Mis ventas</target>
+        </trans-unit>
+        <trans-unit id="OrdersPageViewModelErrorLoading" translate="yes" xml:space="preserve">
+          <source>Não foi possível listar suas vendas. Verifique se há conexão com a internet.</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">No se puede enumerar sus ventas. Compruebe la conexión a internet.</target>
+        </trans-unit>
+        <trans-unit id="OrdersPageViewModelMsgAddContact" translate="yes" xml:space="preserve">
+          <source>Deseja adicionar essa pessoa como seu contato?</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">¿Quieres añadir a esta persona como su contacto?</target>
+        </trans-unit>
+        <trans-unit id="PageTitleHeader.Content" translate="no" xml:space="preserve">
+          <source>Meu MercadoLivre Universal</source>
+          <target state="final">Meu MercadoLivre Universal</target>
+        </trans-unit>
+        <trans-unit id="PeronalInfoPageTitleTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Dados pessoais</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Nombre</target>
+        </trans-unit>
+        <trans-unit id="PersonalInfoAccountAddressTitle.Text" translate="yes" xml:space="preserve">
+          <source>Endereços</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Direcciones</target>
+        </trans-unit>
+        <trans-unit id="PersonalInfoPageAccountNickName.Text" translate="yes" xml:space="preserve">
+          <source>Apelido:</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Apellidos:</target>
+        </trans-unit>
+        <trans-unit id="PersonalInfoPageAccountPassword.Text" translate="yes" xml:space="preserve">
+          <source>Senha</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Frase de contraseña</target>
+        </trans-unit>
+        <trans-unit id="PersonalInfoPageCancelNicknameButton.Content" translate="yes" xml:space="preserve">
+          <source>cancelar</source>
+          <target state="needs-review-translation" state-qualifier="exact-match">cancelar</target>
+        </trans-unit>
+        <trans-unit id="PersonalInfoPageEmail.Text" translate="yes" xml:space="preserve">
+          <source>E-mail: </source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Correo electrónico: </target>
+        </trans-unit>
+        <trans-unit id="PersonalInfoPageModifyNickNameTextBox.PlaceholderText" translate="yes" xml:space="preserve">
+          <source>Novo apelido</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Nuevo apodo</target>
+        </trans-unit>
+        <trans-unit id="PersonalInfoPageModifyNickNameTitle.Text" translate="yes" xml:space="preserve">
+          <source>Modificar apelido</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Apodo de cambio</target>
+        </trans-unit>
+        <trans-unit id="PersonalInfoPagePhone.Text" translate="yes" xml:space="preserve">
+          <source>Telefones: </source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Teléfonos: </target>
+        </trans-unit>
+        <trans-unit id="ProductSearchResultaPageSellerInfoPoints" translate="yes" xml:space="preserve">
+          <source>pontos obtidos com suas compras e vendas</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">puntos con sus compras y ventas</target>
+        </trans-unit>
+        <trans-unit id="ProductSearchResultaPageSellerInfoTransactionsTotal" translate="yes" xml:space="preserve">
+          <source>vendas concretizadas</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">ventas alcanzados</target>
+        </trans-unit>
+        <trans-unit id="ProductSearchResultPageButtonFilter.Label" translate="yes" xml:space="preserve">
+          <source>filtrar</source>
+          <target state="needs-review-translation" state-qualifier="exact-match">filtrar</target>
+        </trans-unit>
+        <trans-unit id="ProductSearchResultPageFlyoutFilterTitle.Text" translate="yes" xml:space="preserve">
+          <source>Filtrar resultados</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Resultados del filtro</target>
+        </trans-unit>
+        <trans-unit id="ProductSearchResultPageViewModelErrorLoadingShippingInfo" translate="yes" xml:space="preserve">
+          <source>Não foi possível localizar os dados de entrega para esse CEP.</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">No se pudo encontrar los datos para este código postal.</target>
+        </trans-unit>
+        <trans-unit id="ProductSearchResultPageViewModelNoItemsFound" translate="yes" xml:space="preserve">
+          <source>Nenhum item localizado. Verifique se sua conexão de internet está ativa</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">No hay artículos encontrados. Verifique que su conexión a internet esté activa</target>
+        </trans-unit>
+        <trans-unit id="ProductSearchResultPageViewModelQuestionEmpty" translate="yes" xml:space="preserve">
+          <source>Você precisa informar sua pergunta antes de enviar.</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Necesitará informar su pregunta antes de enviar.</target>
+        </trans-unit>
+        <trans-unit id="ProductSearchResultPageViewModelQuestionMustLogged" translate="yes" xml:space="preserve">
+          <source>Você precisa estar logado para enviar suas questões.</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Debe estar conectado para enviar sus preguntas.</target>
+        </trans-unit>
+        <trans-unit id="ProductSearchResultPageViewModelQuestionNotSend" translate="yes" xml:space="preserve">
+          <source>Não foi possível enviar sua pergunta. Tente novamente mais tarde.</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">No se puede enviar su consulta. Inténtalo más tarde.</target>
+        </trans-unit>
+        <trans-unit id="ProductSearchResultPageViewModelQuestionSend" translate="yes" xml:space="preserve">
+          <source>Sua pergunta foi enviada ao vendedor.</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Su consulta se ha enviado al vendedor.</target>
+        </trans-unit>
+        <trans-unit id="ProductSearchResultPageViewModelShippingZipCodeEmpty" translate="yes" xml:space="preserve">
+          <source>Informe seu CEP antes de calcular</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Introduce tu código postal antes de calcular</target>
+        </trans-unit>
+        <trans-unit id="QuestionDetailPageMsgAnsweError" translate="yes" xml:space="preserve">
+          <source>Não foi possível enviar a resposta para essa pergunta. Tente novamente mais tarde.</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">No se puede enviar la respuesta a esa pregunta. Inténtalo más tarde.</target>
+        </trans-unit>
+        <trans-unit id="QuestionDetailPageMsgEmptyAnswer" translate="yes" xml:space="preserve">
+          <source>É necessário que você informe uma resposta para enviar.</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Es necesario que usted notifique una respuesta a enviar.</target>
+        </trans-unit>
+        <trans-unit id="QuestionDetailPageMsgRemoverItem" translate="yes" xml:space="preserve">
+          <source>Deseja realmente remover essa pergunta? Isso não poderá ser desfeito.</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">¿Realmente desea eliminar esta pregunta? Esto no se puede deshacer.</target>
+        </trans-unit>
+        <trans-unit id="QuestionDetailPageMsgRemoverItemError" translate="yes" xml:space="preserve">
+          <source>Não foi possível remover essa pergunta. Tente novamente mais tarde.</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">No se pudo quitar esta pregunta. Inténtalo más tarde.</target>
+        </trans-unit>
+        <trans-unit id="RelistItemPageTitleTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Modificar e recadastrar</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Modificar y reajustar</target>
+        </trans-unit>
+        <trans-unit id="SellProductPageMaxImages" translate="yes" xml:space="preserve">
+          <source>É permitido adicionar até 5 imagens</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Se permite añadir hasta 5 imágenes</target>
+        </trans-unit>
+        <trans-unit id="SellProductPagePrice" translate="yes" xml:space="preserve">
+          <source>Informe o valor unitário do produto</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Notificar el valor unitario del producto</target>
+        </trans-unit>
+        <trans-unit id="SellProductPageQuantity" translate="yes" xml:space="preserve">
+          <source>Informe a quantidade disponível</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Notificar la cantidad disponible</target>
+        </trans-unit>
+        <trans-unit id="SellProductPageTitle" translate="yes" xml:space="preserve">
+          <source>Informe o título do produto</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Introduzca el título del producto</target>
+        </trans-unit>
+        <trans-unit id="ShareLogText" translate="yes" xml:space="preserve">
+          <source>Estou enviando meu arquivo de log em anexo.</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Yo voy a enviar mi archivo de registro adjunto.</target>
+        </trans-unit>
+        <trans-unit id="StateBuyQualifiedTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>O comprador qualificou você</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">El comprador le ha calificado</target>
+        </trans-unit>
+        <trans-unit id="StateSellQualifiedTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Você qualificou</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Calificado</target>
+        </trans-unit>
+        <trans-unit id="Yes" translate="yes" xml:space="preserve">
+          <source>Sim</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Sí</target>
+        </trans-unit>
+        <trans-unit id="UserStatusgold" translate="yes" xml:space="preserve">
+          <source>Mercadolíder Ouro</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Mercadolíder Gold</target>
+        </trans-unit>
+        <trans-unit id="UserStatusNull" translate="yes" xml:space="preserve">
+          <source>Sem status</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Sin estado</target>
+        </trans-unit>
+        <trans-unit id="UserStatusplatinum" translate="yes" xml:space="preserve">
+          <source>Mercadolíder Platinum</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Mercadolíder Platinum</target>
+        </trans-unit>
+        <trans-unit id="UserStatussilver" translate="yes" xml:space="preserve">
+          <source>Mercadolíder Prata</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Plata Mercadolíder</target>
+        </trans-unit>
+        <trans-unit id="PerguntaPageEmptyQuestion" translate="yes" xml:space="preserve">
+          <source>É necessário informar sua pergunta antes de enviar</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Es necesario informar a su pregunta antes de enviar</target>
+        </trans-unit>
+        <trans-unit id="MsgNotAuthenticated" translate="yes" xml:space="preserve">
+          <source>Você precisa logar antes para visualizar essa área</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Necesita iniciar sesión para ver esta zona</target>
+        </trans-unit>
+        <trans-unit id="PerguntasComprasPageMsgErrorLoadQuestionDetail" translate="yes" xml:space="preserve">
+          <source>Não foi possível obter detalhes da pergunta. Verifique se sua conexão de internet está ativa.</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">No ha sido posible obtener datos de la encuesta. Verifique que su conexión a internet esté activa.</target>
+        </trans-unit>
+        <trans-unit id="AnunciosDetalhePageDescriptionHtml" translate="yes" xml:space="preserve">
+          <source>Anúncio com descrição em HTML</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Listado con descripción en HTML</target>
+        </trans-unit>
+        <trans-unit id="AnunciosDetalhePageFinalizar" translate="yes" xml:space="preserve">
+          <source>Faltam {0} dias deste anúncio.</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Faltan {0} días de este anuncio.</target>
+        </trans-unit>
+        <trans-unit id="AnunciosDetalhePageFinalizarTitle" translate="yes" xml:space="preserve">
+          <source>Finalizar anúncio</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Anuncio final</target>
+        </trans-unit>
+        <trans-unit id="Cancel" translate="yes" xml:space="preserve">
+          <source>Cancelar</source>
+          <target state="needs-review-translation" state-qualifier="exact-match">Cancelar</target>
+        </trans-unit>
+        <trans-unit id="Finalize" translate="yes" xml:space="preserve">
+          <source>Finalizar</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Finalizar</target>
+        </trans-unit>
+        <trans-unit id="Delete" translate="yes" xml:space="preserve">
+          <source>Remover</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Quitar</target>
+        </trans-unit>
+        <trans-unit id="AnunciosDetalhePageRemover" translate="yes" xml:space="preserve">
+          <source>Excluir anúncio?</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">¿Eliminar el anuncio?</target>
+        </trans-unit>
+        <trans-unit id="MsgDeviceCallNotFound" translate="yes" xml:space="preserve">
+          <source>Opção não disponivel para este dispositivo</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Opción no disponible para este dispositivo</target>
+        </trans-unit>
+        <trans-unit id="SobreEmail" translate="yes" xml:space="preserve">
+          <source>alexandre.dias.simoes@outlook.com</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Alexandre.dias.Simoes@Outlook.com</target>
+        </trans-unit>
+        <trans-unit id="SobreEmailAssunto" translate="yes" xml:space="preserve">
+          <source>Sugestões - Meu MercadoLivre Universal</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Sugerencias-My Ebay Universal</target>
+        </trans-unit>
+        <trans-unit id="SobreEmailBody" translate="yes" xml:space="preserve">
+          <source>...</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">...</target>
+        </trans-unit>
+        <trans-unit id="PerguntasVendasDetalhesPageMsgEmptyAnswer" translate="yes" xml:space="preserve">
+          <source>Infome sua resposta antes de enviar.</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Informar a su respuesta antes de enviar.</target>
+        </trans-unit>
+        <trans-unit id="MsgPerguntaAvaliacao" translate="yes" xml:space="preserve">
+          <source>Gostando do aplicativo? Então, diz pra gente o que você achou. Deseja avaliar agora?</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">¿Disfrutando de la aplicación? Por lo tanto, díganos lo que piensa. ¿Quiere evaluar ahora?</target>
+        </trans-unit>
+        <trans-unit id="MsgPerguntaFeedback" translate="yes" xml:space="preserve">
+          <source>Tudo bem, então gostaria de enviar um feedback por e-mail?</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">¿Bien, así que me gustaría enviar comentarios por correo electrónico?</target>
+        </trans-unit>
+        <trans-unit id="ConfigurationPageCompraEfetuada" translate="yes" xml:space="preserve">
+          <source>Compra efetuada com sucesso. Reinicie o aplicativo para remover a propaganda.</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Éxito de la compra. Reiniciar la aplicación para quitar la publicidad.</target>
+        </trans-unit>
+        <trans-unit id="ConfigurationPageCompraJaEfetuada" translate="yes" xml:space="preserve">
+          <source>Você já possue esse recurso. Obrigado pelo suporte!</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Ya tiene esta característica. ¡Gracias por su apoyo!</target>
+        </trans-unit>
+        <trans-unit id="ConfigurationPageCompraNaoEfetuada" translate="yes" xml:space="preserve">
+          <source>Não foi possível finalizar a compra</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">No ha sido posible al finalizar la compra</target>
+        </trans-unit>
+        <trans-unit id="ShellMenuBusca.Text" translate="yes" xml:space="preserve">
+          <source>Busca</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Búsqueda de</target>
+        </trans-unit>
+        <trans-unit id="ShellMenuInicio.Text" translate="yes" xml:space="preserve">
+          <source>Iniício</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Iniício</target>
+        </trans-unit>
+        <trans-unit id="ShellMenuComprar.Text" translate="yes" xml:space="preserve">
+          <source>Compras</source>
+          <target state="needs-review-translation" state-qualifier="exact-match">Compras</target>
+        </trans-unit>
+        <trans-unit id="ShellMenuFavoritos.Text" translate="yes" xml:space="preserve">
+          <source>Favoritos</source>
+          <target state="needs-review-translation" state-qualifier="exact-match">Favoritos</target>
+        </trans-unit>
+        <trans-unit id="ShellMenuPerguntas.Text" translate="yes" xml:space="preserve">
+          <source>Perguntas</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Preguntas</target>
+        </trans-unit>
+        <trans-unit id="ShellMenuVender.Text" translate="yes" xml:space="preserve">
+          <source>Vender</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Vender</target>
+        </trans-unit>
+        <trans-unit id="ShellMenuAnuncios.Text" translate="yes" xml:space="preserve">
+          <source>Meus anúncios</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Mis anuncios</target>
+        </trans-unit>
+        <trans-unit id="ShellMenuCompras.Text" translate="yes" xml:space="preserve">
+          <source>Compras</source>
+          <target state="needs-review-translation" state-qualifier="exact-match">Compras</target>
+        </trans-unit>
+        <trans-unit id="ShellMenuVendas.Text" translate="yes" xml:space="preserve">
+          <source>Vendas</source>
+          <target state="needs-review-translation" state-qualifier="exact-match">Ventas</target>
+        </trans-unit>
+        <trans-unit id="ShellMenuMinhasVendas.Text" translate="yes" xml:space="preserve">
+          <source>Vendas</source>
+          <target state="needs-review-translation" state-qualifier="exact-match">Ventas</target>
+        </trans-unit>
+        <trans-unit id="ShellMenuPerguntasVendas.Text" translate="yes" xml:space="preserve">
+          <source>Perguntas</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Preguntas</target>
+        </trans-unit>
+        <trans-unit id="ShellMenuConfiguracao.Text" translate="yes" xml:space="preserve">
+          <source>Configurações</source>
+          <target state="needs-review-translation" state-qualifier="exact-match">Configuración</target>
+        </trans-unit>
+        <trans-unit id="ShellMenuConfiguracoes.Text" translate="yes" xml:space="preserve">
+          <source>Configurações</source>
+          <target state="needs-review-translation" state-qualifier="exact-match">Configuración</target>
+        </trans-unit>
+        <trans-unit id="ShellMenuSaldoMP.Text" translate="yes" xml:space="preserve">
+          <source>Saldo MP</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Equilibrio MP</target>
+        </trans-unit>
+        <trans-unit id="ShellMenuLogin.Text" translate="yes" xml:space="preserve">
+          <source>Login</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Inicio de sesión</target>
+        </trans-unit>
+        <trans-unit id="UseLightThemeToggleSwitch.Header" translate="yes" xml:space="preserve">
+          <source>Usar o tema claro</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Utilizar el tema claro</target>
+        </trans-unit>
+        <trans-unit id="UseLightThemeToggleSwitch.OffContent" translate="yes" xml:space="preserve">
+          <source>Tema escuro</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Tema oscuro</target>
+        </trans-unit>
+        <trans-unit id="UseLightThemeToggleSwitch.OnContent" translate="yes" xml:space="preserve">
+          <source>Tema claro</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Por supuesto el tema</target>
+        </trans-unit>
+        <trans-unit id="UseQualityImagesToggleSwitch.Header" translate="yes" xml:space="preserve">
+          <source>Usar imagens de alta qualidade na busca</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Utilizar imágenes de alta calidad en la búsqueda</target>
+        </trans-unit>
+        <trans-unit id="UseQualityImagesToggleSwitch.OffContent" translate="yes" xml:space="preserve">
+          <source>Baixa qualidade</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Calidad baja</target>
+        </trans-unit>
+        <trans-unit id="UseQualityImagesToggleSwitch.OnContent" translate="yes" xml:space="preserve">
+          <source>Alta qualidade</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Alta calidad</target>
+        </trans-unit>
+        <trans-unit id="UseShellDrawnBackButtonToggleSwtich.Header" translate="yes" xml:space="preserve">
+          <source>Modo de exibição do botão voltar</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Vista del botón back</target>
+        </trans-unit>
+        <trans-unit id="UseShellDrawnBackButtonToggleSwtich.OffContent" translate="yes" xml:space="preserve">
+          <source>Botão voltar no cabeçalho da página</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Botón en el encabezado de página</target>
+        </trans-unit>
+        <trans-unit id="UseShellDrawnBackButtonToggleSwtich.OnContent" translate="yes" xml:space="preserve">
+          <source>Botão voltar na barra de título</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Botón en la barra de título</target>
+        </trans-unit>
+        <trans-unit id="AdultContentToggleSwitch.Header" translate="yes" xml:space="preserve">
+          <source>Permitir pesquisas de conteúdo adulto</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Permite búsquedas de contenido para adultos</target>
+        </trans-unit>
+        <trans-unit id="AdultContentToggleSwitch.OffContent" translate="yes" xml:space="preserve">
+          <source>Não permitir</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">No permitir</target>
+        </trans-unit>
+        <trans-unit id="AdultContentToggleSwitch.OnContent" translate="yes" xml:space="preserve">
+          <source>Permitir</source>
+          <target state="needs-review-translation" state-qualifier="exact-match">Permitir</target>
+        </trans-unit>
+        <trans-unit id="ReceiveNotificationsToggleSwitchSubTitle.Text" translate="yes" xml:space="preserve">
+          <source>Use apenas se não estiver recebendo notificações</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Usar sólo si no está recibiendo notificaciones</target>
+        </trans-unit>
+        <trans-unit id="ReceiveNotificationsToggleSwitchTitle.Text" translate="yes" xml:space="preserve">
+          <source>Ativar notificações</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Activar notificaciones</target>
+        </trans-unit>
+        <trans-unit id="SettingsPageCountriesComboBox.Header" translate="yes" xml:space="preserve">
+          <source>Selecione um país</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Seleccione un país</target>
+        </trans-unit>
+        <trans-unit id="BuscaPageHeaderTitle.Content" translate="yes" xml:space="preserve">
+          <source>Busca</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Búsqueda de</target>
+        </trans-unit>
+        <trans-unit id="BuscaFilterPageFiltrosTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Filtros</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Filtros</target>
+        </trans-unit>
+        <trans-unit id="BuscaFilterPageOrdenacaoTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Ordenações</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Ordenaciones</target>
+        </trans-unit>
+        <trans-unit id="BuscaFilterPagePageHeaderTitle.Content" translate="yes" xml:space="preserve">
+          <source>Filtros e Ordenações</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Filtros y clases</target>
+        </trans-unit>
+        <trans-unit id="BuscaPageFilterApplyFilterButton.Label" translate="yes" xml:space="preserve">
+          <source>Aplicar</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Aplicar</target>
+        </trans-unit>
+        <trans-unit id="ImagemPagePageHeader.Content" translate="yes" xml:space="preserve">
+          <source>Imagem</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Fotografía o imagen</target>
+        </trans-unit>
+        <trans-unit id="LoginPagePageHeader.Content" translate="yes" xml:space="preserve">
+          <source>Autenticação</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Auth</target>
+        </trans-unit>
+        <trans-unit id="MainPagePrivacidadeButton.Label" translate="yes" xml:space="preserve">
+          <source>Privacidade</source>
+          <target state="needs-review-translation" state-qualifier="exact-match">Privacidad</target>
+        </trans-unit>
+        <trans-unit id="MainPageSairButton.Label" translate="yes" xml:space="preserve">
+          <source>Sair</source>
+          <target state="needs-review-translation" state-qualifier="exact-match">Cerrar sesión</target>
+        </trans-unit>
+        <trans-unit id="MainPageSobreButton.Label" translate="yes" xml:space="preserve">
+          <source>Sobre</source>
+          <target state="needs-review-translation" state-qualifier="exact-match">Acerca de</target>
+        </trans-unit>
+        <trans-unit id="MainPageSearchBox.PlaceholderText" translate="yes" xml:space="preserve">
+          <source>O que deseja procurar hoje?</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">¿Qué desea buscar hoy?</target>
+        </trans-unit>
+        <trans-unit id="PerguntarPageEnviarPerguntaButton.Label" translate="yes" xml:space="preserve">
+          <source>Perguntar</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Inquire</target>
+        </trans-unit>
+        <trans-unit id="PerguntarPagePageHeader.Content" translate="yes" xml:space="preserve">
+          <source>Perguntas</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Preguntas</target>
+        </trans-unit>
+        <trans-unit id="PerguntarPagePerguntarTextBlock.PlaceholderText" translate="yes" xml:space="preserve">
+          <source>Escreva aqui sua pergunta</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Escriba aquí su pregunta</target>
+        </trans-unit>
+        <trans-unit id="ProdutoDescricaoPagePageHeader.Content" translate="yes" xml:space="preserve">
+          <source>Descrição do anúncio</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Descripción del anuncio</target>
+        </trans-unit>
+        <trans-unit id="ProdutoDetalheEnvioPageCalcularButton.Content" translate="yes" xml:space="preserve">
+          <source>Calcular</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Calcular</target>
+        </trans-unit>
+        <trans-unit id="ProdutoDetalheEnvioPageDescricaoCep.Text" translate="yes" xml:space="preserve">
+          <source>Assim você poderá calular o custo de envio e conhecer os serviços disponíveis.</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Para calular el costo de envío y conocer los servicios disponibles.</target>
+        </trans-unit>
+        <trans-unit id="ProdutoDetalheEnvioPageFreteTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Frete para seu endereço:</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Envío a su dirección:</target>
+        </trans-unit>
+        <trans-unit id="ProdutoDetalheEnvioPageInserirCepTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Insira seu CEP</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Ingrese su código postal</target>
+        </trans-unit>
+        <trans-unit id="ProdutoDetalheEnvioPagePageHeader.Content" translate="yes" xml:space="preserve">
+          <source>Forma de envio</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Enviar formulario</target>
+        </trans-unit>
+        <trans-unit id="ProdutoDetalhePageButtonCompartilhar.Label" translate="yes" xml:space="preserve">
+          <source>compartilhar</source>
+          <target state="needs-review-translation" state-qualifier="exact-match">compartir</target>
+        </trans-unit>
+        <trans-unit id="ProdutoDetalhePageButtonCopiarLink.Label" translate="yes" xml:space="preserve">
+          <source>copiar link do anúncio</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Acoplamiento de la copia del anuncio</target>
+        </trans-unit>
+        <trans-unit id="ProdutoDetalhePageButtonMore.Label" translate="yes" xml:space="preserve">
+          <source>outros produtos do vendedor</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">otros productos del vendedor</target>
+        </trans-unit>
+        <trans-unit id="ProdutoDetalhePageButtonPerguntar.Label" translate="yes" xml:space="preserve">
+          <source>perguntar</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">preguntar</target>
+        </trans-unit>
+        <trans-unit id="ProdutoDetalhePageFavoritoButton.Label" translate="yes" xml:space="preserve">
+          <source>favorito</source>
+          <target state="needs-review-translation" state-qualifier="exact-match">favorito</target>
+        </trans-unit>
+        <trans-unit id="ProdutoDetalhePagePageHeader.Content" translate="yes" xml:space="preserve">
+          <source>Produto</source>
+          <target state="needs-review-translation" state-qualifier="exact-match">Producto</target>
+        </trans-unit>
+        <trans-unit id="ProdutoDetalhePageButtonComprar.Content" translate="yes" xml:space="preserve">
+          <source>Comprar</source>
+          <target state="needs-review-translation" state-qualifier="exact-match">Comprar</target>
+        </trans-unit>
+        <trans-unit id="ProdutoDetalhePageMenuItemApp.Text" translate="yes" xml:space="preserve">
+          <source>pelo aplicativo</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">por la aplicación</target>
+        </trans-unit>
+        <trans-unit id="ProdutoDetalhePageMenuItemWeb.Text" translate="yes" xml:space="preserve">
+          <source>pela web</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">través de la web</target>
+        </trans-unit>
+        <trans-unit id="ProdutoDetalhePageTextBlockFreteGratis.Text" translate="yes" xml:space="preserve">
+          <source>Frete grátis</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Envío gratuito</target>
+        </trans-unit>
+        <trans-unit id="ProdutoDetalhePageTextBlockFretePago.Text" translate="yes" xml:space="preserve">
+          <source>Envio para todo o país</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Envío a todo el país</target>
+        </trans-unit>
+        <trans-unit id="ProdutoDetalhePageTextBlockVendidos.Text" translate="yes" xml:space="preserve">
+          <source> vendidos</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion"> vendido</target>
+        </trans-unit>
+        <trans-unit id="ProdutoDetalhePageTextBlockDescricaoProduto.Text" translate="yes" xml:space="preserve">
+          <source>Descrição do produto</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Descripción del producto</target>
+        </trans-unit>
+        <trans-unit id="ProdutoDetalhePageTextBlockInfoVendedor.Text" translate="yes" xml:space="preserve">
+          <source>Informações do vendedor</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Información del vendedor</target>
+        </trans-unit>
+        <trans-unit id="ProdutoDetalhePageTextBlockPerguntasTitulo.Text" translate="yes" xml:space="preserve">
+          <source>Perguntas</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Preguntas</target>
+        </trans-unit>
+        <trans-unit id="ProdutoPerguntasPagePageHeader.Text" translate="yes" xml:space="preserve">
+          <source>Perguntas ao vendedor</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Preguntas al vendedor</target>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>

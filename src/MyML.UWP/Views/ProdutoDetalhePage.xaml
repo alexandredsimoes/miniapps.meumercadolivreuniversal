@@ -1,63 +1,58 @@
-﻿<Page
-    x:Class="MyML.UWP.Views.ProdutoDetalhePage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    xmlns:controls="using:Template10.Controls"
-    xmlns:converters="using:MyML.UWP.Converters"
-    xmlns:convertersMl="using:MyML.UWP.Converters.MercadoLivre"
-    xmlns:designViewModels="using:MyML.UWP.ViewModels.Design"
-    xmlns:uwpControls="using:AppStudio.Uwp.Controls"
-    xmlns:windowsTriggers="using:WindowsStateTriggers"
-    xmlns:models="using:MyML.UWP.Models.Mercadolivre"
-    xmlns:media3D="using:Windows.UI.Xaml.Media.Media3D"
-    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
-    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
-    d:DataContext="{d:DesignInstance designViewModels:BuscaPageDesignViewModel, IsDesignTimeCreatable=True}"
-    x:Name="ThePage">
+﻿<Page x:Class="MyML.UWP.Views.ProdutoDetalhePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:controls="using:Template10.Controls"
+      xmlns:converters="using:MyML.UWP.Converters"
+      xmlns:convertersMl="using:MyML.UWP.Converters.MercadoLivre"
+      xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:designViewModels="using:MyML.UWP.ViewModels.Design"
+      xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:media3D="using:Windows.UI.Xaml.Media.Media3D"
+      xmlns:models="using:MyML.UWP.Models.Mercadolivre"
+      xmlns:uwpControls="using:AppStudio.Uwp.Controls"
+      xmlns:windowsTriggers="using:WindowsStateTriggers"
+      x:Name="ThePage"
+      d:DataContext="{d:DesignInstance designViewModels:BuscaPageDesignViewModel,
+                                       IsDesignTimeCreatable=True}"
+      mc:Ignorable="d">
     <Page.DataContext>
-        <Binding Source="{StaticResource Locator}" Path="ProdutoDetalhePage" />
+        <Binding Path="ProdutoDetalhePage" Source="{StaticResource Locator}" />
     </Page.DataContext>
 
     <Page.Resources>
         <DataTemplate x:Key="Hero" x:DataType="models:Picture">
             <Grid Background="Black">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="8*"/>
-                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="8*" />
+                    <RowDefinition Height="2*" />
                 </Grid.RowDefinitions>
-                <uwpControls:ImageEx
-            Grid.RowSpan="2"
-            Source="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=url}"
-            Stretch="UniformToFill"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"/>
+                <uwpControls:ImageEx Grid.RowSpan="2"
+                                     HorizontalAlignment="Center"
+                                     VerticalAlignment="Center"
+                                     Source="{Binding RelativeSource={RelativeSource TemplatedParent},
+                                                      Path=url}"
+                                     Stretch="UniformToFill" />
                 <Grid Grid.Row="1">
                     <Grid.Background>
-                        <SolidColorBrush
-                Color="Black"
-                Opacity="0.25" />
+                        <SolidColorBrush Opacity="0.25" Color="Black" />
                     </Grid.Background>
-                    <uwpControls:Virtualbox
-              VirtualWidth="640"
-              VirtualHeight="64">
-                        <TextBlock
-                Margin="12,6"
-                Text="{Binding ElementName=ThePage,Path=DataContext.SelectedProduct.title}"
-                
-                VerticalAlignment="Center"
-                TextAlignment="Center"
-                TextWrapping="Wrap"
-                Foreground="#eee"/>
+                    <uwpControls:Virtualbox VirtualHeight="64" VirtualWidth="640">
+                        <TextBlock Margin="12,6"
+                                   VerticalAlignment="Center"
+                                   Foreground="#eee"
+                                   Text="{Binding ElementName=ThePage,
+                                                  Path=DataContext.SelectedProduct.title}"
+                                   TextAlignment="Center"
+                                   TextWrapping="Wrap" />
                     </uwpControls:Virtualbox>
                 </Grid>
             </Grid>
         </DataTemplate>
 
 
-        <converters:ValueToInvisibilityConverter x:Key="ValueToInvisibilityConverter"/>
+        <converters:ValueToInvisibilityConverter x:Key="ValueToInvisibilityConverter" />
         <converters:StringFormatConverter x:Key="StringFormatConverter" />
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
         <converters:InvertedBoolToVisibilityConverter x:Key="InvertedBoolToVisibilityConverter" />
@@ -67,49 +62,75 @@
         <convertersMl:ReputationHeightConverter x:Key="ReputationHeightConverter" />
         <convertersMl:UserStatusConverter x:Key="UserStatusConverter" />
 
-        
+
 
         <Style x:Key="ListViewItemStyle1" TargetType="ListViewItem">
-            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
-            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
-            <Setter Property="TabNavigation" Value="Local"/>
-            <Setter Property="IsHoldingEnabled" Value="True"/>
-            <Setter Property="Padding" Value="12,0,12,0"/>
-            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="MinWidth" Value="{ThemeResource ListViewItemMinWidth}"/>
-            <Setter Property="MinHeight" Value="{ThemeResource ListViewItemMinHeight}"/>
+            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
+            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
+            <Setter Property="TabNavigation" Value="Local" />
+            <Setter Property="IsHoldingEnabled" Value="True" />
+            <Setter Property="Padding" Value="12,0,12,0" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="MinWidth" Value="{ThemeResource ListViewItemMinWidth}" />
+            <Setter Property="MinHeight" Value="{ThemeResource ListViewItemMinHeight}" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListViewItem">
-                        <ListViewItemPresenter CheckBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}" ContentMargin="{TemplateBinding Padding}" CheckMode="Inline" ContentTransitions="{TemplateBinding ContentTransitions}" CheckBoxBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}" DragForeground="{ThemeResource ListViewItemDragForegroundThemeBrush}" DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}" DragBackground="{ThemeResource ListViewItemDragBackgroundThemeBrush}" DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}" FocusBorderBrush="{ThemeResource SystemControlForegroundAltHighBrush}" FocusSecondaryBorderBrush="{ThemeResource SystemControlForegroundBaseHighBrush}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" PointerOverForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}" PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}" ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}" SelectionCheckMarkVisualEnabled="True" SelectedForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        <ListViewItemPresenter HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                               VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                               CheckBoxBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"
+                                               CheckBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"
+                                               CheckMode="Inline"
+                                               ContentMargin="{TemplateBinding Padding}"
+                                               ContentTransitions="{TemplateBinding ContentTransitions}"
+                                               DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}"
+                                               DragBackground="{ThemeResource ListViewItemDragBackgroundThemeBrush}"
+                                               DragForeground="{ThemeResource ListViewItemDragForegroundThemeBrush}"
+                                               DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}"
+                                               FocusBorderBrush="{ThemeResource SystemControlForegroundAltHighBrush}"
+                                               FocusSecondaryBorderBrush="{ThemeResource SystemControlForegroundBaseHighBrush}"
+                                               PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}"
+                                               PointerOverForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}"
+                                               ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}"
+                                               SelectedForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}"
+                                               SelectionCheckMarkVisualEnabled="True" />
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
         <Style x:Key="ButtonStyle1" TargetType="Button">
-            <Setter Property="Background" Value="{ThemeResource SystemControlBackgroundBaseLowBrush}"/>
-            <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
-            <Setter Property="BorderBrush" Value="{ThemeResource SystemControlForegroundTransparentBrush}"/>
-            <Setter Property="BorderThickness" Value="{ThemeResource ButtonBorderThemeThickness}"/>
-            <Setter Property="Padding" Value="8,4,8,4"/>
-            <Setter Property="HorizontalAlignment" Value="Left"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
-            <Setter Property="FontWeight" Value="Normal"/>
-            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
-            <Setter Property="UseSystemFocusVisuals" Value="True"/>
+            <Setter Property="Background" Value="{ThemeResource SystemControlBackgroundBaseLowBrush}" />
+            <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
+            <Setter Property="BorderBrush" Value="{ThemeResource SystemControlForegroundTransparentBrush}" />
+            <Setter Property="BorderThickness" Value="{ThemeResource ButtonBorderThemeThickness}" />
+            <Setter Property="Padding" Value="8,4,8,4" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
+            <Setter Property="FontWeight" Value="Normal" />
+            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
+            <Setter Property="UseSystemFocusVisuals" Value="True" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Grid x:Name="RootGrid" Background="{TemplateBinding Background}">
+                            <ContentPresenter x:Name="ContentPresenter"
+                                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              AutomationProperties.AccessibilityView="Raw"
+                                              BorderBrush="{TemplateBinding BorderBrush}"
+                                              BorderThickness="{TemplateBinding BorderThickness}"
+                                              Content="{TemplateBinding Content}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              ContentTransitions="{TemplateBinding ContentTransitions}"
+                                              Padding="{TemplateBinding Padding}" />
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
                                     <VisualState x:Name="Normal">
                                         <Storyboard>
-                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
                                         </Storyboard>
                                     </VisualState>
                                     <VisualState x:Name="PointerOver">
@@ -120,21 +141,21 @@
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
                                                 <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightBaseHighBrush}"/>
                                             </ObjectAnimationUsingKeyFrames>-->
-                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
                                         </Storyboard>
                                     </VisualState>
                                     <VisualState x:Name="Pressed">
                                         <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="RootGrid">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemChromeMediumColor}"/>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemChromeMediumColor}" />
                                             </ObjectAnimationUsingKeyFrames>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="ContentPresenter">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightTransparentBrush}"/>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="BorderBrush">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightTransparentBrush}" />
                                             </ObjectAnimationUsingKeyFrames>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightBaseHighBrush}"/>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightBaseHighBrush}" />
                                             </ObjectAnimationUsingKeyFrames>
-                                            <PointerDownThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                            <PointerDownThemeAnimation Storyboard.TargetName="RootGrid" />
                                         </Storyboard>
                                     </VisualState>
                                     <VisualState x:Name="Disabled">
@@ -152,7 +173,6 @@
                                     </VisualState>
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
-                            <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" Content="{TemplateBinding Content}" Padding="{TemplateBinding Padding}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
@@ -198,12 +218,22 @@
     <Page.BottomAppBar>
         <CommandBar>
             <CommandBar.PrimaryCommands>
-                <!--Favorito-->
-                <AppBarButton  Command="{Binding DoFavorite}" Label="favorito">
+                <!--  Favorito  -->
+                <AppBarButton x:Uid="ProdutoDetalhePageFavoritoButton"
+                              Command="{Binding DoFavorite}"
+                              Label="favorito">
                     <AppBarButton.ContentTemplate>
                         <DataTemplate>
                             <Grid>
-                                <Path Visibility="{Binding IsFavorite, Converter={StaticResource InvertedBoolToVisibilityConverter}}" Data="M8.6999969,0C12.300003,0 14,1.5999985 16,4.0999985 18,1.5999985 19.699997,0 23.300003,0 23.800003,0 24.199997,0 24.800003,0.099998474 27.899994,0.40000153 31.599991,3.4000015 32,9.1999969L32,11.099998C31.599991,16.599998 27.599991,23.400002 16,32 4.3999939,23.400002 0.3999939,16.599998 0,11.099998L0,9.1999969C0.3999939,3.4000015 4.0999908,0.40000153 7.1999969,0.099998474 7.6999969,0 8.1999969,0 8.6999969,0z" Stretch="Uniform" Width="20" Height="20" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5" Stroke="{StaticResource SystemControlForegroundAccentBrush}">
+                                <Path Width="20"
+                                      Height="20"
+                                      Margin="0,0,0,0"
+                                      Data="M8.6999969,0C12.300003,0 14,1.5999985 16,4.0999985 18,1.5999985 19.699997,0 23.300003,0 23.800003,0 24.199997,0 24.800003,0.099998474 27.899994,0.40000153 31.599991,3.4000015 32,9.1999969L32,11.099998C31.599991,16.599998 27.599991,23.400002 16,32 4.3999939,23.400002 0.3999939,16.599998 0,11.099998L0,9.1999969C0.3999939,3.4000015 4.0999908,0.40000153 7.1999969,0.099998474 7.6999969,0 8.1999969,0 8.6999969,0z"
+                                      RenderTransformOrigin="0.5,0.5"
+                                      Stretch="Uniform"
+                                      Stroke="{StaticResource SystemControlForegroundAccentBrush}"
+                                      Visibility="{Binding IsFavorite,
+                                                           Converter={StaticResource InvertedBoolToVisibilityConverter}}">
                                     <Path.RenderTransform>
                                         <TransformGroup>
                                             <TransformGroup.Children>
@@ -213,7 +243,15 @@
                                         </TransformGroup>
                                     </Path.RenderTransform>
                                 </Path>
-                                <Path Data="M8.6999969,0C12.300003,0 14,1.5999985 16,4.0999985 18,1.5999985 19.699997,0 23.300003,0 23.800003,0 24.199997,0 24.800003,0.099998474 27.899994,0.40000153 31.599991,3.4000015 32,9.1999969L32,11.099998C31.599991,16.599998 27.599991,23.400002 16,32 4.3999939,23.400002 0.3999939,16.599998 0,11.099998L0,9.1999969C0.3999939,3.4000015 4.0999908,0.40000153 7.1999969,0.099998474 7.6999969,0 8.1999969,0 8.6999969,0z" Stretch="Uniform" Width="20" Height="20" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5"  Fill="{StaticResource SystemControlForegroundAccentBrush}" Visibility="{Binding IsFavorite, Converter={StaticResource BoolToVisibilityConverter}}">
+                                <Path Width="20"
+                                      Height="20"
+                                      Margin="0,0,0,0"
+                                      Data="M8.6999969,0C12.300003,0 14,1.5999985 16,4.0999985 18,1.5999985 19.699997,0 23.300003,0 23.800003,0 24.199997,0 24.800003,0.099998474 27.899994,0.40000153 31.599991,3.4000015 32,9.1999969L32,11.099998C31.599991,16.599998 27.599991,23.400002 16,32 4.3999939,23.400002 0.3999939,16.599998 0,11.099998L0,9.1999969C0.3999939,3.4000015 4.0999908,0.40000153 7.1999969,0.099998474 7.6999969,0 8.1999969,0 8.6999969,0z"
+                                      Fill="{StaticResource SystemControlForegroundAccentBrush}"
+                                      RenderTransformOrigin="0.5,0.5"
+                                      Stretch="Uniform"
+                                      Visibility="{Binding IsFavorite,
+                                                           Converter={StaticResource BoolToVisibilityConverter}}">
                                     <Path.RenderTransform>
                                         <TransformGroup>
                                             <TransformGroup.Children>
@@ -227,13 +265,20 @@
                         </DataTemplate>
                     </AppBarButton.ContentTemplate>
                 </AppBarButton>
-                <!--Compartilhar-->
-                <AppBarButton Label="compartilhar" Command="{Binding ShareProduct}">
+                <!--  Compartilhar  -->
+                <AppBarButton x:Uid="ProdutoDetalhePageButtonCompartilhar"
+                              Command="{Binding ShareProduct}"
+                              Label="compartilhar">
                     <AppBarButton.ContentTemplate>
                         <DataTemplate>
-                            <Path Data="M26.709939,21.197004C25.05594,21.197004 23.709939,22.543005 23.709939,24.197005 23.709939,25.851004 25.05594,27.197004 26.709939,27.197004 28.363938,27.197004 29.709939,25.851004 29.709939,24.197005 29.709939,22.543005 28.363938,21.197004 26.709939,21.197004z M5,21.197004C3.3460002,21.197004 2,22.543005 2,24.197004 2,25.851004 3.3460002,27.197004 5,27.197004 6.6540001,27.197004 8.0000001,25.851004 8.0000004,24.197004 8.0000001,22.543005 6.6540001,21.197004 5,21.197004z M20.219228,6.1876125L20.205233,6.2481022C19.649432,8.4031773 17.689137,10 15.362919,10 13.209013,10 11.368827,8.6309814 10.666813,6.7173958L10.608627,6.5457821 10.484062,6.6013622C6.1810184,8.6214619 3.3509576,12.972749 3.3509569,17.708997 3.3509574,18.171996 3.3772073,18.634995 3.4295819,19.094746L3.4734135,19.436204 3.5147953,19.422174C3.9841955,19.27586 4.4830625,19.197004 5,19.197004 7.7570001,19.197004 10,21.440004 9.9999998,24.197004 10,25.489348 9.5071533,26.668752 8.6995416,27.557136L8.5642807,27.698991 8.6905391,27.787805C10.779011,29.223062 13.282691,30.004001 15.850017,30.004001 18.431229,30.004001 20.945149,29.216169 23.04128,27.767128L23.1424,27.695573 23.010398,27.557136C22.202785,26.668752 21.709939,25.489348 21.709939,24.197005 21.709939,21.440004 23.952939,19.197004 26.709939,19.197004 27.226876,19.197004 27.725743,19.27586 28.195144,19.422174L28.228528,19.433493 28.235692,19.386393C28.312303,18.831491 28.350974,18.270242 28.350974,17.708992 28.350974,12.646496 25.125396,8.0709133 20.391398,6.2498207z M15.362919,2C13.708919,2 12.362919,3.3460007 12.362919,5 12.362919,6.6540012 13.708919,8 15.362919,8 17.016919,8 18.362919,6.6540012 18.362919,5 18.362919,3.3460007 17.016919,2 15.362919,2z M15.362919,0C17.775294,0,19.794138,1.7172966,20.261155,3.9935951L20.278956,4.0930042 20.553591,4.1828003C26.351193,6.1448212 30.35097,11.623309 30.35097,17.708992 30.35097,18.622492 30.262923,19.536757 30.08817,20.431689L30.073655,20.50088 30.243814,20.663129C31.149188,21.568504 31.709939,22.818504 31.709939,24.197005 31.709939,26.954004 29.466939,29.197004 26.709939,29.197004 26.106845,29.197004 25.528348,29.089673 24.992543,28.89311L24.918328,28.863794 24.692845,29.038847C22.16708,30.955456 19.052538,32.003997 15.850017,32.003997 12.56014,32.003997 9.3565266,30.894714 6.7939677,28.874357L6.7844011,28.866642 6.7173957,28.89311C6.1815919,29.089673 5.6030939,29.197004 5,29.197004 2.243,29.197004 0,26.954004 0,24.197004 0,22.818504 0.56075001,21.568504 1.466125,20.663129L1.6289248,20.507898 1.5568442,20.121417C1.420157,19.325995 1.3509698,18.517496 1.3509698,17.708997 1.3509698,12.013719 4.8608508,6.8008156 10.140511,4.5659046L10.391881,4.4651909 10.420635,4.2395706C10.787999,1.8421516,12.864388,0,15.362919,0z" Stretch="Uniform" Width="20" Height="20" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
+                            <Path Width="20"
+                                  Height="20"
+                                  Margin="0,0,0,0"
+                                  Data="M26.709939,21.197004C25.05594,21.197004 23.709939,22.543005 23.709939,24.197005 23.709939,25.851004 25.05594,27.197004 26.709939,27.197004 28.363938,27.197004 29.709939,25.851004 29.709939,24.197005 29.709939,22.543005 28.363938,21.197004 26.709939,21.197004z M5,21.197004C3.3460002,21.197004 2,22.543005 2,24.197004 2,25.851004 3.3460002,27.197004 5,27.197004 6.6540001,27.197004 8.0000001,25.851004 8.0000004,24.197004 8.0000001,22.543005 6.6540001,21.197004 5,21.197004z M20.219228,6.1876125L20.205233,6.2481022C19.649432,8.4031773 17.689137,10 15.362919,10 13.209013,10 11.368827,8.6309814 10.666813,6.7173958L10.608627,6.5457821 10.484062,6.6013622C6.1810184,8.6214619 3.3509576,12.972749 3.3509569,17.708997 3.3509574,18.171996 3.3772073,18.634995 3.4295819,19.094746L3.4734135,19.436204 3.5147953,19.422174C3.9841955,19.27586 4.4830625,19.197004 5,19.197004 7.7570001,19.197004 10,21.440004 9.9999998,24.197004 10,25.489348 9.5071533,26.668752 8.6995416,27.557136L8.5642807,27.698991 8.6905391,27.787805C10.779011,29.223062 13.282691,30.004001 15.850017,30.004001 18.431229,30.004001 20.945149,29.216169 23.04128,27.767128L23.1424,27.695573 23.010398,27.557136C22.202785,26.668752 21.709939,25.489348 21.709939,24.197005 21.709939,21.440004 23.952939,19.197004 26.709939,19.197004 27.226876,19.197004 27.725743,19.27586 28.195144,19.422174L28.228528,19.433493 28.235692,19.386393C28.312303,18.831491 28.350974,18.270242 28.350974,17.708992 28.350974,12.646496 25.125396,8.0709133 20.391398,6.2498207z M15.362919,2C13.708919,2 12.362919,3.3460007 12.362919,5 12.362919,6.6540012 13.708919,8 15.362919,8 17.016919,8 18.362919,6.6540012 18.362919,5 18.362919,3.3460007 17.016919,2 15.362919,2z M15.362919,0C17.775294,0,19.794138,1.7172966,20.261155,3.9935951L20.278956,4.0930042 20.553591,4.1828003C26.351193,6.1448212 30.35097,11.623309 30.35097,17.708992 30.35097,18.622492 30.262923,19.536757 30.08817,20.431689L30.073655,20.50088 30.243814,20.663129C31.149188,21.568504 31.709939,22.818504 31.709939,24.197005 31.709939,26.954004 29.466939,29.197004 26.709939,29.197004 26.106845,29.197004 25.528348,29.089673 24.992543,28.89311L24.918328,28.863794 24.692845,29.038847C22.16708,30.955456 19.052538,32.003997 15.850017,32.003997 12.56014,32.003997 9.3565266,30.894714 6.7939677,28.874357L6.7844011,28.866642 6.7173957,28.89311C6.1815919,29.089673 5.6030939,29.197004 5,29.197004 2.243,29.197004 0,26.954004 0,24.197004 0,22.818504 0.56075001,21.568504 1.466125,20.663129L1.6289248,20.507898 1.5568442,20.121417C1.420157,19.325995 1.3509698,18.517496 1.3509698,17.708997 1.3509698,12.013719 4.8608508,6.8008156 10.140511,4.5659046L10.391881,4.4651909 10.420635,4.2395706C10.787999,1.8421516,12.864388,0,15.362919,0z"
+                                  RenderTransformOrigin="0.5,0.5"
+                                  Stretch="Uniform">
                                 <Path.Fill>
-                                    <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
+                                    <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}" />
                                 </Path.Fill>
                                 <Path.RenderTransform>
                                     <TransformGroup>
@@ -247,13 +292,20 @@
                         </DataTemplate>
                     </AppBarButton.ContentTemplate>
                 </AppBarButton>
-                <!--Perguntar-->
-                <AppBarButton Label="Perguntar" Command="{Binding Perguntar}">
+                <!--  Perguntar  -->
+                <AppBarButton x:Uid="ProdutoDetalhePageButtonPerguntar"
+                              Command="{Binding Perguntar}"
+                              Label="perguntar">
                     <AppBarButton.ContentTemplate>
                         <DataTemplate>
-                            <Path Data="M5,27.599984C6.3000183,27.599984 7.4000244,28.19999 7.4000244,28.999978 7.4000244,29.799994 6.3000183,30.400001 5,30.400001 3.7000122,30.400001 2.6000061,29.799994 2.6000061,28.999978 2.7000122,28.299996 3.7000122,27.599984 5,27.599984z M9.8000183,20.09999C12.5,20.09999 14.800018,21.499984 14.800018,23.199994 14.800018,24.900004 12.600006,26.299998 9.8000183,26.299998 7.1000061,26.299998 4.8000183,24.900004 4.8000183,23.199994 4.8000183,21.400008 7.1000061,20.09999 9.8000183,20.09999z M16,0C24.800018,-4.7784852E-09 32,4.4000211 32,9.7000046 32,15.099995 24.800018,19.40001 16,19.40001 7.2000122,19.40001 0,14.999989 0,9.7000046 0,4.4000211 7.2000122,-4.7784852E-09 16,0z" Stretch="Uniform"  Width="20" Height="20" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
+                            <Path Width="20"
+                                  Height="20"
+                                  Margin="0,0,0,0"
+                                  Data="M5,27.599984C6.3000183,27.599984 7.4000244,28.19999 7.4000244,28.999978 7.4000244,29.799994 6.3000183,30.400001 5,30.400001 3.7000122,30.400001 2.6000061,29.799994 2.6000061,28.999978 2.7000122,28.299996 3.7000122,27.599984 5,27.599984z M9.8000183,20.09999C12.5,20.09999 14.800018,21.499984 14.800018,23.199994 14.800018,24.900004 12.600006,26.299998 9.8000183,26.299998 7.1000061,26.299998 4.8000183,24.900004 4.8000183,23.199994 4.8000183,21.400008 7.1000061,20.09999 9.8000183,20.09999z M16,0C24.800018,-4.7784852E-09 32,4.4000211 32,9.7000046 32,15.099995 24.800018,19.40001 16,19.40001 7.2000122,19.40001 0,14.999989 0,9.7000046 0,4.4000211 7.2000122,-4.7784852E-09 16,0z"
+                                  RenderTransformOrigin="0.5,0.5"
+                                  Stretch="Uniform">
                                 <Path.Fill>
-                                    <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
+                                    <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}" />
                                 </Path.Fill>
                                 <Path.RenderTransform>
                                     <TransformGroup>
@@ -269,13 +321,442 @@
                 </AppBarButton>
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
-                <AppBarButton Label="Copiar link do anúncio" Command="{Binding CopyLink}"/>
-                <AppBarButton Label="Outros produtos do vendedor" Command="{Binding SeeMoreFromThisUser}"/>
+                <AppBarButton x:Uid="ProdutoDetalhePageButtonCopiarLink"
+                              Command="{Binding CopyLink}"
+                              Label="copiar link do anúncio" />
+                <AppBarButton x:Uid="ProdutoDetalhePageButtonMore"
+                              Command="{Binding SeeMoreFromThisUser}"
+                              Label="outros produtos do vendedor" />
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </Page.BottomAppBar>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="RootGrid" SizeChanged="RootGrid_SizeChanged">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!--  page header  -->
+            <controls:PageHeader x:Uid="ProdutoDetalhePagePageHeader"
+                                 Background="{StaticResource MercadoLivreBackgroundColor}"
+                                 Content="Produto"
+                                 Foreground="{StaticResource MercadoLivreForegroundColor}" />
+
+
+            <!--  page content  -->
+            <ScrollViewer x:Name="ParallaxRoot"
+                          Grid.Row="1"
+                          VerticalScrollBarVisibility="Auto"
+                          VerticalScrollMode="Auto"
+                          Visibility="{Binding ZoomMode,
+                                               Converter={StaticResource InvertedBoolToVisibilityConverter}}">
+                <ScrollViewer.Transform3D>
+                    <media3D:PerspectiveTransform3D x:Name="PerspectiveTransform" />
+                </ScrollViewer.Transform3D>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <StackPanel x:Name="FlipImageWrap"
+                                Grid.Row="0"
+                                Margin="0"
+                                Padding="0">
+
+                        <uwpControls:Carousel MinHeight="240"
+                                              MaxHeight="480"
+                                              AlignmentX="Center"
+                                              AspectRatio="1.5"
+                                              GradientOpacity="0.3"
+                                              ItemClickCommand="{Binding OpenImage}"
+                                              ItemsSource="{Binding ElementName=ThePage,
+                                                                    Path=DataContext.SelectedProduct.pictures}"
+                                              MaxItems="3">
+                            <!--<interactivity:Interaction.Behaviors>
+                                <core:EventTriggerBehavior EventName="Tapped">
+                                    <core:InvokeCommandAction Command="" CommandParameter="a" />
+                                </core:EventTriggerBehavior>
+                            </interactivity:Interaction.Behaviors>-->
+                            <uwpControls:Carousel.ContentTemplate>
+                                <DataTemplate x:DataType="models:Picture">
+                                    <Grid Background="Black">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="8*" />
+                                            <RowDefinition Height="2*" />
+                                        </Grid.RowDefinitions>
+                                        <uwpControls:ImageEx Grid.RowSpan="2"
+                                                             HorizontalAlignment="Center"
+                                                             VerticalAlignment="Center"
+                                                             Source="{Binding url}"
+                                                             Stretch="UniformToFill" />
+                                        <Grid Grid.Row="1">
+                                            <Grid.Background>
+                                                <SolidColorBrush Opacity="0.25" Color="Black" />
+                                            </Grid.Background>
+                                            <uwpControls:Virtualbox VirtualHeight="64" VirtualWidth="640">
+                                                <TextBlock Margin="12,6"
+                                                           VerticalAlignment="Center"
+                                                           Foreground="#eee"
+                                                           Text="{Binding ElementName=ThePage,
+                                                                          Path=DataContext.SelectedProduct.title}"
+                                                           TextAlignment="Center"
+                                                           TextWrapping="Wrap" />
+                                            </uwpControls:Virtualbox>
+                                        </Grid>
+                                    </Grid>
+                                </DataTemplate>
+                            </uwpControls:Carousel.ContentTemplate>
+                        </uwpControls:Carousel>
+                        <uwpControls:Indicator Height="40"
+                                               ItemsSource="{Binding ItemsSource,
+                                                                     ElementName=FlipImage2,
+                                                                     Mode=TwoWay}"
+                                               SelectedIndex="{Binding SelectedIndex,
+                                                                       ElementName=FlipImage2,
+                                                                       Mode=TwoWay}">
+                            <uwpControls:Indicator.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Width="12"
+                                            Height="8"
+                                            Background="Transparent"
+                                            BorderThickness="1" />
+                                </DataTemplate>
+                            </uwpControls:Indicator.ItemTemplate>
+
+                        </uwpControls:Indicator>
+
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Visibility="{Binding ZoomMode, Converter={StaticResource InvertedBoolToVisibilityConverter}}">
+                        <StackPanel.Background>
+                            <SolidColorBrush Color="{ThemeResource SystemChromeMediumLowColor}" />
+                        </StackPanel.Background>
+                        <!--  Titulo  -->
+                        <TextBlock Margin="15,0"
+                                   Style="{StaticResource SubtitleTextBlockStyle}"
+                                   Text="{Binding SelectedProduct.title}" />
+
+                        <!--  Valor  -->
+                        <TextBlock Margin="15,10"
+                                   Style="{StaticResource TitleTextBlockStyle}"
+                                   Text="{Binding SelectedProduct.price,
+                                                  ConverterParameter=\{0:c2\},
+                                                  Converter={StaticResource StringFormatConverter}}" />
+
+                        <!--  Parcelamento  -->
+                        <StackPanel Margin="15,10,15,5"
+                                    Orientation="Horizontal"
+                                    Visibility="{Binding SelectedProduct.installments,
+                                                         Converter={StaticResource NullToVisibilitConverter}}">
+                            <TextBlock Text="{Binding SelectedProduct.installments.quantity}" />
+                            <TextBlock Margin="0,0,3,0" Text="x" />
+                            <TextBlock Text="{Binding SelectedProduct.installments.amount, ConverterParameter=\{0:c2\}, Converter={StaticResource StringFormatConverter}}" />
+                        </StackPanel>
+
+                        <!--  Envio (Frete gratis)  -->
+                        <StackPanel Margin="15,5" Visibility="{Binding SelectedProduct.shipping.free_shipping, Converter={StaticResource BoolToVisibilityConverter}}">
+                            <StackPanel Orientation="Horizontal">
+                                <Grid Margin="0,0,5,0">
+                                    <Grid x:Name="backgroundGrid"
+                                          Width="32"
+                                          Height="32"
+                                          Visibility="Visible">
+                                        <Ellipse x:Name="Fill"
+                                                 Fill="{ThemeResource SystemControlBackgroundBaseLowBrush}"
+                                                 Visibility="Visible" />
+                                    </Grid>
+                                    <Path Width="18"
+                                          Height="18"
+                                          Margin="0,0,0,0"
+                                          Data="M24.700012,16.299988C26.400024,16.299988 27.800018,17.700012 27.800018,19.399963 27.800018,21.099976 26.400024,22.5 24.700012,22.5 23,22.5 21.600006,21.099976 21.600006,19.399963 21.600006,17.599976 23,16.299988 24.700012,16.299988z M8.7000122,16.299988C10.400024,16.299988 11.800018,17.700012 11.800018,19.399963 11.800018,21.099976 10.400024,22.5 8.7000122,22.5 7,22.5 5.6000061,21.099976 5.6000061,19.399963 5.6000061,17.599976 7,16.299988 8.7000122,16.299988z M22.700012,5.2999878L22.700012,10.599976 29.800018,10.599976C29.800018,10.299988,29.5,9.7999878,29.300018,9.5L26.5,5.5999756C26.5,5.5999756,26.200012,5.2999878,26,5.2999878z M20,2.7000122L26,2.7000122 32,10.700012 32,17.399963C32,18.099976,31.400024,18.700012,30.700012,18.700012L29.400024,18.700012C29.100006,16.399963 27.100006,14.599976 24.700012,14.599976 22.300018,14.599976 20.400024,16.399963 20,18.700012 19.300018,18.700012 18.700012,18.099976 18.700012,17.399963L18.700012,4C18.700012,3.2999878,19.300018,2.7000122,20,2.7000122z M0,0L17.300018,0 17.300018,18.700012 13.100006,18.700012C12.800018,16.5 10.900024,14.799988 8.6000061,14.799988 6.3000183,14.799988 4.5,16.5 4.1000061,18.700012L0,18.700012z"
+                                          Fill="{ThemeResource SystemControlForegroundBaseHighBrush}"
+                                          RenderTransformOrigin="0.5,0.5"
+                                          Stretch="Uniform">
+                                        <Path.RenderTransform>
+                                            <TransformGroup>
+                                                <RotateTransform Angle="0" />
+                                                <ScaleTransform ScaleX="1" ScaleY="1" />
+                                            </TransformGroup>
+                                        </Path.RenderTransform>
+                                    </Path>
+                                </Grid>
+                                <TextBlock x:Uid="ProdutoDetalhePageTextBlockFreteGratis"
+                                           VerticalAlignment="Center"
+                                           Foreground="{ThemeResource SystemControlForegroundAccentBrush}"
+                                           Text="Frete grátis para todo Brasil" />
+                            </StackPanel>
+                            <TextBlock Margin="38,0,0,0" Text="{Binding ShippingExcludeRegions}" />
+                        </StackPanel>
+                        <!--  Envio (Frete pago)  -->
+                        <Button Margin="15,10"
+                                HorizontalAlignment="Stretch"
+                                HorizontalContentAlignment="Left"
+                                Background="{x:Null}"
+                                Command="{Binding OpenShipping}"
+                                Padding="0"
+                                Style="{StaticResource ButtonStyle1}"
+                                Visibility="{Binding SelectedProduct.shipping.free_shipping,
+                                                     Converter={StaticResource InvertedBoolToVisibilityConverter}}">
+                            <StackPanel Margin="0,10,0,0">
+                                <StackPanel Orientation="Horizontal">
+                                    <Grid Margin="0,0,5,0">
+                                        <Grid x:Name="backgroundGrid2"
+                                              Width="32"
+                                              Height="32"
+                                              Visibility="Visible">
+                                            <Ellipse x:Name="Fill2"
+                                                     Fill="{ThemeResource SystemControlBackgroundBaseLowBrush}"
+                                                     Visibility="Visible" />
+                                        </Grid>
+                                        <Path Width="18"
+                                              Height="18"
+                                              Margin="0,0,0,0"
+                                              Data="M24.700012,16.299988C26.400024,16.299988 27.800018,17.700012 27.800018,19.399963 27.800018,21.099976 26.400024,22.5 24.700012,22.5 23,22.5 21.600006,21.099976 21.600006,19.399963 21.600006,17.599976 23,16.299988 24.700012,16.299988z M8.7000122,16.299988C10.400024,16.299988 11.800018,17.700012 11.800018,19.399963 11.800018,21.099976 10.400024,22.5 8.7000122,22.5 7,22.5 5.6000061,21.099976 5.6000061,19.399963 5.6000061,17.599976 7,16.299988 8.7000122,16.299988z M22.700012,5.2999878L22.700012,10.599976 29.800018,10.599976C29.800018,10.299988,29.5,9.7999878,29.300018,9.5L26.5,5.5999756C26.5,5.5999756,26.200012,5.2999878,26,5.2999878z M20,2.7000122L26,2.7000122 32,10.700012 32,17.399963C32,18.099976,31.400024,18.700012,30.700012,18.700012L29.400024,18.700012C29.100006,16.399963 27.100006,14.599976 24.700012,14.599976 22.300018,14.599976 20.400024,16.399963 20,18.700012 19.300018,18.700012 18.700012,18.099976 18.700012,17.399963L18.700012,4C18.700012,3.2999878,19.300018,2.7000122,20,2.7000122z M0,0L17.300018,0 17.300018,18.700012 13.100006,18.700012C12.800018,16.5 10.900024,14.799988 8.6000061,14.799988 6.3000183,14.799988 4.5,16.5 4.1000061,18.700012L0,18.700012z"
+                                              Fill="{ThemeResource SystemControlForegroundBaseHighBrush}"
+                                              RenderTransformOrigin="0.5,0.5"
+                                              Stretch="Uniform">
+                                            <Path.RenderTransform>
+                                                <TransformGroup>
+                                                    <RotateTransform Angle="0" />
+                                                    <ScaleTransform ScaleX="1" ScaleY="1" />
+                                                </TransformGroup>
+                                            </Path.RenderTransform>
+                                        </Path>
+                                    </Grid>
+                                    <TextBlock x:Uid="ProdutoDetalhePageTextBlockFretePago"
+                                               VerticalAlignment="Center"
+                                               Foreground="{ThemeResource SystemControlForegroundAccentBrush}"
+                                               Text="Envio para todo Brasil" />
+                                </StackPanel>
+                                <TextBlock Margin="38,0,0,0" Text="{Binding ShippingExcludeRegions}" />
+                            </StackPanel>
+                        </Button>
+
+                        <!--  Estado do produto  -->
+                        <TextBlock Margin="15,0"
+                                   Text="{Binding SelectedProduct.condition}"
+                                   Visibility="Collapsed" />
+
+                        <!--  Comprar  -->
+                        <Button x:Uid="ProdutoDetalhePageButtonComprar"
+                                Margin="15,10"
+                                HorizontalAlignment="Stretch"
+                                Content="Comprar"
+                                Padding="8">
+                            <Button.Flyout>
+                                <MenuFlyout>
+                                    <MenuFlyoutItem x:Uid="ProdutoDetalhePageMenuItemWeb"
+                                                    Command="{Binding BuyItem}"
+                                                    CommandParameter="web"
+                                                    Text="Pela web" />
+                                    <MenuFlyoutItem x:Uid="ProdutoDetalhePageMenuItemApp"
+                                                    Command="{Binding BuyItem}"
+                                                    CommandParameter="app"
+                                                    Text="Pelo aplicativo" />
+                                </MenuFlyout>
+                            </Button.Flyout>
+                        </Button>
+                        <TextBlock Margin="15,0">
+                            <Run Text="{Binding SelectedProduct.sold_quantity}" />
+                            <Run x:Uid="ProdutoDetalhePageTextBlockVendidos" Text=" vendidos" />
+                        </TextBlock>
+
+                        <!--  Dados do vendedor  -->
+                        <Button Margin="15,10"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                HorizontalContentAlignment="Left"
+                                Background="{x:Null}"
+                                Command="{Binding DataContext.OpenOptions,
+                                                  ElementName=ThePage}"
+                                CommandParameter="seller_info"
+                                Padding="0"
+                                Style="{StaticResource ButtonStyle1}">
+                            <StackPanel Margin="0,0,0,10" Padding="8,0,0,5">
+                                <StackPanel.Background>
+                                    <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}" />
+                                </StackPanel.Background>
+                                <TextBlock x:Uid="ProdutoDetalhePageTextBlockInfoVendedor"
+                                           Margin="0,0,15,0"
+                                           Style="{StaticResource SubtitleTextBlockStyle}"
+                                           Text="Informações do vendedor" />
+                                <StackPanel Height="15"
+                                            Margin="0,0,15,0"
+                                            Orientation="Horizontal">
+                                    <Rectangle Width="50"
+                                               Height="{Binding SellerInfo.seller_reputation.level_id,
+                                                                ConverterParameter=1_red,
+                                                                Converter={StaticResource ReputationHeightConverter}}"
+                                               Fill="#FFF00000" />
+                                    <Rectangle Width="50"
+                                               Height="{Binding SellerInfo.seller_reputation.level_id,
+                                                                ConverterParameter=2_orange,
+                                                                Converter={StaticResource ReputationHeightConverter}}"
+                                               Fill="#FFF09800" />
+                                    <Rectangle Width="50"
+                                               Height="{Binding SellerInfo.seller_reputation.level_id,
+                                                                ConverterParameter=3_yellow,
+                                                                Converter={StaticResource ReputationHeightConverter}}"
+                                               Fill="#FFFFE800" />
+                                    <Rectangle Width="50"
+                                               Height="{Binding SellerInfo.seller_reputation.level_id,
+                                                                ConverterParameter=4_light_green,
+                                                                Converter={StaticResource ReputationHeightConverter}}"
+                                               Fill="#FFDCFF00" />
+                                    <Rectangle Width="50"
+                                               Height="{Binding SellerInfo.seller_reputation.level_id,
+                                                                ConverterParameter=5_green,
+                                                                Converter={StaticResource ReputationHeightConverter}}"
+                                               Fill="#FF05DE2C" />
+                                </StackPanel>
+
+                                <TextBlock Margin="0,0,15,0" Text="{Binding SellerInfo.seller_reputation.power_seller_status, Converter={StaticResource UserStatusConverter}}" />
+                                <StackPanel Margin="0,5,15,0" Orientation="Horizontal">
+                                    <Path Width="26"
+                                          Height="26"
+                                          Margin="0,0,0,0"
+                                          Data="M10.1,5C7.200008,5 4.8999911,7.1999969 4.8999911,10 4.8999911,12.800003 7.200008,15 10.1,15 12.999992,15 15.300009,12.800003 15.300009,10 15.300009,7.3000031 12.899986,5 10.1,5z M10.1,0C15.700003,0 20.2,4.3000031 20.2,9.6999969 20.2,11.600006 19.599994,13.300003 18.700002,14.800003L14.499991,23.300003 10.1,32 5.800015,23.300003 1.6000052,14.800003C0.60000567,13.300003 -4.7890353E-08,11.600006 0,9.6999969 -4.7890353E-08,4.3000031 4.4999972,0 10.1,0z"
+                                          Fill="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"
+                                          RenderTransformOrigin="0.5,0.5"
+                                          Stretch="Uniform">
+                                        <Path.RenderTransform>
+                                            <TransformGroup>
+                                                <RotateTransform Angle="0" />
+                                                <ScaleTransform ScaleX="1" ScaleY="1" />
+                                            </TransformGroup>
+                                        </Path.RenderTransform>
+                                    </Path>
+                                    <TextBlock Margin="15,0">
+                                        <Run Text="{Binding SellerInfo.address.city}" />
+                                        <Run Text="," />
+                                        <Run Text="{Binding SellerInfo.address.state}" />
+                                    </TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                        </Button>
+
+                        <!--  Descrição do produto  -->
+                        <Button Margin="15,10"
+                                HorizontalAlignment="Stretch"
+                                HorizontalContentAlignment="Left"
+                                Background="{x:Null}"
+                                Command="{Binding DataContext.OpenOptions,
+                                                  ElementName=ThePage}"
+                                CommandParameter="product_description"
+                                Padding="0"
+                                Style="{StaticResource ButtonStyle1}">
+                            <Grid Padding="8,0,0,10">
+                                <Grid.Background>
+                                    <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}" />
+                                </Grid.Background>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0"
+                                           Grid.Column="0"
+                                           Grid.ColumnSpan="2"
+                                           Margin="0,0,0,10"
+                                           Style="{StaticResource SubtitleTextBlockStyle}"
+                                           Text="Descrição"
+                                           x:Uid="ProdutoDetalhePageTextBlockDescricaoProduto"/>
+                                <Ellipse Grid.Row="1"
+                                         Grid.Column="0"
+                                         Width="80"
+                                         Height="80">
+                                    <Ellipse.Fill>
+                                        <ImageBrush>
+                                            <ImageBrush.ImageSource>
+                                                <BitmapImage DecodePixelHeight="80"
+                                                             DecodePixelWidth="80"
+                                                             UriSource="{Binding SelectedProduct.thumbnail}" />
+                                            </ImageBrush.ImageSource>
+                                        </ImageBrush>
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                                <TextBlock Grid.Row="1"
+                                           Grid.Column="1"
+                                           Margin="10,0,0,0"
+                                           VerticalAlignment="Center"
+                                           Style="{StaticResource BodyTextBlockStyle}"
+                                           Text="{Binding SelectedProduct.title}"
+                                           TextWrapping="Wrap" />
+                            </Grid>
+                        </Button>
+
+                        <!--  Perguntas  -->
+                        <Button Margin="15,10"
+                                HorizontalAlignment="Stretch"
+                                HorizontalContentAlignment="Left"
+                                Background="{x:Null}"
+                                Command="{Binding DataContext.OpenOptions,
+                                                  ElementName=ThePage}"
+                                CommandParameter="questions"
+                                Padding="0"
+                                Style="{StaticResource ButtonStyle1}"
+                                Visibility="{Binding HasQuestions,
+                                                     Converter={StaticResource BoolToVisibilityConverter}}">
+                            <Grid Padding="8,0,0,10">
+                                <Grid.Background>
+                                    <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}" />
+                                </Grid.Background>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <!--<RowDefinition/>-->
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.ColumnSpan="2"
+                                           Margin="0,0,0,10"
+                                           Style="{StaticResource SubtitleTextBlockStyle}">
+                                    <Run Text="Perguntas" x:Uid="ProdutoDetalhePageTextBlockPerguntasTitulo" />
+                                    <Run Text="(" />
+                                    <Run Text="{Binding Questions}" />
+                                    <Run Text=")" />
+                                </TextBlock>
+                                <Image Grid.Row="1"
+                                       Grid.Column="0"
+                                       Margin="0,0,0,8"
+                                       Source="ms-appx:///Assets/chat-in.png" />
+                                <TextBlock Grid.Row="1"
+                                           Grid.Column="1"
+                                           Margin="10,0,0,0"
+                                           Style="{StaticResource BodyTextBlockStyle}"
+                                           Text="{Binding QuestionsList.questions[0].text}"
+                                           TextWrapping="Wrap" />
+                                <Image Grid.Row="2"
+                                       Grid.Column="0"
+                                       Margin="0,0,0,8"
+                                       Source="ms-appx:///Assets/chat-out.png"
+                                       Visibility="{Binding QuestionsList.questions[0].answer,
+                                                            Converter={StaticResource NullToVisibilitConverter}}" />
+                                <TextBlock Grid.Row="2"
+                                           Grid.Column="1"
+                                           Margin="10,0,0,0"
+                                           Style="{StaticResource BodyTextBlockStyle}"
+                                           Text="{Binding QuestionsList.questions[0].answer.text}"
+                                           TextWrapping="Wrap"
+                                           Visibility="{Binding QuestionsList.questions[0].answer,
+                                                                Converter={StaticResource NullToVisibilitConverter}}" />
+                                <!--<Line Grid.Row="3"  Stroke="#7F000000" StrokeThickness="0.8" Grid.ColumnSpan="2" />
+                                    <Button Grid.Row="3" Grid.ColumnSpan="2" Content="Perguntar" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />-->
+                            </Grid>
+                        </Button>
+
+                    </StackPanel>
+                </Grid>
+            </ScrollViewer>
+        </Grid>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="AdaptiveVisualStateGroup">
                 <VisualState x:Name="VisualStateNarrow">
@@ -289,7 +770,7 @@
                 </VisualState>
                 <VisualState x:Name="VisualStateNormal">
                     <VisualState.StateTriggers>
-                        <windowsTriggers:DeviceFamilyStateTrigger DeviceFamily="Mobile"/>
+                        <windowsTriggers:DeviceFamilyStateTrigger DeviceFamily="Mobile" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <!--<Setter Target="FlipImage.MaxHeight" Value="300" />-->
@@ -302,274 +783,6 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        <Grid  x:Name="RootGrid" SizeChanged="RootGrid_SizeChanged">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-
-            <!--  page header  -->
-            <controls:PageHeader Content="Produto" Background="{StaticResource MercadoLivreBackgroundColor}" Foreground="{StaticResource MercadoLivreForegroundColor}">
-            </controls:PageHeader>
-
-
-            <!--  page content  -->
-            <ScrollViewer Grid.Row="1"  x:Name="ParallaxRoot" Visibility="{Binding ZoomMode, Converter={StaticResource InvertedBoolToVisibilityConverter}}"
-                      VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
-                <ScrollViewer.Transform3D>
-                    <media3D:PerspectiveTransform3D x:Name="PerspectiveTransform" />
-                </ScrollViewer.Transform3D>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition  />
-                    </Grid.RowDefinitions>
-
-                    <StackPanel Grid.Row="0"  Margin="0" Padding="0" x:Name="FlipImageWrap">
-                        
-                        <uwpControls:Carousel                              
-                              ItemsSource="{Binding ElementName=ThePage, Path=DataContext.SelectedProduct.pictures}"                              
-                              MaxItems="3"
-                              AspectRatio="1.5"
-                              AlignmentX="Center"
-                              MinHeight="240"
-                              MaxHeight="480"
-                              GradientOpacity="0.3"
-                              ItemClickCommand="{Binding OpenImage}">
-                            <!--<interactivity:Interaction.Behaviors>
-                                <core:EventTriggerBehavior EventName="Tapped">
-                                    <core:InvokeCommandAction Command="" CommandParameter="a" />
-                                </core:EventTriggerBehavior>
-                            </interactivity:Interaction.Behaviors>-->
-                            <uwpControls:Carousel.ContentTemplate>
-                                <DataTemplate x:DataType="models:Picture">
-                                    <Grid Background="Black">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="8*"/>
-                                            <RowDefinition Height="2*"/>
-                                        </Grid.RowDefinitions>
-                                        <uwpControls:ImageEx
-                                            Grid.RowSpan="2"
-                                            Source="{Binding url}"
-                                            Stretch="UniformToFill"
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"/>
-                                        <Grid Grid.Row="1">
-                                            <Grid.Background>
-                                                <SolidColorBrush
-                                                Color="Black"
-                                                Opacity="0.25" />
-                                            </Grid.Background>
-                                            <uwpControls:Virtualbox
-                                              VirtualWidth="640"
-                                              VirtualHeight="64">
-                                                <TextBlock
-                                                Margin="12,6"
-                                                Text="{Binding ElementName=ThePage,Path=DataContext.SelectedProduct.title}"
-                
-                                                VerticalAlignment="Center"
-                                                TextAlignment="Center"
-                                                TextWrapping="Wrap"
-                                                Foreground="#eee"/>
-                                            </uwpControls:Virtualbox>
-                                        </Grid>
-                                    </Grid>
-                                </DataTemplate>
-                            </uwpControls:Carousel.ContentTemplate>
-                        </uwpControls:Carousel>
-                        <uwpControls:Indicator
-                          ItemsSource="{Binding ItemsSource, ElementName=FlipImage2, Mode=TwoWay}"
-                          SelectedIndex="{Binding SelectedIndex, ElementName=FlipImage2, Mode=TwoWay}"
-                          Height="40"
-                          >
-                            <uwpControls:Indicator.ItemTemplate>
-                                <DataTemplate>
-                                    <Border
-                                        Width="12"
-                                        Height="8"
-                                        Background="Transparent"
-                                       
-                                        BorderThickness="1"/>
-                                </DataTemplate>
-                            </uwpControls:Indicator.ItemTemplate>
-
-                        </uwpControls:Indicator>
-
-                    </StackPanel>
-                    <StackPanel Grid.Row="1" Visibility="{Binding ZoomMode, Converter={StaticResource InvertedBoolToVisibilityConverter}}">
-                        <StackPanel.Background>
-                            <SolidColorBrush Color="{ThemeResource SystemChromeMediumLowColor}"/>
-                        </StackPanel.Background>
-                        <!--Titulo-->
-                        <TextBlock Text="{Binding SelectedProduct.title}" Style="{StaticResource SubtitleTextBlockStyle}" Margin="15,0" />
-
-                        <!--Valor-->
-                        <TextBlock Text="{Binding SelectedProduct.price, ConverterParameter=\{0:c2\}, Converter={StaticResource StringFormatConverter}}" Style="{StaticResource TitleTextBlockStyle}" Margin="15,10" />
-
-                        <!--Parcelamento-->
-                        <StackPanel Orientation="Horizontal" Visibility="{Binding SelectedProduct.installments, Converter={StaticResource NullToVisibilitConverter}}" Margin="15,10,15,5">
-                            <TextBlock Text="{Binding SelectedProduct.installments.quantity}" />
-                            <TextBlock Text="x" Margin="0,0,3,0" />
-                            <TextBlock Text="{Binding SelectedProduct.installments.amount, ConverterParameter=\{0:c2\}, Converter={StaticResource StringFormatConverter}}" />
-                        </StackPanel>
-
-                        <!--Envio (Frete gratis)-->
-                        <StackPanel Margin="15,5" Visibility="{Binding SelectedProduct.shipping.free_shipping, Converter={StaticResource BoolToVisibilityConverter}}">
-                            <StackPanel Orientation="Horizontal">
-                                <Grid Margin="0,0,5,0">
-                                    <Grid x:Name="backgroundGrid" Width="32" Height="32" Visibility="Visible">
-                                        <Ellipse x:Name="Fill" Visibility="Visible" Fill="{ThemeResource SystemControlBackgroundBaseLowBrush}" />
-                                    </Grid>
-                                    <Path Data="M24.700012,16.299988C26.400024,16.299988 27.800018,17.700012 27.800018,19.399963 27.800018,21.099976 26.400024,22.5 24.700012,22.5 23,22.5 21.600006,21.099976 21.600006,19.399963 21.600006,17.599976 23,16.299988 24.700012,16.299988z M8.7000122,16.299988C10.400024,16.299988 11.800018,17.700012 11.800018,19.399963 11.800018,21.099976 10.400024,22.5 8.7000122,22.5 7,22.5 5.6000061,21.099976 5.6000061,19.399963 5.6000061,17.599976 7,16.299988 8.7000122,16.299988z M22.700012,5.2999878L22.700012,10.599976 29.800018,10.599976C29.800018,10.299988,29.5,9.7999878,29.300018,9.5L26.5,5.5999756C26.5,5.5999756,26.200012,5.2999878,26,5.2999878z M20,2.7000122L26,2.7000122 32,10.700012 32,17.399963C32,18.099976,31.400024,18.700012,30.700012,18.700012L29.400024,18.700012C29.100006,16.399963 27.100006,14.599976 24.700012,14.599976 22.300018,14.599976 20.400024,16.399963 20,18.700012 19.300018,18.700012 18.700012,18.099976 18.700012,17.399963L18.700012,4C18.700012,3.2999878,19.300018,2.7000122,20,2.7000122z M0,0L17.300018,0 17.300018,18.700012 13.100006,18.700012C12.800018,16.5 10.900024,14.799988 8.6000061,14.799988 6.3000183,14.799988 4.5,16.5 4.1000061,18.700012L0,18.700012z" Stretch="Uniform" Width="18" Height="18" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5" Fill="{ThemeResource SystemControlForegroundBaseHighBrush}">
-                                        <Path.RenderTransform>
-                                            <TransformGroup>
-                                                <RotateTransform Angle="0" />
-                                                <ScaleTransform ScaleX="1" ScaleY="1" />
-                                            </TransformGroup>
-                                        </Path.RenderTransform>
-                                    </Path>
-                                </Grid>
-                                <TextBlock Text="Frete grátis para todo Brasil" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" VerticalAlignment="Center" />
-                            </StackPanel>
-                            <TextBlock Text="{Binding ShippingExcludeRegions}" Margin="38,0,0,0" />
-                        </StackPanel>
-                        <!--Envio (Frete pago)-->
-                        <Button Command="{Binding OpenShipping}" Style="{StaticResource ButtonStyle1}" Margin="15,10" HorizontalAlignment="Stretch" Background="{x:Null}"  Visibility="{Binding SelectedProduct.shipping.free_shipping, Converter={StaticResource InvertedBoolToVisibilityConverter}}" HorizontalContentAlignment="Left" Padding="0">
-                            <StackPanel Margin="0,10,0,0">
-                                <StackPanel Orientation="Horizontal">
-                                    <Grid Margin="0,0,5,0">
-                                        <Grid x:Name="backgroundGrid2" Width="32" Height="32" Visibility="Visible">
-                                            <Ellipse x:Name="Fill2" Visibility="Visible" Fill="{ThemeResource SystemControlBackgroundBaseLowBrush}" />
-                                        </Grid>
-                                        <Path Data="M24.700012,16.299988C26.400024,16.299988 27.800018,17.700012 27.800018,19.399963 27.800018,21.099976 26.400024,22.5 24.700012,22.5 23,22.5 21.600006,21.099976 21.600006,19.399963 21.600006,17.599976 23,16.299988 24.700012,16.299988z M8.7000122,16.299988C10.400024,16.299988 11.800018,17.700012 11.800018,19.399963 11.800018,21.099976 10.400024,22.5 8.7000122,22.5 7,22.5 5.6000061,21.099976 5.6000061,19.399963 5.6000061,17.599976 7,16.299988 8.7000122,16.299988z M22.700012,5.2999878L22.700012,10.599976 29.800018,10.599976C29.800018,10.299988,29.5,9.7999878,29.300018,9.5L26.5,5.5999756C26.5,5.5999756,26.200012,5.2999878,26,5.2999878z M20,2.7000122L26,2.7000122 32,10.700012 32,17.399963C32,18.099976,31.400024,18.700012,30.700012,18.700012L29.400024,18.700012C29.100006,16.399963 27.100006,14.599976 24.700012,14.599976 22.300018,14.599976 20.400024,16.399963 20,18.700012 19.300018,18.700012 18.700012,18.099976 18.700012,17.399963L18.700012,4C18.700012,3.2999878,19.300018,2.7000122,20,2.7000122z M0,0L17.300018,0 17.300018,18.700012 13.100006,18.700012C12.800018,16.5 10.900024,14.799988 8.6000061,14.799988 6.3000183,14.799988 4.5,16.5 4.1000061,18.700012L0,18.700012z" Stretch="Uniform" Width="18" Height="18" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5" Fill="{ThemeResource SystemControlForegroundBaseHighBrush}">
-                                            <Path.RenderTransform>
-                                                <TransformGroup>
-                                                    <RotateTransform Angle="0" />
-                                                    <ScaleTransform ScaleX="1" ScaleY="1" />
-                                                </TransformGroup>
-                                            </Path.RenderTransform>
-                                        </Path>
-                                    </Grid>
-                                    <TextBlock Text="Envio para todo Brasil" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" VerticalAlignment="Center" />
-                                </StackPanel>
-                                <TextBlock Text="{Binding ShippingExcludeRegions}" Margin="38,0,0,0" />
-                            </StackPanel>
-                        </Button>
-
-                        <!--Estado do produto-->
-                        <TextBlock Text="{Binding SelectedProduct.condition}" Margin="15,0" Visibility="Collapsed" />
-
-                        <!--Comprar-->
-                        <Button Content="Comprar" HorizontalAlignment="Stretch" Margin="15,10" Padding="8">
-                            <Button.Flyout>
-                                <MenuFlyout>
-                                    <MenuFlyoutItem Text="Pela web" Command="{Binding BuyItem}" CommandParameter="web" />
-                                    <MenuFlyoutItem Text="Pelo aplicativo" Command="{Binding BuyItem}" CommandParameter="app" />
-                                </MenuFlyout>
-                            </Button.Flyout>
-                        </Button>
-                        <TextBlock Margin="15,0">
-            				        <Run Text="{Binding SelectedProduct.sold_quantity}"/>
-            				        <Run Text=" vendidos" />
-                        </TextBlock>
-
-                        <!--Dados do vendedor-->
-                        <Button Command="{Binding DataContext.OpenOptions, ElementName=ThePage}" CommandParameter="seller_info" Style="{StaticResource ButtonStyle1}" Margin="15,10" HorizontalAlignment="Stretch" Background="{x:Null}" HorizontalContentAlignment="Left" Padding="0" VerticalAlignment="Stretch">
-                            <StackPanel Margin="0,0,0,10" Padding="8,0,0,5">
-                                <StackPanel.Background>
-                                    <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
-                                </StackPanel.Background>
-                                <TextBlock Text="Informações do vendedor" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,0,15,0" />
-                                <StackPanel Orientation="Horizontal"  Height="15" Margin="0,0,15,0">
-                                    <Rectangle Fill="#FFF00000" Width="50" Height="{Binding SellerInfo.seller_reputation.level_id, ConverterParameter=1_red, Converter={StaticResource ReputationHeightConverter}}" />
-                                    <Rectangle Fill="#FFF09800"  Width="50" Height="{Binding SellerInfo.seller_reputation.level_id, ConverterParameter=2_orange, Converter={StaticResource ReputationHeightConverter}}"/>
-                                    <Rectangle Fill="#FFFFE800"  Width="50" Height="{Binding SellerInfo.seller_reputation.level_id, ConverterParameter=3_yellow, Converter={StaticResource ReputationHeightConverter}}" />
-                                    <Rectangle Fill="#FFDCFF00"  Width="50" Height="{Binding SellerInfo.seller_reputation.level_id, ConverterParameter=4_light_green, Converter={StaticResource ReputationHeightConverter}}" />
-                                    <Rectangle Fill="#FF05DE2C"  Width="50" Height="{Binding SellerInfo.seller_reputation.level_id, ConverterParameter=5_green, Converter={StaticResource ReputationHeightConverter}}" />
-                                </StackPanel>
-
-                                <TextBlock Text="{Binding SellerInfo.seller_reputation.power_seller_status, Converter={StaticResource UserStatusConverter}}" Margin="0,0,15,0" />
-                                <StackPanel Orientation="Horizontal" Margin="0,5,15,0" >
-                                    <Path Data="M10.1,5C7.200008,5 4.8999911,7.1999969 4.8999911,10 4.8999911,12.800003 7.200008,15 10.1,15 12.999992,15 15.300009,12.800003 15.300009,10 15.300009,7.3000031 12.899986,5 10.1,5z M10.1,0C15.700003,0 20.2,4.3000031 20.2,9.6999969 20.2,11.600006 19.599994,13.300003 18.700002,14.800003L14.499991,23.300003 10.1,32 5.800015,23.300003 1.6000052,14.800003C0.60000567,13.300003 -4.7890353E-08,11.600006 0,9.6999969 -4.7890353E-08,4.3000031 4.4999972,0 10.1,0z" Stretch="Uniform" Fill="{ThemeResource SystemControlForegroundBaseMediumHighBrush}" Width="26" Height="26" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
-                                        <Path.RenderTransform>
-                                            <TransformGroup>
-                                                <RotateTransform Angle="0" />
-                                                <ScaleTransform ScaleX="1" ScaleY="1" />
-                                            </TransformGroup>
-                                        </Path.RenderTransform>
-                                    </Path>
-                                    <TextBlock Margin="15,0" >
-            				                    <Run Text="{Binding SellerInfo.address.city}" />
-            				                    <Run Text="," />
-            				                    <Run Text="{Binding SellerInfo.address.state}" />
-                                    </TextBlock>
-                                </StackPanel>
-                            </StackPanel>
-                        </Button>
-
-                        <!--Descrição do produto-->
-                        <Button Command="{Binding DataContext.OpenOptions, ElementName=ThePage}" CommandParameter="product_description" Style="{StaticResource ButtonStyle1}" Margin="15,10" HorizontalAlignment="Stretch" Background="{x:Null}" HorizontalContentAlignment="Left" Padding="0">
-                            <Grid Padding="8,0,0,10">
-                                <Grid.Background>
-                                    <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
-                                </Grid.Background>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="Descrição" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,0,0,10"/>
-                                <Ellipse Width="80" Grid.Column="0" Height="80" Grid.Row="1">
-                                    <Ellipse.Fill>
-                                        <ImageBrush>
-                                            <ImageBrush.ImageSource>
-                                                <BitmapImage DecodePixelHeight="80" DecodePixelWidth="80" UriSource="{Binding SelectedProduct.thumbnail}" />
-                                            </ImageBrush.ImageSource>
-                                        </ImageBrush>
-                                    </Ellipse.Fill>
-                                </Ellipse>
-                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding SelectedProduct.title}" VerticalAlignment="Center" Margin="10,0,0,0" TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}" />
-                            </Grid>
-                        </Button>
-
-                        <!--Perguntas-->
-                        <Button Command="{Binding DataContext.OpenOptions, ElementName=ThePage}" CommandParameter="questions" Style="{StaticResource ButtonStyle1}" Margin="15,10" HorizontalAlignment="Stretch" Background="{x:Null}"  Visibility="{Binding HasQuestions, Converter={StaticResource BoolToVisibilityConverter}}" HorizontalContentAlignment="Left" Padding="0">
-                            <Grid Padding="8,0,0,10">
-                                <Grid.Background>
-                                    <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
-                                </Grid.Background>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                    <!--<RowDefinition/>-->
-                                </Grid.RowDefinitions>
-                                <TextBlock Grid.ColumnSpan="2" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,0,0,10">
-                                                <Run Text="Perguntas" />
-                                                <Run Text="(" />
-                                                <Run Text="{Binding Questions}"/>
-                                                <Run Text=")" />
-                                </TextBlock>
-                                <Image Grid.Row="1" Source="ms-appx:///Assets/chat-in.png" Grid.Column="0" Margin="0,0,0,8" />
-                                <TextBlock Text="{Binding QuestionsList.questions[0].text}" Grid.Row="1" Grid.Column="1" TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}" Margin="10,0,0,0"/>
-                                <Image Visibility="{Binding QuestionsList.questions[0].answer, Converter={StaticResource NullToVisibilitConverter}}" Source="ms-appx:///Assets/chat-out.png"  Grid.Row="2" Grid.Column="0" Margin="0,0,0,8" />
-                                <TextBlock Visibility="{Binding QuestionsList.questions[0].answer, Converter={StaticResource NullToVisibilitConverter}}" Text="{Binding QuestionsList.questions[0].answer.text}" Grid.Column="1" Grid.Row="2" TextWrapping="Wrap"  Style="{StaticResource BodyTextBlockStyle}" Margin="10,0,0,0"/>
-                                <!--<Line Grid.Row="3"  Stroke="#7F000000" StrokeThickness="0.8" Grid.ColumnSpan="2" />
-                                    <Button Grid.Row="3" Grid.ColumnSpan="2" Content="Perguntar" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />-->
-                            </Grid>
-                        </Button>
-
-                    </StackPanel>
-                </Grid>
-            </ScrollViewer>
-        </Grid>
     </Grid>
 </Page>
 

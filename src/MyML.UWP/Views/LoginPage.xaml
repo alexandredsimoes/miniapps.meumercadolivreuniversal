@@ -2,21 +2,50 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:Behaviors="using:Template10.Behaviors"
-      xmlns:MyBehavior="using:MyML.UWP.Behaviors"
       xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
       xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+      xmlns:MyBehavior="using:MyML.UWP.Behaviors"
       xmlns:controls="using:Template10.Controls"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="using:MyML.UWP.Views"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:vm="using:MyML.UWP.ViewModels" mc:Ignorable="d"
-      x:Name="This">
+      xmlns:vm="using:MyML.UWP.ViewModels"
+      x:Name="This"
+      mc:Ignorable="d">
 
     <Page.DataContext>
-        <Binding Source="{StaticResource Locator}" Path="LoginPage" />
+        <Binding Path="LoginPage" Source="{StaticResource Locator}" />
     </Page.DataContext>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <!--  page header  -->
+        <controls:PageHeader x:Uid="LoginPagePageHeader"
+                             Background="{StaticResource MercadoLivreBackgroundColor}"
+                             Content="Autenticação"
+                             Foreground="{StaticResource MercadoLivreForegroundColor}">
+            <!--<controls:PageHeader.Foreground>
+                <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
+            </controls:PageHeader.Foreground>
+            <controls:PageHeader.Background>
+                <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
+            </controls:PageHeader.Background>-->
+            <!--<controls:PageHeader.PrimaryCommands>
+                <AppBarButton Label="Sair" Command="{Binding RevokeAccess}" Icon="Clear" />
+            </controls:PageHeader.PrimaryCommands>-->
+        </controls:PageHeader>
+
+        <!--  page content  -->
+        <WebView x:Name="LoginWebview"
+                 Grid.Row="2"
+                 Margin="0,0,0,25"
+                 MyBehavior:WebBrowserHelper.Url="{Binding ElementName=This,
+                                                           Path=DataContext.NavigationUrl}" />
 
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="AdaptiveVisualStateGroup">
@@ -46,30 +75,6 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-
-        <!--  page header  -->
-        <controls:PageHeader Content="Autenticação" x:Uid="PageTitleHeader" Background="{StaticResource MercadoLivreBackgroundColor}" Foreground="{StaticResource MercadoLivreForegroundColor}">
-            <!--<controls:PageHeader.Foreground>
-                <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
-            </controls:PageHeader.Foreground>
-            <controls:PageHeader.Background>
-                <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
-            </controls:PageHeader.Background>-->
-            <!--<controls:PageHeader.PrimaryCommands>
-                <AppBarButton Label="Sair" Command="{Binding RevokeAccess}" Icon="Clear" />
-            </controls:PageHeader.PrimaryCommands>-->
-        </controls:PageHeader>
-
-        <!--  page content  -->
-        <WebView MyBehavior:WebBrowserHelper.Url="{Binding ElementName=This, Path=DataContext.NavigationUrl}" x:Name="LoginWebview" Grid.Row="2" Margin="0,0,0,25">
-            
-        </WebView>
     </Grid>
 </Page>
 

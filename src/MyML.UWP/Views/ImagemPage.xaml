@@ -1,22 +1,19 @@
-﻿<Page
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    
-    xmlns:local="using:MyML.UWP.Views"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:controls="using:Template10.Controls"
-    xmlns:converters="using:MyML.UWP.Converters"
-    xmlns:designViewModels="using:MyML.UWP.ViewModels.Design"
-    xmlns:uwp="using:AppStudio.Uwp.Controls"
-    x:Class="MyML.UWP.Views.ImagemPage"
-    mc:Ignorable="d"
-    d:DataContext="{d:DesignInstance designViewModels:BuscaPageDesignViewModel, IsDesignTimeCreatable=True}"
-    x:Name="This">
+﻿<Page x:Class="MyML.UWP.Views.ImagemPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:controls="using:Template10.Controls"
+      xmlns:converters="using:MyML.UWP.Converters"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:designViewModels="using:MyML.UWP.ViewModels.Design"
+      xmlns:local="using:MyML.UWP.Views"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:uwp="using:AppStudio.Uwp.Controls"
+      x:Name="This"
+      d:DataContext="{d:DesignInstance designViewModels:BuscaPageDesignViewModel,
+                                       IsDesignTimeCreatable=True}"
+      mc:Ignorable="d">
 
-    <Page.Resources>
-        
-    </Page.Resources>
+    <Page.Resources />
 
 
 
@@ -27,12 +24,20 @@
         </Grid.RowDefinitions>
 
         <!--  page header  -->
-        <controls:PageHeader Content="Imagem" Background="{StaticResource MercadoLivreBackgroundColor}" Foreground="{StaticResource MercadoLivreForegroundColor}">
+        <controls:PageHeader x:Uid="ImagemPagePageHeader"
+                             Background="{StaticResource MercadoLivreBackgroundColor}"
+                             Content="Imagem"
+                             Foreground="{StaticResource MercadoLivreForegroundColor}">
             <!--<controls:PageHeader.PrimaryCommands>
                 <AppBarButton Icon="Accept"></AppBarButton>
             </controls:PageHeader.PrimaryCommands>-->
         </controls:PageHeader>
-        <ScrollViewer Grid.Row="1" ZoomMode="Enabled" Margin="10" VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Auto" HorizontalScrollMode="Enabled" >
+        <ScrollViewer Grid.Row="1"
+                      Margin="10"
+                      HorizontalScrollMode="Enabled"
+                      VerticalScrollBarVisibility="Auto"
+                      VerticalScrollMode="Enabled"
+                      ZoomMode="Enabled">
             <uwp:ImageEx x:Name="ImageExDetalhe" />
         </ScrollViewer>
     </Grid>

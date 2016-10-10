@@ -1,22 +1,23 @@
-﻿<Page
-    x:Class="MyML.UWP.Views.ProdutoPerguntasPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:MyML.UWP.Views"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    xmlns:Behaviors="using:Template10.Behaviors"
-    xmlns:MyBehaviors="using:MyML.UWP.Behaviors"
-    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
-    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
-    xmlns:controls="using:Template10.Controls"
-    xmlns:converters="using:MyML.UWP.Converters"
-    xmlns:convertersML="using:MyML.UWP.Converters.MercadoLivre"
-    xmlns:designViewModels="using:MyML.UWP.ViewModels.Design"
-    xmlns:uc="using:MyML.UWP.Usercontrols"
-    d:DataContext="{d:DesignInstance designViewModels:BuscaPageDesignViewModel, IsDesignTimeCreatable=True}"    
-    DataContext="{Binding Source={StaticResource Locator}, Path=ProdutoPerguntasPage}">
+﻿<Page x:Class="MyML.UWP.Views.ProdutoPerguntasPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:Behaviors="using:Template10.Behaviors"
+      xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+      xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+      xmlns:MyBehaviors="using:MyML.UWP.Behaviors"
+      xmlns:controls="using:Template10.Controls"
+      xmlns:converters="using:MyML.UWP.Converters"
+      xmlns:convertersML="using:MyML.UWP.Converters.MercadoLivre"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:designViewModels="using:MyML.UWP.ViewModels.Design"
+      xmlns:local="using:MyML.UWP.Views"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:uc="using:MyML.UWP.Usercontrols"
+      d:DataContext="{d:DesignInstance designViewModels:BuscaPageDesignViewModel,
+                                       IsDesignTimeCreatable=True}"
+      DataContext="{Binding Source={StaticResource Locator},
+                            Path=ProdutoPerguntasPage}"
+      mc:Ignorable="d">
     <Page.Resources>
         <converters:BoolToVisibilityConverter x:Name="BoolToVisibilityConverter" />
         <converters:InvertedBoolToVisibilityConverter x:Name="InvertedBoolToVisibilityConverter" />
@@ -24,6 +25,119 @@
 
     </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <!--  page header  -->
+        <controls:PageHeader x:Uid="ProdutoPerguntasPagePageHeader"
+                             Background="{StaticResource MercadoLivreBackgroundColor}"
+                             Content="Perguntas ao vendedor"
+                             Foreground="{StaticResource MercadoLivreForegroundColor}">
+            <!--<controls:PageHeader.Foreground>
+                <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
+            </controls:PageHeader.Foreground>
+            <controls:PageHeader.Background>
+                <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
+            </controls:PageHeader.Background>-->
+        </controls:PageHeader>
+        <Grid Grid.Row="1" Margin="15">
+            <ListView ItemsSource="{Binding Items}">
+                <ListView.Resources>
+                    <Style x:Key="ListViewItemStyle1" TargetType="ListViewItem">
+                        <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
+                        <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
+                        <Setter Property="Background" Value="Transparent" />
+                        <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
+                        <Setter Property="TabNavigation" Value="Local" />
+                        <Setter Property="IsHoldingEnabled" Value="True" />
+                        <Setter Property="Padding" Value="12,0,12,0" />
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        <Setter Property="VerticalContentAlignment" Value="Center" />
+                        <Setter Property="MinWidth" Value="{ThemeResource ListViewItemMinWidth}" />
+                        <Setter Property="MinHeight" Value="{ThemeResource ListViewItemMinHeight}" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListViewItem">
+                                    <ListViewItemPresenter HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                           VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                           CheckBoxBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"
+                                                           CheckBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"
+                                                           CheckMode="Inline"
+                                                           ContentMargin="{TemplateBinding Padding}"
+                                                           ContentTransitions="{TemplateBinding ContentTransitions}"
+                                                           DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}"
+                                                           DragBackground="{ThemeResource ListViewItemDragBackgroundThemeBrush}"
+                                                           DragForeground="{ThemeResource ListViewItemDragForegroundThemeBrush}"
+                                                           DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}"
+                                                           FocusBorderBrush="{ThemeResource SystemControlForegroundAltHighBrush}"
+                                                           FocusSecondaryBorderBrush="{ThemeResource SystemControlForegroundBaseHighBrush}"
+                                                           PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}"
+                                                           PointerOverForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}"
+                                                           ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}"
+                                                           SelectedForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}"
+                                                           SelectionCheckMarkVisualEnabled="True" />
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListView.Resources>
+                <ListView.ItemContainerStyle>
+                    <StaticResource ResourceKey="ListViewItemStyle1" />
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="0,0,0,5"
+                                BorderBrush="#300E0D0D"
+                                BorderThickness="0,0,0,1">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+
+                                <Grid Margin="0,0,0,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Image Grid.Column="0"
+                                           VerticalAlignment="Top"
+                                           Source="ms-appx:///Assets/chat-in.png"
+                                           Stretch="None" />
+                                    <TextBlock x:Name="PerguntaTextBlock"
+                                               Grid.Column="1"
+                                               Margin="15,0,0,0"
+                                               Style="{StaticResource BodyTextBlockStyle}"
+                                               Text="{Binding text}"
+                                               TextWrapping="Wrap" />
+                                </Grid>
+                                <Grid Grid.Row="1"
+                                      Margin="0,0,0,10"
+                                      Visibility="{Binding answer,
+                                                           Converter={StaticResource NullToVisibilitConverter}}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Image Grid.Column="0"
+                                           VerticalAlignment="Top"
+                                           Source="ms-appx:///Assets/chat-out.png"
+                                           Stretch="None" />
+                                    <TextBlock x:Name="RespostaTextBlock"
+                                               Grid.Column="1"
+                                               Margin="15,0,0,0"
+                                               Style="{StaticResource BodyTextBlockStyle}"
+                                               Text="{Binding answer.text}"
+                                               TextWrapping="Wrap" />
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="AdaptiveVisualStateGroup">
                 <VisualState x:Name="VisualStateNarrow">
@@ -52,77 +166,5 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition  />
-        </Grid.RowDefinitions>
-
-        <!--  page header  -->
-        <controls:PageHeader Content="Perguntas ao vendedor" Background="{StaticResource MercadoLivreBackgroundColor}" Foreground="{StaticResource MercadoLivreForegroundColor}">
-            <!--<controls:PageHeader.Foreground>
-                <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
-            </controls:PageHeader.Foreground>
-            <controls:PageHeader.Background>
-                <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
-            </controls:PageHeader.Background>-->
-        </controls:PageHeader>
-        <Grid Margin="15" Grid.Row="1">
-            <ListView Grid.Row="1" ItemsSource="{Binding Items}">
-                <ListView.Resources>
-                    <Style x:Key="ListViewItemStyle1" TargetType="ListViewItem">
-                        <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
-                        <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
-                        <Setter Property="TabNavigation" Value="Local"/>
-                        <Setter Property="IsHoldingEnabled" Value="True"/>
-                        <Setter Property="Padding" Value="12,0,12,0"/>
-                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                        <Setter Property="VerticalContentAlignment" Value="Center"/>
-                        <Setter Property="MinWidth" Value="{ThemeResource ListViewItemMinWidth}"/>
-                        <Setter Property="MinHeight" Value="{ThemeResource ListViewItemMinHeight}"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="ListViewItem">
-                                    <ListViewItemPresenter CheckBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}" ContentMargin="{TemplateBinding Padding}" CheckMode="Inline" ContentTransitions="{TemplateBinding ContentTransitions}" CheckBoxBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}" DragForeground="{ThemeResource ListViewItemDragForegroundThemeBrush}" DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}" DragBackground="{ThemeResource ListViewItemDragBackgroundThemeBrush}" DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}" FocusBorderBrush="{ThemeResource SystemControlForegroundAltHighBrush}" FocusSecondaryBorderBrush="{ThemeResource SystemControlForegroundBaseHighBrush}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" PointerOverForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}" PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}" ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}" SelectionCheckMarkVisualEnabled="True" SelectedForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </ListView.Resources>
-                <ListView.ItemContainerStyle>
-                    <StaticResource ResourceKey="ListViewItemStyle1"/>
-                </ListView.ItemContainerStyle>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Border BorderBrush="#300E0D0D" BorderThickness="0,0,0,1" Margin="0,0,0,5">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
-
-                                <Grid Margin="0,0,0,10">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <Image Grid.Column="0" Source="ms-appx:///Assets/chat-in.png" Stretch="None" VerticalAlignment="Top" />
-                                    <TextBlock x:Name="PerguntaTextBlock" Text="{Binding text}" Style="{StaticResource BodyTextBlockStyle}"  TextWrapping="Wrap" Grid.Column="1" Margin="15,0,0,0"/>
-                                </Grid>
-                                <Grid Grid.Row="1"  Margin="0,0,0,10" Visibility="{Binding answer, Converter={StaticResource NullToVisibilitConverter}}">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <Image Grid.Column="0" Source="ms-appx:///Assets/chat-out.png" Stretch="None" VerticalAlignment="Top" />
-                                    <TextBlock x:Name="RespostaTextBlock" Text="{Binding answer.text}" Style="{StaticResource BodyTextBlockStyle}"  TextWrapping="Wrap" Grid.Column="1"  Margin="15,0,0,0" />
-                                </Grid>
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </Grid>
     </Grid>
 </Page>

@@ -428,8 +428,8 @@
                                 RelativePanel.Below="AdultContentToggleSwitch"
                                 Visibility="Visible">
                             <StackPanel>
-                                <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="Ativar notificações" />
-                                <TextBlock Text="Use apenas se não estiver recebendo notificações" TextWrapping="Wrap" />
+                                <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="Ativar notificações" x:Uid="ReceiveNotificationsToggleSwitchTitle" />
+                                <TextBlock Text="Use apenas se não estiver recebendo notificações" TextWrapping="Wrap" x:Uid="ReceiveNotificationsToggleSwitchSubTitle"/>
                             </StackPanel>
                         </Button>
                         <TextBlock RelativePanel.Below="ReceiveNotificationsToggleSwitch"
@@ -466,6 +466,7 @@
                         <ComboBox Header="Selecione um país"
                                   Margin="0,10,0,0"
                                   x:Name="CountriesComboBox"
+                                  x:Uid="SettingsPageCountriesComboBox"
                                   ItemsSource="{Binding Countries}"
                                   RelativePanel.Below="ReceiveNotificationsToggleSwitch"
                                   SelectedValuePath="id"

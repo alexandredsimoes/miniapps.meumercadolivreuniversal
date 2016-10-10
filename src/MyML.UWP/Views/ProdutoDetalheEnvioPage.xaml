@@ -1,42 +1,60 @@
-﻿<Page
-    x:Class="MyML.UWP.Views.ProdutoDetalheEnvioPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:MyML.UWP.Views"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    xmlns:Behaviors="using:Template10.Behaviors"
-    xmlns:MyBehaviors="using:MyML.UWP.Behaviors"
-    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
-    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
-    xmlns:controls="using:Template10.Controls"
-    xmlns:converters="using:MyML.UWP.Converters"
-    xmlns:convertersML="using:MyML.UWP.Converters.MercadoLivre"
-    xmlns:designViewModels="using:MyML.UWP.ViewModels.Design"
-    xmlns:uc="using:MyML.UWP.Usercontrols"
-    d:DataContext="{d:DesignInstance designViewModels:BuscaPageDesignViewModel, IsDesignTimeCreatable=True}"    
-    DataContext="{Binding Source={StaticResource Locator}, Path=ProdutoDetalheEnvioPage}">
+﻿<Page x:Class="MyML.UWP.Views.ProdutoDetalheEnvioPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:Behaviors="using:Template10.Behaviors"
+      xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+      xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+      xmlns:MyBehaviors="using:MyML.UWP.Behaviors"
+      xmlns:controls="using:Template10.Controls"
+      xmlns:converters="using:MyML.UWP.Converters"
+      xmlns:convertersML="using:MyML.UWP.Converters.MercadoLivre"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:designViewModels="using:MyML.UWP.ViewModels.Design"
+      xmlns:local="using:MyML.UWP.Views"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:uc="using:MyML.UWP.Usercontrols"
+      d:DataContext="{d:DesignInstance designViewModels:BuscaPageDesignViewModel,
+                                       IsDesignTimeCreatable=True}"
+      DataContext="{Binding Source={StaticResource Locator},
+                            Path=ProdutoDetalheEnvioPage}"
+      mc:Ignorable="d">
     <Page.Resources>
         <converters:NullToVisibilitConverter x:Name="NullToVisibilitConverter" />
         <converters:StringFormatConverter x:Name="StringFormatConverter" />
 
         <Style x:Key="ListViewItemStyle1" TargetType="ListViewItem">
-            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
-            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
-            <Setter Property="TabNavigation" Value="Local"/>
-            <Setter Property="IsHoldingEnabled" Value="True"/>
-            <Setter Property="Padding" Value="0"/>
-            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="MinWidth" Value="{ThemeResource ListViewItemMinWidth}"/>
-            <Setter Property="MinHeight" Value="{ThemeResource ListViewItemMinHeight}"/>
+            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
+            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
+            <Setter Property="TabNavigation" Value="Local" />
+            <Setter Property="IsHoldingEnabled" Value="True" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="MinWidth" Value="{ThemeResource ListViewItemMinWidth}" />
+            <Setter Property="MinHeight" Value="{ThemeResource ListViewItemMinHeight}" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListViewItem">
-                        <ListViewItemPresenter CheckBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}" ContentMargin="{TemplateBinding Padding}" CheckMode="Inline" ContentTransitions="{TemplateBinding ContentTransitions}" CheckBoxBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}" DragForeground="{ThemeResource ListViewItemDragForegroundThemeBrush}" DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}" DragBackground="{ThemeResource ListViewItemDragBackgroundThemeBrush}" DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}" FocusBorderBrush="{ThemeResource SystemControlForegroundAltHighBrush}" FocusSecondaryBorderBrush="{ThemeResource SystemControlForegroundBaseHighBrush}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" PointerOverForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}" PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}" ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}" SelectionCheckMarkVisualEnabled="True" SelectedForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        <ListViewItemPresenter HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                               VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                               CheckBoxBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"
+                                               CheckBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"
+                                               CheckMode="Inline"
+                                               ContentMargin="{TemplateBinding Padding}"
+                                               ContentTransitions="{TemplateBinding ContentTransitions}"
+                                               DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}"
+                                               DragBackground="{ThemeResource ListViewItemDragBackgroundThemeBrush}"
+                                               DragForeground="{ThemeResource ListViewItemDragForegroundThemeBrush}"
+                                               DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}"
+                                               FocusBorderBrush="{ThemeResource SystemControlForegroundAltHighBrush}"
+                                               FocusSecondaryBorderBrush="{ThemeResource SystemControlForegroundBaseHighBrush}"
+                                               PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}"
+                                               PointerOverForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}"
+                                               ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}"
+                                               SelectedForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}"
+                                               SelectionCheckMarkVisualEnabled="True" />
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -44,6 +62,101 @@
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <!--  page header  -->
+        <controls:PageHeader x:Uid="ProdutoDetalheEnvioPagePageHeader"
+                             Background="{StaticResource MercadoLivreBackgroundColor}"
+                             Content="Forma de envio"
+                             Foreground="{StaticResource MercadoLivreForegroundColor}">
+            <!--<controls:PageHeader.Foreground>
+                <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
+            </controls:PageHeader.Foreground>
+            <controls:PageHeader.Background>
+                <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
+            </controls:PageHeader.Background>-->
+        </controls:PageHeader>
+        <StackPanel Grid.Row="1" Margin="15">
+            <TextBlock x:Uid="ProdutoDetalheEnvioPageInserirCepTextBlock"
+                       Style="{StaticResource TitleTextBlockStyle}"
+                       Text="Insira seu CEP" />
+            <TextBlock x:Uid="ProdutoDetalheEnvioPageDescricaoCep"
+                       Style="{StaticResource BodyTextBlockStyle}"
+                       Text="Assim você poderá calular o custo de envio e conhecer os serviços disponíveis." />
+
+            <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                <TextBox MinWidth="150"
+                         Margin="0,0,10,0"
+                         InputScope="Number"
+                         PlaceholderText="Ex: 12345678"
+                         Text="{Binding ZipCode,
+                                        Mode=TwoWay}" />
+                <Button x:Uid="ProdutoDetalheEnvioPageCalcularButton"
+                        Command="{Binding CalculateShipping}"
+                        Content="Calcular" />
+            </StackPanel>
+
+            <ListView Margin="0,15,0,0"
+                      HorizontalContentAlignment="Stretch"
+                      VerticalContentAlignment="Stretch"
+                      ItemContainerStyle="{StaticResource ListViewItemStyle1}"
+                      ItemsSource="{Binding ShippingInfo.options}"
+                      Visibility="{Binding ShippingInfo,
+                                           Converter={StaticResource NullToVisibilitConverter}}">
+                <ListView.HeaderTemplate>
+                    <DataTemplate>
+                        <TextBlock Margin="0,0,0,5"
+                                   FontWeight="Bold"
+                                   TextWrapping="Wrap">
+                            <Run x:Uid="ProdutoDetalheEnvioPageFreteTextBlock" Text="Frete para seu endereço:" />
+                            <Run Text="{Binding ShippingInfo.destination.city.name}" />
+                            <Run Text="(" />
+                            <Run Text="{Binding ShippingInfo.destination.state.name}" />
+                            <Run Text=")" />
+                        </TextBlock>
+                    </DataTemplate>
+                </ListView.HeaderTemplate>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="5" Padding="10">
+                            <Border.Background>
+                                <SolidColorBrush Color="{ThemeResource SystemChromeLowColor}" />
+                            </Border.Background>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <TextBlock Text="{Binding name}" />
+                                <TextBlock Grid.RowSpan="2"
+                                           Grid.Column="1"
+                                           HorizontalAlignment="Right"
+                                           VerticalAlignment="Center"
+                                           FontWeight="Bold"
+                                           Foreground="#FFF30A0A"
+                                           Style="{StaticResource SubtitleTextBlockStyle}"
+                                           Text="{Binding cost,
+                                                          Converter={StaticResource StringFormatConverter},
+                                                          ConverterParameter=\{0:c2\}}" />
+                                <TextBlock Grid.Row="1"
+                                           Grid.ColumnSpan="2"
+                                           Margin="0,5,0,0">
+                                    <Run Text="Chegara na " />
+                                    <Run Text="{Binding estimated_delivery.date, Converter={StaticResource StringFormatConverter}, ConverterParameter=\{0:dddd dd MMMM\}}" />
+                                </TextBlock>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="AdaptiveVisualStateGroup">
                 <VisualState x:Name="VisualStateNarrow">
@@ -72,70 +185,6 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-
-        <!--  page header  -->
-        <controls:PageHeader Content="Forma de envio" Background="{StaticResource MercadoLivreBackgroundColor}" Foreground="{StaticResource MercadoLivreForegroundColor}">
-            <!--<controls:PageHeader.Foreground>
-                <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
-            </controls:PageHeader.Foreground>
-            <controls:PageHeader.Background>
-                <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
-            </controls:PageHeader.Background>-->
-        </controls:PageHeader>
-        <StackPanel Grid.Row="1" Margin="15">
-            <TextBlock Text="Insira seu CEP" Style="{StaticResource TitleTextBlockStyle}" />
-            <TextBlock Text="Assim você poderá calular o custo de envio e conhecer os serviços disponíveis." Style="{StaticResource BodyTextBlockStyle}" />
-
-            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                <TextBox Text="{Binding ZipCode, Mode=TwoWay}" PlaceholderText="Ex: 12345678" InputScope="Number" Margin="0,0,10,0" MinWidth="150"/>
-                <Button Content="Calcular" Command="{Binding CalculateShipping}"/>
-            </StackPanel>
-
-            <ListView Visibility="{Binding ShippingInfo, Converter={StaticResource NullToVisibilitConverter}}" ItemContainerStyle="{StaticResource ListViewItemStyle1}" Margin="0,15,0,0" ItemsSource="{Binding ShippingInfo.options}" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
-                <ListView.HeaderTemplate>
-                    <DataTemplate>
-                        <TextBlock FontWeight="Bold" TextWrapping="Wrap" Margin="0,0,0,5">
-                            <Run Text="Frete para seu endereço:" />
-                            <Run Text="{Binding ShippingInfo.destination.city.name}" />
-                            <Run Text="(" />
-                            <Run Text="{Binding ShippingInfo.destination.state.name}" />
-                            <Run Text=")" />
-                        </TextBlock>
-                    </DataTemplate>
-                </ListView.HeaderTemplate>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Border Padding="10" Margin="5">
-                            <Border.Background>
-                                <SolidColorBrush Color="{ThemeResource SystemChromeLowColor}"/>
-                            </Border.Background>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition />
-                                    <ColumnDefinition />
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition />
-                                    <RowDefinition />
-                                </Grid.RowDefinitions>
-                                <TextBlock Text="{Binding name}" />
-                                <TextBlock Grid.Column="1" Text="{Binding cost, Converter={StaticResource StringFormatConverter}, ConverterParameter=\{0:c2\}}" HorizontalAlignment="Right" Style="{StaticResource SubtitleTextBlockStyle}" Foreground="#FFF30A0A" Grid.RowSpan="2" VerticalAlignment="Center" FontWeight="Bold" />
-                                <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Margin="0,5,0,0">
-                                    <Run Text="Chegara na " />
-                                    <Run Text="{Binding estimated_delivery.date, Converter={StaticResource StringFormatConverter}, ConverterParameter=\{0:dddd dd MMMM\}}" />
-                                </TextBlock>
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackPanel>
-
-
     </Grid>
 
 </Page>

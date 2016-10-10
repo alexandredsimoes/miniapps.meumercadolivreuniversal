@@ -504,4 +504,202 @@
   <data name="ConfigurationPageCompraNaoEfetuada" xml:space="preserve">
     <value>Não foi possível finalizar a compra</value>
   </data>
+  <data name="AdultContentToggleSwitch.Header" xml:space="preserve">
+    <value>Permitir pesquisas de conteúdo adulto</value>
+  </data>
+  <data name="AdultContentToggleSwitch.OffContent" xml:space="preserve">
+    <value>Não permitir</value>
+  </data>
+  <data name="AdultContentToggleSwitch.OnContent" xml:space="preserve">
+    <value>Permitir</value>
+  </data>
+  <data name="BuscaFilterPageFiltrosTextBlock.Text" xml:space="preserve">
+    <value>Filtros</value>
+  </data>
+  <data name="BuscaFilterPageOrdenacaoTextBlock.Text" xml:space="preserve">
+    <value>Ordenações</value>
+  </data>
+  <data name="BuscaFilterPagePageHeaderTitle.Content" xml:space="preserve">
+    <value>Filtros e Ordenações</value>
+  </data>
+  <data name="BuscaPageFilterApplyFilterButton.Label" xml:space="preserve">
+    <value>Aplicar</value>
+  </data>
+  <data name="BuscaPageHeaderTitle.Content" xml:space="preserve">
+    <value>Busca</value>
+  </data>
+  <data name="ImagemPagePageHeader.Content" xml:space="preserve">
+    <value>Imagem</value>
+  </data>
+  <data name="LoginPagePageHeader.Content" xml:space="preserve">
+    <value>Autenticação</value>
+  </data>
+  <data name="MainPagePrivacidadeButton.Label" xml:space="preserve">
+    <value>Privacidade</value>
+  </data>
+  <data name="MainPageSairButton.Label" xml:space="preserve">
+    <value>Sair</value>
+  </data>
+  <data name="MainPageSearchBox.PlaceholderText" xml:space="preserve">
+    <value>O que deseja procurar hoje?</value>
+  </data>
+  <data name="MainPageSobreButton.Label" xml:space="preserve">
+    <value>Sobre</value>
+  </data>
+  <data name="PerguntarPageEnviarPerguntaButton.Label" xml:space="preserve">
+    <value>Perguntar</value>
+  </data>
+  <data name="PerguntarPagePageHeader.Content" xml:space="preserve">
+    <value>Perguntas</value>
+  </data>
+  <data name="PerguntarPagePerguntarTextBlock.PlaceholderText" xml:space="preserve">
+    <value>Escreva aqui sua pergunta</value>
+  </data>
+  <data name="ProdutoDescricaoPagePageHeader.Content" xml:space="preserve">
+    <value>Descrição do anúncio</value>
+  </data>
+  <data name="ProdutoDetalheEnvioPageCalcularButton.Content" xml:space="preserve">
+    <value>Calcular</value>
+  </data>
+  <data name="ProdutoDetalheEnvioPageDescricaoCep.Text" xml:space="preserve">
+    <value>Assim você poderá calular o custo de envio e conhecer os serviços disponíveis.</value>
+  </data>
+  <data name="ProdutoDetalheEnvioPageFreteTextBlock.Text" xml:space="preserve">
+    <value>Frete para seu endereço:</value>
+  </data>
+  <data name="ProdutoDetalheEnvioPageInserirCepTextBlock.Text" xml:space="preserve">
+    <value>Insira seu CEP</value>
+  </data>
+  <data name="ProdutoDetalheEnvioPagePageHeader.Content" xml:space="preserve">
+    <value>Forma de envio</value>
+  </data>
+  <data name="ProdutoDetalhePageButtonCompartilhar.Label" xml:space="preserve">
+    <value>compartilhar</value>
+  </data>
+  <data name="ProdutoDetalhePageButtonComprar.Content" xml:space="preserve">
+    <value>Comprar</value>
+  </data>
+  <data name="ProdutoDetalhePageButtonCopiarLink.Label" xml:space="preserve">
+    <value>copiar link do anúncio</value>
+  </data>
+  <data name="ProdutoDetalhePageButtonMore.Label" xml:space="preserve">
+    <value>outros produtos do vendedor</value>
+  </data>
+  <data name="ProdutoDetalhePageButtonPerguntar.Label" xml:space="preserve">
+    <value>perguntar</value>
+  </data>
+  <data name="ProdutoDetalhePageFavoritoButton.Label" xml:space="preserve">
+    <value>favorito</value>
+  </data>
+  <data name="ProdutoDetalhePageMenuItemApp.Text" xml:space="preserve">
+    <value>pelo aplicativo</value>
+  </data>
+  <data name="ProdutoDetalhePageMenuItemWeb.Text" xml:space="preserve">
+    <value>pela web</value>
+  </data>
+  <data name="ProdutoDetalhePagePageHeader.Content" xml:space="preserve">
+    <value>Produto</value>
+  </data>
+  <data name="ProdutoDetalhePageTextBlockDescricaoProduto.Text" xml:space="preserve">
+    <value>Descrição do produto</value>
+  </data>
+  <data name="ProdutoDetalhePageTextBlockFreteGratis.Text" xml:space="preserve">
+    <value>Frete grátis</value>
+  </data>
+  <data name="ProdutoDetalhePageTextBlockFretePago.Text" xml:space="preserve">
+    <value>Envio para todo o país</value>
+  </data>
+  <data name="ProdutoDetalhePageTextBlockInfoVendedor.Text" xml:space="preserve">
+    <value>Informações do vendedor</value>
+  </data>
+  <data name="ProdutoDetalhePageTextBlockPerguntasTitulo.Text" xml:space="preserve">
+    <value>Perguntas</value>
+  </data>
+  <data name="ProdutoDetalhePageTextBlockVendidos.Text" xml:space="preserve">
+    <value> vendidos</value>
+  </data>
+  <data name="ProdutoPerguntasPagePageHeader.Text" xml:space="preserve">
+    <value>Perguntas ao vendedor</value>
+  </data>
+  <data name="ReceiveNotificationsToggleSwitchSubTitle.Text" xml:space="preserve">
+    <value>Use apenas se não estiver recebendo notificações</value>
+  </data>
+  <data name="ReceiveNotificationsToggleSwitchTitle.Text" xml:space="preserve">
+    <value>Ativar notificações</value>
+  </data>
+  <data name="SettingsPageCountriesComboBox.Header" xml:space="preserve">
+    <value>Selecione um país</value>
+  </data>
+  <data name="ShellMenuAnuncios.Text" xml:space="preserve">
+    <value>Meus anúncios</value>
+  </data>
+  <data name="ShellMenuBusca.Text" xml:space="preserve">
+    <value>Busca</value>
+  </data>
+  <data name="ShellMenuComprar.Text" xml:space="preserve">
+    <value>Compras</value>
+  </data>
+  <data name="ShellMenuCompras.Text" xml:space="preserve">
+    <value>Compras</value>
+  </data>
+  <data name="ShellMenuConfiguracao.Text" xml:space="preserve">
+    <value>Configurações</value>
+  </data>
+  <data name="ShellMenuConfiguracoes.Text" xml:space="preserve">
+    <value>Configurações</value>
+  </data>
+  <data name="ShellMenuFavoritos.Text" xml:space="preserve">
+    <value>Favoritos</value>
+  </data>
+  <data name="ShellMenuInicio.Text" xml:space="preserve">
+    <value>Iniício</value>
+  </data>
+  <data name="ShellMenuLogin.Text" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="ShellMenuMinhasVendas.Text" xml:space="preserve">
+    <value>Vendas</value>
+  </data>
+  <data name="ShellMenuPerguntas.Text" xml:space="preserve">
+    <value>Perguntas</value>
+  </data>
+  <data name="ShellMenuPerguntasVendas.Text" xml:space="preserve">
+    <value>Perguntas</value>
+  </data>
+  <data name="ShellMenuSaldoMP.Text" xml:space="preserve">
+    <value>Saldo MP</value>
+  </data>
+  <data name="ShellMenuVendas.Text" xml:space="preserve">
+    <value>Vendas</value>
+  </data>
+  <data name="ShellMenuVender.Text" xml:space="preserve">
+    <value>Vender</value>
+  </data>
+  <data name="UseLightThemeToggleSwitch.Header" xml:space="preserve">
+    <value>Usar o tema claro</value>
+  </data>
+  <data name="UseLightThemeToggleSwitch.OffContent" xml:space="preserve">
+    <value>Tema escuro</value>
+  </data>
+  <data name="UseLightThemeToggleSwitch.OnContent" xml:space="preserve">
+    <value>Tema claro</value>
+  </data>
+  <data name="UseQualityImagesToggleSwitch.Header" xml:space="preserve">
+    <value>Usar imagens de alta qualidade na busca</value>
+  </data>
+  <data name="UseQualityImagesToggleSwitch.OffContent" xml:space="preserve">
+    <value>Baixa qualidade</value>
+  </data>
+  <data name="UseQualityImagesToggleSwitch.OnContent" xml:space="preserve">
+    <value>Alta qualidade</value>
+  </data>
+  <data name="UseShellDrawnBackButtonToggleSwtich.Header" xml:space="preserve">
+    <value>Modo de exibição do botão voltar</value>
+  </data>
+  <data name="UseShellDrawnBackButtonToggleSwtich.OffContent" xml:space="preserve">
+    <value>Botão voltar no cabeçalho da página</value>
+  </data>
+  <data name="UseShellDrawnBackButtonToggleSwtich.OnContent" xml:space="preserve">
+    <value>Botão voltar na barra de título</value>
+  </data>
 </root>
