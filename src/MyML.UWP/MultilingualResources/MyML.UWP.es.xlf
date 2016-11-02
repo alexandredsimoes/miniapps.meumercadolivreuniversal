@@ -786,6 +786,10 @@
           <source>Perguntas ao vendedor</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Preguntas al vendedor</target>
         </trans-unit>
+        <trans-unit id="CategoriaPagePageHeader.Content" translate="yes" xml:space="preserve">
+          <source>Categorias</source>
+          <target state="new">Categorias</target>
+        </trans-unit>
       </group>
     </body>
   </file>
