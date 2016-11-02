@@ -504,4 +504,7 @@
   <data name="ConfigurationPageCompraNaoEfetuada" xml:space="preserve">
     <value>Não foi possível finalizar a compra</value>
   </data>
+  <data name="CategoriaPagePageHeader.Content" xml:space="preserve">
+    <value>Categorias</value>
+  </data>
 </root>

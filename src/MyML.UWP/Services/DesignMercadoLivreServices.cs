@@ -8,7 +8,7 @@ namespace MyML.UWP.Services
 {
     public class DesignMercadoLivreServices : IMercadoLivreService
     {
-        public Task<IList<MLCategorySearchResult>> ListCategories(string paisId)
+        public Task<IReadOnlyCollection<MLCategorySearchResult>> ListCategories(string paisId)
         {
             throw new NotImplementedException();
         }
@@ -281,6 +281,16 @@ namespace MyML.UWP.Services
         }
 
         public Task<IReadOnlyCollection<Country>> ListCountries()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IReadOnlyCollection<MLItemHomeFeature>> ListFeaturedHomeItems()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IReadOnlyCollection<MLItemHomeFeature>> ListFeaturedCategoryItems(string categoryId)
         {
             throw new NotImplementedException();
         }

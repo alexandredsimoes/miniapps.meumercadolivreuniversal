@@ -68,7 +68,7 @@ namespace MyML.UWP.ViewModels
         {
             if (obj == null) return;
 
-            BuscaExecute(new[] { Searchterm + "&" + obj.Result, "search" });
+            BuscaExecute(new[] { Searchterm + "&" + obj.Result, SearchType });
         }
 
         public  override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
@@ -88,8 +88,10 @@ namespace MyML.UWP.ViewModels
 
             if (parameter != null && mode == NavigationMode.New)
             {
-                Searchterm = parameter as string;
-                BuscaExecute(new []{Searchterm, "search"});
+                var search = parameter.ToString().Split('|');
+                Searchterm = search[0];
+                SearchType = search[1];
+                BuscaExecute(new []{Searchterm, SearchType});
             }
             return Task.CompletedTask;
         }
@@ -251,6 +253,13 @@ namespace MyML.UWP.ViewModels
         {
             get { return _Searchterm; }
             set { Set(() => Searchterm, ref _Searchterm, value); }
+        }
+
+        private string _SearchType;
+        public string SearchType
+        {
+            get { return _SearchType; }
+            set { Set(() => SearchType, ref _SearchType, value); }
         }
 
         public Item SelectedItem { get; set; }
