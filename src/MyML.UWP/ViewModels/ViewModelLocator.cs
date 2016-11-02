@@ -64,7 +64,8 @@ namespace MyML.UWP.ViewModels
             SimpleIoc.Default.Register<VendasArquivadasPageViewModel>();
             SimpleIoc.Default.Register<SaldoPageViewModel>();
             SimpleIoc.Default.Register<ProdutoUsuarioPageViewModel>();
-            
+            SimpleIoc.Default.Register<CategoriaPageViewModel>();
+
 
         }
 
@@ -99,7 +100,9 @@ namespace MyML.UWP.ViewModels
         public VendasArquivadasPageViewModel VendasArquivadasPage => ServiceLocator.Current.GetInstance<VendasArquivadasPageViewModel>();
         public SaldoPageViewModel SaldoPage => ServiceLocator.Current.GetInstance<SaldoPageViewModel>();
         public ProdutoUsuarioPageViewModel ProdutoUsuarioPage => ServiceLocator.Current.GetInstance<ProdutoUsuarioPageViewModel>();
+        public CategoriaPageViewModel CategoriaPage => ServiceLocator.Current.GetInstance<CategoriaPageViewModel>();
         
+
 
     }
 }

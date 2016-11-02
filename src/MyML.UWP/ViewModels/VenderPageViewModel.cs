@@ -25,7 +25,7 @@ namespace MyML.UWP.ViewModels
         private readonly IMercadoLivreService _mercadoLivreServices;
         private readonly ResourceLoader _resourceLoader;
         private readonly IDataService _dataService;
-        private IList<MLCategorySearchResult> _backupCategories;
+        private IReadOnlyCollection<MLCategorySearchResult> _backupCategories;
         private readonly SettingsService _settings = SettingsService.Instance;
 
         public event Action<int> PartChanged;

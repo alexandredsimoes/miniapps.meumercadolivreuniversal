@@ -13,21 +13,23 @@ namespace MyML.UWP.Services
     public static class BaseServices<T>
     {
         private static readonly HttpClient _httpClient = SimpleIoc.Default.GetInstance<HttpClient>();
+
         public static async Task<T> GetAsync(string url, params KeyValuePair<string, object>[] attributesAndFilters)
         {
             T result = default(T);
-            try
+            if (attributesAndFilters != null && attributesAndFilters.Length > 0)
             {
-                if (attributesAndFilters != null && attributesAndFilters.Length > 0)
+                for (int i = 0; i < attributesAndFilters.Length; i++)
                 {
-                    for (int i = 0; i < attributesAndFilters.Length; i++)
-                    {
-                        url = string.Concat(url, url.Contains("?") ? "&" : "?", attributesAndFilters[i].Key, "=", attributesAndFilters[i].Value, i < (attributesAndFilters.Length - 1) ? "," : string.Empty);
-                    }
+                    url = string.Concat(url, url.Contains("?") ? "&" : "?", attributesAndFilters[i].Key, "=",
+                        attributesAndFilters[i].Value, i < (attributesAndFilters.Length - 1) ? "," : string.Empty);
                 }
+            }
 
-                await _httpClient.GetAsync(url, HttpCompletionOption.ResponseContentRead)
-                    .ContinueWith(async c =>
+            await _httpClient.GetAsync(url, HttpCompletionOption.ResponseContentRead)
+                .ContinueWith(async c =>
+                {
+                    try
                     {
                         var r = c.Result;
                         if (r.StatusCode == System.Net.HttpStatusCode.OK)
@@ -35,14 +37,15 @@ namespace MyML.UWP.Services
                             var s = await r.Content.ReadAsStringAsync().ConfigureAwait(false);
                             result = JsonConvert.DeserializeObject<T>(s);
                         }
-                    }).ConfigureAwait(false);
-                return result;
-            }
-            catch (Exception ex)
-            {
-                //AppLogs.WriteError(url, ex);
-            }
-            return default(T);
+                        return result;
+                    }
+                    catch (Exception ex)
+                    {
+                        return default(T);                        
+                    }
+                    
+                }).ConfigureAwait(false);
+            return result;            
         }
     }
 }

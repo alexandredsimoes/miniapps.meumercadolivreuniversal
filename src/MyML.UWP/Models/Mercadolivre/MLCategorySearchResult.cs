@@ -62,5 +62,6 @@ namespace MyML.UWP.Models.Mercadolivre
         public List<ChildrenCategory> children_categories { get; set; }
         public string attribute_types { get; set; }
         public Settings settings { get; set; }
+        public string PathData { get; set; }
     }
 }

@@ -304,7 +304,16 @@ namespace MyML.UWP.Models
         /// Parametros ItemId, AccessToken
         /// </summary>
         public const string ML_LIST_ITEM_UPGRADES = "https://api.mercadolibre.com/items/{0}/available_upgrades?access_token={1}";
+
+        /// <summary>
+        /// Parametros PaisId
+        /// </summary>
+        public const string MlUrlDestaquesHome = "https://api.mercadolibre.com/sites/{0}/featured_items/HP";
         
+        /// <summary>
+        /// Parametros PaisId, CategoriaId
+        /// </summary>
+        public const string MlUrlDestaquesCategoria = "https://api.mercadolibre.com/sites/{0}/featured_items/HO-{1}";
 
         public static string GetUrl(string url, params object[] parameters)        
         {
