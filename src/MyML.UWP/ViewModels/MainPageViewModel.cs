@@ -18,6 +18,7 @@ using Windows.ApplicationModel.Email;
 using System.Diagnostics;
 using Windows.ApplicationModel.Background;
 using Windows.UI.Notifications;
+using MyML.UWP.Models.Mercadolivre;
 using MyML.UWP.Views.Secure;
 
 namespace MyML.UWP.ViewModels
@@ -33,6 +34,24 @@ namespace MyML.UWP.ViewModels
             _dataService = dataService;
             _mercadoLivreServices = mercadoLivreService;
             _resourceLoader = resourceLoader;
+
+            SelecionarCategoria = new RelayCommand<object>(async(o) => {
+                var obj = o as MLCategorySearchResult;
+                if (obj != null)
+                {
+                    await NavigationService.NavigateAsync(typeof(CategoriaPage), obj.id);
+                }
+            });
+
+            SelecionarProduto = new RelayCommand<object>(async o =>
+            {
+                var obj = o as MLItemHomeFeature;
+                if (obj != null)
+                {
+                    await NavigationService.NavigateAsync(typeof(ProdutoDetalhePage), obj.item_id);
+                }
+            });
+
             GotoItem = new RelayCommand<string>((s) =>
             {
                 NavigationService.Navigate(typeof(AnunciosPage), s);
@@ -82,48 +101,13 @@ namespace MyML.UWP.ViewModels
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
+            LoadHomeFeatures();
             //await new MessageDialog("QUESTION_DETAIL = " + ApplicationData.Current.LocalSettings.Values["QUESTION_ID"]).ShowAsync();
             if (state.Any())
             {
                 state.Clear();
             }
                       
-
-//            IsAuthenticated = _dataService.IsAuthenticated();
-//            if (IsAuthenticated)
-//            {
-                
-//            }
-//            else
-//            {
-//#if DEBUG
-//                Debug.WriteLine("TENTANDO RESTAURAR TOKEN DO ML ************************ ");
-//#endif
-//                //Tenta atualizar o token de autenticação, caso já tenha sido autenticado em algum momento.
-//                var refreshToken = _dataService.GetMLConfig(Consts.ML_CONFIG_KEY_REFRESH_TOKEN);
-//                if (!String.IsNullOrWhiteSpace(refreshToken))
-//                {
-//                    var login = await _mercadoLivreServices.TryRefreshToken();
-//                    if (login != null && !string.IsNullOrWhiteSpace(login.Refresh_Token))
-//                    {
-//#if DEBUG
-//                        Debug.WriteLine("LOGIN RESTAURADO ************************ ");
-//#endif
-//                        _dataService.SaveConfig(Consts.ML_CONFIG_KEY_USER_ID, login.user_id);
-//                        _dataService.SaveConfig(Consts.ML_CONFIG_KEY_REFRESH_TOKEN, login.Refresh_Token);
-//                        _dataService.SaveConfig(Consts.ML_CONFIG_KEY_EXPIRES, DateTime.Now.AddSeconds(login.Expires_In ?? 0).ToString());
-//                        _dataService.SaveConfig(Consts.ML_CONFIG_KEY_ACCESS_TOKEN, login.Access_Token);
-//                        _dataService.SaveConfig(Consts.ML_CONFIG_KEY_LOGIN_DATE, DateTime.Now.ToString());
-
-//                        await NotificationHelper.SubscribeNotification();                      
-//                    }
-//                    else
-//                    {
-                        
-//                    }
-//                }
-//                IsAuthenticated = _dataService.IsAuthenticated();
-//            }
             await VerifyExecutions();
 
 #if DEBUG
@@ -139,6 +123,15 @@ namespace MyML.UWP.ViewModels
 
 #endif
             //var categories = await _mercadoLivreServices.ListCategories("MLB");
+        }
+
+        private async void LoadHomeFeatures()
+        {
+            Items = await _mercadoLivreServices.ListFeaturedHomeItems();
+            RaisePropertyChanged("Items");
+
+            Categories = await _mercadoLivreServices.ListCategories(null);
+            RaisePropertyChanged("Categories");
         }
 
 
@@ -225,10 +218,12 @@ namespace MyML.UWP.ViewModels
         public void GotoAbout() =>
             NavigationService.Navigate(typeof(Views.SettingsPage), 2);
 
+        public IReadOnlyCollection<MLItemHomeFeature> Items { get; set; }
+        public IReadOnlyCollection<MLCategorySearchResult> Categories { get; set; }
+
         public async void Logoff()
         {
             var result = await _mercadoLivreServices.RevokeAccess();
-
         }     
 
 
@@ -239,31 +234,14 @@ namespace MyML.UWP.ViewModels
             set { Set(() => IsAuthenticated, ref _IsAuthenticated, value); }
         }
 
-        private long? _ActiveItems = 0;
-        public long? ActiveItems
-        {
-            get { return _ActiveItems; }
-            set { Set(() => ActiveItems, ref _ActiveItems, value); }
-        }
-
-        private long? _PausedItems = 0;
-        public long? PausedItems
-        {
-            get { return _PausedItems; }
-            set { Set(() => PausedItems, ref _PausedItems, value); }
-        }
-
-        private long? _FinalizedItems = 0;
-        public long? FinalizedItems
-        {
-            get { return _FinalizedItems; }
-            set { Set(() => FinalizedItems, ref _FinalizedItems, value); }
-        }
+        
 
         public RelayCommand RevokeAccess { get; private set; }
         public RelayCommand DoLogin { get; private set; }
         public RelayCommand<string> GotoItem { get; private set; }
         public RelayCommand<object> DoSearch { get; private set; }
+        public RelayCommand<object> SelecionarProduto { get; private set; }
+        public RelayCommand<object> SelecionarCategoria { get; private set; }
     }
 }
 

@@ -5,16 +5,24 @@
       xmlns:converters="using:MyML.UWP.Converters"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      mc:Ignorable="d"
-      xmlns:uwp="using:AppStudio.Uwp.Controls"
+      xmlns:mercadolivre="using:MyML.UWP.Models.Mercadolivre"
       xmlns:uc="using:MyML.UWP.Usercontrols"
-      DataContext="{Binding Source={StaticResource Locator}, Path=MainPage}">
+      xmlns:uwp="using:AppStudio.Uwp.Controls"
+      xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+      xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+      DataContext="{Binding Source={StaticResource Locator},
+                            Path=MainPage}"
+      xmlns:designViewModels="using:MyML.UWP.ViewModels.Design"
+      mc:Ignorable="d"
+      x:Name="This"
+      d:DataContext="{d:DesignInstance designViewModels:MainPageDesignViewModel, IsDesignTimeCreatable=True}">
 
-    
+
     <Page.Resources>
         <converters:StringFormatConverter x:Name="StringFormatConverter" />
         <converters:BoolToVisibilityConverter x:Name="BoolToVisibilityConverter" />
         <converters:InvertedBoolToVisibilityConverter x:Name="InvertedBoolToVisibilityConverter" />
+        <converters:NullToVisibilitConverter x:Key="NullToVisibilitConverter" />
     </Page.Resources>
 
     <Page.BottomAppBar>
@@ -23,11 +31,127 @@
                 <AppBarButton Click="{x:Bind ViewModel.GotoPrivacy}" Label="Privacidade" />
                 <AppBarButton Click="{x:Bind ViewModel.GotoAbout}" Label="Sobre" />
                 <AppBarSeparator />
-                <AppBarButton Label="Sair" Icon="Clear" Command="{Binding RevokeAccess}" />
+                <AppBarButton Command="{Binding RevokeAccess}"
+                              Icon="Clear"
+                              Label="Sair" />
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </Page.BottomAppBar>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="155" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!--  page header -->
+        <controls:PageHeader x:Uid="PageTitleHeader"
+                             Grid.Row="0"
+                             Background="{StaticResource MercadoLivreBackgroundColor}"
+                             Content="Meu MercadoLivre Universal"
+                             Foreground="{StaticResource MercadoLivreForegroundColor}">
+
+        </controls:PageHeader>
+
+
+
+        <!--  page content  -->
+        <StackPanel Grid.Row="0" Visibility="Collapsed">
+            <uwp:SearchBox Margin="0,10,0,0"
+                           PlaceholderText="O que deseja procurar hoje?"
+                           SearchCommand="{Binding DoSearch}" />
+        </StackPanel>
+
+
+        <!--<ScrollViewer Grid.Row="1" IsVerticalRailEnabled="False" IsVerticalScrollChainingEnabled="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled" VerticalScrollMode="Disabled" HorizontalScrollMode="Enabled">-->
+            <GridView ItemsSource="{Binding Categories}" Margin="8" Grid.Row="1"
+                      x:Name="GridCategories"
+                      ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                      ScrollViewer.HorizontalScrollMode="Enabled"
+                      ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                      ScrollViewer.VerticalScrollMode="Disabled">
+            <interactivity:Interaction.Behaviors>
+                <core:EventTriggerBehavior EventName="Tapped">
+                    <core:InvokeCommandAction Command="{Binding ElementName=This,Path=DataContext.SelecionarCategoria}" CommandParameter="{Binding ElementName=GridCategories, Path=SelectedItem}"  />
+                </core:EventTriggerBehavior>
+            </interactivity:Interaction.Behaviors>
+            <GridView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapGrid Orientation="Vertical" MaximumRowsOrColumns="2" HorizontalAlignment="Left"/>
+                </ItemsPanelTemplate>
+            </GridView.ItemsPanel>
+            <GridView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Width="103">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="70" />
+                                <RowDefinition Height="85" />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Text="{Binding name}" Grid.Row="1" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Top" TextAlignment="Center"/>
+                            <ContentControl Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Path Data="{Binding PathData}" Stretch="Uniform" Fill="#FF464545" Width="40" Height="40" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
+                                    <Path.RenderTransform>
+                                        <TransformGroup>
+                                            <TransformGroup.Children>
+                                                <RotateTransform Angle="0" />
+                                                <ScaleTransform ScaleX="1" ScaleY="1" />
+                                            </TransformGroup.Children>
+                                        </TransformGroup>
+                                    </Path.RenderTransform>
+                                </Path>
+                            </ContentControl>
+                        </Grid>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+            </GridView>
+        <!--</ScrollViewer>-->
+
+        <uwp:VariableSizedGrid Grid.Row="2"                                
+                                ItemsSource="{Binding Items}"
+                                Margin="8,8,15,8"
+                                x:Name="Grid" >
+            <interactivity:Interaction.Behaviors>
+                <core:EventTriggerBehavior EventName="Tapped">
+                    <core:InvokeCommandAction Command="{Binding ElementName=This,Path=DataContext.SelecionarProduto}" CommandParameter="{Binding ElementName=Grid, Path=SelectedItem}"  />
+                </core:EventTriggerBehavior>
+            </interactivity:Interaction.Behaviors>
+            <uwp:VariableSizedGrid.ItemTemplate>
+                <DataTemplate x:DataType="mercadolivre:MLItemHomeFeature">
+
+                    <Grid VerticalAlignment="Top" Margin="8,8,6,8">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <!--<Border
+                            BorderThickness="0,0,0,1"
+                            Padding="35" Grid.Row="0">
+
+                            <Border.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="White" Offset="0.798"/>
+                                    <GradientStop Color="#CED9D9D9" Offset="0.981"/>
+                                </LinearGradientBrush>
+                            </Border.Background>-->
+                        <uwp:ImageEx 
+                                Background="{x:Null}"
+                                Foreground="{x:Null}"
+                                Source="{Binding picture.url}" VerticalContentAlignment="Top" Stretch="None"  />
+                        <!--</Border>-->
+                        <StackPanel Margin="10,10,10,5" Grid.Row="1" VerticalAlignment="Bottom">
+                            <TextBlock
+                                Text="{Binding title}"
+                                TextAlignment="Left"
+                                TextWrapping="Wrap" Foreground="Black"  Grid.Row="1" />
+                            <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="{Binding price, ConverterParameter=\{0:c2\}, Converter={StaticResource StringFormatConverter}}" Foreground="Black" />
+                        </StackPanel>
+                    </Grid>
+
+
+                </DataTemplate>
+            </uwp:VariableSizedGrid.ItemTemplate>
+        </uwp:VariableSizedGrid>
 
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="AdaptiveVisualStateGroup">
@@ -36,8 +160,7 @@
                         <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <!--<Setter Target="AdMediator_MOBILE.Visibility" Value="Visible" />
-                        <Setter Target="AdMediator_DESKTOP.Visibility" Value="Collapsed" />-->
+                        <Setter Target="Grid.MaximumRowsOrColumns" Value="2" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="VisualStateNormal">
@@ -45,8 +168,7 @@
                         <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <!--<Setter Target="AdMediator_MOBILE.Visibility" Value="Collapsed" />
-                        <Setter Target="AdMediator_DESKTOP.Visibility" Value="Visible" />-->
+                        <Setter Target="Grid.MaximumRowsOrColumns" Value="4" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="VisualStateWide">
@@ -54,36 +176,11 @@
                         <AdaptiveTrigger MinWindowWidth="{StaticResource WideMinWidth}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <!--<Setter Target="AdMediator_MOBILE.Visibility" Value="Collapsed" />
-                        <Setter Target="AdMediator_DESKTOP.Visibility" Value="Visible" />-->
+                        <Setter Target="Grid.MaximumRowsOrColumns" Value="6" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-
-        <!--  page header  -->
-        <controls:PageHeader Grid.Row="0" Content="Meu MercadoLivre Universal" x:Uid="PageTitleHeader" Background="{StaticResource MercadoLivreBackgroundColor}" Foreground="{StaticResource MercadoLivreForegroundColor}">
-            <!--<controls:PageHeader.Foreground>
-                <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
-            </controls:PageHeader.Foreground>
-            <controls:PageHeader.Background>
-                <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
-            </controls:PageHeader.Background>-->
-        </controls:PageHeader>
-        
-
-
-        <!--  page content  -->
-        <StackPanel Grid.Row="2">
-            <uwp:SearchBox PlaceholderText="O que deseja procurar hoje?" SearchCommand="{Binding DoSearch}" Margin="0,10,0,0" />
-        </StackPanel>
-
     </Grid>
 </Page>
 

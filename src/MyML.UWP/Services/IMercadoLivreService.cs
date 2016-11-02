@@ -10,7 +10,7 @@ namespace MyML.UWP.Services
     public interface IMercadoLivreService
     {
         //Task<bool> IsAuthenticated();
-        Task<IList<MLCategorySearchResult>> ListCategories(string paisId);
+        Task<IReadOnlyCollection<MLCategorySearchResult>> ListCategories(string paisId);
         Task<MLQuestionResultSearch> ListQuestions(params KeyValuePair<string,object>[] attributesAndFilters);
         Task<ProductQuestionContent> GetQuestionDetails(string questionId, params KeyValuePair<string, object>[] attributesAndFilters);
         Task<MLMyItemsSearchResult> ListMyItems(params KeyValuePair<string, object>[] attributes);
@@ -74,5 +74,7 @@ namespace MyML.UWP.Services
         Task<MLSearchResult> ListProductsByUser(string userId, int pageIndex = 0, int pageSize = 0);
 
         Task<IReadOnlyCollection<Country>> ListCountries();
+        Task<IReadOnlyCollection<MLItemHomeFeature>> ListFeaturedHomeItems();
+        Task<IReadOnlyCollection<MLItemHomeFeature>> ListFeaturedCategoryItems(string categoryId);
     }
 }

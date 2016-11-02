@@ -173,6 +173,7 @@
     <Compile Include="Models\Mercadolivre\MLErrorRequest.cs" />
     <Compile Include="Models\Mercadolivre\MLFeedback.cs" />
     <Compile Include="Models\Mercadolivre\MLImage.cs" />
+    <Compile Include="Models\Mercadolivre\MLItemHomeFeature.cs" />
     <Compile Include="Models\Mercadolivre\MLJson.cs" />
     <Compile Include="Models\Mercadolivre\MLListPrice.cs" />
     <Compile Include="Models\Mercadolivre\MLListType.cs" />
@@ -220,6 +221,7 @@
     <Compile Include="ViewModels\AnunciosPageViewModel.cs" />
     <Compile Include="ViewModels\BuscaFilterPageViewModel.cs" />
     <Compile Include="ViewModels\BuscaPageViewModel.cs" />
+    <Compile Include="ViewModels\CategoriaPageViewModel.cs" />
     <Compile Include="ViewModels\CompraDetalhePageViewModel.cs" />
     <Compile Include="ViewModels\CompraQualificarPageViewModel.cs" />
     <Compile Include="ViewModels\ComprarItemPageViewModel.cs" />
@@ -227,6 +229,8 @@
     <Compile Include="ViewModels\Design\AlterarAtributoPageDesignViewModel.cs" />
     <Compile Include="ViewModels\Design\AnunciosDetalhesPageDesignViewModel.cs" />
     <Compile Include="ViewModels\Design\BuscaPageDesignViewModel.cs" />
+    <Compile Include="ViewModels\Design\CategoriaPageDesignViewModel.cs" />
+    <Compile Include="ViewModels\Design\MainPageDesignViewModel.cs" />
     <Compile Include="ViewModels\OrdernarBuscaPageViewModel.cs" />
     <Compile Include="ViewModels\PerguntasVendasDetalhesPageViewModel.cs" />
     <Compile Include="ViewModels\FavoritesPageViewModel.cs" />
@@ -626,9 +630,6 @@
     </SDKReference>
     <SDKReference Include="SQLite.UAP.2015, Version=3.8.11.1">
       <Name>SQLite for Universal App Platform</Name>
-    </SDKReference>
-    <SDKReference Include="SQLite.UWP.2015, Version=3.14.2">
-      <Name>SQLite for Universal Windows Platform</Name>
     </SDKReference>
     <SDKReference Include="WindowsMobile, Version=10.0.10586.0">
       <Name>Windows Mobile Extensions for the UWP</Name>
