@@ -6,7 +6,10 @@ wwwroot/uploads/
 
 #pasta BundleArtifacts
 [Bb]undleArtifacts/
+src/MyML.UWP/BundleArtifacts
 
+#Arquivos appx
+*.appx
 
 
 # User-specific files
