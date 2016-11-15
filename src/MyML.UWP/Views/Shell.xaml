@@ -238,6 +238,18 @@
                                            Text="Configurações" />
                             </StackPanel>
                         </controls:HamburgerButtonInfo>
+                        <!--  Dados pessoais  -->
+                        <controls:HamburgerButtonInfo ClearHistory="False" PageType="viewsSecure:DadosPessoaisPage">
+                            <StackPanel Orientation="Horizontal">
+                                <SymbolIcon Width="48"
+                                            Height="48"
+                                            Symbol="Contact" />
+                                <TextBlock x:Uid="ShellMenuDadosPessoais"
+                                           Margin="12,0,0,0"
+                                           VerticalAlignment="Center"
+                                           Text="Dados pessoais" />
+                            </StackPanel>
+                        </controls:HamburgerButtonInfo>
                         <!--  Login button  -->
                         <controls:HamburgerButtonInfo ClearHistory="False" PageType="views:LoginPage">
                             <StackPanel Orientation="Horizontal">

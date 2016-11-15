@@ -10,10 +10,13 @@ using MyML.UWP.Models.Mercadolivre;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.Http.Headers;
+using Windows.ApplicationModel.Resources;
 using MyML.UWP.AppStorage;
 using Windows.Globalization.NumberFormatting;
 using Windows.Storage;
+using Windows.UI.Popups;
 using MyML.UWP.Services.SettingsServices;
+using static System.String;
 
 namespace MyML.UWP.Services
 {
@@ -24,10 +27,12 @@ namespace MyML.UWP.Services
         private readonly SettingsService _settings = SettingsService.Instance;
         private string _userId;
         private string _accessToken;
-        public MercadoLivreServices(HttpClient httpClient, IDataService dataService)
+        private readonly ResourceLoader _resourceLoader;
+        public MercadoLivreServices(HttpClient httpClient, IDataService dataService, ResourceLoader resourceLoader)
         {
             _httpClient = httpClient;
             _dataService = dataService;
+            _resourceLoader = resourceLoader;
 
             _userId = _dataService.GetMLConfig(Consts.ML_CONFIG_KEY_USER_ID);
             _accessToken = _dataService.GetMLConfig(Consts.ML_CONFIG_KEY_USER_ID);
@@ -41,11 +46,11 @@ namespace MyML.UWP.Services
         public async Task<IReadOnlyCollection<MLCategorySearchResult>> ListCategories(string paisId)
         {
             var result = await BaseServices<IReadOnlyCollection<MLCategorySearchResult>>
-                .GetAsync(String.Format(Consts.ML_URL_CATEGORIAS, _settings.SelectedCountry)).ConfigureAwait(false);
+                .GetAsync(Format(Consts.ML_URL_CATEGORIAS, _settings.SelectedCountry)).ConfigureAwait(false);
 
             Func<string, string> obterIcone = (categories) =>
             {
-                var resultado = string.Empty;
+                var resultado = Empty;
                 switch (categories)
                 {
                     case "Acessórios para Veículos":
@@ -108,7 +113,7 @@ namespace MyML.UWP.Services
                 item.PathData = obterIcone(item.name);
                 Debug.WriteLine(item.name);
             }
-            return result.Where(c => !String.IsNullOrWhiteSpace(c.PathData)).ToList();
+            return result.Where(c => !IsNullOrWhiteSpace(c.PathData)).ToList();
         }
 
         #region Métodos referente as questões
@@ -179,7 +184,7 @@ namespace MyML.UWP.Services
 
             if (pageIndex >= 0 && pageSize > 0)
             {
-                url = String.Concat(url, String.Format("&limit={0}&offset={1}", pageSize, pageIndex));
+                url = Concat(url, Format("&limit={0}&offset={1}", pageSize, pageIndex));
             }
 
             return await BaseServices<ProductQuestion>.GetAsync(url, attributesAndFilters).ConfigureAwait(false);
@@ -233,7 +238,7 @@ namespace MyML.UWP.Services
         {
             var url = Consts.GetUrl(Consts.ML_USER_INFO_URL, _userId);
             _accessToken = _dataService.GetMLConfig(Consts.ML_CONFIG_KEY_ACCESS_TOKEN);
-            url = string.Concat(url, "?", _accessToken);
+            url = Concat(url, "?", _accessToken);
             return await BaseServices<MLUserInfoSearchResult>.GetAsync(url, attributesOrFilters).ConfigureAwait(false);
         }
 
@@ -324,7 +329,7 @@ namespace MyML.UWP.Services
 
             if (pageIndex >= 0 && pageSize > 0)
             {
-                url = String.Concat(url, String.Format("&limit={0}&offset={1}", pageSize, --pageIndex));
+                url = Concat(url, Format("&limit={0}&offset={1}", pageSize, --pageIndex));
             }
             return await BaseServices<MLSearchResult>.GetAsync(url).ConfigureAwait(false);
         }
@@ -336,7 +341,7 @@ namespace MyML.UWP.Services
 
             if (pageIndex >= 0 && pageSize > 0)
             {
-                url = String.Concat(url, String.Format("&limit={0}&offset={1}", pageSize, (pageIndex * pageSize)));
+                url = Concat(url, Format("&limit={0}&offset={1}", pageSize, (pageIndex * pageSize)));
             }
             return await BaseServices<MLSearchResult>.GetAsync(url).ConfigureAwait(false);
         }
@@ -387,6 +392,7 @@ namespace MyML.UWP.Services
         {
             try
             {
+                var errorMessage = "";
                 _accessToken = _dataService.GetMLConfig(Consts.ML_CONFIG_KEY_ACCESS_TOKEN);
                 var url = Consts.GetUrl(Consts.ML_LIST_ITEM, _accessToken);
 
@@ -425,10 +431,19 @@ namespace MyML.UWP.Services
 
                         await AppLogs.WriteLog("MercadoLivreServices.ListNewItem()", "Erro durante a criação do novo item", "");
                         if (error.cause != null)
+                        {
                             foreach (var item in error.cause)
                             {
+                                errorMessage += item.message;
                                 await AppLogs.WriteLog("     ", item.code + " - " + item.message, "");
                             }
+                        }
+                    }
+                    if (!IsNullOrWhiteSpace(errorMessage))
+                    {
+                        await new MessageDialog(_resourceLoader
+                                .GetString(Format("MercadoLivreServicesListNewItemErrorContent", errorMessage)),
+                            _resourceLoader.GetString("ApplicationTitle")).ShowAsync();
                     }
 
                     await AppLogs.WriteWarning("MercadoLivreServices.ListNewItem()", result);
@@ -601,7 +616,7 @@ namespace MyML.UWP.Services
 
             var url = Consts.GetUrl(Consts.ML_URL_REFRESH_AUTHENTICATION, clientId, clientSecret, token);
             var result = await BaseServices<MLAutorizationInfo>.GetAsync(url).ConfigureAwait(false);
-            return !String.IsNullOrWhiteSpace(result?.Access_Token);
+            return !IsNullOrWhiteSpace(result?.Access_Token);
         }
         #endregion
 
@@ -614,7 +629,7 @@ namespace MyML.UWP.Services
 
             if (pageIndex >= 0 && pageSize > 0)
             {
-                url = String.Concat(url, String.Format("&limit={0}&offset={1}", pageSize, pageIndex));
+                url = Concat(url, Format("&limit={0}&offset={1}", pageSize, pageIndex));
             }
 
             var result = await BaseServices<MLOrder>.GetAsync(url, attributes).ConfigureAwait(false);
@@ -645,7 +660,7 @@ namespace MyML.UWP.Services
 
             if (pageIndex >= 0 && pageSize > 0)
             {
-                url = String.Concat(url, String.Format("&limit={0}&offset={1}", pageSize, pageIndex));
+                url = Concat(url, Format("&limit={0}&offset={1}", pageSize, pageIndex));
             }
 
             var result = await BaseServices<MLOrder>.GetAsync(url, attributes).ConfigureAwait(false);
@@ -677,7 +692,7 @@ namespace MyML.UWP.Services
 
             if (pageIndex >= 0 && pageSize > 0)
             {
-                url = String.Concat(url, String.Format("&limit={0}&offset={1}", pageSize, pageIndex));
+                url = Concat(url, Format("&limit={0}&offset={1}", pageSize, pageIndex));
             }
 
             var result = await BaseServices<MLOrder>.GetAsync(url, attributes).ConfigureAwait(false);
@@ -716,7 +731,7 @@ namespace MyML.UWP.Services
 
             if (pageIndex >= 0 && pageSize > 0)
             {
-                url = String.Concat(url, String.Format("&limit={0}&offset={1}", pageSize, pageIndex));
+                url = Concat(url, Format("&limit={0}&offset={1}", pageSize, pageIndex));
             }
 
             var result = await BaseServices<MLOrder>.GetAsync(url).ConfigureAwait(false);
@@ -749,7 +764,7 @@ namespace MyML.UWP.Services
 
             if (pageIndex >= 0 && pageSize > 0)
             {
-                url = String.Concat(url, String.Format("&limit={0}&offset={1}", pageSize, pageIndex));
+                url = Concat(url, Format("&limit={0}&offset={1}", pageSize, pageIndex));
             }
             var result = await BaseServices<MLOrder>.GetAsync(url, attributes).ConfigureAwait(false);
 
@@ -803,10 +818,10 @@ namespace MyML.UWP.Services
 
             if (pageIndex >= 0 && pageSize > 0)
             {
-                url = String.Concat(url, String.Format("&limit={0}&offset={1}", pageSize, --pageIndex));
+                url = Concat(url, Format("&limit={0}&offset={1}", pageSize, --pageIndex));
             }
 
-            url = String.Concat(url, String.Format("&status={0}", status));
+            url = Concat(url, Format("&status={0}", status));
             return await BaseServices<MLMyItemsSearchResult>.GetAsync(url).ConfigureAwait(false);
         }
 
@@ -820,7 +835,7 @@ namespace MyML.UWP.Services
 
             if (pageIndex >= 0 && pageSize > 0)
             {
-                url = String.Concat(url, String.Format("&limit={0}&offset={1}", pageSize, (pageIndex * pageSize)));
+                url = Concat(url, Format("&limit={0}&offset={1}", pageSize, (pageIndex * pageSize)));
             }
 
             return await BaseServices<MLMyItemsSearchResult>.GetAsync(url, attributesAndFilters).ConfigureAwait(false);
@@ -844,7 +859,7 @@ namespace MyML.UWP.Services
                 var url = Consts.GetUrl(Consts.ML_REFRESH_TOKEN_URL, Consts.ML_CLIENT_ID, Consts.ML_API_KEY, refreshToken);
 
 
-                var response = await _httpClient.PostAsync(url, new StringContent(String.Empty)).ConfigureAwait(false);
+                var response = await _httpClient.PostAsync(url, new StringContent(Empty)).ConfigureAwait(false);
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
                     var result = JsonConvert.DeserializeObject<MLAutorizationInfo>(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
@@ -939,7 +954,7 @@ namespace MyML.UWP.Services
             {
                 _accessToken = _dataService.GetMLConfig(Consts.ML_CONFIG_KEY_ACCESS_TOKEN);
                 _userId = _dataService.GetMLConfig(Consts.ML_CONFIG_KEY_USER_ID);
-                var url = String.Format(Consts.ML_REVOKE_LOGIN, _userId, Consts.ML_CLIENT_ID, _accessToken);
+                var url = Format(Consts.ML_REVOKE_LOGIN, _userId, Consts.ML_CLIENT_ID, _accessToken);
                 var r = await _httpClient.DeleteAsync(url);
 
                 if (r.StatusCode == System.Net.HttpStatusCode.OK)
@@ -960,7 +975,7 @@ namespace MyML.UWP.Services
         {
             _accessToken = _dataService.GetMLConfig(Consts.ML_CONFIG_KEY_ACCESS_TOKEN);
 
-            var url = String.Format(Consts.ML_LIST_ITEM_UPGRADES, itemId, _accessToken);
+            var url = Format(Consts.ML_LIST_ITEM_UPGRADES, itemId, _accessToken);
             return await BaseServices<IReadOnlyList<MLListType>>.GetAsync(url).ConfigureAwait(false);
         }
 
@@ -1001,7 +1016,7 @@ namespace MyML.UWP.Services
                 var url = Consts.GetUrl(Consts.MlUrlOrderFeedback, orderId, _accessToken);
 
 
-                var jason = string.Empty;
+                var jason = Empty;
                 if (fulfilled)
                 {
                     jason = JsonConvert.SerializeObject(new
@@ -1048,7 +1063,7 @@ namespace MyML.UWP.Services
                 var url = Consts.GetUrl(Consts.MlUrlOrderFeedback, orderId, _accessToken);
 
 
-                var jason = string.Empty;
+                var jason = Empty;
                 if (fulfilled)
                 {
                     jason = JsonConvert.SerializeObject(new
@@ -1272,7 +1287,7 @@ namespace MyML.UWP.Services
 
             if (pageIndex >= 0 && pageSize > 0)
             {
-                url = String.Concat(url, String.Format("&limit={0}&offset={1}", pageSize, (pageIndex * pageSize)));
+                url = Concat(url, Format("&limit={0}&offset={1}", pageSize, (pageIndex * pageSize)));
             }
             return await BaseServices<MLSearchResult>.GetAsync(url).ConfigureAwait(false);
         }
@@ -1289,13 +1304,13 @@ namespace MyML.UWP.Services
         public async Task<IReadOnlyCollection<MLItemHomeFeature>> ListFeaturedHomeItems()
         {
             return await BaseServices<IReadOnlyCollection<MLItemHomeFeature>>
-                .GetAsync(String.Format(Consts.MlUrlDestaquesHome, _settings.SelectedCountry)).ConfigureAwait(false);
+                .GetAsync(Format(Consts.MlUrlDestaquesHome, _settings.SelectedCountry)).ConfigureAwait(false);
         }
 
         public async Task<IReadOnlyCollection<MLItemHomeFeature>> ListFeaturedCategoryItems(string categoryId)
         {
             return await BaseServices<IReadOnlyCollection<MLItemHomeFeature>>
-                .GetAsync(string.Format(Consts.MlUrlDestaquesCategoria, categoryId, _settings.SelectedCountry))
+                .GetAsync(Format(Consts.MlUrlDestaquesCategoria, categoryId, _settings.SelectedCountry))
                 .ConfigureAwait(false);
         }
     }

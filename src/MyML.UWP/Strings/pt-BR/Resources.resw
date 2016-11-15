@@ -655,7 +655,7 @@
     <value>Favoritos</value>
   </data>
   <data name="ShellMenuInicio.Text" xml:space="preserve">
-    <value>Iniício</value>
+    <value>Início</value>
   </data>
   <data name="ShellMenuLogin.Text" xml:space="preserve">
     <value>Login</value>
@@ -704,5 +704,29 @@
   </data>
   <data name="UseShellDrawnBackButtonToggleSwtich.OnContent" xml:space="preserve">
     <value>Botão voltar na barra de título</value>
+  </data>
+  <data name="DadosPessoaisPageEmailTextBlock.Text" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="DadosPessoaisPageNomeSobrenomeTextBlock.Text" xml:space="preserve">
+    <value>Nome e sobrenome</value>
+  </data>
+  <data name="DadosPessoaisPagePageHeader.Content" xml:space="preserve">
+    <value>Dados pessoais</value>
+  </data>
+  <data name="DadosPessoaisPageTelefoneTextBlock.Text" xml:space="preserve">
+    <value>Telefone</value>
+  </data>
+  <data name="DadosPessoaisPageTitle.Text" xml:space="preserve">
+    <value>Dados pessoais</value>
+  </data>
+  <data name="DadosPessoaisPageUsuarioTextBlock.Text" xml:space="preserve">
+    <value>Usuário</value>
+  </data>
+  <data name="ShellMenuDadosPessoais.Text" xml:space="preserve">
+    <value>Dados pessoais</value>
+  </data>
+  <data name="MercadoLivreServicesListNewItemErrorContent" xml:space="preserve">
+    <value>Erro ao criar novo item: \r\n{0}</value>
   </data>
 </root>

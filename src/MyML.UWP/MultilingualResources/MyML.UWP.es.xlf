@@ -527,8 +527,9 @@
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Búsqueda de</target>
         </trans-unit>
         <trans-unit id="ShellMenuInicio.Text" translate="yes" xml:space="preserve">
-          <source>Iniício</source>
+          <source>Início</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Iniício</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="ShellMenuComprar.Text" translate="yes" xml:space="preserve">
           <source>Compras</source>
@@ -788,7 +789,39 @@
         </trans-unit>
         <trans-unit id="CategoriaPagePageHeader.Content" translate="yes" xml:space="preserve">
           <source>Categorias</source>
-          <target state="new">Categorias</target>
+          <target state="needs-review-translation" state-qualifier="exact-match">Categorías</target>
+        </trans-unit>
+        <trans-unit id="DadosPessoaisPagePageHeader.Content" translate="yes" xml:space="preserve">
+          <source>Dados pessoais</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Nombre</target>
+        </trans-unit>
+        <trans-unit id="ShellMenuDadosPessoais.Text" translate="yes" xml:space="preserve">
+          <source>Dados pessoais</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Nombre</target>
+        </trans-unit>
+        <trans-unit id="DadosPessoaisPageNomeSobrenomeTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Nome e sobrenome</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Nombre y apellidos</target>
+        </trans-unit>
+        <trans-unit id="DadosPessoaisPageTitle.Text" translate="yes" xml:space="preserve">
+          <source>Dados pessoais</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Nombre</target>
+        </trans-unit>
+        <trans-unit id="DadosPessoaisPageEmailTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>E-mail</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Correo electrónico</target>
+        </trans-unit>
+        <trans-unit id="DadosPessoaisPageUsuarioTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Usuário</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Nombre de usuario</target>
+        </trans-unit>
+        <trans-unit id="DadosPessoaisPageTelefoneTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Telefone</source>
+          <target state="needs-review-translation" state-qualifier="exact-match">Teléfono</target>
+        </trans-unit>
+        <trans-unit id="MercadoLivreServicesListNewItemErrorContent" translate="yes" xml:space="preserve">
+          <source>Erro ao criar novo item: \r\n{0}</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Error al crear nuevo artículo: \r\n{0}</target>
         </trans-unit>
       </group>
     </body>

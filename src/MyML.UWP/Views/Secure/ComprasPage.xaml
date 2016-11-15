@@ -94,10 +94,7 @@
         </Grid.RowDefinitions>
 
         <!--  page header  -->
-        <controls:PageHeader Content="Compras" Background="{StaticResource MercadoLivreBackgroundColor}" Foreground="{StaticResource MercadoLivreForegroundColor}">
-           
-            
-        </controls:PageHeader>
+        <controls:PageHeader Content="Compras" Background="{StaticResource MercadoLivreBackgroundColor}" Foreground="{StaticResource MercadoLivreForegroundColor}" />
 
 
         <!--Produtos relacionados nas perguntas-->

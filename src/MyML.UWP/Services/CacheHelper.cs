@@ -24,7 +24,7 @@ namespace MyML.UWP.Services
                 var date = DateTime.MinValue;
                 if(DateTime.TryParse(ApplicationData.Current.LocalSettings.Values[sectionName].ToString(), out date))
                 {
-                    var result = DateTime.Now.Subtract(date).TotalSeconds >= TimeSpan.FromMinutes(2).TotalSeconds;
+                    var result = DateTime.Now.Subtract(date).TotalSeconds >= TimeSpan.FromSeconds(30).TotalSeconds;
 
                     if (result)
                         AddCache(sectionName);//Atualiza o cache

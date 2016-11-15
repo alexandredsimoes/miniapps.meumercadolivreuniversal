@@ -17,6 +17,7 @@ using Windows.Foundation.Metadata;
 using Windows.UI;
 using Microsoft.HockeyApp;
 using Microsoft.Services.Store.Engagement;
+using MyML.UWP.Views;
 using Template10.Controls;
 
 namespace MyML.UWP
@@ -131,6 +132,7 @@ namespace MyML.UWP
                 if (e.Exception != null)
                     await AppLogs.WriteError("App_UnhandledException", e.Exception);
 
+                Shell.SetBusy(false);
                 var dialog = new MessageDialog("Houve um erro inesperado", resourceLoader.GetString("ApplicationTitle"));
                 await dialog.ShowAsync();
             }

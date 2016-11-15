@@ -1,0 +1,88 @@
+﻿<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MyML.UWP.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:controls="using:Template10.Controls"
+    xmlns:converters="using:MyML.UWP.Converters"
+    xmlns:designViewModels="using:MyML.UWP.ViewModels.Design"
+    xmlns:windowsStateTriggers="using:WindowsStateTriggers"
+    x:Class="MyML.UWP.Views.Secure.DadosPessoaisPage"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance designViewModels:BuscaPageDesignViewModel, IsDesignTimeCreatable=True}"
+    x:Name="This">
+
+    <Page.Resources>
+        <converters:StringFormatConverter x:Key="StringFormatConverter" />
+    </Page.Resources>
+
+    <Page.DataContext>
+        <Binding Source="{StaticResource Locator}" Path="DadosPessoaisPage" />
+    </Page.DataContext>
+
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <!--  page header  -->
+        <controls:PageHeader Content="Dados Pessoais" Background="{StaticResource MercadoLivreBackgroundColor}" Foreground="{StaticResource MercadoLivreForegroundColor}" x:Uid="DadosPessoaisPagePageHeader">
+            <!--<controls:PageHeader.PrimaryCommands>
+                <AppBarButton Icon="Accept"></AppBarButton>
+            </controls:PageHeader.PrimaryCommands>-->
+        </controls:PageHeader>
+        <Border Grid.Row="1" Margin="10" BorderBrush="#66A6A5A5" BorderThickness="0.5">
+            <Border.Background>
+                <SolidColorBrush Color="{ThemeResource SystemChromeMediumLowColor}"/>
+            </Border.Background>
+            <StackPanel>
+                <TextBlock x:Uid="DadosPessoaisPageTitle" Text="Dados pessoais" Style="{StaticResource TitleTextBlockStyle}" FontWeight="Bold" Margin="10,8,0,0" />
+                <TextBlock x:Uid="DadosPessoaisPageNomeSobrenomeTextBlock" Text="Nome e sobrenome"  Margin="10,8,0,0"/>
+                <TextBlock Margin="10,0,0,8">
+                    <Run Text="{Binding Me.first_name}"/>
+                    <Run Text="{Binding Me.last_name}"/>
+                </TextBlock>
+                <Line X1="3000" VerticalAlignment="Bottom" StrokeThickness="0.5" X2="0.5" Y1="0.5" Y2="0.5" >
+                    <Line.Stroke>
+                        <SolidColorBrush Color="{ThemeResource SystemBaseLowColor}"/>
+                    </Line.Stroke>
+                </Line>
+
+
+                <TextBlock x:Uid="DadosPessoaisPageUsuarioTextBlock" Text="Usuário"  Margin="10,8,0,0"/>
+                <TextBlock Margin="10,0,0,8" Text="{Binding Me.nickname}" />
+                <Line X1="3000" VerticalAlignment="Bottom" Stroke="#B2000000" StrokeThickness="0.5" X2="0.5" Y1="0.5" Y2="0.5" />
+
+                <TextBlock x:Uid="DadosPessoaisPageEmailTextBlock" Text="E-mail"  Margin="10,8,0,0"/>
+                <TextBlock Margin="10,0,0,8" Text="{Binding Me.email}" />
+                <Line X1="3000" VerticalAlignment="Bottom" Stroke="#B2000000" StrokeThickness="0.5" X2="0.5" Y1="0.5" Y2="0.5" />
+
+                <TextBlock x:Uid="DadosPessoaisPageTelefoneTextBlock" Text="E-mail"  Margin="10,8,0,0"/>
+                <TextBlock Margin="10,0,0,8">
+                    <Run Text="{Binding Me.phone.area_code}"/>
+                    <Run Text="{Binding Me.phone.number}"/>
+                    <Run Text="{Binding Me.phone.extension}"/>
+                </TextBlock>
+                <Line X1="3000" VerticalAlignment="Bottom" Stroke="#B2000000" StrokeThickness="0.5" X2="0.5" Y1="0.5" Y2="0.5" />
+
+                <TextBlock Text="Endereço" Style="{StaticResource TitleTextBlockStyle}" FontWeight="Bold" Margin="10,8,0,8" />
+                <TextBlock Text="{Binding Me.address.address}" Margin="10,0,0,8"/>
+                <TextBlock Margin="10,0,0,8">
+                    <Run Text="{Binding Me.address.zip_code}"/>
+                    <Run Text="-"/>
+                    <Run Text="{Binding Me.address.city}"/>
+                    <Run Text="-"/>
+                    <Run Text="{Binding Me.address.state_name}"/>
+                </TextBlock>
+                <Line  X1="3000" VerticalAlignment="Bottom" Stroke="#B2000000" StrokeThickness="0.5" X2="0.5" Y1="0.5" Y2="0.5" />
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>
+

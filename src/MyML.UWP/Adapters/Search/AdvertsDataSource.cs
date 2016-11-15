@@ -36,34 +36,36 @@ namespace MyML.UWP.Adapters.Search
                                         new KeyValuePair<string, object>("status",query)
                                     });
 
-                items.ListTypes = await _mercadoLivreService.ListTypes(settings.SelectedCountry);
-                if (items.results_graph == null)
-                    items.results_graph = new List<Item>();
 
-                foreach (var item in items.results)
-                {
-                    var product = await _mercadoLivreService
-                        .GetItemDetails(item,
-                            new KeyValuePair<string, object>[]
-                            {
-                                new KeyValuePair<string, object>("attributes",
-                                    "id,title,price,thumbnail,stop_time,available_quantity")
-                            })
-                        .ConfigureAwait(false);
 
-                    if (product != null)
-                    {
-                        if (items.ListTypes != null)
-                            product.ListType = items.ListTypes.FirstOrDefault(c => c.id == product.listing_type_id);
-
-                        items.results_graph.Add(product);
-                    }
-                }
-
-                bool success = items == null ? false : items.paging.total > 0;
+                bool success = items != null && items.paging.total > 0;
 
                 if (success)
                 {
+                    items.ListTypes = await _mercadoLivreService.ListTypes(settings.SelectedCountry);
+                    if (items.results_graph == null)
+                        items.results_graph = new List<Item>();
+
+                    foreach (var item in items.results)
+                    {
+                        var product = await _mercadoLivreService
+                            .GetItemDetails(item,
+                                new KeyValuePair<string, object>[]
+                                {
+                                new KeyValuePair<string, object>("attributes",
+                                    "id,title,price,thumbnail,stop_time,available_quantity")
+                                })
+                            .ConfigureAwait(false);
+
+                        if (product != null)
+                        {
+                            if (items.ListTypes != null)
+                                product.ListType = items.ListTypes.FirstOrDefault(c => c.id == product.listing_type_id);
+
+                            items.results_graph.Add(product);
+                        }
+                    }
+
                     int virtualCount;
                     virtualCount = items.paging.total;
                     return new AdvertsResponse(items.results_graph.AsEnumerable(), virtualCount);

@@ -65,22 +65,19 @@ namespace MyML.UWP.ViewModels
 
         private void LoadShopping()
         {
-            HasOrders = false;
+            HasOrders = true;
             //Orders = await _mercadoLivreService.ListMyOrders(0, 0, new KeyValuePair<string, object>[] { });
             Orders = new IncrementalSearchSource<MyOrdersDataSource, MLOrderInfo>(0, 15, null, true);
 
             Orders.LoadMoreItemsStarted += () =>
             {
-                Views.Shell.SetBusy(true, "Carregando informações");
-                HasOrders = true;
+                Views.Shell.SetBusy(true, "Carregando informações");                
             };
 
             Orders.LoadMoreItemsCompleted += (paging) =>
             {
-                Views.Shell.SetBusy(false);
+                Views.Shell.SetBusy(false);                
             };
-
-
         }
 
         public RelayCommand Refresh { get; private set; }

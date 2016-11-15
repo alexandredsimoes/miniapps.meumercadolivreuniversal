@@ -16,15 +16,15 @@ using Windows.UI.Xaml.Data;
 
 namespace MyML.UWP.Adapters
 {
-    public class IncrementalSearchSource<T, K> : ObservableCollection<K>, ISupportIncrementalLoading
-        where T : IPagedSource<K>, new()
+    public class IncrementalSearchSource<T, TK> : ObservableCollection<TK>, ISupportIncrementalLoading
+        where T : IPagedSource<TK>, new()
     {
         private string CategoryName { get; set; }
         private bool SearchByName { get; set; }
         private int VirtualCount { get; set; }
         private int CurrentPage { get; set; }
         private int PageSize { get; set; }
-        private IPagedSource<K> Source { get; set; }
+        private IPagedSource<TK> Source { get; set; }
         private bool? UseHighResolutionImages { get; set; } = false;
 
         public IncrementalSearchSource(int pageIndex, int pageSize, string query, bool searchByProductName, bool? highResolutionImages)
@@ -82,13 +82,12 @@ namespace MyML.UWP.Adapters
                     //    OnLoadMoreItemsStarted();
                     //});
 
-                    IPagedResponse<K> result = await Source.GetPage(CategoryName, CurrentPage++, PageSize, SearchByName, UseHighResolutionImages);
+                    IPagedResponse<TK> result = await Source.GetPage(CategoryName, CurrentPage++, PageSize, SearchByName, UseHighResolutionImages);
                     this.VirtualCount = result == null ? 0 : result.VirtualCount;
 
 
                     if (result == null)
                     {
-
                         OnLoadMoreItemsCompleted(result?.Paging);//terminamos por aqui
                         return new LoadMoreItemsResult() { Count = 0 };
                     }
@@ -96,7 +95,7 @@ namespace MyML.UWP.Adapters
 
                     WindowWrapper.Current().Dispatcher.Dispatch(() =>
                     {
-                        foreach (K item in result.Items)
+                        foreach (TK item in result.Items)
                             Add(item);
 
 

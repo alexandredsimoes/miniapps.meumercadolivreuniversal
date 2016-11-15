@@ -11,8 +11,8 @@
     <AssemblyName>MyML.UWP</AssemblyName>
     <DefaultLanguage>pt-BR</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10586.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -233,6 +233,7 @@
     <Compile Include="ViewModels\CompraQualificarPageViewModel.cs" />
     <Compile Include="ViewModels\ComprarItemPageViewModel.cs" />
     <Compile Include="ViewModels\ComprasPageViewModel.cs" />
+    <Compile Include="ViewModels\DadosPessoaisPageViewModel.cs" />
     <Compile Include="ViewModels\Design\AlterarAtributoPageDesignViewModel.cs" />
     <Compile Include="ViewModels\Design\AnunciosDetalhesPageDesignViewModel.cs" />
     <Compile Include="ViewModels\Design\BuscaPageDesignViewModel.cs" />
@@ -329,6 +330,9 @@
     </Compile>
     <Compile Include="Views\Secure\ComprasPage.xaml.cs">
       <DependentUpon>ComprasPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Secure\DadosPessoaisPage.xaml.cs">
+      <DependentUpon>DadosPessoaisPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Secure\FavoritesPage.xaml.cs">
       <DependentUpon>FavoritesPage.xaml</DependentUpon>
@@ -568,6 +572,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Secure\DadosPessoaisPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Secure\FavoritesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -638,10 +646,10 @@
     <SDKReference Include="SQLite.UAP.2015, Version=3.8.11.1">
       <Name>SQLite for Universal App Platform</Name>
     </SDKReference>
-    <SDKReference Include="WindowsMobile, Version=10.0.10586.0">
+    <SDKReference Include="WindowsMobile, Version=10.0.14393.0">
       <Name>Windows Mobile Extensions for the UWP</Name>
     </SDKReference>
-    <SDKReference Include="WindowsTeam, Version=10.0.10586.0">
+    <SDKReference Include="WindowsTeam, Version=10.0.14393.0">
       <Name>Windows Team Extensions for the UWP</Name>
     </SDKReference>
   </ItemGroup>

@@ -588,4 +588,31 @@
   <data name="ProdutoPerguntasPagePageHeader.Text" xml:space="preserve">
     <value>Preguntas al vendedor</value>
   </data>
+  <data name="CategoriaPagePageHeader.Content" xml:space="preserve">
+    <value>Categorías</value>
+  </data>
+  <data name="DadosPessoaisPagePageHeader.Content" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="ShellMenuDadosPessoais.Text" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="DadosPessoaisPageNomeSobrenomeTextBlock.Text" xml:space="preserve">
+    <value>Nombre y apellidos</value>
+  </data>
+  <data name="DadosPessoaisPageTitle.Text" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="DadosPessoaisPageEmailTextBlock.Text" xml:space="preserve">
+    <value>Correo electrónico</value>
+  </data>
+  <data name="DadosPessoaisPageUsuarioTextBlock.Text" xml:space="preserve">
+    <value>Nombre de usuario</value>
+  </data>
+  <data name="DadosPessoaisPageTelefoneTextBlock.Text" xml:space="preserve">
+    <value>Teléfono</value>
+  </data>
+  <data name="MercadoLivreServicesListNewItemErrorContent" xml:space="preserve">
+    <value>Error al crear nuevo artículo: \r\n{0}</value>
+  </data>
 </root>
