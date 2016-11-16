@@ -92,7 +92,7 @@
 
                             <TextBlock Text="{Binding name}" Grid.Row="1" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Top" TextAlignment="Center"/>
                             <ContentControl Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <Path Data="{Binding PathData}" Stretch="Uniform" Fill="#FF464545" Width="40" Height="40" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
+                                <Path Data="{Binding PathData}" Stretch="Uniform" Fill="{ThemeResource TextControlForeground}" Width="40" Height="40" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
                                     <Path.RenderTransform>
                                         <TransformGroup>
                                             <TransformGroup.Children>
@@ -145,8 +145,8 @@
                             <TextBlock
                                 Text="{Binding title}"
                                 TextAlignment="Left"
-                                TextWrapping="Wrap" Foreground="Black"  Grid.Row="1" />
-                            <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="{Binding price, ConverterParameter=\{0:c2\}, Converter={StaticResource StringFormatConverter}}" Foreground="Black" />
+                                TextWrapping="Wrap"  Grid.Row="1" />
+                            <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="{Binding price, ConverterParameter=\{0:c2\}, Converter={StaticResource StringFormatConverter}}" />
                         </StackPanel>
                     </Grid>
 
