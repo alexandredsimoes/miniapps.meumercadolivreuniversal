@@ -62,7 +62,7 @@
         </Grid.RowDefinitions>
 
         <!--  page header  -->
-        <controls:PageHeader Content="Informações sobre o vendedor" Background="{StaticResource MercadoLivreBackgroundColor}" Foreground="{StaticResource MercadoLivreForegroundColor}">
+        <controls:PageHeader Content="Informações sobre o vendedor"  >
 
         </controls:PageHeader>
         <StackPanel Grid.Row="1" Margin="15">

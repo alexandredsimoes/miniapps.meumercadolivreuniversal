@@ -32,7 +32,7 @@
         </Grid.RowDefinitions>
 
         <!--  page header  -->
-        <controls:PageHeader Content="Saldo no MercadoPago" Background="{StaticResource MercadoLivreBackgroundColor}" Foreground="{StaticResource MercadoLivreForegroundColor}">
+        <controls:PageHeader Content="Saldo no MercadoPago"  >
             <!--<controls:PageHeader.PrimaryCommands>
                 <AppBarButton Icon="Accept"></AppBarButton>
             </controls:PageHeader.PrimaryCommands>-->

@@ -244,6 +244,7 @@
     <Compile Include="Controllers\MercadoLivreController.cs" />
     <Compile Include="Controllers\MLLoginController.cs" />
     <Compile Include="Controllers\NotificacoesController.cs" />
+    <Compile Include="Controllers\PrivacidadeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -297,7 +298,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <None Include="Properties\PublishProfiles\meumercadolivre - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\meumercadolivre.pubxml" />
     <None Include="Scripts\jquery-2.2.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -333,6 +334,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\MercadoLivre\Login.cshtml" />
+    <Content Include="Views\Privacidade\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

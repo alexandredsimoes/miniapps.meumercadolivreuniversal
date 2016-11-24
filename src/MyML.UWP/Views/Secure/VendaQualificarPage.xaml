@@ -274,7 +274,7 @@
         </Grid.RowDefinitions>
 
         <!--  page header  -->
-        <controls:PageHeader Content="Qualificar" Background="{StaticResource MercadoLivreBackgroundColor}" Foreground="{StaticResource MercadoLivreForegroundColor}">
+        <controls:PageHeader Content="Qualificar"  >
 
         </controls:PageHeader>
         <StackPanel Grid.Row="1" Margin="15">

@@ -32,9 +32,9 @@
 
         <!--  page header  -->
         <controls:PageHeader x:Uid="ProdutoPerguntasPagePageHeader"
-                             Background="{StaticResource MercadoLivreBackgroundColor}"
+                             
                              Content="Perguntas ao vendedor"
-                             Foreground="{StaticResource MercadoLivreForegroundColor}">
+                             >
             <!--<controls:PageHeader.Foreground>
                 <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
             </controls:PageHeader.Foreground>

@@ -92,7 +92,7 @@
         </Grid.RowDefinitions>
 
         <!--  page header  -->
-        <controls:PageHeader Content="Detalhe da venda" Background="{StaticResource MercadoLivreBackgroundColor}" Foreground="{StaticResource MercadoLivreForegroundColor}">
+        <controls:PageHeader Content="Detalhe da venda"  >
 
         </controls:PageHeader>
         <ScrollViewer Grid.Row="1" Padding="10">

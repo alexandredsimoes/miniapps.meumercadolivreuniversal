@@ -340,9 +340,9 @@
 
             <!--  page header  -->
             <controls:PageHeader x:Uid="ProdutoDetalhePagePageHeader"
-                                 Background="{StaticResource MercadoLivreBackgroundColor}"
+                                 
                                  Content="Produto"
-                                 Foreground="{StaticResource MercadoLivreForegroundColor}" />
+                                  />
 
 
             <!--  page content  -->

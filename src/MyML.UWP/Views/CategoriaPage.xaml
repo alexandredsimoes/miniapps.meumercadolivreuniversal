@@ -73,7 +73,7 @@
         </Grid.RowDefinitions>
 
         <!--  page header  -->
-        <controls:PageHeader x:Uid="CategoriaPagePageHeader" Content="Categoria" Background="{StaticResource MercadoLivreBackgroundColor}" Foreground="{StaticResource MercadoLivreForegroundColor}">
+        <controls:PageHeader x:Uid="CategoriaPagePageHeader" Content="Categoria"  >
 
         </controls:PageHeader>
 

@@ -175,20 +175,20 @@ namespace MyML.UWP
                 }
 
                 //windows title bar      
-                Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar.BackgroundColor = Color.FromArgb(100, 254, 220, 19);
-                Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar.ForegroundColor =
-                    Colors.White;
-                Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar.ButtonBackgroundColor = Color.FromArgb(100, 254, 220, 19);
-                Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar.ButtonForegroundColor =
-                    Colors.White;
+                //Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar.BackgroundColor = Color.FromArgb(100, 254, 220, 19);
+                //Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar.ForegroundColor =
+                //    Colors.White;
+                //Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar.ButtonBackgroundColor = Color.FromArgb(100, 254, 220, 19);
+                //Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar.ButtonForegroundColor =
+                //    Colors.White;
 
                 //StatusBar for Mobile
 
                 if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
                 {
-                    Windows.UI.ViewManagement.StatusBar.GetForCurrentView().BackgroundColor = Color.FromArgb(100, 254, 220, 19);
-                    Windows.UI.ViewManagement.StatusBar.GetForCurrentView().BackgroundOpacity = 1;
-                    Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = Colors.White;
+                    //Windows.UI.ViewManagement.StatusBar.GetForCurrentView().BackgroundColor = Color.FromArgb(100, 254, 220, 19);
+                    //Windows.UI.ViewManagement.StatusBar.GetForCurrentView().BackgroundOpacity = 1;
+                    //Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = Colors.White;
                 }
             }
             await Task.CompletedTask;

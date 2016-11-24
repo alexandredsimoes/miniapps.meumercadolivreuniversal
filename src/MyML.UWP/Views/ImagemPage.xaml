@@ -25,9 +25,9 @@
 
         <!--  page header  -->
         <controls:PageHeader x:Uid="ImagemPagePageHeader"
-                             Background="{StaticResource MercadoLivreBackgroundColor}"
+                             
                              Content="Imagem"
-                             Foreground="{StaticResource MercadoLivreForegroundColor}">
+                             >
             <!--<controls:PageHeader.PrimaryCommands>
                 <AppBarButton Icon="Accept"></AppBarButton>
             </controls:PageHeader.PrimaryCommands>-->

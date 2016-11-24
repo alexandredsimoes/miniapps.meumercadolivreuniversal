@@ -69,9 +69,9 @@
 
         <!--  page header  -->
         <controls:PageHeader x:Uid="ProdutoDetalheEnvioPagePageHeader"
-                             Background="{StaticResource MercadoLivreBackgroundColor}"
+                             
                              Content="Forma de envio"
-                             Foreground="{StaticResource MercadoLivreForegroundColor}">
+                             >
             <!--<controls:PageHeader.Foreground>
                 <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
             </controls:PageHeader.Foreground>

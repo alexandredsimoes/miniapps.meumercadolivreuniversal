@@ -32,7 +32,7 @@
         </Grid.RowDefinitions>
 
         <!--  page header  -->
-        <controls:PageHeader Content="Dados Pessoais" Background="{StaticResource MercadoLivreBackgroundColor}" Foreground="{StaticResource MercadoLivreForegroundColor}" x:Uid="DadosPessoaisPagePageHeader">
+        <controls:PageHeader Content="Dados Pessoais"   x:Uid="DadosPessoaisPagePageHeader">
             <!--<controls:PageHeader.PrimaryCommands>
                 <AppBarButton Icon="Accept"></AppBarButton>
             </controls:PageHeader.PrimaryCommands>-->

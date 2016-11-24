@@ -351,9 +351,9 @@
         </Grid.RowDefinitions>
 
         <!--  header  -->
-        <controls:PageHeader Background="{StaticResource MercadoLivreBackgroundColor}"
+        <controls:PageHeader 
                              Content="Configurações"
-                             Foreground="{StaticResource MercadoLivreForegroundColor}"
+                             
                              Frame="{x:Bind Frame}">
             <Interactivity:Interaction.Behaviors>
                 <Behaviors:EllipsisBehavior Visibility="Auto" />

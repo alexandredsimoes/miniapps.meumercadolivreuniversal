@@ -23,34 +23,7 @@ namespace MyML.UWP.Usercontrols
         public AdsControl()
         {
             this.InitializeComponent();
-
-            //if (!App.ExibirAds)
-            //{
-            //    AdMediatorMobile.Visibility = Visibility.Collapsed;
-            //    AdMediatorMobile.Opacity = 0;
-            //}
-            //else
-            //{
-            //    AdMediatorMobile.Visibility = Visibility.Visible;
-            //    AdMediatorMobile.Opacity = 1;
-
-            //    var family = Windows.System.Profile.AnalyticsInfo.VersionInfo.DeviceFamily;
-            //    if (family.Equals("Windows.Desktop") || family.Equals("Windows.Xbox") || family.Equals("Windows.IoT"))
-            //    {
-            //        AdMediatorMobile.Height = 90;
-            //        AdMediatorMobile.Width = 728;
-            //    }
-            //    else if (family.Equals("Windows.Mobile"))
-            //    {
-            //        AdMediatorMobile.Height = 50;
-            //        AdMediatorMobile.Width = 300;
-            //    }
-            //    else
-            //    {
-            //        AdMediatorMobile.Height = 50;
-            //        AdMediatorMobile.Width = 300;
-            //    }
-            //}
+           
         }        
     }
 }
