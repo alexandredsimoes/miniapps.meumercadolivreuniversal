@@ -1,2 +1,2 @@
-MainPackage=C:\Users\Alexandre\Git\meumercadolivre.universal\src\MyML.UWP\bin\x64\Release\MyML.UWP_1.1.166.0_x64.appx
-SymbolPackage=C:\Users\Alexandre\Git\Saida\MyML.UWP_1.1.166.0_Test\MyML.UWP_1.1.166.0_x64.appxsym
+MainPackage=C:\Users\Alexandre\Git\meumercadolivre.universal\src\MyML.UWP\bin\x64\Release\MyML.UWP_1.1.167.0_x64.appx
+SymbolPackage=C:\Users\Alexandre\Git\Saida\MyML.UWP_1.1.167.0_Test\MyML.UWP_1.1.167.0_x64.appxsym
