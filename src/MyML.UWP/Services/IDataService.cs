@@ -1,5 +1,4 @@
 ﻿using MyML.UWP.Models.Mercadolivre;
-using SQLite.Net.Async;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,7 +8,7 @@ namespace MyML.UWP.Services
 {
     public interface IDataService
     {
-        SQLiteAsyncConnection DbContext {get;}  
+        
         string GetMLConfig(string key);
         bool IsAuthenticated();
         void SaveConfig(string key, string value);

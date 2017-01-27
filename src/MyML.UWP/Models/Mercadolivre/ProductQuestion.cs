@@ -1,6 +1,4 @@
-﻿using SQLite.Net.Attributes;
-using SQLiteNetExtensions.Attributes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,7 +6,7 @@ namespace MyML.UWP.Models.Mercadolivre
 {
     public class Answer
     {
-        [PrimaryKey]
+        
         public int AnswerId { get; set; }
         public string text { get; set; }
         public string status { get; set; }
@@ -17,7 +15,7 @@ namespace MyML.UWP.Models.Mercadolivre
 
     public class ProductQuestionContent
     {
-        [PrimaryKey,AutoIncrement]
+        
         public int ProductQuestionContentId { get; set; }
         public DateTime? date_created { get; set; }
         public string item_id { get; set; }
@@ -25,16 +23,16 @@ namespace MyML.UWP.Models.Mercadolivre
         public string status { get; set; }
         public string text { get; set; }
         public long? id { get; set; }
-        [Ignore]
+        
         public Answer answer { get; set; }
 
-        [ForeignKey(typeof(Answer))]
+        
         public int AnswerId { get; set; }
 
-        [ForeignKey(typeof(Item))]
+        
         public int ItemId { get; set; }
 
-        [Ignore]
+        
         public Item Item { get; set; }
         public string nickname { get; set; }
         public string buyer_experience { get; set; }

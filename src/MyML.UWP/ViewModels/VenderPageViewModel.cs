@@ -89,10 +89,11 @@ namespace MyML.UWP.ViewModels
                 if (result != null)
                 {
                     var message = new StringBuilder();
-
+                    
                     foreach (var item in result.cause)
                     {
-                        message.Append($"{item.code}-{item.message}{Environment.NewLine}");
+                        var cause = item as Cause;
+                        message.Append($"{cause?.code}-{cause?.message}{Environment.NewLine}");
                     }
                     await new MessageDialog($"Ocorreu o seguinte erro:{Environment.NewLine}{message.ToString()}",
                                                 _resourceLoader.GetString("ApplicationTitle")).ShowAsync();

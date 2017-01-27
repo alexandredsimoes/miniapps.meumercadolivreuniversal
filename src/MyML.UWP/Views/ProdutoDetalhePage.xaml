@@ -551,10 +551,10 @@
                                                     Command="{Binding BuyItem}"
                                                     CommandParameter="web"
                                                     Text="Pela web" />
-                                    <MenuFlyoutItem x:Uid="ProdutoDetalhePageMenuItemApp"
+                                    <!--<MenuFlyoutItem x:Uid="ProdutoDetalhePageMenuItemApp"
                                                     Command="{Binding BuyItem}"
                                                     CommandParameter="app"
-                                                    Text="Pelo aplicativo" />
+                                                    Text="Pelo aplicativo" />-->
                                 </MenuFlyout>
                             </Button.Flyout>
                         </Button>

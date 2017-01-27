@@ -13,9 +13,10 @@ namespace MyML.UWP.Models.Mercadolivre
 
     public class AvailableOrder
     {
-        public string id { get; set; }
+        public object id { get; set; }
         public string name { get; set; }
     }
+
 
     //public class AvailableFilterMyItems
     //{
@@ -24,7 +25,7 @@ namespace MyML.UWP.Models.Mercadolivre
     //    public List<Value2> values { get; set; }
     //}
 
-    
+
 
     public class MLMyItemsSearchResult
     {

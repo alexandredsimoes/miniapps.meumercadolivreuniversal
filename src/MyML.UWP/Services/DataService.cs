@@ -9,33 +9,20 @@ using System.Threading.Tasks;
 using Windows.Globalization.DateTimeFormatting;
 using Windows.Storage;
 using MyML.UWP.Models.Mercadolivre;
-using SQLite.Net.Async;
-using SQLite.Net;
-using SQLite.Net.Platform.WinRT;
 using System.IO;
+using Microsoft.EntityFrameworkCore;
 
 namespace MyML.UWP.Services
 {
     public class DataService : IDataService
     {
-        private readonly SQLiteConnectionWithLock sqliteConnection;
-        private string databasePath = Path.Combine(ApplicationData.Current.LocalFolder.Path, "myml.universal.db");
-        SQLiteAsyncConnection _DbContext;
+                
         public DataService()
-        {
-            sqliteConnection = new SQLiteConnectionWithLock(new SQLitePlatformWinRT(), new SQLiteConnectionString(databasePath, false));
-            _DbContext = new SQLiteAsyncConnection(()=>sqliteConnection);
+        {        
             //TODO: Rever isso
         }
 
-        public SQLiteAsyncConnection DbContext
-        {
-            get
-            {
-                return _DbContext; 
-            }
-        }
-
+        
         public Task DeleteConfig(string key)
         {
             if (ApplicationData.Current.LocalSettings.Values.ContainsKey(key))
@@ -86,7 +73,11 @@ namespace MyML.UWP.Services
 
         public async Task<IEnumerable<ProductQuestionContent>> ListQuestions()
         {
-            return await _DbContext.Table<ProductQuestionContent>().ToListAsync();
+            using(var db = new MercadoLivreContext())
+            {
+                return await db.ProductQuestions.ToListAsync();
+            }
+            
             //return await _context.Questions.ToListAsync();
         }
 
@@ -97,18 +88,11 @@ namespace MyML.UWP.Services
 
         public async Task<bool> SaveQuestion(ProductQuestionContent question)
         {
-            return await _DbContext.InsertAsync(question) > 0;
-            return false;
-            //_context.Entry(question).State = EntityState.Added;
-            //return await _context.SaveChangesAsync() > 0;
-        }
-
-        public async void Initialize()
-        {
-            await _DbContext.CreateTableAsync<ProductQuestionContent>();
-            await _DbContext.CreateTableAsync<Answer>();
-            await _DbContext.CreateTableAsync<Item>();
-
-        }
+            using (var db = new MercadoLivreContext())
+            {
+                db.ProductQuestions.Add(question);
+                return await db.SaveChangesAsync() > 0;
+            }            
+        }        
     }
 }

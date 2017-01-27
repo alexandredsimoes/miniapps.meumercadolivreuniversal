@@ -3,11 +3,11 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"      
       xmlns:controls="using:Template10.Controls"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:universal="using:Microsoft.Advertising.WinRT.UI"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"      
       xmlns:views="using:MyML.UWP.Views"
       xmlns:viewsSecure="using:MyML.UWP.Views.Secure"
       xmlns:windowsStateTriggers="using:WindowsStateTriggers"
+      xmlns:universal="using:Microsoft.Advertising.WinRT.UI"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
       mc:Ignorable="d">
 
@@ -19,6 +19,8 @@
         </Grid.RowDefinitions>
 
 
+        
+        
         <universal:AdControl x:Name="AdMediatorMobile"
                              Grid.Row="0"
                              Width="300"

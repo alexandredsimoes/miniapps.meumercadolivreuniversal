@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26020.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyML.UWP", "MyML.UWP\MyML.UWP.csproj", "{C4594ECC-3B09-4F7F-AAA9-10A974AEDE8F}"
 EndProject
@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyML.BackendServices.Jobs",
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug .NET Native|Any CPU = Debug .NET Native|Any CPU
+		Debug .NET Native|ARM = Debug .NET Native|ARM
+		Debug .NET Native|x64 = Debug .NET Native|x64
+		Debug .NET Native|x86 = Debug .NET Native|x86
 		Debug|Any CPU = Debug|Any CPU
 		Debug|ARM = Debug|ARM
 		Debug|x64 = Debug|x64
@@ -23,6 +27,16 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C4594ECC-3B09-4F7F-AAA9-10A974AEDE8F}.Debug .NET Native|Any CPU.ActiveCfg = Debug .NET Native|x86
+		{C4594ECC-3B09-4F7F-AAA9-10A974AEDE8F}.Debug .NET Native|ARM.ActiveCfg = Debug .NET Native|ARM
+		{C4594ECC-3B09-4F7F-AAA9-10A974AEDE8F}.Debug .NET Native|ARM.Build.0 = Debug .NET Native|ARM
+		{C4594ECC-3B09-4F7F-AAA9-10A974AEDE8F}.Debug .NET Native|ARM.Deploy.0 = Debug .NET Native|ARM
+		{C4594ECC-3B09-4F7F-AAA9-10A974AEDE8F}.Debug .NET Native|x64.ActiveCfg = Debug .NET Native|x64
+		{C4594ECC-3B09-4F7F-AAA9-10A974AEDE8F}.Debug .NET Native|x64.Build.0 = Debug .NET Native|x64
+		{C4594ECC-3B09-4F7F-AAA9-10A974AEDE8F}.Debug .NET Native|x64.Deploy.0 = Debug .NET Native|x64
+		{C4594ECC-3B09-4F7F-AAA9-10A974AEDE8F}.Debug .NET Native|x86.ActiveCfg = Debug .NET Native|x86
+		{C4594ECC-3B09-4F7F-AAA9-10A974AEDE8F}.Debug .NET Native|x86.Build.0 = Debug .NET Native|x86
+		{C4594ECC-3B09-4F7F-AAA9-10A974AEDE8F}.Debug .NET Native|x86.Deploy.0 = Debug .NET Native|x86
 		{C4594ECC-3B09-4F7F-AAA9-10A974AEDE8F}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{C4594ECC-3B09-4F7F-AAA9-10A974AEDE8F}.Debug|ARM.ActiveCfg = Debug|ARM
 		{C4594ECC-3B09-4F7F-AAA9-10A974AEDE8F}.Debug|ARM.Build.0 = Debug|ARM
@@ -43,6 +57,14 @@ Global
 		{C4594ECC-3B09-4F7F-AAA9-10A974AEDE8F}.Release|x86.ActiveCfg = Release|x86
 		{C4594ECC-3B09-4F7F-AAA9-10A974AEDE8F}.Release|x86.Build.0 = Release|x86
 		{C4594ECC-3B09-4F7F-AAA9-10A974AEDE8F}.Release|x86.Deploy.0 = Release|x86
+		{5490B9D7-093D-4AB1-B8C9-D6FC30BC69CB}.Debug .NET Native|Any CPU.ActiveCfg = Debug .NET Native|Any CPU
+		{5490B9D7-093D-4AB1-B8C9-D6FC30BC69CB}.Debug .NET Native|Any CPU.Build.0 = Debug .NET Native|Any CPU
+		{5490B9D7-093D-4AB1-B8C9-D6FC30BC69CB}.Debug .NET Native|ARM.ActiveCfg = Debug .NET Native|Any CPU
+		{5490B9D7-093D-4AB1-B8C9-D6FC30BC69CB}.Debug .NET Native|ARM.Build.0 = Debug .NET Native|Any CPU
+		{5490B9D7-093D-4AB1-B8C9-D6FC30BC69CB}.Debug .NET Native|x64.ActiveCfg = Debug .NET Native|Any CPU
+		{5490B9D7-093D-4AB1-B8C9-D6FC30BC69CB}.Debug .NET Native|x64.Build.0 = Debug .NET Native|Any CPU
+		{5490B9D7-093D-4AB1-B8C9-D6FC30BC69CB}.Debug .NET Native|x86.ActiveCfg = Debug .NET Native|Any CPU
+		{5490B9D7-093D-4AB1-B8C9-D6FC30BC69CB}.Debug .NET Native|x86.Build.0 = Debug .NET Native|Any CPU
 		{5490B9D7-093D-4AB1-B8C9-D6FC30BC69CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5490B9D7-093D-4AB1-B8C9-D6FC30BC69CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5490B9D7-093D-4AB1-B8C9-D6FC30BC69CB}.Debug|ARM.ActiveCfg = Debug|Any CPU
@@ -59,6 +81,14 @@ Global
 		{5490B9D7-093D-4AB1-B8C9-D6FC30BC69CB}.Release|x64.Build.0 = Release|Any CPU
 		{5490B9D7-093D-4AB1-B8C9-D6FC30BC69CB}.Release|x86.ActiveCfg = Release|Any CPU
 		{5490B9D7-093D-4AB1-B8C9-D6FC30BC69CB}.Release|x86.Build.0 = Release|Any CPU
+		{20F8242F-8C55-4F2F-9783-EE16BB4737D8}.Debug .NET Native|Any CPU.ActiveCfg = Debug .NET Native|Any CPU
+		{20F8242F-8C55-4F2F-9783-EE16BB4737D8}.Debug .NET Native|Any CPU.Build.0 = Debug .NET Native|Any CPU
+		{20F8242F-8C55-4F2F-9783-EE16BB4737D8}.Debug .NET Native|ARM.ActiveCfg = Debug .NET Native|ARM
+		{20F8242F-8C55-4F2F-9783-EE16BB4737D8}.Debug .NET Native|ARM.Build.0 = Debug .NET Native|ARM
+		{20F8242F-8C55-4F2F-9783-EE16BB4737D8}.Debug .NET Native|x64.ActiveCfg = Debug .NET Native|x64
+		{20F8242F-8C55-4F2F-9783-EE16BB4737D8}.Debug .NET Native|x64.Build.0 = Debug .NET Native|x64
+		{20F8242F-8C55-4F2F-9783-EE16BB4737D8}.Debug .NET Native|x86.ActiveCfg = Debug .NET Native|x86
+		{20F8242F-8C55-4F2F-9783-EE16BB4737D8}.Debug .NET Native|x86.Build.0 = Debug .NET Native|x86
 		{20F8242F-8C55-4F2F-9783-EE16BB4737D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{20F8242F-8C55-4F2F-9783-EE16BB4737D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20F8242F-8C55-4F2F-9783-EE16BB4737D8}.Debug|ARM.ActiveCfg = Debug|ARM
@@ -75,6 +105,14 @@ Global
 		{20F8242F-8C55-4F2F-9783-EE16BB4737D8}.Release|x64.Build.0 = Release|x64
 		{20F8242F-8C55-4F2F-9783-EE16BB4737D8}.Release|x86.ActiveCfg = Release|x86
 		{20F8242F-8C55-4F2F-9783-EE16BB4737D8}.Release|x86.Build.0 = Release|x86
+		{8D2B7D1A-11F3-4405-9916-10C5F086EC11}.Debug .NET Native|Any CPU.ActiveCfg = Debug .NET Native|Any CPU
+		{8D2B7D1A-11F3-4405-9916-10C5F086EC11}.Debug .NET Native|Any CPU.Build.0 = Debug .NET Native|Any CPU
+		{8D2B7D1A-11F3-4405-9916-10C5F086EC11}.Debug .NET Native|ARM.ActiveCfg = Debug .NET Native|Any CPU
+		{8D2B7D1A-11F3-4405-9916-10C5F086EC11}.Debug .NET Native|ARM.Build.0 = Debug .NET Native|Any CPU
+		{8D2B7D1A-11F3-4405-9916-10C5F086EC11}.Debug .NET Native|x64.ActiveCfg = Debug .NET Native|Any CPU
+		{8D2B7D1A-11F3-4405-9916-10C5F086EC11}.Debug .NET Native|x64.Build.0 = Debug .NET Native|Any CPU
+		{8D2B7D1A-11F3-4405-9916-10C5F086EC11}.Debug .NET Native|x86.ActiveCfg = Debug .NET Native|Any CPU
+		{8D2B7D1A-11F3-4405-9916-10C5F086EC11}.Debug .NET Native|x86.Build.0 = Debug .NET Native|Any CPU
 		{8D2B7D1A-11F3-4405-9916-10C5F086EC11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8D2B7D1A-11F3-4405-9916-10C5F086EC11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D2B7D1A-11F3-4405-9916-10C5F086EC11}.Debug|ARM.ActiveCfg = Debug|Any CPU

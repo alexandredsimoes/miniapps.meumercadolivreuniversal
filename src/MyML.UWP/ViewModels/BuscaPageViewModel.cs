@@ -89,9 +89,17 @@ namespace MyML.UWP.ViewModels
             if (parameter != null && mode == NavigationMode.New)
             {
                 var search = parameter.ToString().Split('|');
-                Searchterm = search[0];
-                SearchType = search[1];
-                BuscaExecute(new []{Searchterm, SearchType});
+                if (search.Length == 1)
+                {
+                    Searchterm = search[0];
+                    BuscaExecute(new[] { Searchterm, "search" });
+                }
+                else
+                {
+                    Searchterm = search[0];
+                    SearchType = search[1];
+                    BuscaExecute(new[] { Searchterm, SearchType });
+                }
             }
             return Task.CompletedTask;
         }

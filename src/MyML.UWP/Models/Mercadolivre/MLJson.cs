@@ -1,5 +1,4 @@
 ﻿using GalaSoft.MvvmLight;
-using SQLite.Net.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -174,15 +173,14 @@ namespace MyML.UWP.Models.Mercadolivre
         public Item()
         {
             IsFavorite = false;
-        }
-        [PrimaryKey]
+        }        
         public int ItemId { get; set; }
         public string id { get; set; }
         public double? seller_id { get; set; }
         public string site_id { get; set; }
         public string title { get; set; }
         public string subtitle { get; set; }
-        [Ignore]
+        
         public Seller seller { get; set; }
         public double? price { get; set; }
         public string currency_id { get; set; }
@@ -195,27 +193,27 @@ namespace MyML.UWP.Models.Mercadolivre
         public string permalink { get; set; }
         public string thumbnail { get; set; }
         public bool? accepts_mercadopago { get; set; }
-        [Ignore]
+        
         public Installments installments { get; set; }
-        [Ignore]
+        
         public Address address { get; set; }
-        [Ignore]
+        
         public Shipping shipping { get; set; }
-        [Ignore]
+        
         public SellerAddress seller_address { get; set; }
-        [Ignore]
+        
         public List<object> attributes { get; set; }
-        [Ignore]
+        
         public List<Picture> pictures { get; set; }
 
         public double? original_price { get; set; }
         public string category_id { get; set; }
-        [Ignore]
+        
         public DifferentialPricing differential_pricing { get; set; }
-        [Ignore]
+        
         public List<object> variation_attributes { get; set; }
         public string variation_id { get; set; }
-        [Ignore]
+        
         public MLListType ListType { get; set; }
         public bool IsFavorite { get; set; }
         public string status { get; set; }

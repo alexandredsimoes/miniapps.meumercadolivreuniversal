@@ -106,14 +106,14 @@ namespace MyML.UWP.Models.Mercadolivre
     {
         public string area_code { get; set; }
         public string number { get; set; }
-        public object extension { get; set; }
+        public string extension { get; set; }
     }
 
     public class AlternativePhone2
     {
         public string area_code { get; set; }
         public string number { get; set; }
-        public object extension { get; set; }
+        public string extension { get; set; }
     }
 
     //public class Seller

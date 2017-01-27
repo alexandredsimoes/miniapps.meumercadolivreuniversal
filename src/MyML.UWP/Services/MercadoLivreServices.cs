@@ -434,8 +434,9 @@ namespace MyML.UWP.Services
                         {
                             foreach (var item in error.cause)
                             {
-                                errorMessage += item.message;
-                                await AppLogs.WriteLog("     ", item.code + " - " + item.message, "");
+                                var cause = item as Cause;
+                                errorMessage += cause?.message;
+                                await AppLogs.WriteLog("     ", cause?.code + " - " + cause?.message, "");
                             }
                         }
                     }
@@ -1208,13 +1209,13 @@ namespace MyML.UWP.Services
                     var error = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<MLErrorRequest>(result)).ConfigureAwait(false);
 
                     if (error != null)
-                    {
-
+                    {                        
                         await AppLogs.WriteLog("MercadoLivreServices.ValidateNewItem()", "Erro durante a criação do novo item", "").ConfigureAwait(false);
                         if (error.cause != null)
                             foreach (var item in error.cause)
                             {
-                                await AppLogs.WriteLog("     ", item.code + " - " + item.message, "");
+                                var cause = item as Cause;
+                                await AppLogs.WriteLog("     ", cause?.code + " - " + cause?.message, "");
                             }
                     }
 
@@ -1266,7 +1267,8 @@ namespace MyML.UWP.Services
                         if (error.cause != null)
                             foreach (var item in error.cause)
                             {
-                                await AppLogs.WriteLog("     ", item.code + " - " + item.message, "");
+                                var cause = item as Cause;
+                                await AppLogs.WriteLog("     ", cause?.code + " - " + cause?.message, "");
                             }
                     }
 

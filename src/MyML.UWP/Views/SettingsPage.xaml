@@ -554,12 +554,12 @@
                         <StackPanel Orientation="Vertical">
 
 
-                            <Button Margin="10"
+                            <!--<Button Margin="10"
                                     HorizontalAlignment="Stretch"
                                     Command="{Binding RemoveAds}"
                                     Content="Não quero ver propagandas"
                                     Padding="5"
-                                    Visibility="Visible" />
+                                    Visibility="Visible" />-->
                             <Line Margin="5"
                                   Stroke="Black"
                                   X1="1000" />

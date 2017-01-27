@@ -16,9 +16,10 @@ using Windows.ApplicationModel;
 using Windows.Foundation.Metadata;
 using Windows.UI;
 using Microsoft.HockeyApp;
-using Microsoft.Services.Store.Engagement;
 using MyML.UWP.Views;
 using Template10.Controls;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Services.Store.Engagement;
 
 namespace MyML.UWP
 {
@@ -43,6 +44,10 @@ namespace MyML.UWP
 
             RegistrarAplicativoNoDevCenter();
 
+            using(var db = new MercadoLivreContext())
+            {
+                db.Database.Migrate();
+            }
             #region App settings
 
             var settings = SettingsService.Instance;
@@ -239,10 +244,6 @@ namespace MyML.UWP
                 else
                 {
                     ApplicationData.Current.LocalSettings.Values.Add(Consts.CONFIG_KEY_EXECUCOES, 1);
-
-                    //Nunca executamos, cria o banco de dados
-                    DataService ds = new DataService();
-                    ds.Initialize();
                 }
 
 

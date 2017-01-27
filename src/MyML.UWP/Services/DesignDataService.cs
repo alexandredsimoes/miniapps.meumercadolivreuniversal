@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using MyML.UWP.Models.Mercadolivre;
-using SQLite.Net.Async;
+
 
 namespace MyML.UWP.Services
 {
     public class DesignDataService : IDataService
     {
-        public SQLiteAsyncConnection DbContext { get; }
         public string GetMLConfig(string key)
         {
             return String.Empty;
