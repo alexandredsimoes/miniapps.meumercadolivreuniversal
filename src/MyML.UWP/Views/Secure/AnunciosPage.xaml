@@ -424,15 +424,7 @@
             </Border>
         </DataTemplate>
     </Page.Resources>
-
-    <Page.BottomAppBar>
-        <CommandBar>
-            <CommandBar.PrimaryCommands>
-                <AppBarButton x:Name="RecarregarButton" Width="Auto"  Label="Recarregar" Command="{Binding Refresh}" Icon="Refresh" />
-            </CommandBar.PrimaryCommands>
-        </CommandBar>
-    </Page.BottomAppBar>
-
+    
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="AdaptiveVisualStateGroup">
@@ -469,22 +461,21 @@
         </Grid.RowDefinitions>
 
         <!--  page header  -->
-        <controls:PageHeader Content="Anúncios"  >
-            <!--<controls:PageHeader.Foreground>
-                <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
-            </controls:PageHeader.Foreground>
-            <controls:PageHeader.Background>
-                <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
-            </controls:PageHeader.Background>-->
+        <controls:PageHeader Content="Anúncios"
+                             FontFamily="/Fonts/Roboto-Regular.ttf#Roboto"
+                             Background="#FFFFD100" 
+                             Foreground="Black">
+            <controls:PageHeader.PrimaryCommands>
+                <AppBarButton x:Name="RecarregarButton" Width="Auto"  Label="Recarregar" Command="{Binding Refresh}" Icon="Refresh" />
+            </controls:PageHeader.PrimaryCommands>
         </controls:PageHeader>
-        
 
-
-        <Pivot Grid.Row="2" SelectedIndex="{Binding SelectedIndex}" x:Name="PivotMenu" Style="{StaticResource TabsStylePivotStyle}">
-            <PivotItem>
-                <PivotItem.Header>
+        <Pivot Grid.Row="2" SelectedIndex="{Binding SelectedIndex}" x:Name="PivotMenu">
+            <!--<Pivot Grid.Row="2" SelectedIndex="{Binding SelectedIndex}" x:Name="PivotMenu" Style="{StaticResource TabsStylePivotStyle}">-->
+            <PivotItem Header="Ativos">
+                <!--<PivotItem.Header>
                     <uc:TabHeader Label="Ativos" Glyph="&#xE768;" />
-                </PivotItem.Header>
+                </PivotItem.Header>-->
                 <Grid>
                     <ListView ItemTemplate="{StaticResource ListViewItemTemplate1}" ItemContainerStyle="{StaticResource ListViewItemStyle1}" ItemsSource="{Binding Items}" Grid.Row="1" x:Name="ProdutosListView">
                         <Interactivity:Interaction.Behaviors>
@@ -499,10 +490,10 @@
                     </StackPanel>
                 </Grid>
             </PivotItem>
-            <PivotItem>
-                <PivotItem.Header>
+            <PivotItem Header="Pausados">
+                <!--<PivotItem.Header>
                     <uc:TabHeader Label="Pausados" Glyph="&#xE769;" />
-                </PivotItem.Header>
+                </PivotItem.Header>-->
                 <Grid>
                     <ListView ItemTemplate="{StaticResource ListViewItemTemplate1}" ItemContainerStyle="{StaticResource ListViewItemStyle1}" ItemsSource="{Binding ItemsPaused}" Grid.Row="1" x:Name="ProdutosPausadosListView">
                         <Interactivity:Interaction.Behaviors>
@@ -518,10 +509,10 @@
                 </Grid>
                 
             </PivotItem>
-            <PivotItem>
-                <PivotItem.Header>
+            <PivotItem Header="Finalizados">
+                <!--<PivotItem.Header>
                     <uc:TabHeader Label="Finalizados" Glyph="&#xE922;" />
-                </PivotItem.Header>
+                </PivotItem.Header>-->
                 <Grid>
                     <ListView ItemTemplate="{StaticResource ListViewItemTemplate1}" ItemContainerStyle="{StaticResource ListViewItemStyle1}" ItemsSource="{Binding ItemsClosed}" Grid.Row="1" x:Name="ProdutosClosedListView">
                         <Interactivity:Interaction.Behaviors>

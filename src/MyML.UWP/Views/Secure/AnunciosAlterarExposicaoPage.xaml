@@ -72,13 +72,11 @@
         </Grid.RowDefinitions>
 
         <!--  page header  -->
-        <controls:PageHeader Content="Aumentar exposição"  >
-            <!--<controls:PageHeader.Foreground>
-                <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
-            </controls:PageHeader.Foreground>
-            <controls:PageHeader.Background>
-                <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
-            </controls:PageHeader.Background>-->
+        <controls:PageHeader Content="Aumentar exposição"
+                             FontFamily="/Fonts/Roboto-Regular.ttf#Roboto"
+                             Background="#FFFFD100" 
+                             Foreground="Black">
+            
         </controls:PageHeader>
         <ScrollViewer Grid.Row="1" Padding="10">
             <Grid>

@@ -137,7 +137,10 @@
         </Grid.RowDefinitions>
 
         <!--  page header  -->
-        <controls:PageHeader Content="Detalhe da compra"  >
+        <controls:PageHeader Content="Detalhe da compra" 
+                             FontFamily="/Fonts/Roboto-Regular.ttf#Roboto"
+                             Background="#FFFFD100" 
+                             Foreground="Black">
             <!--<controls:PageHeader.Foreground>
                 <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
             </controls:PageHeader.Foreground>

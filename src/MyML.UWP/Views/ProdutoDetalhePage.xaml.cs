@@ -79,7 +79,7 @@ namespace MyML.UWP.Views
 
         private void RootGrid_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            // NormalizeParallax(FlipImage);
+             //NormalizeParallax(Carousel);
         }
     }
 }

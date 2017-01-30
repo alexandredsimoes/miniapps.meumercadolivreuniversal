@@ -75,7 +75,10 @@
         </Grid.RowDefinitions>
 
         <!--  page header  -->
-        <controls:PageHeader Content="Refinar"  >
+        <controls:PageHeader Content="Refinar"
+                              FontFamily="/Fonts/Roboto-Regular.ttf#Roboto"
+                             Background="#FFFFD100" 
+                             Foreground="Black">
             <!--<controls:PageHeader.Foreground>
                 <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
             </controls:PageHeader.Foreground>
@@ -126,7 +129,7 @@
                        SelectionMode="None" Visibility="Visible" />-->
 
                 <!--Filtros-->
-                <TextBlock Grid.Row="4" Text="FILTROS DISPONÍVEIS" Style="{StaticResource TitleTextBlockStyle}" Margin="0,0,0,10"/>
+                <TextBlock Grid.Row="4" Text="FILTROS DISPONÍVEIS" FontFamily="/Fonts/Roboto-Regular.ttf#Roboto" Style="{StaticResource TitleTextBlockStyle}" Margin="0,0,0,10"/>
                 <Line Grid.Row="5" X1="3000" VerticalAlignment="Bottom" Stroke="Black" StrokeThickness="0.5" />
                 <ListView  x:Name="FilterListView" Grid.Row="5"                        
                        ItemsSource="{Binding Sorts}"                        

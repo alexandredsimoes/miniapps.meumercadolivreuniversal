@@ -51,7 +51,10 @@
         </Grid.RowDefinitions>
 
         <!--  page header  -->
-        <controls:PageHeader Content="{Binding Title}"  >
+        <controls:PageHeader Content="{Binding Title}" 
+                             FontFamily="/Fonts/Roboto-Regular.ttf#Roboto"
+                             Background="#FFFFD100" 
+                             Foreground="Black">
 
         </controls:PageHeader>
 

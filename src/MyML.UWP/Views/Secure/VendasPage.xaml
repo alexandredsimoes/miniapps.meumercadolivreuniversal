@@ -432,13 +432,6 @@
         </DataTemplate>
     </Page.Resources>
 
-    <Page.BottomAppBar>
-        <CommandBar>
-            <CommandBar.PrimaryCommands>
-                <AppBarButton x:Name="RecarregarButton" Width="Auto"  Label="Recarregar" Command="{Binding Refresh}" Icon="Refresh" />
-            </CommandBar.PrimaryCommands>
-        </CommandBar>
-    </Page.BottomAppBar>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="GenralVisualStateGroup">
@@ -495,16 +488,22 @@
         </Grid.RowDefinitions>
 
         <!--  page header  -->
-        <controls:PageHeader Content="Vendas"  >
+        <controls:PageHeader Content="Vendas"
+                             FontFamily="/Fonts/Roboto-Regular.ttf#Roboto"
+                             Background="#FFFFD100" 
+                             Foreground="Black">
 
+            <controls:PageHeader.PrimaryCommands>
+                <AppBarButton x:Name="RecarregarButton" Width="Auto"  Label="Recarregar" Command="{Binding Refresh}" Icon="Refresh" />
+            </controls:PageHeader.PrimaryCommands>
         </controls:PageHeader>
 
 
-        <Pivot Grid.Row="2" x:Name="PivotMenu" Style="{StaticResource TabsStylePivotStyle}">
-            <PivotItem>
-                <PivotItem.Header>
+        <Pivot Grid.Row="2" x:Name="PivotMenu">
+            <PivotItem Header="Abertas">
+                <!--<PivotItem.Header>
                     <uc:TabHeader Label="Abertas" Glyph="&#xE1F7;" />
-                </PivotItem.Header>
+                </PivotItem.Header>-->
 
                 <Grid>
                     <ListView ItemsSource="{Binding Orders}" Grid.Row="2" x:Name="ProdutosListView"
@@ -524,10 +523,10 @@
                     
                 </Grid>
             </PivotItem>
-            <PivotItem>
-                <PivotItem.Header>
+            <PivotItem Header="Encerradas">
+                <!--<PivotItem.Header>
                     <uc:TabHeader Label="Encerradas" Glyph="&#xE1F6;" />
-                </PivotItem.Header>
+                </PivotItem.Header>-->
                 <Grid>
                     <ListView ItemsSource="{Binding OrdersClosed}"  x:Name="ProdutosEncerradosListView"
                               ItemContainerStyle="{StaticResource ListViewItemStyle1}"

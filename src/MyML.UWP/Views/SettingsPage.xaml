@@ -353,7 +353,9 @@
         <!--  header  -->
         <controls:PageHeader 
                              Content="Configurações"
-                             
+                             FontFamily="/Fonts/Roboto-Regular.ttf#Roboto"
+                             Background="#FFFFD100" 
+                             Foreground="Black"
                              Frame="{x:Bind Frame}">
             <Interactivity:Interaction.Behaviors>
                 <Behaviors:EllipsisBehavior Visibility="Auto" />

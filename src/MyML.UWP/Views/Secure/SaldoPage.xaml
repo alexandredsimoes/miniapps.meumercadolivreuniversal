@@ -32,7 +32,10 @@
         </Grid.RowDefinitions>
 
         <!--  page header  -->
-        <controls:PageHeader Content="Saldo no MercadoPago"  >
+        <controls:PageHeader Content="Saldo no MercadoPago"
+                             FontFamily="/Fonts/Roboto-Regular.ttf#Roboto"
+                             Background="#FFFFD100" 
+                             Foreground="Black">
             <!--<controls:PageHeader.PrimaryCommands>
                 <AppBarButton Icon="Accept"></AppBarButton>
             </controls:PageHeader.PrimaryCommands>-->

@@ -14,20 +14,20 @@
     <Page.Resources />
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition  />
             <RowDefinition Height="Auto" />
-            <RowDefinition />
         </Grid.RowDefinitions>
 
 
         
         
         <universal:AdControl x:Name="AdMediatorMobile"
-                             Grid.Row="0"
+                             Grid.Row="1"
                              Width="300"
                              Height="50"
                              Margin="0,5,0,5" />
         <controls:ModalDialog x:Name="ModalContainer"
-                              Grid.Row="1"
+                              Grid.Row="0"
                               CanBackButtonDismiss="False"
                               DisableBackButtonWhenModal="False">
             <controls:ModalDialog.ModalBackground>
@@ -35,7 +35,7 @@
             </controls:ModalDialog.ModalBackground>
             <controls:ModalDialog.Content>
                 <controls:HamburgerMenu x:Name="MyHamburgerMenu"
-                                        Grid.Row="0">
+                                        Grid.Row="0" Grid.RowSpan="2" OpenCloseMode="Swipe" PaneWidth="250" HamburgerBackground="#FF171717">
                     <controls:HamburgerMenu.PrimaryButtons>
                         <!--  mainpage button  -->
                         <controls:HamburgerButtonInfo ClearHistory="True" PageType="views:MainPage">

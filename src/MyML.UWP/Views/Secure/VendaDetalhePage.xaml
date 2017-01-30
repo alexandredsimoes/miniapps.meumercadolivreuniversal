@@ -92,7 +92,10 @@
         </Grid.RowDefinitions>
 
         <!--  page header  -->
-        <controls:PageHeader Content="Detalhe da venda"  >
+        <controls:PageHeader Content="Detalhe da venda"
+                             FontFamily="/Fonts/Roboto-Regular.ttf#Roboto"
+                             Background="#FFFFD100" 
+                             Foreground="Black">
 
         </controls:PageHeader>
         <ScrollViewer Grid.Row="1" Padding="10">

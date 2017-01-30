@@ -31,7 +31,9 @@
 
         <!--  page header  -->
         <controls:PageHeader x:Uid="ProdutoDescricaoPagePageHeader"
-                             
+                             FontFamily="/Fonts/Roboto-Regular.ttf#Roboto"
+                             Background="#FFFFD100" 
+                             Foreground="Black"
                              Content="Descrição do anúncio"
                              >
             <!--<controls:PageHeader.Foreground>

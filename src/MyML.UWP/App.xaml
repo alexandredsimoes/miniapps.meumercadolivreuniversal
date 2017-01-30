@@ -4,7 +4,11 @@
                      xmlns:vm="using:MyML.UWP.ViewModels">
 
     <Application.Resources>
-        <ResourceDictionary Source="Styles\Custom.xaml"  />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles\Custom.xaml"  />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 
 </common:BootStrapper>

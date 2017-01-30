@@ -73,7 +73,10 @@
         </Grid.RowDefinitions>
 
         <!--  page header  -->
-        <controls:PageHeader x:Uid="CategoriaPagePageHeader" Content="Categoria"  >
+        <controls:PageHeader x:Uid="CategoriaPagePageHeader" Content="Categoria" 
+                             FontFamily="/Fonts/Roboto-Regular.ttf#Roboto"
+                             Background="#FFFFD100" 
+                             Foreground="Black">
 
         </controls:PageHeader>
 
@@ -90,8 +93,8 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding name}" Style="{StaticResource TitleTextBlockStyle}"/>
-                            <TextBlock Text="{Binding total_items_in_this_category}" Margin="10,0,0,0"/>
+                            <TextBlock Text="{Binding name}" Style="{StaticResource TitleTextBlockStyle}" FontFamily="/Fonts/Roboto-Bold.ttf#Roboto"/>
+                            <TextBlock Text="{Binding total_items_in_this_category}" Margin="10,0,0,0" FontFamily="/Fonts/Roboto-Bold.ttf#Roboto"/>
                         </StackPanel>
 
                     </DataTemplate>

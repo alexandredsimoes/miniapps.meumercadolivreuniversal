@@ -62,7 +62,10 @@
         </Grid.RowDefinitions>
 
         <!--  page header  -->
-        <controls:PageHeader Content="Informações sobre o vendedor"  >
+        <controls:PageHeader Content="Informações sobre o vendedor"
+                              FontFamily="/Fonts/Roboto-Regular.ttf#Roboto"
+                             Background="#FFFFD100" 
+                             Foreground="Black">
 
         </controls:PageHeader>
         <StackPanel Grid.Row="1" Margin="15">

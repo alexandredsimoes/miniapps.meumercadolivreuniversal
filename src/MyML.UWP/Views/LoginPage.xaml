@@ -26,7 +26,9 @@
 
         <!--  page header  -->
         <controls:PageHeader x:Uid="LoginPagePageHeader"
-                             
+                            FontFamily="/Fonts/Roboto-Regular.ttf#Roboto"
+                             Background="#FFFFD100" 
+                             Foreground="Black"
                              Content="Autenticação"
                              >
             <!--<controls:PageHeader.Foreground>
