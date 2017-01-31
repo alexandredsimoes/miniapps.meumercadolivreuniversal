@@ -1,7 +1,0 @@
-MainPackage=C:\Users\Alexandre\Git\meumercadolivre.universal\src\MyML.UWP\bin\ARM\Release\Upload\MyML.UWP_1.1.167.0_ARM.appx
-SymbolPackage=C:\Users\Alexandre\Git\Saida\MyML.UWP_1.1.167.0\MyML.UWP_1.1.167.0_ARM.appxsym
-ResourcePack=C:\Users\Alexandre\Git\meumercadolivre.universal\src\MyML.UWP\_language-pt.appx
-ResourcePack=C:\Users\Alexandre\Git\meumercadolivre.universal\src\MyML.UWP\_scale-100.appx
-ResourcePack=C:\Users\Alexandre\Git\meumercadolivre.universal\src\MyML.UWP\_scale-125.appx
-ResourcePack=C:\Users\Alexandre\Git\meumercadolivre.universal\src\MyML.UWP\_scale-150.appx
-ResourcePack=C:\Users\Alexandre\Git\meumercadolivre.universal\src\MyML.UWP\_scale-400.appx
