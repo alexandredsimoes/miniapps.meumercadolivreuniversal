@@ -8,6 +8,9 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles\Custom.xaml"  />
             </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="/Fonts/Roboto-Regular#Roboto" />
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 
