@@ -69,7 +69,7 @@
 
         <!--  page header  -->
         <controls:PageHeader x:Uid="ProdutoDetalheEnvioPagePageHeader"
-                             FontFamily="/Fonts/Roboto-Regular.ttf#Roboto"
+                             FontFamily="/Fonts/Roboto-Bold.ttf#Roboto"
                              Background="#FFFFD100" 
                              Foreground="Black"
                              Content="Forma de envio"

@@ -489,7 +489,7 @@
 
         <!--  page header  -->
         <controls:PageHeader Content="Vendas"
-                             FontFamily="/Fonts/Roboto-Regular.ttf#Roboto"
+                             FontFamily="/Fonts/Roboto-Bold.ttf#Roboto"
                              Background="#FFFFD100" 
                              Foreground="Black">
 

@@ -391,7 +391,7 @@
 
         <!--  page header  -->
         <controls:PageHeader x:Uid="PerguntarPagePageHeader"
-                             FontFamily="/Fonts/Roboto-Regular.ttf#Roboto"
+                             FontFamily="/Fonts/Roboto-Bold.ttf#Roboto"
                              Background="#FFFFD100" 
                              Foreground="Black"
                              Content="Perguntas"

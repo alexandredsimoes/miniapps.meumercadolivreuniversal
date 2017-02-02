@@ -353,7 +353,7 @@
         <!--  header  -->
         <controls:PageHeader 
                              Content="Configurações"
-                             FontFamily="/Fonts/Roboto-Regular.ttf#Roboto"
+                             FontFamily="/Fonts/Roboto-Bold.ttf#Roboto"
                              Background="#FFFFD100" 
                              Foreground="Black"
                              Frame="{x:Bind Frame}">
@@ -364,15 +364,15 @@
 
         <!--  content  -->
         <Pivot x:Name="MyPivot"
-               Grid.Row="1"
-               Style="{StaticResource TabsStylePivotStyle}">
-            <PivotItem DataContext="{Binding SettingsPartViewModel}">
-                <PivotItem.Header>
-                    <uc:TabHeader Width="Auto"
+               Grid.Row="1">
+            <PivotItem DataContext="{Binding SettingsPartViewModel}" Header=" Configurações">
+                
+                   
+                    <!--<uc:TabHeader Width="Auto"
                                   Margin="10,0"
                                   Glyph=""
-                                  Label="Configurações" />
-                </PivotItem.Header>
+                                  Label="Configurações" />-->
+                
                 <ScrollViewer Margin="0,12,-12,0"
                               HorizontalContentAlignment="Left"
                               VerticalScrollBarVisibility="Auto">
@@ -482,17 +482,18 @@
                     </RelativePanel>
                 </ScrollViewer>
             </PivotItem>
-            <PivotItem DataContext="{Binding SettingsPartViewModel}" Padding="0">
-                <PivotItem.Header>
+            <PivotItem DataContext="{Binding SettingsPartViewModel}" Padding="0" Header="Privacidade">
+                <!--<PivotItem.Header>
                     <uc:TabHeader Width="Auto"
                                   Margin="10,0"
                                   Glyph=""
                                   Label="Privacidade" />
-                </PivotItem.Header>
-                <ScrollViewer Margin="0,0,-12,0" VerticalScrollBarVisibility="Auto">
-                    <TextBlock Margin="0,12,24,12"
+                </PivotItem.Header>-->
+                <ScrollViewer Margin="0,12,24,12">
+                    <TextBlock 
                                LineHeight="24"
-                               TextWrapping="Wrap">
+                               TextWrapping="Wrap"
+                               FontFamily="/Fonts/Roboto Regular.ttf#Roboto" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto">
                         <Bold>Política de privacidade</Bold>
                         <LineBreak />
                         O Meu MercadoLivre Universal, é um aplicativo de terceiro (não oficial) que permite você acessar seus dados do MercadoLivre sem a necessidade de acessar
@@ -511,13 +512,14 @@
                         <LineBreak />
                     </TextBlock>
                 </ScrollViewer>
+                
             </PivotItem>
-            <PivotItem>
-                <PivotItem.Header>
+            <PivotItem Header="Sobre">
+                <!--<PivotItem.Header>
                     <uc:TabHeader Margin="10,0"
                                   Glyph=""
                                   Label="Sobre" />
-                </PivotItem.Header>
+                </PivotItem.Header>-->
                 <Grid Margin="0,10,0,0" DataContext="{Binding AboutPartViewModel}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="2*" />

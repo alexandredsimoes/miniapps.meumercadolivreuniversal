@@ -551,7 +551,7 @@
         <controls:PageHeader 
                              Content="Filtros e Ordenações"                             
                              x:Uid="BuscaFilterPagePageHeaderTitle"
-                             FontFamily="/Fonts/Roboto-Regular.ttf#Roboto"
+                             FontFamily="/Fonts/Roboto-Bold.ttf#Roboto"
                              Background="#FFFFD100" 
                              Foreground="Black">
             <controls:PageHeader.PrimaryCommands>
@@ -577,7 +577,7 @@
             <PivotItem>
                 <PivotItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Filtros" FontFamily="/Fonts/Roboto-Regular.ttf#Roboto" x:Uid="BuscaFilterPageFiltrosTextBlock" />
+                        <TextBlock Text="Filtros" FontFamily="/Fonts/Roboto-Bold.ttf#Roboto" x:Uid="BuscaFilterPageFiltrosTextBlock" />
                         <SymbolIcon Symbol="Filter" Margin="5" />
                     </StackPanel>
 
@@ -640,7 +640,7 @@
             <PivotItem>
                 <PivotItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Ordenações" x:Uid="BuscaFilterPageOrdenacaoTextBlock" FontFamily="/Fonts/Roboto-Regular.ttf#Roboto" />
+                        <TextBlock Text="Ordenações" x:Uid="BuscaFilterPageOrdenacaoTextBlock" FontFamily="/Fonts/Roboto-Bold.ttf#Roboto" />
                         <SymbolIcon Symbol="Sort" Margin="5" />
                     </StackPanel>
                     <!--<Usercontrols:TabHeader Label="Ordenação" Glyph="&#xE169;" />-->

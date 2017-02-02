@@ -38,28 +38,7 @@
         <Binding Source="{StaticResource Locator}" Path="CompraDetalhePage" />
     </Page.DataContext>
 
-    <Page.BottomAppBar>
-        <CommandBar>
-            <CommandBar.PrimaryCommands>
-
-                <AppBarButton Label="Copiar dados da compra" Icon="Copy">
-                    <AppBarButton.Flyout>
-                        <MenuFlyout>
-                            <MenuFlyoutItem Command="{Binding CopyTrackingCode}" CommandParameter="TrackingCode" Text="Copiar código de rastreio" />
-                            <MenuFlyoutItem Command="{Binding CopyTrackingCode}" CommandParameter="Email" Text="Copiar e-mail do vendedor" />
-                            <MenuFlyoutSubItem Text="Outras opções">
-                                <MenuFlyoutSubItem.Items>
-                                    <MenuFlyoutItem Text="Rastrear mercadoria" Command="{Binding TrackOrder}"/>
-                                </MenuFlyoutSubItem.Items>
-                            </MenuFlyoutSubItem>
-                        </MenuFlyout>
-                    </AppBarButton.Flyout>
-                </AppBarButton>
-
-            </CommandBar.PrimaryCommands>
-
-        </CommandBar>
-    </Page.BottomAppBar>
+    
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <VisualStateManager.VisualStateGroups>
 
@@ -138,15 +117,24 @@
 
         <!--  page header  -->
         <controls:PageHeader Content="Detalhe da compra" 
-                             FontFamily="/Fonts/Roboto-Regular.ttf#Roboto"
+                             FontFamily="/Fonts/Roboto-Bold.ttf#Roboto"
                              Background="#FFFFD100" 
                              Foreground="Black">
-            <!--<controls:PageHeader.Foreground>
-                <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
-            </controls:PageHeader.Foreground>
-            <controls:PageHeader.Background>
-                <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
-            </controls:PageHeader.Background>-->
+            <controls:PageHeader.PrimaryCommands>
+                <AppBarButton Label="Copiar dados da compra" Icon="Copy">
+                    <AppBarButton.Flyout>
+                        <MenuFlyout>
+                            <MenuFlyoutItem Command="{Binding CopyTrackingCode}" CommandParameter="TrackingCode" Text="Copiar código de rastreio" />
+                            <MenuFlyoutItem Command="{Binding CopyTrackingCode}" CommandParameter="Email" Text="Copiar e-mail do vendedor" />
+                            <MenuFlyoutSubItem Text="Outras opções">
+                                <MenuFlyoutSubItem.Items>
+                                    <MenuFlyoutItem Text="Rastrear mercadoria" Command="{Binding TrackOrder}"/>
+                                </MenuFlyoutSubItem.Items>
+                            </MenuFlyoutSubItem>
+                        </MenuFlyout>
+                    </AppBarButton.Flyout>
+                </AppBarButton>
+            </controls:PageHeader.PrimaryCommands>
         </controls:PageHeader>
         <ScrollViewer Grid.Row="1" Padding="10">
             <StackPanel Padding="0,0,10,0">

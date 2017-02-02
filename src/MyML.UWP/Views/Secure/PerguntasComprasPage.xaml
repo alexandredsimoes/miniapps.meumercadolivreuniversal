@@ -74,7 +74,7 @@
 
         <!--  page header  -->
         <controls:PageHeader Content="Perguntas"
-                             FontFamily="/Fonts/Roboto-Regular.ttf#Roboto"
+                             FontFamily="/Fonts/Roboto-Bold.ttf#Roboto"
                              Background="#FFFFD100" 
                              Foreground="Black">
             <controls:PageHeader.PrimaryCommands>
