@@ -18,7 +18,6 @@ using Windows.UI;
 using Microsoft.HockeyApp;
 using MyML.UWP.Views;
 using Template10.Controls;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Services.Store.Engagement;
 
 namespace MyML.UWP
@@ -43,11 +42,7 @@ namespace MyML.UWP
             SplashFactory = (e) => new Views.Splash(e);
 
             RegistrarAplicativoNoDevCenter();
-
-            using(var db = new MercadoLivreContext())
-            {
-                db.Database.Migrate();
-            }
+           
             #region App settings
 
             var settings = SettingsService.Instance;

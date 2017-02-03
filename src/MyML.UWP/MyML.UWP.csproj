@@ -210,15 +210,9 @@
     <Compile Include="Converters\ValueToVisibilityConverter.cs" />
     <Compile Include="Extensions\VisualTreeHelperExtensions.cs" />
     <Compile Include="Json\AvailableOrderCustomConverter.cs" />
-    <Compile Include="Migrations\20161205033645_MyFirstMigration.cs" />
-    <Compile Include="Migrations\20161205033645_MyFirstMigration.designer.cs">
-      <DependentUpon>20161205033645_MyFirstMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\MercadoLivreContextModelSnapshot.cs" />
     <Compile Include="Models\Categories.cs" />
     <Compile Include="Models\Configuration.cs" />
     <Compile Include="Models\Consts.cs" />
-    <Compile Include="Models\MercadoLivreContext.cs" />
     <Compile Include="Models\Mercadolivre\MLAccountBalance.cs" />
     <Compile Include="Models\Mercadolivre\MLCategorySearchResult.cs" />
     <Compile Include="Models\Mercadolivre\MLErrorRequest.cs" />

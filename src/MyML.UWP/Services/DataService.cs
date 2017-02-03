@@ -10,7 +10,7 @@ using Windows.Globalization.DateTimeFormatting;
 using Windows.Storage;
 using MyML.UWP.Models.Mercadolivre;
 using System.IO;
-using Microsoft.EntityFrameworkCore;
+
 
 namespace MyML.UWP.Services
 {
@@ -71,14 +71,9 @@ namespace MyML.UWP.Services
             return result;         
         }
 
-        public async Task<IEnumerable<ProductQuestionContent>> ListQuestions()
+        public Task<IEnumerable<ProductQuestionContent>> ListQuestions()
         {
-            using(var db = new MercadoLivreContext())
-            {
-                return await db.ProductQuestions.ToListAsync();
-            }
-            
-            //return await _context.Questions.ToListAsync();
+            return null;
         }
 
         public void SaveConfig(string key, string value)
@@ -86,13 +81,9 @@ namespace MyML.UWP.Services
             ApplicationData.Current.LocalSettings.Values[key] = value;                  
         }
 
-        public async Task<bool> SaveQuestion(ProductQuestionContent question)
+        public Task<bool> SaveQuestion(ProductQuestionContent question)
         {
-            using (var db = new MercadoLivreContext())
-            {
-                db.ProductQuestions.Add(question);
-                return await db.SaveChangesAsync() > 0;
-            }            
+            return null;
         }        
     }
 }

@@ -97,8 +97,8 @@
                                        Text="Compras" />
                         </controls:HamburgerButtonInfo>
 
-                        <!--  Perguntas - button  -->
-                        <controls:HamburgerButtonInfo ClearHistory="False" PageType="viewsSecure:PerguntasComprasPage">
+                        <!--  Perguntas - button  -->                        
+                        <!--<controls:HamburgerButtonInfo ClearHistory="False" PageType="viewsSecure:PerguntasComprasPage">
                             <controls:HamburgerButtonInfo.NavigationTransitionInfo>
                                 <SuppressNavigationTransitionInfo />
                             </controls:HamburgerButtonInfo.NavigationTransitionInfo>
@@ -111,7 +111,7 @@
                                            VerticalAlignment="Center"
                                            Text="Perguntas" />
                             </StackPanel>
-                        </controls:HamburgerButtonInfo>
+                        </controls:HamburgerButtonInfo>-->
                         <!--  Compras  button  -->
                         <controls:HamburgerButtonInfo ClearHistory="False" PageType="viewsSecure:ComprasPage">
                             <controls:HamburgerButtonInfo.NavigationTransitionInfo>
