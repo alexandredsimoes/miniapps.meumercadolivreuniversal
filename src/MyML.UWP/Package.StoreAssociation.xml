@@ -364,12 +364,15 @@
     </ReservedNames>
   </ProductReservedInfo>
   <AccountPackageIdentityNames>
+    <MainPackageIdentityName>24720AlexandreDiasSimes.MeuMercadoLivre</MainPackageIdentityName>
+    <MainPackageIdentityName>24720AlexandreDiasSimes.ChicoBipolar</MainPackageIdentityName>
     <MainPackageIdentityName>24720AlexandreDiasSimes.DinDin-Universal</MainPackageIdentityName>
     <MainPackageIdentityName>24720AlexandreDiasSimes.DinDinPro</MainPackageIdentityName>
-    <MainPackageIdentityName>24720AlexandreDiasSimes.MeuMercadoLivre</MainPackageIdentityName>
+    <MainPackageIdentityName>24720AlexandreDiasSimes.MapadoImpeachment</MainPackageIdentityName>
     <MainPackageIdentityName>24720AlexandreDiasSimes.MinhasHoras</MainPackageIdentityName>
     <MainPackageIdentityName>24720AlexandreDiasSimes.OPSFiscalize</MainPackageIdentityName>
     <MainPackageIdentityName>24720AlexandreDiasSimes.TecnoWinBeta</MainPackageIdentityName>
+    <MainPackageIdentityName>24720AlexandreDiasSimes.VendPraiaImveis</MainPackageIdentityName>
   </AccountPackageIdentityNames>
-  <PackageInfoList LandingUrl="https://dev.windows.com/dashboard/Application?appId=9NBLGGH20CNX" />
+  <PackageInfoList LandingUrl="https://developer.microsoft.com/dashboard/Application?appId=9NBLGGH20CNX" />
 </StoreAssociation>
