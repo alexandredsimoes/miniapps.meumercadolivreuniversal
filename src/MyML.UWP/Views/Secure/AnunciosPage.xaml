@@ -16,7 +16,8 @@
     xmlns:designViewModels="using:MyML.UWP.ViewModels.Design"
     xmlns:uc="using:MyML.UWP.Usercontrols"
     d:DataContext="{d:DesignInstance designViewModels:BuscaPageDesignViewModel, IsDesignTimeCreatable=True}"
-    xmlns:Universal="using:Microsoft.Advertising.WinRT.UI">
+    xmlns:Universal="using:Microsoft.Advertising.WinRT.UI"
+    xmlns:controls1="using:Microsoft.Toolkit.Uwp.UI.Controls">
 
     <Page.DataContext>
         <Binding Source="{StaticResource Locator}" Path="AnunciosPage" />
@@ -383,10 +384,7 @@
             </Setter>
         </Style>
         <DataTemplate x:Name="ListViewItemTemplate1">
-            <Border BorderThickness="0.5" Margin="0,5" CornerRadius="5" Padding="5">
-                <Border.Background>
-                    <SolidColorBrush Color="{ThemeResource SystemChromeLowColor}"/>
-                </Border.Background>
+            <Border BorderThickness="0,0,0,0.3" Margin="0,5" CornerRadius="5" Padding="5" BorderBrush="{ThemeResource SystemControlBackgroundAccentBrush}">
                 <Grid Margin="0,0,0,10">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
@@ -398,22 +396,20 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <Ellipse Width="80" Grid.Column="0" Height="80">
-                        <Ellipse.Fill>
-                            <ImageBrush>
-                                <ImageBrush.ImageSource>
-                                    <BitmapImage DecodePixelHeight="80" DecodePixelWidth="80" UriSource="{Binding  thumbnail}" />
-                                </ImageBrush.ImageSource>
-                            </ImageBrush>
-                        </Ellipse.Fill>
-                    </Ellipse>
+                    <controls1:ImageEx
+                        IsCacheEnabled="True">
+                        <controls1:ImageEx.Source>
+                            <BitmapImage DecodePixelHeight="80" DecodePixelWidth="80" UriSource="{Binding  thumbnail}" />
+                        </controls1:ImageEx.Source>
+                    </controls1:ImageEx>
+                    
                     <StackPanel Grid.Column="1" Margin="10,0,0,0">
-                        <TextBlock TextWrapping="Wrap"  Style="{StaticResource BaseTextBlockStyle}" Margin="0,10,0,0">
+                        <TextBlock TextWrapping="Wrap"  Style="{StaticResource BaseTextBlockStyle}" Margin="0,10,0,0" FontFamily="ms-appx:/Fonts/Roboto-Light.ttf#Roboto Light">
                                         <Run Text="Finaliza" x:Uid="ItensPageStopTimeTextBlock"/>
                                         <Run Text="{Binding stop_time, Converter={StaticResource MLStringDateConveter}}"/>
                         </TextBlock>
-                        <TextBlock Text="{Binding title}" TextWrapping="Wrap" Style="{StaticResource BaseTextBlockStyle}" />
-                        <TextBlock TextWrapping="Wrap" FontWeight="Bold" Style="{StaticResource BaseTextBlockStyle}" FontSize="16">
+                        <TextBlock Text="{Binding title}" TextWrapping="Wrap" Style="{StaticResource BaseTextBlockStyle}" FontFamily="ms-appx:/Fonts/Roboto-Bold.ttf#Roboto" />
+                        <TextBlock TextWrapping="Wrap" FontWeight="Bold" Style="{StaticResource BaseTextBlockStyle}" FontSize="16" FontFamily="ms-appx:/Fonts/Roboto-Light.ttf#Roboto Light">
                                             <Run Text="{Binding price, ConverterParameter=\{0:c2\}, Converter={StaticResource StringFormatConverter}}" FontWeight="Bold" />
                                             <Run Text="x" />
                             				<Run Text="{Binding available_quantity}" />
@@ -471,6 +467,11 @@
         </controls:PageHeader>
 
         <Pivot Grid.Row="2" SelectedIndex="{Binding SelectedIndex}" x:Name="PivotMenu">
+            <Pivot.HeaderTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" FontFamily="ms-appx:/Fonts/Roboto-Bold.ttf#Roboto"/>
+                </DataTemplate>
+            </Pivot.HeaderTemplate>
             <!--<Pivot Grid.Row="2" SelectedIndex="{Binding SelectedIndex}" x:Name="PivotMenu" Style="{StaticResource TabsStylePivotStyle}">-->
             <PivotItem Header="Ativos">
                 <!--<PivotItem.Header>

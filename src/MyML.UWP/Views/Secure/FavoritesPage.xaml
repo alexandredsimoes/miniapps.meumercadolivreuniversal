@@ -10,6 +10,7 @@
     xmlns:converters="using:MyML.UWP.Converters"
     xmlns:designViewModels="using:MyML.UWP.ViewModels.Design"
     xmlns:windowsStateTriggers="using:WindowsStateTriggers"
+    xmlns:uwp="using:Microsoft.Toolkit.Uwp.UI.Controls"
     x:Class="MyML.UWP.Views.Secure.FavoritesPage"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance designViewModels:BuscaPageDesignViewModel, IsDesignTimeCreatable=True}"
@@ -40,10 +41,7 @@
             </Setter>
         </Style>
         <DataTemplate x:Name="ListViewItemTemplate1">
-            <Border BorderThickness="0.5" Margin="0,5,10,5" CornerRadius="5" Padding="5">
-                <Border.Background>
-                    <SolidColorBrush Color="{ThemeResource SystemChromeLowColor}"/>
-                </Border.Background>
+            <Border BorderThickness="0,0,0,0.3" Margin="0,5,10,5" Padding="5" BorderBrush="{ThemeResource SystemControlForegroundAccentBrush}">
                 <Grid Margin="0,0,0,10">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
@@ -54,25 +52,22 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <Ellipse Width="80" Grid.Column="0" Height="80">
-                        <Ellipse.Fill>
-                            <ImageBrush>
-                                <ImageBrush.ImageSource>
-                                    <BitmapImage DecodePixelHeight="80" DecodePixelWidth="80" UriSource="{Binding ItemInfo.thumbnail}" />
-                                </ImageBrush.ImageSource>
-                            </ImageBrush>
-                        </Ellipse.Fill>
-                    </Ellipse>
+                    <uwp:ImageEx IsCacheEnabled="True">
+                        <uwp:ImageEx.Source>
+                            <BitmapImage DecodePixelHeight="80" DecodePixelWidth="80" UriSource="{Binding ItemInfo.thumbnail}" />
+                        </uwp:ImageEx.Source>
+                    </uwp:ImageEx>
+
                     <StackPanel Grid.Column="1" Margin="10,0,0,0">
-                        <TextBlock Text="{Binding ItemInfo.title}" TextWrapping="Wrap" Style="{StaticResource SubtitleTextBlockStyle}" />
-                        <TextBlock TextWrapping="Wrap" FontWeight="Bold" Style="{StaticResource BaseTextBlockStyle}" FontSize="16">
+                        <TextBlock Text="{Binding ItemInfo.title}" TextWrapping="Wrap" Style="{StaticResource SubtitleTextBlockStyle}" FontFamily="ms-appx:/Fonts/Roboto-Medium.ttf#Roboto Medium" />
+                        <TextBlock TextWrapping="Wrap" FontWeight="Bold" Style="{StaticResource BaseTextBlockStyle}" FontSize="16" FontFamily="ms-appx:/Fonts/Roboto-Bold.ttf#Roboto">
                             <TextBlock.Foreground>
                                 <SolidColorBrush Color="{ThemeResource SystemBaseMediumLowColor}"/>
                             </TextBlock.Foreground>
         					<Run Text="{Binding ItemInfo.price, ConverterParameter=\{0:c2\}, Converter={StaticResource StringFormatConverter}}" FontWeight="Bold" />
                         </TextBlock>
 
-                        <HyperlinkButton Command="{Binding DataContext.RemoveBookmark, ElementName=This}" CommandParameter="{Binding}">
+                        <HyperlinkButton Command="{Binding DataContext.RemoveBookmark, ElementName=This}" CommandParameter="{Binding}" FontFamily="ms-appx:/Fonts/Roboto-Bold.ttf#Roboto">
                             <HyperlinkButton.ContentTemplate>
                                 <DataTemplate>
                                     <FontIcon Glyph="&#xE107;" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}" />

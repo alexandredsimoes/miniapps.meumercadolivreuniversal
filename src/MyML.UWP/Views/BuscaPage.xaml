@@ -73,6 +73,7 @@
                          BorderThickness="0,0,0,1"
                          InputScope="Search"
                          PlaceholderText="Entre aqui o que procura"
+                         FontFamily="/Fonts/Roboto-Regular.ttf#Roboto"
                          Text="{Binding Searchterm,
                                         Mode=TwoWay}">
                     <interactivity:Interaction.Behaviors>

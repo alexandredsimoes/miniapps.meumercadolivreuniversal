@@ -7,7 +7,7 @@
       xmlns:designViewModels="using:MyML.UWP.ViewModels.Design"
       xmlns:local="using:MyML.UWP.Views"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:uwp="using:AppStudio.Uwp.Controls"
+      xmlns:uwp="using:Microsoft.Toolkit.Uwp.UI.Controls"
       x:Name="This"
       d:DataContext="{d:DesignInstance designViewModels:BuscaPageDesignViewModel,
                                        IsDesignTimeCreatable=True}"

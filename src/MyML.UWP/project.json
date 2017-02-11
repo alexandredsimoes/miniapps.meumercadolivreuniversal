@@ -16,7 +16,6 @@
     "NotificationsExtensions.Win10": "14332.0.2",
     "Template10": "1.1.12",
     "Win2D.uwp": "1.20.0",
-    "WindowsAppStudio.Uwp": "1.5.3",
     "WindowsAzure.Messaging.Managed": "0.1.7.9",
     "WindowsStateTriggers": "1.1.0"
   },
