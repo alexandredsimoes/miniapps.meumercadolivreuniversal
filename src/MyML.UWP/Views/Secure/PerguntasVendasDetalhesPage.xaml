@@ -129,7 +129,10 @@
         </Grid.RowDefinitions>
 
         <!--  page header  -->
-        <controls:PageHeader Content="Perguntas"  >
+        <controls:PageHeader Content="Perguntas"
+                             FontFamily="/Fonts/Roboto-Bold.ttf#Roboto"
+                             Background="#FFFFD100" 
+                             Foreground="Black">
 
         </controls:PageHeader>
         <!--Produtos relacionados nas perguntas-->

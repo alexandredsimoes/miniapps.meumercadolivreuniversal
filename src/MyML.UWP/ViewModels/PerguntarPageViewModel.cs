@@ -52,14 +52,11 @@ namespace MyML.UWP.ViewModels
 
                 if (questionResult != null)
                 {
-                    if (await _dataService.SaveQuestion(questionResult))
-                    {
-                        await new MessageDialog(_resourceLoader.GetString("ProductSearchResultPageViewModelQuestionSend"),
+                    await new MessageDialog(_resourceLoader.GetString("ProductSearchResultPageViewModelQuestionSend"),
                             _resourceLoader.GetString("ApplicationTitle")).ShowAsync();
 
-                        if (NavigationService.CanGoBack)
-                            NavigationService.GoBack();
-                    }
+                    if (NavigationService.CanGoBack)
+                        NavigationService.GoBack();                    
                 }
                 else
                     await new MessageDialog(_resourceLoader.GetString("ProductSearchResultPageViewModelQuestionNotSend"),

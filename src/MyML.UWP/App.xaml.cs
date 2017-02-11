@@ -18,7 +18,6 @@ using Windows.UI;
 using Microsoft.HockeyApp;
 using MyML.UWP.Views;
 using Template10.Controls;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Services.Store.Engagement;
 
 namespace MyML.UWP
@@ -33,21 +32,17 @@ namespace MyML.UWP
 
             Microsoft.HockeyApp.HockeyClient.Current.Configure("046d5d06bf8e4703a1bdc2f201875c9a",
              new TelemetryConfiguration() { EnableDiagnostics = true });
-
+            UnhandledException += App_UnhandledException;
             InitializeComponent();
             
             //System.Globalization.CultureInfo.CurrentCulture = new System.Globalization.CultureInfo("pt");
             //System.Globalization.CultureInfo.CurrentUICulture = new System.Globalization.CultureInfo("pt");
 
-            UnhandledException += App_UnhandledException;
+            
             SplashFactory = (e) => new Views.Splash(e);
 
             RegistrarAplicativoNoDevCenter();
-
-            using(var db = new MercadoLivreContext())
-            {
-                db.Database.Migrate();
-            }
+           
             #region App settings
 
             var settings = SettingsService.Instance;

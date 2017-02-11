@@ -92,7 +92,10 @@
         </Grid.RowDefinitions>
 
         <!--  page header  -->
-        <controls:PageHeader Content="Detalhe da venda"  >
+        <controls:PageHeader Content="Detalhe da venda"
+                             FontFamily="/Fonts/Roboto-Bold.ttf#Roboto"
+                             Background="#FFFFD100" 
+                             Foreground="Black">
 
         </controls:PageHeader>
         <ScrollViewer Grid.Row="1" Padding="10">
@@ -121,8 +124,8 @@
                             </Ellipse.Fill>
                         </Ellipse>
                         <StackPanel Grid.Column="1" Margin="10,0,0,0">
-                            <TextBlock Text="{Binding OrderInfo.order_items[0].item.title}" TextWrapping="Wrap" Style="{StaticResource SubtitleTextBlockStyle}" />
-                            <TextBlock x:Name="PrecoTextBlock" Grid.Row="1" Text="{Binding OrderInfo.total_amount, ConverterParameter=\{0:c2\}, Converter={StaticResource StringFormatConverter}}" Style="{StaticResource BodyTextBlockStyle}"  TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FFBB0000" FontWeight="Bold" />
+                            <TextBlock Text="{Binding OrderInfo.order_items[0].item.title}" TextWrapping="Wrap" Style="{StaticResource SubtitleTextBlockStyle}" FontFamily="ms-appx:/Fonts/Roboto-Bold.ttf#Roboto" />
+                            <TextBlock x:Name="PrecoTextBlock" Grid.Row="1" Text="{Binding OrderInfo.total_amount, ConverterParameter=\{0:c2\}, Converter={StaticResource StringFormatConverter}}" Style="{StaticResource BodyTextBlockStyle}"  TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FFBB0000" FontWeight="Bold" FontFamily="ms-appx:/Fonts/Roboto-Medium.ttf#Roboto Medium" />
                         </StackPanel>
                         <Border Grid.Row="2" Grid.ColumnSpan="2" BorderBrush="#2B000000" BorderThickness="0,0.5,0,0" Margin="0,10,0,0" />
                         <StackPanel Grid.ColumnSpan="2" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5,7,0,0">
@@ -137,7 +140,7 @@
                                     </TransformGroup>
                                 </Path.RenderTransform>
                             </Path>
-                            <TextBlock Grid.Row="2" Text="{Binding OrderInfo.status, Converter={StaticResource OrderStatusToStringConverter}}" Style="{StaticResource BodyTextBlockStyle}" Grid.ColumnSpan="2" Margin="10,10,0,0" />
+                            <TextBlock Grid.Row="2" Text="{Binding OrderInfo.status, Converter={StaticResource OrderStatusToStringConverter}}" Style="{StaticResource BodyTextBlockStyle}" Grid.ColumnSpan="2" Margin="10,10,0,0" FontFamily="ms-appx:/Fonts/Roboto-Bold.ttf#Roboto" />
                         </StackPanel>
                         <Button Grid.Row="3" x:Name="CompletarCompraButton" Grid.ColumnSpan="2" Content="Completar a compra" HorizontalAlignment="Stretch" Margin="0,10,0,0" FontWeight="Bold" Visibility="Collapsed"/>
 
@@ -156,17 +159,17 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Border Grid.Row="0" BorderBrush="#2B000000" BorderThickness="0,0.5,0,0" VerticalAlignment="Bottom"/>
-                        <TextBlock Text="Comprador" Grid.Row="0" Style="{StaticResource SubtitleTextBlockStyle}" />
+                        <TextBlock Text="Comprador" Grid.Row="0" Style="{StaticResource SubtitleTextBlockStyle}" FontFamily="ms-appx:/Fonts/Roboto-Bold.ttf#Roboto" />
                         <StackPanel Grid.Column="1" Grid.Row="1">
-                            <TextBlock  TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}">
+                            <TextBlock  TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}" FontFamily="ms-appx:/Fonts/Roboto-Medium.ttf#Roboto Medium">
                                 <Run Text="{Binding OrderInfo.buyer.first_name}"/>
                                 <Run Text="{Binding OrderInfo.buyer.last_name}"/>
                             </TextBlock>
-                            <TextBlock TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}">
+                            <TextBlock TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}" FontFamily="ms-appx:/Fonts/Roboto-Medium.ttf#Roboto Medium">
 								<Run Text="{Binding OrderInfo.buyer.phone.area_code}" />
 								<Run Text="{Binding OrderInfo.buyer.phone.number}" />
                             </TextBlock>
-                            <TextBlock Text="{Binding OrderInfo.buyer.email}" TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}" />
+                            <TextBlock Text="{Binding OrderInfo.buyer.email}" TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}" FontFamily="ms-appx:/Fonts/Roboto-Medium.ttf#Roboto Medium" />
                         </StackPanel>
                         <Border Grid.Row="2" Grid.ColumnSpan="2" BorderBrush="#2B000000" BorderThickness="0,0.6,0,0" Margin="0,10,0,0" />
                         <Grid Grid.Row="2" Margin="0,15,0,0">
@@ -212,11 +215,11 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Border Grid.Row="0" BorderBrush="#2B000000" BorderThickness="0,0.5,0,0" VerticalAlignment="Bottom"/>
-                        <TextBlock Text="Recebimento" Grid.Row="0" Style="{StaticResource SubtitleTextBlockStyle}" />
+                        <TextBlock Text="Recebimento" Grid.Row="0" Style="{StaticResource SubtitleTextBlockStyle}" FontFamily="ms-appx:/Fonts/Roboto-Bold.ttf#Roboto" />
 
                         <StackPanel Grid.Column="1" Grid.Row="1">
-                            <TextBlock Text="{Binding OrderInfo.payments[0].status, Converter={StaticResource OrderPaymentStatusDetailConverter}}" TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}" />
-                            <TextBlock Text="{Binding OrderInfo.payments[0].payment_type, Converter={StaticResource OrderPaymentTypeConverter}}" TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}" />
+                            <TextBlock Text="{Binding OrderInfo.payments[0].status, Converter={StaticResource OrderPaymentStatusDetailConverter}}" TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}" FontFamily="ms-appx:/Fonts/Roboto-Medium.ttf#Roboto Medium" />
+                            <TextBlock Text="{Binding OrderInfo.payments[0].payment_type, Converter={StaticResource OrderPaymentTypeConverter}}" TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}" FontFamily="ms-appx:/Fonts/Roboto-Medium.ttf#Roboto Medium" />
 
                             <Grid Margin="0,15,0,0">
                                 <Grid.ColumnDefinitions>
@@ -229,18 +232,18 @@
                                     <RowDefinition />
                                 </Grid.RowDefinitions>
 
-                                <TextBlock Grid.Column="0" Grid.Row="0" x:Name="PaymentProductAmount" TextWrapping="Wrap"  Style="{StaticResource BodyTextBlockStyle}">
+                                <TextBlock Grid.Column="0" Grid.Row="0" x:Name="PaymentProductAmount" TextWrapping="Wrap"  Style="{StaticResource BodyTextBlockStyle}" FontFamily="ms-appx:/Fonts/Roboto-Medium.ttf#Roboto Medium">
 								<Run Text="Produto" />
 								<Run Text=" ( x" />
 								<Run Text="{Binding OrderInfo.order_items[0].quantity}"/>
 								<Run Text=" )" />
                                 </TextBlock>
-                                <TextBlock Grid.Column="0" Grid.Row="1" Text="Custo do envio" Style="{StaticResource BodyTextBlockStyle}" />
-                                <TextBlock  Grid.Column="0"  Grid.Row="2" Text="Total a pagar" />
+                                <TextBlock Grid.Column="0" Grid.Row="1" Text="Custo do envio" Style="{StaticResource BodyTextBlockStyle}" FontFamily="ms-appx:/Fonts/Roboto-Medium.ttf#Roboto Medium" />
+                                <TextBlock  Grid.Column="0"  Grid.Row="2" Text="Total a pagar" FontFamily="ms-appx:/Fonts/Roboto-Medium.ttf#Roboto Medium" />
 
-                                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding OrderInfo.total_amount, ConverterParameter=\{0:c2\}, Converter={StaticResource StringFormatConverter}}" HorizontalAlignment="Right"/>
-                                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding OrderInfo.shipping.cost, ConverterParameter=\{0:c2\}, Converter={StaticResource StringFormatConverter}}" HorizontalAlignment="Right"/>
-                                <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding OrderInfo.total_amount_with_shipping, ConverterParameter=\{0:c2\}, Converter={StaticResource StringFormatConverter}}" HorizontalAlignment="Right"/>
+                                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding OrderInfo.total_amount, ConverterParameter=\{0:c2\}, Converter={StaticResource StringFormatConverter}}" HorizontalAlignment="Right" FontFamily="ms-appx:/Fonts/Roboto-Medium.ttf#Roboto Medium"/>
+                                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding OrderInfo.shipping.cost, ConverterParameter=\{0:c2\}, Converter={StaticResource StringFormatConverter}}" HorizontalAlignment="Right" FontFamily="ms-appx:/Fonts/Roboto-Medium.ttf#Roboto Medium"/>
+                                <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding OrderInfo.total_amount_with_shipping, ConverterParameter=\{0:c2\}, Converter={StaticResource StringFormatConverter}}" HorizontalAlignment="Right" FontFamily="ms-appx:/Fonts/Roboto-Medium.ttf#Roboto Medium"/>
                             </Grid>
                         </StackPanel>
 
@@ -261,7 +264,7 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Border Grid.Row="0" BorderBrush="#2B000000" BorderThickness="0,0.5,0,0" VerticalAlignment="Bottom"/>
-                        <TextBlock Text="Entrega" Grid.Row="0" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,0,0,5" />
+                        <TextBlock Text="Entrega" Grid.Row="0" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,0,0,5" FontFamily="ms-appx:/Fonts/Roboto-Bold.ttf#Roboto" />
 
                         <StackPanel Grid.Column="1" Grid.Row="1">
                             <StackPanel Orientation="Horizontal">
@@ -278,10 +281,10 @@
                                         </TransformGroup>
                                     </Path.RenderTransform>
                                 </Path>
-                                <TextBlock x:Name="ShipStatusTextBlock" TextWrapping="Wrap" Text="{Binding OrderInfo.shipping.status, Converter={StaticResource OrderShipStatusDetailConverter}}"  Style="{StaticResource BodyTextBlockStyle}" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                                <TextBlock x:Name="ShipStatusTextBlock" TextWrapping="Wrap" Text="{Binding OrderInfo.shipping.status, Converter={StaticResource OrderShipStatusDetailConverter}}"  Style="{StaticResource BodyTextBlockStyle}" Margin="10,0,0,0" VerticalAlignment="Center" FontFamily="ms-appx:/Fonts/Roboto-Medium.ttf#Roboto Medium"/>
                             </StackPanel>
-                            <TextBlock x:Name="ShipDateTextBlock" TextWrapping="Wrap" Text="{Binding OrderInfo.shipping.status_history.date_delivered}"  Style="{StaticResource BodyTextBlockStyle}"/>
-                            <TextBlock x:Name="ShipMethodTextBlock" TextWrapping="Wrap"  Style="{StaticResource BodyTextBlockStyle}" >
+                            <TextBlock x:Name="ShipDateTextBlock" TextWrapping="Wrap" Text="{Binding OrderInfo.shipping.status_history.date_delivered}"  Style="{StaticResource BodyTextBlockStyle}" FontFamily="ms-appx:/Fonts/Roboto-Medium.ttf#Roboto Medium"/>
+                            <TextBlock x:Name="ShipMethodTextBlock" TextWrapping="Wrap"  Style="{StaticResource BodyTextBlockStyle}" FontFamily="ms-appx:/Fonts/Roboto-Medium.ttf#Roboto Medium" >
 								<Run Text="Forma de envio" />
 								<Run Text=" ( " />
 								<Run Text="{Binding OrderInfo.shipping.tracking_method}"/>
@@ -289,16 +292,16 @@
 
                             </TextBlock>
 
-                            <TextBlock x:Name="ShipTrackNumberTextBlock" TextWrapping="Wrap"  Style="{StaticResource BodyTextBlockStyle}" >
+                            <TextBlock x:Name="ShipTrackNumberTextBlock" TextWrapping="Wrap"  Style="{StaticResource BodyTextBlockStyle}" FontFamily="ms-appx:/Fonts/Roboto-Medium.ttf#Roboto Medium" >
 								<Run Text="Código" />
 								<Run Text=" ( " />
 								<Run Text="{Binding OrderInfo.shipping.tracking_number}"/>
 								<Run Text=" )" />
                             </TextBlock>
 
-                            <TextBlock x:Name="ShipAddressTextBlock" TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}"  Text="{Binding OrderInfo.shipping.receiver_address.address_line}" />
+                            <TextBlock x:Name="ShipAddressTextBlock" TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}"  Text="{Binding OrderInfo.shipping.receiver_address.address_line}" FontFamily="ms-appx:/Fonts/Roboto-Medium.ttf#Roboto Medium" />
 
-                            <TextBlock x:Name="ShipCityTextBlock" TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}">
+                            <TextBlock x:Name="ShipCityTextBlock" TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}" FontFamily="ms-appx:/Fonts/Roboto-Medium.ttf#Roboto Medium">
 								<Run Text="{Binding OrderInfo.shipping.receiver_address.zip_code}" />
 								<Run Text="{Binding OrderInfo.shipping.receiver_address.city.name}"/>
 								<Run Text="-"/>
@@ -323,32 +326,32 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Border Grid.Row="0" BorderBrush="#2B000000" BorderThickness="0,0.5,0,0" VerticalAlignment="Bottom"/>
-                        <TextBlock Text="Estado da compra" Grid.Row="0" Style="{StaticResource SubtitleTextBlockStyle}" />
+                        <TextBlock Text="Estado da compra" Grid.Row="0" Style="{StaticResource SubtitleTextBlockStyle}" FontFamily="ms-appx:/Fonts/Roboto-Medium.ttf#Roboto Medium" />
 
                         <StackPanel Grid.Column="1" Grid.Row="1">
                             <!--<TextBlock x:Name="StateTextBlock" TextWrapping="Wrap" Text="{Binding OrderInfo.shipping.status, Converter={StaticResource OrderShipStatusDetailConverter}}"  Style="{StaticResource BodyTextBlockStyle}"  />-->
                             <!--Feedback do vendedor-->
 
-                            <TextBlock x:Name="FeedBackSaleRating" Visibility="{Binding HasSaleFeedback, Converter={StaticResource BoolToVisibilityConverter}}" TextWrapping="Wrap" Grid.Row="2"  Style="{StaticResource BodyTextBlockStyle}" >
+                            <TextBlock x:Name="FeedBackSaleRating" Visibility="{Binding HasSaleFeedback, Converter={StaticResource BoolToVisibilityConverter}}" TextWrapping="Wrap" Grid.Row="2"  Style="{StaticResource BodyTextBlockStyle}" FontFamily="ms-appx:/Fonts/Roboto-Medium.ttf#Roboto Medium" >
 								<Run Text="Você qualificou " x:Name="StateSellQualifiedTextBlock" x:Uid="MyOrdersStateSellQualifiedTextBlock" />
 								<Run Text=" ( " />
 								<Run Text="{Binding OrderInfo.feedback.sale.rating, Converter={StaticResource FeedbackRatingConverter}}"/>
 								<Run Text=" )" />
                             </TextBlock>
-                            <TextBlock x:Name="FeedBackSaleMessage"  Visibility="{Binding HasSaleFeedback, Converter={StaticResource BoolToVisibilityConverter}}" TextWrapping="Wrap" Grid.Row="3"  Style="{StaticResource BodyTextBlockStyle}" >
+                            <TextBlock x:Name="FeedBackSaleMessage"  Visibility="{Binding HasSaleFeedback, Converter={StaticResource BoolToVisibilityConverter}}" TextWrapping="Wrap" Grid.Row="3"  Style="{StaticResource BodyTextBlockStyle}" FontFamily="ms-appx:/Fonts/Roboto-Medium.ttf#Roboto Medium" >
 								<Run Text="&quot;" />                            
 								<Run Text="{Binding OrderInfo.feedback.sale.message}"/>
 								<Run Text="&quot;" />
                             </TextBlock>
 
                             <!--Feedback do comprador-->
-                            <TextBlock x:Name="FeedBackPurchaseRating"  Visibility="{Binding HasPurchaseFeedback, Converter={StaticResource BoolToVisibilityConverter}}" TextWrapping="Wrap" Grid.Row="5"  Style="{StaticResource BodyTextBlockStyle}" Margin="5,10,0,0" >
+                            <TextBlock x:Name="FeedBackPurchaseRating"  Visibility="{Binding HasPurchaseFeedback, Converter={StaticResource BoolToVisibilityConverter}}" TextWrapping="Wrap" Grid.Row="5"  Style="{StaticResource BodyTextBlockStyle}" Margin="5,10,0,0" FontFamily="ms-appx:/Fonts/Roboto-Medium.ttf#Roboto Medium" >
 								<Run Text="O comprador qualificou " x:Name="StateBuyQualifiedTextBlock" x:Uid="MyOrdersStateBuyQualifiedTextBlock"/>
 								<Run Text="(" />
 								<Run Text="{Binding OrderInfo.feedback.purchase.rating, Converter={StaticResource FeedbackRatingConverter}}"/>
 								<Run Text=")" />
                             </TextBlock>
-                            <TextBlock  x:Name="FeedBackPurchaseMessage"  Visibility="{Binding HasPurchaseFeedback, Converter={StaticResource BoolToVisibilityConverter}}" TextWrapping="Wrap" Grid.Row="6"  Style="{StaticResource BodyTextBlockStyle}" >
+                            <TextBlock  x:Name="FeedBackPurchaseMessage"  Visibility="{Binding HasPurchaseFeedback, Converter={StaticResource BoolToVisibilityConverter}}" TextWrapping="Wrap" Grid.Row="6"  Style="{StaticResource BodyTextBlockStyle}" FontFamily="ms-appx:/Fonts/Roboto-Medium.ttf#Roboto Medium" >
 								<Run Text="&quot;" />                            
 								<Run Text="{Binding OrderInfo.feedback.purchase.message}"/>
 								<Run Text="&quot;" />

@@ -32,7 +32,10 @@
         </Grid.RowDefinitions>
 
         <!--  page header  -->
-        <controls:PageHeader Content="Dados Pessoais"   x:Uid="DadosPessoaisPagePageHeader">
+        <controls:PageHeader Content="Dados Pessoais" x:Uid="DadosPessoaisPagePageHeader"
+                             FontFamily="/Fonts/Roboto-Bold.ttf#Roboto"
+                             Background="#FFFFD100" 
+                             Foreground="Black">
             <!--<controls:PageHeader.PrimaryCommands>
                 <AppBarButton Icon="Accept"></AppBarButton>
             </controls:PageHeader.PrimaryCommands>-->

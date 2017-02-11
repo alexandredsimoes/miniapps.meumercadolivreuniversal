@@ -25,13 +25,6 @@
         <converters:StringFormatConverter x:Key="StringFormatConverter" />
     </Page.Resources>
 
-    <Page.BottomAppBar>
-        <CommandBar>
-            <CommandBar.PrimaryCommands>
-                <AppBarButton x:Name="RecarregarButton" Width="Auto"  Label="Recarregar" Command="{Binding Refresh}" Icon="Refresh" />
-            </CommandBar.PrimaryCommands>
-        </CommandBar>
-    </Page.BottomAppBar>
     
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <VisualStateManager.VisualStateGroups>
@@ -80,8 +73,13 @@
         </Grid.RowDefinitions>
 
         <!--  page header  -->
-        <controls:PageHeader Content="Perguntas"  >
-
+        <controls:PageHeader Content="Perguntas"
+                             FontFamily="/Fonts/Roboto-Bold.ttf#Roboto"
+                             Background="#FFFFD100" 
+                             Foreground="Black">
+            <controls:PageHeader.PrimaryCommands>
+                <AppBarButton x:Name="RecarregarButton" Width="Auto"  Label="Recarregar" Command="{Binding Refresh}" Icon="Refresh" />
+            </controls:PageHeader.PrimaryCommands>
         </controls:PageHeader>
 
 

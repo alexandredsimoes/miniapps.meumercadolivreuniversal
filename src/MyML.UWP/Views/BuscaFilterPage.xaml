@@ -540,16 +540,6 @@
                                                          TextDataTemplate="{StaticResource TextDataTemplate}" />
     </Page.Resources>
 
-    <Page.BottomAppBar>
-        <CommandBar>
-            <CommandBar.PrimaryCommands>
-                <AppBarButton x:Uid="BuscaPageFilterApplyFilterButton"
-                              Command="{Binding SaveFilter}"
-                              Icon="Accept"
-                              Label="Aplicar" />
-            </CommandBar.PrimaryCommands>
-        </CommandBar>
-    </Page.BottomAppBar>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
@@ -560,7 +550,16 @@
         <!--  page header  -->
         <controls:PageHeader 
                              Content="Filtros e Ordenações"                             
-                             x:Uid="BuscaFilterPagePageHeaderTitle">
+                             x:Uid="BuscaFilterPagePageHeaderTitle"
+                             FontFamily="/Fonts/Roboto-Bold.ttf#Roboto"
+                             Background="#FFFFD100" 
+                             Foreground="Black">
+            <controls:PageHeader.PrimaryCommands>
+                <AppBarButton x:Uid="BuscaPageFilterApplyFilterButton"
+                              Command="{Binding SaveFilter}"
+                              Icon="Accept"
+                              Label="Aplicar" />
+            </controls:PageHeader.PrimaryCommands>
             <!--<controls:PageHeader.Foreground>
                 <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
             </controls:PageHeader.Foreground>
@@ -578,8 +577,8 @@
             <PivotItem>
                 <PivotItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Filtros" x:Uid="BuscaFilterPageFiltrosTextBlock" />
-                        <!--<SymbolIcon Symbol="Filter"  />-->
+                        <TextBlock Text="Filtros" FontFamily="/Fonts/Roboto-Bold.ttf#Roboto" x:Uid="BuscaFilterPageFiltrosTextBlock" />
+                        <SymbolIcon Symbol="Filter" Margin="5" />
                     </StackPanel>
 
                     <!--<Usercontrols:TabHeader Label="Filtros" Glyph="&#xE16E;" />-->
@@ -641,8 +640,8 @@
             <PivotItem>
                 <PivotItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Ordenações" x:Uid="BuscaFilterPageOrdenacaoTextBlock" />
-                        <!--<SymbolIcon Symbol="Sort"  />-->
+                        <TextBlock Text="Ordenações" x:Uid="BuscaFilterPageOrdenacaoTextBlock" FontFamily="/Fonts/Roboto-Bold.ttf#Roboto" />
+                        <SymbolIcon Symbol="Sort" Margin="5" />
                     </StackPanel>
                     <!--<Usercontrols:TabHeader Label="Ordenação" Glyph="&#xE169;" />-->
                 </PivotItem.Header>

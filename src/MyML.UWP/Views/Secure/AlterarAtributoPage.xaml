@@ -59,14 +59,11 @@
         </Grid.RowDefinitions>
 
         <!--  page header  -->
-        <controls:PageHeader Content="Alterar atributo"  >
-            <!--<controls:PageHeader.Foreground>
-                <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
-            </controls:PageHeader.Foreground>
-            <controls:PageHeader.Background>
-                <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
-            </controls:PageHeader.Background>-->
-
+        <controls:PageHeader Content="Alterar atributo"  
+                             FontFamily="/Fonts/Roboto-Bold.ttf#Roboto"
+                             Background="#FFFFD100" 
+                             Foreground="Black">
+                        
         </controls:PageHeader>
         <StackPanel Grid.Row="1" Padding="10">
             <Border Padding="0" x:Name="TitleBorder">

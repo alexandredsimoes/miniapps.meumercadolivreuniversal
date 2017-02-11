@@ -18,6 +18,8 @@ using Windows.System;
 using Template10.Services.NavigationService;
 using Template10.Utils;
 using System.Diagnostics;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml;
 
 namespace MyML.UWP.ViewModels
 {
@@ -131,7 +133,9 @@ namespace MyML.UWP.ViewModels
 
             OpenImage = new RelayCommand<object>(o =>
             {
-                var item = o as Picture;
+                var eventarg = o as TappedRoutedEventArgs;
+                var element = eventarg?.OriginalSource as FrameworkElement;
+                var item = element?.DataContext as Picture;
                 if (item != null) NavigationService.Navigate(typeof(ImagemPage), item.url);
             });
         }

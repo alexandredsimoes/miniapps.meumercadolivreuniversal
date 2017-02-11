@@ -34,16 +34,7 @@
         <!--<ResourceDictionary Source="..\Styles\CustomListView.xaml" x:Key="CustomListView" />-->
 
     </Page.Resources>
-    <Page.BottomAppBar>
-        <CommandBar>
-            <CommandBar.PrimaryCommands>
-                <AppBarButton Command="{Binding OpenFilter}"
-                              Icon="Filter"
-                              Label="Filtrar" />
-                <!--<AppBarButton Label="Ordenar" Icon="Sort" Command="{Binding OpenSort}" />-->
-            </CommandBar.PrimaryCommands>
-        </CommandBar>
-    </Page.BottomAppBar>
+
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -53,9 +44,17 @@
 
         <!--  page header  -->
         <controls:PageHeader x:Uid="BuscaPageHeaderTitle"
-                             
+                             FontFamily="/Fonts/Roboto-Bold.ttf#Roboto"
+                             Background="#FFFFD100" 
+                             Foreground="Black"
                              Content="Busca"
-                              />
+                              >
+            <controls:PageHeader.PrimaryCommands>
+                <AppBarButton Command="{Binding OpenFilter}"
+                              Icon="Filter"
+                              Label="Filtrar" />
+            </controls:PageHeader.PrimaryCommands>
+        </controls:PageHeader>
 
 
         <!--  page content  -->
@@ -74,6 +73,7 @@
                          BorderThickness="0,0,0,1"
                          InputScope="Search"
                          PlaceholderText="Entre aqui o que procura"
+                         FontFamily="/Fonts/Roboto-Regular.ttf#Roboto"
                          Text="{Binding Searchterm,
                                         Mode=TwoWay}">
                     <interactivity:Interaction.Behaviors>

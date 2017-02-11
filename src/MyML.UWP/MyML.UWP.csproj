@@ -18,7 +18,7 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <PackageCertificateKeyFile>MyML.UWP_StoreKey.pfx</PackageCertificateKeyFile>
-    <PackageCertificateThumbprint>2049588BC8B9CE1CC957B2E89258D75B5B1BF745</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>8BE2C13FBA18456CC9BE7D8511F587E72E69E680</PackageCertificateThumbprint>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
@@ -109,6 +109,43 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="AdMediator.config" />
+    <Content Include="Fonts\LICENSE.txt" />
+    <Content Include="Fonts\Roboto-Black.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\Roboto-BlackItalic.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\Roboto-Bold.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\Roboto-BoldItalic.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\Roboto-Italic.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\Roboto-Light.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\Roboto-LightItalic.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\Roboto-Medium.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\Roboto-MediumItalic.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\Roboto-Regular.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\Roboto-Thin.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\Roboto-ThinItalic.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="MyML.UWP_StoreKey.pfx" />
     <None Include="MyML.UWP_TemporaryKey.pfx" />
     <None Include="project.json" />
@@ -173,15 +210,9 @@
     <Compile Include="Converters\ValueToVisibilityConverter.cs" />
     <Compile Include="Extensions\VisualTreeHelperExtensions.cs" />
     <Compile Include="Json\AvailableOrderCustomConverter.cs" />
-    <Compile Include="Migrations\20161205033645_MyFirstMigration.cs" />
-    <Compile Include="Migrations\20161205033645_MyFirstMigration.designer.cs">
-      <DependentUpon>20161205033645_MyFirstMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\MercadoLivreContextModelSnapshot.cs" />
     <Compile Include="Models\Categories.cs" />
     <Compile Include="Models\Configuration.cs" />
     <Compile Include="Models\Consts.cs" />
-    <Compile Include="Models\MercadoLivreContext.cs" />
     <Compile Include="Models\Mercadolivre\MLAccountBalance.cs" />
     <Compile Include="Models\Mercadolivre\MLCategorySearchResult.cs" />
     <Compile Include="Models\Mercadolivre\MLErrorRequest.cs" />

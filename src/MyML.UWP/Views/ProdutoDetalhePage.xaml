@@ -4,15 +4,16 @@
       xmlns:controls="using:Template10.Controls"
       xmlns:converters="using:MyML.UWP.Converters"
       xmlns:convertersMl="using:MyML.UWP.Converters.MercadoLivre"
-      xmlns:core="using:Microsoft.Xaml.Interactions.Core"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:designViewModels="using:MyML.UWP.ViewModels.Design"
-      xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:media3D="using:Windows.UI.Xaml.Media.Media3D"
       xmlns:models="using:MyML.UWP.Models.Mercadolivre"
-      xmlns:uwpControls="using:AppStudio.Uwp.Controls"
+      xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+      xmlns:core="using:Microsoft.Xaml.Interactions.Core"
       xmlns:windowsTriggers="using:WindowsStateTriggers"
+      xmlns:uwpControls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+      xmlns:an="using:Microsoft.Toolkit.Uwp.UI.Animations"
       x:Name="ThePage"
       d:DataContext="{d:DesignInstance designViewModels:BuscaPageDesignViewModel,
                                        IsDesignTimeCreatable=True}"
@@ -38,7 +39,7 @@
                     <Grid.Background>
                         <SolidColorBrush Opacity="0.25" Color="Black" />
                     </Grid.Background>
-                    <uwpControls:Virtualbox VirtualHeight="64" VirtualWidth="640">
+                    <!--<uwpControls:Virtualbox VirtualHeight="64" VirtualWidth="640">
                         <TextBlock Margin="12,6"
                                    VerticalAlignment="Center"
                                    Foreground="#eee"
@@ -46,7 +47,7 @@
                                                   Path=DataContext.SelectedProduct.title}"
                                    TextAlignment="Center"
                                    TextWrapping="Wrap" />
-                    </uwpControls:Virtualbox>
+                    </uwpControls:Virtualbox>-->
                 </Grid>
             </Grid>
         </DataTemplate>
@@ -215,121 +216,16 @@
         </Storyboard>-->
     </Page.Resources>
 
-    <Page.BottomAppBar>
+    <!--<Page.BottomAppBar>
         <CommandBar>
             <CommandBar.PrimaryCommands>
-                <!--  Favorito  -->
-                <AppBarButton x:Uid="ProdutoDetalhePageFavoritoButton"
-                              Command="{Binding DoFavorite}"
-                              Label="favorito">
-                    <AppBarButton.ContentTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Path Width="20"
-                                      Height="20"
-                                      Margin="0,0,0,0"
-                                      Data="M8.6999969,0C12.300003,0 14,1.5999985 16,4.0999985 18,1.5999985 19.699997,0 23.300003,0 23.800003,0 24.199997,0 24.800003,0.099998474 27.899994,0.40000153 31.599991,3.4000015 32,9.1999969L32,11.099998C31.599991,16.599998 27.599991,23.400002 16,32 4.3999939,23.400002 0.3999939,16.599998 0,11.099998L0,9.1999969C0.3999939,3.4000015 4.0999908,0.40000153 7.1999969,0.099998474 7.6999969,0 8.1999969,0 8.6999969,0z"
-                                      RenderTransformOrigin="0.5,0.5"
-                                      Stretch="Uniform"
-                                      Stroke="{StaticResource SystemControlForegroundAccentBrush}"
-                                      Visibility="{Binding IsFavorite,
-                                                           Converter={StaticResource InvertedBoolToVisibilityConverter}}">
-                                    <Path.RenderTransform>
-                                        <TransformGroup>
-                                            <TransformGroup.Children>
-                                                <RotateTransform Angle="0" />
-                                                <ScaleTransform ScaleX="1" ScaleY="1" />
-                                            </TransformGroup.Children>
-                                        </TransformGroup>
-                                    </Path.RenderTransform>
-                                </Path>
-                                <Path Width="20"
-                                      Height="20"
-                                      Margin="0,0,0,0"
-                                      Data="M8.6999969,0C12.300003,0 14,1.5999985 16,4.0999985 18,1.5999985 19.699997,0 23.300003,0 23.800003,0 24.199997,0 24.800003,0.099998474 27.899994,0.40000153 31.599991,3.4000015 32,9.1999969L32,11.099998C31.599991,16.599998 27.599991,23.400002 16,32 4.3999939,23.400002 0.3999939,16.599998 0,11.099998L0,9.1999969C0.3999939,3.4000015 4.0999908,0.40000153 7.1999969,0.099998474 7.6999969,0 8.1999969,0 8.6999969,0z"
-                                      Fill="{StaticResource SystemControlForegroundAccentBrush}"
-                                      RenderTransformOrigin="0.5,0.5"
-                                      Stretch="Uniform"
-                                      Visibility="{Binding IsFavorite,
-                                                           Converter={StaticResource BoolToVisibilityConverter}}">
-                                    <Path.RenderTransform>
-                                        <TransformGroup>
-                                            <TransformGroup.Children>
-                                                <RotateTransform Angle="0" />
-                                                <ScaleTransform ScaleX="1" ScaleY="1" />
-                                            </TransformGroup.Children>
-                                        </TransformGroup>
-                                    </Path.RenderTransform>
-                                </Path>
-                            </Grid>
-                        </DataTemplate>
-                    </AppBarButton.ContentTemplate>
-                </AppBarButton>
-                <!--  Compartilhar  -->
-                <AppBarButton x:Uid="ProdutoDetalhePageButtonCompartilhar"
-                              Command="{Binding ShareProduct}"
-                              Label="compartilhar">
-                    <AppBarButton.ContentTemplate>
-                        <DataTemplate>
-                            <Path Width="20"
-                                  Height="20"
-                                  Margin="0,0,0,0"
-                                  Data="M26.709939,21.197004C25.05594,21.197004 23.709939,22.543005 23.709939,24.197005 23.709939,25.851004 25.05594,27.197004 26.709939,27.197004 28.363938,27.197004 29.709939,25.851004 29.709939,24.197005 29.709939,22.543005 28.363938,21.197004 26.709939,21.197004z M5,21.197004C3.3460002,21.197004 2,22.543005 2,24.197004 2,25.851004 3.3460002,27.197004 5,27.197004 6.6540001,27.197004 8.0000001,25.851004 8.0000004,24.197004 8.0000001,22.543005 6.6540001,21.197004 5,21.197004z M20.219228,6.1876125L20.205233,6.2481022C19.649432,8.4031773 17.689137,10 15.362919,10 13.209013,10 11.368827,8.6309814 10.666813,6.7173958L10.608627,6.5457821 10.484062,6.6013622C6.1810184,8.6214619 3.3509576,12.972749 3.3509569,17.708997 3.3509574,18.171996 3.3772073,18.634995 3.4295819,19.094746L3.4734135,19.436204 3.5147953,19.422174C3.9841955,19.27586 4.4830625,19.197004 5,19.197004 7.7570001,19.197004 10,21.440004 9.9999998,24.197004 10,25.489348 9.5071533,26.668752 8.6995416,27.557136L8.5642807,27.698991 8.6905391,27.787805C10.779011,29.223062 13.282691,30.004001 15.850017,30.004001 18.431229,30.004001 20.945149,29.216169 23.04128,27.767128L23.1424,27.695573 23.010398,27.557136C22.202785,26.668752 21.709939,25.489348 21.709939,24.197005 21.709939,21.440004 23.952939,19.197004 26.709939,19.197004 27.226876,19.197004 27.725743,19.27586 28.195144,19.422174L28.228528,19.433493 28.235692,19.386393C28.312303,18.831491 28.350974,18.270242 28.350974,17.708992 28.350974,12.646496 25.125396,8.0709133 20.391398,6.2498207z M15.362919,2C13.708919,2 12.362919,3.3460007 12.362919,5 12.362919,6.6540012 13.708919,8 15.362919,8 17.016919,8 18.362919,6.6540012 18.362919,5 18.362919,3.3460007 17.016919,2 15.362919,2z M15.362919,0C17.775294,0,19.794138,1.7172966,20.261155,3.9935951L20.278956,4.0930042 20.553591,4.1828003C26.351193,6.1448212 30.35097,11.623309 30.35097,17.708992 30.35097,18.622492 30.262923,19.536757 30.08817,20.431689L30.073655,20.50088 30.243814,20.663129C31.149188,21.568504 31.709939,22.818504 31.709939,24.197005 31.709939,26.954004 29.466939,29.197004 26.709939,29.197004 26.106845,29.197004 25.528348,29.089673 24.992543,28.89311L24.918328,28.863794 24.692845,29.038847C22.16708,30.955456 19.052538,32.003997 15.850017,32.003997 12.56014,32.003997 9.3565266,30.894714 6.7939677,28.874357L6.7844011,28.866642 6.7173957,28.89311C6.1815919,29.089673 5.6030939,29.197004 5,29.197004 2.243,29.197004 0,26.954004 0,24.197004 0,22.818504 0.56075001,21.568504 1.466125,20.663129L1.6289248,20.507898 1.5568442,20.121417C1.420157,19.325995 1.3509698,18.517496 1.3509698,17.708997 1.3509698,12.013719 4.8608508,6.8008156 10.140511,4.5659046L10.391881,4.4651909 10.420635,4.2395706C10.787999,1.8421516,12.864388,0,15.362919,0z"
-                                  RenderTransformOrigin="0.5,0.5"
-                                  Stretch="Uniform">
-                                <Path.Fill>
-                                    <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}" />
-                                </Path.Fill>
-                                <Path.RenderTransform>
-                                    <TransformGroup>
-                                        <TransformGroup.Children>
-                                            <RotateTransform Angle="0" />
-                                            <ScaleTransform ScaleX="1" ScaleY="1" />
-                                        </TransformGroup.Children>
-                                    </TransformGroup>
-                                </Path.RenderTransform>
-                            </Path>
-                        </DataTemplate>
-                    </AppBarButton.ContentTemplate>
-                </AppBarButton>
-                <!--  Perguntar  -->
-                <AppBarButton x:Uid="ProdutoDetalhePageButtonPerguntar"
-                              Command="{Binding Perguntar}"
-                              Label="perguntar">
-                    <AppBarButton.ContentTemplate>
-                        <DataTemplate>
-                            <Path Width="20"
-                                  Height="20"
-                                  Margin="0,0,0,0"
-                                  Data="M5,27.599984C6.3000183,27.599984 7.4000244,28.19999 7.4000244,28.999978 7.4000244,29.799994 6.3000183,30.400001 5,30.400001 3.7000122,30.400001 2.6000061,29.799994 2.6000061,28.999978 2.7000122,28.299996 3.7000122,27.599984 5,27.599984z M9.8000183,20.09999C12.5,20.09999 14.800018,21.499984 14.800018,23.199994 14.800018,24.900004 12.600006,26.299998 9.8000183,26.299998 7.1000061,26.299998 4.8000183,24.900004 4.8000183,23.199994 4.8000183,21.400008 7.1000061,20.09999 9.8000183,20.09999z M16,0C24.800018,-4.7784852E-09 32,4.4000211 32,9.7000046 32,15.099995 24.800018,19.40001 16,19.40001 7.2000122,19.40001 0,14.999989 0,9.7000046 0,4.4000211 7.2000122,-4.7784852E-09 16,0z"
-                                  RenderTransformOrigin="0.5,0.5"
-                                  Stretch="Uniform">
-                                <Path.Fill>
-                                    <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}" />
-                                </Path.Fill>
-                                <Path.RenderTransform>
-                                    <TransformGroup>
-                                        <TransformGroup.Children>
-                                            <RotateTransform Angle="0" />
-                                            <ScaleTransform ScaleX="1" ScaleY="1" />
-                                        </TransformGroup.Children>
-                                    </TransformGroup>
-                                </Path.RenderTransform>
-                            </Path>
-                        </DataTemplate>
-                    </AppBarButton.ContentTemplate>
-                </AppBarButton>
+               
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
-                <AppBarButton x:Uid="ProdutoDetalhePageButtonCopiarLink"
-                              Command="{Binding CopyLink}"
-                              Label="copiar link do anúncio" />
-                <AppBarButton x:Uid="ProdutoDetalhePageButtonMore"
-                              Command="{Binding SeeMoreFromThisUser}"
-                              Label="outros produtos do vendedor" />
+                
             </CommandBar.SecondaryCommands>
         </CommandBar>
-    </Page.BottomAppBar>
+    </Page.BottomAppBar>-->
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid x:Name="RootGrid" SizeChanged="RootGrid_SizeChanged">
@@ -340,9 +236,122 @@
 
             <!--  page header  -->
             <controls:PageHeader x:Uid="ProdutoDetalhePagePageHeader"
-                                 
+                                 FontFamily="/Fonts/Roboto-Bold.ttf#Roboto"
+                                 Background="#FFFFD100" Foreground="Black" 
                                  Content="Produto"
-                                  />
+                                  >
+                <controls:PageHeader.PrimaryCommands>
+                    <!--  Favorito  -->
+                    <AppBarButton x:Uid="ProdutoDetalhePageFavoritoButton"
+                              Command="{Binding DoFavorite}"
+                              Label="favorito">
+                        <AppBarButton.ContentTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Path Width="20"
+                                      Height="20"
+                                      Margin="0,0,0,0"
+                                      Data="M8.6999969,0C12.300003,0 14,1.5999985 16,4.0999985 18,1.5999985 19.699997,0 23.300003,0 23.800003,0 24.199997,0 24.800003,0.099998474 27.899994,0.40000153 31.599991,3.4000015 32,9.1999969L32,11.099998C31.599991,16.599998 27.599991,23.400002 16,32 4.3999939,23.400002 0.3999939,16.599998 0,11.099998L0,9.1999969C0.3999939,3.4000015 4.0999908,0.40000153 7.1999969,0.099998474 7.6999969,0 8.1999969,0 8.6999969,0z"
+                                      RenderTransformOrigin="0.5,0.5"
+                                      Stretch="Uniform"
+                                      Stroke="{StaticResource SystemControlForegroundAccentBrush}"
+                                      Visibility="{Binding IsFavorite,
+                                                           Converter={StaticResource InvertedBoolToVisibilityConverter}}">
+                                        <Path.RenderTransform>
+                                            <TransformGroup>
+                                                <TransformGroup.Children>
+                                                    <RotateTransform Angle="0" />
+                                                    <ScaleTransform ScaleX="1" ScaleY="1" />
+                                                </TransformGroup.Children>
+                                            </TransformGroup>
+                                        </Path.RenderTransform>
+                                    </Path>
+                                    <Path Width="20"
+                                      Height="20"
+                                      Margin="0,0,0,0"
+                                      Data="M8.6999969,0C12.300003,0 14,1.5999985 16,4.0999985 18,1.5999985 19.699997,0 23.300003,0 23.800003,0 24.199997,0 24.800003,0.099998474 27.899994,0.40000153 31.599991,3.4000015 32,9.1999969L32,11.099998C31.599991,16.599998 27.599991,23.400002 16,32 4.3999939,23.400002 0.3999939,16.599998 0,11.099998L0,9.1999969C0.3999939,3.4000015 4.0999908,0.40000153 7.1999969,0.099998474 7.6999969,0 8.1999969,0 8.6999969,0z"
+                                      Fill="{StaticResource SystemControlForegroundAccentBrush}"
+                                      RenderTransformOrigin="0.5,0.5"
+                                      Stretch="Uniform"
+                                      Visibility="{Binding IsFavorite,
+                                                           Converter={StaticResource BoolToVisibilityConverter}}">
+                                        <Path.RenderTransform>
+                                            <TransformGroup>
+                                                <TransformGroup.Children>
+                                                    <RotateTransform Angle="0" />
+                                                    <ScaleTransform ScaleX="1" ScaleY="1" />
+                                                </TransformGroup.Children>
+                                            </TransformGroup>
+                                        </Path.RenderTransform>
+                                    </Path>
+                                </Grid>
+                            </DataTemplate>
+                        </AppBarButton.ContentTemplate>
+                    </AppBarButton>
+                    <!--  Compartilhar  -->
+                    <AppBarButton x:Uid="ProdutoDetalhePageButtonCompartilhar"
+                              Command="{Binding ShareProduct}"
+                              Label="compartilhar">
+                        <AppBarButton.ContentTemplate>
+                            <DataTemplate>
+                                <Path Width="20"
+                                  Height="20"
+                                  Margin="0,0,0,0"
+                                  Data="M26.709939,21.197004C25.05594,21.197004 23.709939,22.543005 23.709939,24.197005 23.709939,25.851004 25.05594,27.197004 26.709939,27.197004 28.363938,27.197004 29.709939,25.851004 29.709939,24.197005 29.709939,22.543005 28.363938,21.197004 26.709939,21.197004z M5,21.197004C3.3460002,21.197004 2,22.543005 2,24.197004 2,25.851004 3.3460002,27.197004 5,27.197004 6.6540001,27.197004 8.0000001,25.851004 8.0000004,24.197004 8.0000001,22.543005 6.6540001,21.197004 5,21.197004z M20.219228,6.1876125L20.205233,6.2481022C19.649432,8.4031773 17.689137,10 15.362919,10 13.209013,10 11.368827,8.6309814 10.666813,6.7173958L10.608627,6.5457821 10.484062,6.6013622C6.1810184,8.6214619 3.3509576,12.972749 3.3509569,17.708997 3.3509574,18.171996 3.3772073,18.634995 3.4295819,19.094746L3.4734135,19.436204 3.5147953,19.422174C3.9841955,19.27586 4.4830625,19.197004 5,19.197004 7.7570001,19.197004 10,21.440004 9.9999998,24.197004 10,25.489348 9.5071533,26.668752 8.6995416,27.557136L8.5642807,27.698991 8.6905391,27.787805C10.779011,29.223062 13.282691,30.004001 15.850017,30.004001 18.431229,30.004001 20.945149,29.216169 23.04128,27.767128L23.1424,27.695573 23.010398,27.557136C22.202785,26.668752 21.709939,25.489348 21.709939,24.197005 21.709939,21.440004 23.952939,19.197004 26.709939,19.197004 27.226876,19.197004 27.725743,19.27586 28.195144,19.422174L28.228528,19.433493 28.235692,19.386393C28.312303,18.831491 28.350974,18.270242 28.350974,17.708992 28.350974,12.646496 25.125396,8.0709133 20.391398,6.2498207z M15.362919,2C13.708919,2 12.362919,3.3460007 12.362919,5 12.362919,6.6540012 13.708919,8 15.362919,8 17.016919,8 18.362919,6.6540012 18.362919,5 18.362919,3.3460007 17.016919,2 15.362919,2z M15.362919,0C17.775294,0,19.794138,1.7172966,20.261155,3.9935951L20.278956,4.0930042 20.553591,4.1828003C26.351193,6.1448212 30.35097,11.623309 30.35097,17.708992 30.35097,18.622492 30.262923,19.536757 30.08817,20.431689L30.073655,20.50088 30.243814,20.663129C31.149188,21.568504 31.709939,22.818504 31.709939,24.197005 31.709939,26.954004 29.466939,29.197004 26.709939,29.197004 26.106845,29.197004 25.528348,29.089673 24.992543,28.89311L24.918328,28.863794 24.692845,29.038847C22.16708,30.955456 19.052538,32.003997 15.850017,32.003997 12.56014,32.003997 9.3565266,30.894714 6.7939677,28.874357L6.7844011,28.866642 6.7173957,28.89311C6.1815919,29.089673 5.6030939,29.197004 5,29.197004 2.243,29.197004 0,26.954004 0,24.197004 0,22.818504 0.56075001,21.568504 1.466125,20.663129L1.6289248,20.507898 1.5568442,20.121417C1.420157,19.325995 1.3509698,18.517496 1.3509698,17.708997 1.3509698,12.013719 4.8608508,6.8008156 10.140511,4.5659046L10.391881,4.4651909 10.420635,4.2395706C10.787999,1.8421516,12.864388,0,15.362919,0z"
+                                  RenderTransformOrigin="0.5,0.5"
+                                  Stretch="Uniform">
+                                    <Path.Fill>
+                                        <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}" />
+                                    </Path.Fill>
+                                    <Path.RenderTransform>
+                                        <TransformGroup>
+                                            <TransformGroup.Children>
+                                                <RotateTransform Angle="0" />
+                                                <ScaleTransform ScaleX="1" ScaleY="1" />
+                                            </TransformGroup.Children>
+                                        </TransformGroup>
+                                    </Path.RenderTransform>
+                                </Path>
+                            </DataTemplate>
+                        </AppBarButton.ContentTemplate>
+                    </AppBarButton>
+                    <!--  Perguntar  -->
+                    <AppBarButton x:Uid="ProdutoDetalhePageButtonPerguntar"
+                              Command="{Binding Perguntar}"
+                              Label="perguntar">
+                        <AppBarButton.ContentTemplate>
+                            <DataTemplate>
+                                <Path Width="20"
+                                  Height="20"
+                                  Margin="0,0,0,0"
+                                  Data="M5,27.599984C6.3000183,27.599984 7.4000244,28.19999 7.4000244,28.999978 7.4000244,29.799994 6.3000183,30.400001 5,30.400001 3.7000122,30.400001 2.6000061,29.799994 2.6000061,28.999978 2.7000122,28.299996 3.7000122,27.599984 5,27.599984z M9.8000183,20.09999C12.5,20.09999 14.800018,21.499984 14.800018,23.199994 14.800018,24.900004 12.600006,26.299998 9.8000183,26.299998 7.1000061,26.299998 4.8000183,24.900004 4.8000183,23.199994 4.8000183,21.400008 7.1000061,20.09999 9.8000183,20.09999z M16,0C24.800018,-4.7784852E-09 32,4.4000211 32,9.7000046 32,15.099995 24.800018,19.40001 16,19.40001 7.2000122,19.40001 0,14.999989 0,9.7000046 0,4.4000211 7.2000122,-4.7784852E-09 16,0z"
+                                  RenderTransformOrigin="0.5,0.5"
+                                  Stretch="Uniform">
+                                    <Path.Fill>
+                                        <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}" />
+                                    </Path.Fill>
+                                    <Path.RenderTransform>
+                                        <TransformGroup>
+                                            <TransformGroup.Children>
+                                                <RotateTransform Angle="0" />
+                                                <ScaleTransform ScaleX="1" ScaleY="1" />
+                                            </TransformGroup.Children>
+                                        </TransformGroup>
+                                    </Path.RenderTransform>
+                                </Path>
+                            </DataTemplate>
+                        </AppBarButton.ContentTemplate>
+                    </AppBarButton>
+                </controls:PageHeader.PrimaryCommands>
+                <controls:PageHeader.SecondaryCommands>
+                    <AppBarButton x:Uid="ProdutoDetalhePageButtonCopiarLink"
+                              Command="{Binding CopyLink}"
+                              Label="copiar link do anúncio" />
+                    <AppBarButton x:Uid="ProdutoDetalhePageButtonMore"
+                              Command="{Binding SeeMoreFromThisUser}"
+                              Label="outros produtos do vendedor" />
+                </controls:PageHeader.SecondaryCommands>
+            </controls:PageHeader>
 
 
             <!--  page content  -->
@@ -361,74 +370,21 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <StackPanel x:Name="FlipImageWrap"
-                                Grid.Row="0"
-                                Margin="0"
-                                Padding="0">
-
-                        <uwpControls:Carousel MinHeight="240"
-                                              MaxHeight="480"
-                                              AlignmentX="Center"
-                                              AspectRatio="1.5"
-                                              GradientOpacity="0.3"
-                                              ItemClickCommand="{Binding OpenImage}"
-                                              ItemsSource="{Binding ElementName=ThePage,
-                                                                    Path=DataContext.SelectedProduct.pictures}"
-                                              MaxItems="3">
-                            <!--<interactivity:Interaction.Behaviors>
-                                <core:EventTriggerBehavior EventName="Tapped">
-                                    <core:InvokeCommandAction Command="" CommandParameter="a" />
-                                </core:EventTriggerBehavior>
-                            </interactivity:Interaction.Behaviors>-->
-                            <uwpControls:Carousel.ContentTemplate>
-                                <DataTemplate x:DataType="models:Picture">
-                                    <Grid Background="Black">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="8*" />
-                                            <RowDefinition Height="2*" />
-                                        </Grid.RowDefinitions>
-                                        <uwpControls:ImageEx Grid.RowSpan="2"
-                                                             HorizontalAlignment="Center"
-                                                             VerticalAlignment="Center"
-                                                             Source="{Binding url}"
-                                                             Stretch="UniformToFill" />
-                                        <Grid Grid.Row="1">
-                                            <Grid.Background>
-                                                <SolidColorBrush Opacity="0.25" Color="Black" />
-                                            </Grid.Background>
-                                            <uwpControls:Virtualbox VirtualHeight="64" VirtualWidth="640">
-                                                <TextBlock Margin="12,6"
-                                                           VerticalAlignment="Center"
-                                                           Foreground="#eee"
-                                                           Text="{Binding ElementName=ThePage,
-                                                                          Path=DataContext.SelectedProduct.title}"
-                                                           TextAlignment="Center"
-                                                           TextWrapping="Wrap" />
-                                            </uwpControls:Virtualbox>
-                                        </Grid>
-                                    </Grid>
-                                </DataTemplate>
-                            </uwpControls:Carousel.ContentTemplate>
-                        </uwpControls:Carousel>
-                        <uwpControls:Indicator Height="40"
-                                               ItemsSource="{Binding ItemsSource,
-                                                                     ElementName=FlipImage2,
-                                                                     Mode=TwoWay}"
-                                               SelectedIndex="{Binding SelectedIndex,
-                                                                       ElementName=FlipImage2,
-                                                                       Mode=TwoWay}">
-                            <uwpControls:Indicator.ItemTemplate>
-                                <DataTemplate>
-                                    <Border Width="12"
-                                            Height="8"
-                                            Background="Transparent"
-                                            BorderThickness="1" />
-                                </DataTemplate>
-                            </uwpControls:Indicator.ItemTemplate>
-
-                        </uwpControls:Indicator>
-
-                    </StackPanel>
+                    <FlipView Grid.Row="0" MaxHeight="350" Margin="16,0,16,0"
+                              Background="{x:Null}"                              
+                              ItemsSource="{Binding ElementName=ThePage,Path=DataContext.SelectedProduct.pictures}">
+                        <interactivity:Interaction.Behaviors>
+                            <core:EventTriggerBehavior EventName="Tapped">
+                                <core:InvokeCommandAction Command="{Binding ElementName=ThePage,Path=DataContext.OpenImage}"  />
+                            </core:EventTriggerBehavior>
+                        </interactivity:Interaction.Behaviors>
+                        <FlipView.ItemTemplate>
+                            <DataTemplate>
+                                <uwpControls:ImageEx
+                                    Source="{Binding url}"/>
+                            </DataTemplate>
+                        </FlipView.ItemTemplate>
+                    </FlipView>
                     <StackPanel Grid.Row="1" Visibility="{Binding ZoomMode, Converter={StaticResource InvertedBoolToVisibilityConverter}}">
                         <StackPanel.Background>
                             <SolidColorBrush Color="{ThemeResource SystemChromeMediumLowColor}" />
@@ -436,14 +392,14 @@
                         <!--  Titulo  -->
                         <TextBlock Margin="15,0"
                                    Style="{StaticResource SubtitleTextBlockStyle}"
-                                   Text="{Binding SelectedProduct.title}" />
+                                   Text="{Binding SelectedProduct.title}" FontFamily="ms-appx:/Fonts/Roboto-Bold.ttf#Roboto" />
 
                         <!--  Valor  -->
                         <TextBlock Margin="15,10"
                                    Style="{StaticResource TitleTextBlockStyle}"
                                    Text="{Binding SelectedProduct.price,
                                                   ConverterParameter=\{0:c2\},
-                                                  Converter={StaticResource StringFormatConverter}}" />
+                                                  Converter={StaticResource StringFormatConverter}}" FontFamily="ms-appx:/Fonts/Roboto-Medium.ttf#Roboto Medium" />
 
                         <!--  Parcelamento  -->
                         <StackPanel Margin="15,10,15,5"
@@ -581,7 +537,7 @@
                                 <TextBlock x:Uid="ProdutoDetalhePageTextBlockInfoVendedor"
                                            Margin="0,0,15,0"
                                            Style="{StaticResource SubtitleTextBlockStyle}"
-                                           Text="Informações do vendedor" />
+                                           Text="Informações do vendedor" FontFamily="ms-appx:/Fonts/Roboto-Bold.ttf#Roboto" />
                                 <StackPanel Height="15"
                                             Margin="0,0,15,0"
                                             Orientation="Horizontal">
@@ -665,7 +621,7 @@
                                            Margin="0,0,0,10"
                                            Style="{StaticResource SubtitleTextBlockStyle}"
                                            Text="Descrição"
-                                           x:Uid="ProdutoDetalhePageTextBlockDescricaoProduto"/>
+                                           x:Uid="ProdutoDetalhePageTextBlockDescricaoProduto" FontFamily="ms-appx:/Fonts/Roboto-Bold.ttf#Roboto"/>
                                 <Ellipse Grid.Row="1"
                                          Grid.Column="0"
                                          Width="80"
@@ -686,7 +642,7 @@
                                            VerticalAlignment="Center"
                                            Style="{StaticResource BodyTextBlockStyle}"
                                            Text="{Binding SelectedProduct.title}"
-                                           TextWrapping="Wrap" />
+                                           TextWrapping="Wrap" FontFamily="ms-appx:/Fonts/Roboto-Light.ttf#Roboto Light" />
                             </Grid>
                         </Button>
 

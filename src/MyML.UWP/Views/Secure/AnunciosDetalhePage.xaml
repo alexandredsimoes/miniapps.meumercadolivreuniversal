@@ -11,7 +11,7 @@
     xmlns:controls="using:Template10.Controls"
     xmlns:converters="using:MyML.UWP.Converters"
     xmlns:designViewModels="using:MyML.UWP.ViewModels.Design"
-    xmlns:uwp="using:AppStudio.Uwp.Controls"
+    xmlns:uwp="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:mercadolivre="using:MyML.UWP.Models.Mercadolivre"
     Name="ThePage"
     d:DataContext="{d:DesignInstance designViewModels:AnunciosDetalhesPageDesignViewModel, IsDesignTimeCreatable=True}">
@@ -59,13 +59,11 @@
         </Grid.RowDefinitions>
 
         <!--  page header  -->
-        <controls:PageHeader Content="Anúncio"  >
-            <!--<controls:PageHeader.Foreground>
-                <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
-            </controls:PageHeader.Foreground>
-            <controls:PageHeader.Background>
-                <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
-            </controls:PageHeader.Background>-->
+        <controls:PageHeader Content="Anúncio"
+                             FontFamily="/Fonts/Roboto-Bold.ttf#Roboto"
+                             Background="#FFFFD100" 
+                             Foreground="Black">
+
         </controls:PageHeader>
         <ScrollViewer Grid.Row="1" Padding="10">
             <Grid>
@@ -73,14 +71,29 @@
                     <RowDefinition/>
                     <RowDefinition Height="2*"/>
                 </Grid.RowDefinitions>
-                
+
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                
-                
-                <uwp:Carousel Grid.Row="0" Grid.ColumnSpan="2"                             
+
+                <FlipView Grid.Row="0" MaxHeight="350"
+                          Grid.ColumnSpan="2" Margin="16,0,16,0"
+                              Background="{x:Null}"                              
+                              ItemsSource="{Binding ElementName=ThePage, Path=DataContext.Item.pictures}">
+                    <interactivity:Interaction.Behaviors>
+                        <core:EventTriggerBehavior EventName="Tapped">
+                            <core:InvokeCommandAction Command="{Binding ElementName=ThePage,Path=DataContext.OpenImage}"  />
+                        </core:EventTriggerBehavior>
+                    </interactivity:Interaction.Behaviors>
+                    <FlipView.ItemTemplate>
+                        <DataTemplate>
+                            <uwp:ImageEx
+                                    Source="{Binding url}"/>
+                        </DataTemplate>
+                    </FlipView.ItemTemplate>
+                </FlipView>
+                <!--<uwp:Carousel Grid.Row="0" Grid.ColumnSpan="2"                             
                               ItemsSource="{Binding ElementName=ThePage, Path=DataContext.Item.pictures}"
                               MaxItems="3"
                               AspectRatio="1.5"
@@ -126,7 +139,7 @@
                             
                         </DataTemplate>
                     </uwp:Carousel.ContentTemplate>
-                </uwp:Carousel>
+                </uwp:Carousel>-->
 
                 <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0" Margin="0,15,0,0">
                     <Button HorizontalAlignment="Stretch" Command="{Binding ChangeAttribute}" CommandParameter="title" Background="{x:Null}" HorizontalContentAlignment="Stretch">
@@ -134,8 +147,8 @@
                             <StackPanel.BorderBrush>
                                 <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
                             </StackPanel.BorderBrush>
-                            <TextBlock Text="Título" Style="{StaticResource TitleTextBlockStyle}"  />
-                            <TextBlock Text="{Binding Item.title}" Style="{StaticResource SubtitleTextBlockStyle}"  />
+                            <TextBlock Text="Título" Style="{StaticResource TitleTextBlockStyle}" FontFamily="ms-appx:/Fonts/Roboto-Bold.ttf#Roboto"  />
+                            <TextBlock Text="{Binding Item.title}" Style="{StaticResource SubtitleTextBlockStyle}" FontFamily="ms-appx:/Fonts/Roboto-Medium.ttf#Roboto Medium"  />
                             <Border />
                         </StackPanel>
                     </Button>
@@ -150,8 +163,8 @@
                                 <StackPanel.BorderBrush>
                                     <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
                                 </StackPanel.BorderBrush>
-                                <TextBlock Text="Preço" Style="{StaticResource TitleTextBlockStyle}"  />
-                                <TextBlock Grid.Column="0" Text="{Binding Item.price, Converter={StaticResource StringFormatConverter}, ConverterParameter=\{0:c2\}}" Style="{StaticResource SubtitleTextBlockStyle}"  />
+                                <TextBlock Text="Preço" Style="{StaticResource TitleTextBlockStyle}" FontFamily="ms-appx:/Fonts/Roboto-Bold.ttf#Roboto"  />
+                                <TextBlock Grid.Column="0" Text="{Binding Item.price, Converter={StaticResource StringFormatConverter}, ConverterParameter=\{0:c2\}}" Style="{StaticResource SubtitleTextBlockStyle}" FontFamily="ms-appx:/Fonts/Roboto-Medium.ttf#Roboto Medium"  />
                                 <Border />
                             </StackPanel>
                         </Button>
@@ -160,8 +173,8 @@
                                 <StackPanel.BorderBrush>
                                     <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
                                 </StackPanel.BorderBrush>
-                                <TextBlock Text="Quantidade" Style="{StaticResource TitleTextBlockStyle}"  />
-                                <TextBlock Grid.Column="21" Text="{Binding Item.available_quantity}" Style="{StaticResource SubtitleTextBlockStyle}"  />
+                                <TextBlock Text="Quantidade" Style="{StaticResource TitleTextBlockStyle}" FontFamily="ms-appx:/Fonts/Roboto-Bold.ttf#Roboto"  />
+                                <TextBlock Grid.Column="21" Text="{Binding Item.available_quantity}" Style="{StaticResource SubtitleTextBlockStyle}" FontFamily="ms-appx:/Fonts/Roboto-Medium.ttf#Roboto Medium"  />
                                 <Border />
                             </StackPanel>
                         </Button>
@@ -172,13 +185,13 @@
                             <StackPanel.BorderBrush>
                                 <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
                             </StackPanel.BorderBrush>
-                            <TextBlock Text="Descrição" Style="{StaticResource TitleTextBlockStyle}"  />
+                            <TextBlock Text="Descrição" Style="{StaticResource TitleTextBlockStyle}" FontFamily="ms-appx:/Fonts/Roboto-Medium.ttf#Roboto Medium"  />
                             <TextBlock Grid.Column="21" Text="{Binding ItemDescription}" Style="{StaticResource SubtitleTextBlockStyle}"  />
                             <Border />
                         </StackPanel>
                     </Button>
 
-                    <TextBlock Text="Mais informações"  Style="{StaticResource TitleTextBlockStyle}" Margin="10,0,0,0"/>
+                    <TextBlock Text="Mais informações"  Style="{StaticResource TitleTextBlockStyle}" Margin="10,0,0,0" FontFamily="ms-appx:/Fonts/Roboto-Bold.ttf#Roboto"/>
                     <Grid Background="#33000000" Margin="10,15,10,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
@@ -186,16 +199,16 @@
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0" HorizontalAlignment="Center" Margin="5,20">
-                            <TextBlock Text="Visitas"  Style="{StaticResource SubtitleTextBlockStyle}"/>
-                            <TextBlock Text="{Binding ItemVisits}" Style="{StaticResource TitleTextBlockStyle}" HorizontalAlignment="Center"/>
+                            <TextBlock Text="Visitas"  Style="{StaticResource SubtitleTextBlockStyle}" FontFamily="ms-appx:/Fonts/Roboto-Bold.ttf#Roboto"/>
+                            <TextBlock Text="{Binding ItemVisits}" Style="{StaticResource TitleTextBlockStyle}" HorizontalAlignment="Center" FontFamily="ms-appx:/Fonts/Roboto-Medium.ttf#Roboto Medium"/>
                         </StackPanel>
                         <StackPanel Grid.Column="1" HorizontalAlignment="Center" Margin="5,20">
-                            <TextBlock Text="Perguntas"  Style="{StaticResource SubtitleTextBlockStyle}"/>
-                            <TextBlock Text="{Binding ItemQuestions}"  Style="{StaticResource TitleTextBlockStyle}" HorizontalAlignment="Center"/>
+                            <TextBlock Text="Perguntas"  Style="{StaticResource SubtitleTextBlockStyle}" FontFamily="ms-appx:/Fonts/Roboto-Bold.ttf#Roboto"/>
+                            <TextBlock Text="{Binding ItemQuestions}"  Style="{StaticResource TitleTextBlockStyle}" HorizontalAlignment="Center" FontFamily="ms-appx:/Fonts/Roboto-Medium.ttf#Roboto Medium"/>
                         </StackPanel>
                         <StackPanel Grid.Column="2" HorizontalAlignment="Center" Margin="5,20">
-                            <TextBlock Text="Vendas"  Style="{StaticResource SubtitleTextBlockStyle}"/>
-                            <TextBlock Text="{Binding Item.sold_quantity}" Style="{StaticResource TitleTextBlockStyle}" HorizontalAlignment="Center"/>
+                            <TextBlock Text="Vendas"  Style="{StaticResource SubtitleTextBlockStyle}" FontFamily="ms-appx:/Fonts/Roboto-Bold.ttf#Roboto"/>
+                            <TextBlock Text="{Binding Item.sold_quantity}" Style="{StaticResource TitleTextBlockStyle}" HorizontalAlignment="Center" FontFamily="ms-appx:/Fonts/Roboto-Medium.ttf#Roboto Medium"/>
                         </StackPanel>
                     </Grid>
                     <Button x:Name="ExposicaoButton" HorizontalAlignment="Stretch" Command="{Binding DoCommand}" CommandParameter="E" Content="Aumentar exposição" Margin="10,20,10,10" Padding="15">

@@ -381,19 +381,7 @@
             </Setter>
         </Style>
     </Page.Resources>
-
-    <Page.BottomAppBar>
-        <CommandBar>
-            <CommandBar.PrimaryCommands>
-                <AppBarButton x:Uid="PerguntarPageEnviarPerguntaButton"
-                              x:Name="EnviarPerguntaButton"
-                              Width="48"
-                              Command="{Binding EnviarPergunta}"
-                              Icon="Send"
-                              Label="Perguntar" />
-            </CommandBar.PrimaryCommands>
-        </CommandBar>
-    </Page.BottomAppBar>
+    
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
@@ -403,16 +391,19 @@
 
         <!--  page header  -->
         <controls:PageHeader x:Uid="PerguntarPagePageHeader"
-                             
+                             FontFamily="/Fonts/Roboto-Bold.ttf#Roboto"
+                             Background="#FFFFD100" 
+                             Foreground="Black"
                              Content="Perguntas"
                              >
-            <!--<controls:PageHeader.Foreground>
-                <SolidColorBrush Color="{ThemeResource SystemChromeMediumColor}"/>
-            </controls:PageHeader.Foreground>
-            <controls:PageHeader.Background>
-                <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
-            </controls:PageHeader.Background>-->
-
+            <controls:PageHeader.PrimaryCommands>
+                <AppBarButton x:Uid="PerguntarPageEnviarPerguntaButton"
+                              x:Name="EnviarPerguntaButton"
+                              Width="48"
+                              Command="{Binding EnviarPergunta}"
+                              Icon="Send"
+                              Label="Perguntar" />
+            </controls:PageHeader.PrimaryCommands>
         </controls:PageHeader>
         <TextBox x:Uid="PerguntarPagePerguntarTextBlock"
                  Grid.Row="1"

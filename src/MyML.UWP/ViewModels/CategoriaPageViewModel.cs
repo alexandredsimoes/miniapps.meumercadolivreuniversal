@@ -7,8 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Template10.Mvvm;
 using Windows.UI.Xaml.Navigation;
-using AppStudio.Uwp.Commands;
 using MyML.UWP.Views;
+using GalaSoft.MvvmLight.Command;
 
 namespace MyML.UWP.ViewModels
 {
