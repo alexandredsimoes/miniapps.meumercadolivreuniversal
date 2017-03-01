@@ -117,9 +117,9 @@ namespace MyML.UWP.ViewModels
             //TG-57800daee4b07d84f29ee5ab-162927607
             //07/08/2016 23:31:41
 
-            //_dataService.SaveConfig(Consts.ML_CONFIG_KEY_ACCESS_TOKEN, "APP_USR-8765232316929095-012005-8c0a054302259e5ea61729b8b585d6dd__I_A__-210770051");
-            //_dataService.SaveConfig(Consts.ML_CONFIG_KEY_REFRESH_TOKEN, "TG-5881d8cee4b06291a5ab45ca-210770051");
-            //_dataService.SaveConfig(Consts.ML_CONFIG_KEY_LOGIN_DATE, "20/01/2017 12:30:49");
+            //_dataService.SaveConfig(Consts.ML_CONFIG_KEY_ACCESS_TOKEN, "APP_USR-8765232316929095-021107-f8e5cf30854f5cc8aa960c4ba7f64337__J_N__-243508956");
+            //_dataService.SaveConfig(Consts.ML_CONFIG_KEY_REFRESH_TOKEN, "TG-589ef737e4b060dcdbb0d37c-243508956");
+            //_dataService.SaveConfig(Consts.ML_CONFIG_KEY_LOGIN_DATE, "11/02/2017 14:36:22");
 
 #endif
             //var categories = await _mercadoLivreServices.ListCategories("MLB");

@@ -372,7 +372,8 @@
 
                     <FlipView Grid.Row="0" MaxHeight="350" Margin="16,0,16,0"
                               Background="{x:Null}"                              
-                              ItemsSource="{Binding ElementName=ThePage,Path=DataContext.SelectedProduct.pictures}">
+                              ItemsSource="{Binding ElementName=ThePage,Path=DataContext.SelectedProduct.pictures}"
+                              an:ParallaxService.VerticalMultiplier="-0.75">
                         <interactivity:Interaction.Behaviors>
                             <core:EventTriggerBehavior EventName="Tapped">
                                 <core:InvokeCommandAction Command="{Binding ElementName=ThePage,Path=DataContext.OpenImage}"  />
@@ -674,7 +675,7 @@
                                 </Grid.RowDefinitions>
                                 <TextBlock Grid.ColumnSpan="2"
                                            Margin="0,0,0,10"
-                                           Style="{StaticResource SubtitleTextBlockStyle}">
+                                           Style="{StaticResource SubtitleTextBlockStyle}" FontFamily="ms-appx:/Fonts/Roboto-Bold.ttf#Roboto">
                                     <Run Text="Perguntas" x:Uid="ProdutoDetalhePageTextBlockPerguntasTitulo" />
                                     <Run Text="(" />
                                     <Run Text="{Binding Questions}" />
@@ -689,7 +690,7 @@
                                            Margin="10,0,0,0"
                                            Style="{StaticResource BodyTextBlockStyle}"
                                            Text="{Binding QuestionsList.questions[0].text}"
-                                           TextWrapping="Wrap" />
+                                           TextWrapping="Wrap" FontFamily="ms-appx:/Fonts/Roboto-Medium.ttf#Roboto Medium" />
                                 <Image Grid.Row="2"
                                        Grid.Column="0"
                                        Margin="0,0,0,8"
@@ -703,7 +704,7 @@
                                            Text="{Binding QuestionsList.questions[0].answer.text}"
                                            TextWrapping="Wrap"
                                            Visibility="{Binding QuestionsList.questions[0].answer,
-                                                                Converter={StaticResource NullToVisibilitConverter}}" />
+                                                                Converter={StaticResource NullToVisibilitConverter}}" FontFamily="ms-appx:/Fonts/Roboto-Medium.ttf#Roboto Medium" />
                                 <!--<Line Grid.Row="3"  Stroke="#7F000000" StrokeThickness="0.8" Grid.ColumnSpan="2" />
                                     <Button Grid.Row="3" Grid.ColumnSpan="2" Content="Perguntar" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />-->
                             </Grid>
@@ -720,7 +721,7 @@
                         <windowsTriggers:DeviceFamilyStateTrigger DeviceFamily="Desktop" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <!--<Setter Target="FlipImage.MaxHeight" Value="400" />-->
+                        <Setter Target="FlipImage.MaxHeight" Value="400" />
                         <!--  TODO: change properties for narrow view  -->
                     </VisualState.Setters>
                 </VisualState>
@@ -729,7 +730,7 @@
                         <windowsTriggers:DeviceFamilyStateTrigger DeviceFamily="Mobile" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <!--<Setter Target="FlipImage.MaxHeight" Value="300" />-->
+                        <Setter Target="FlipImage.MaxHeight" Value="250" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="VisualStateWide">
