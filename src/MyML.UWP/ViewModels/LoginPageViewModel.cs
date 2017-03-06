@@ -64,7 +64,8 @@ namespace MyML.UWP.ViewModels
                                 _dataService.SaveConfig(Consts.ML_CONFIG_KEY_ACCESS_TOKEN, login.Access_Token);
                                 _dataService.SaveConfig(Consts.ML_CONFIG_KEY_LOGIN_DATE, DateTime.Now.ToString(CultureInfo.InvariantCulture));
 
-                                await NotificationHelper.SubscribeNotification().ConfigureAwait(true);
+                                ////////Desativado incrição nas notificações
+                                /////////////////await NotificationHelper.SubscribeNotification().ConfigureAwait(true);
 
                                 if (NavigationService.CanGoBack)
                                     NavigationService.GoBack();
