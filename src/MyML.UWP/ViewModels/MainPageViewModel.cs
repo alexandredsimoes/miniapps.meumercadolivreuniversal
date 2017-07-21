@@ -127,11 +127,16 @@ namespace MyML.UWP.ViewModels
 
         private async void LoadHomeFeatures()
         {
-            Items = await _mercadoLivreServices.ListFeaturedHomeItems();
-            RaisePropertyChanged("Items");
+            //Items = await _mercadoLivreServices.ListFeaturedHomeItems();
+            //RaisePropertyChanged("Items");
 
-            Categories = await _mercadoLivreServices.ListCategories(null);
-            RaisePropertyChanged("Categories");
+            var categories = await _mercadoLivreServices.ListCategories(null);
+
+            if (categories == null)
+            {
+                Categories = await _mercadoLivreServices.ListCategories(null);
+                RaisePropertyChanged("Categories");
+            }
         }
 
 

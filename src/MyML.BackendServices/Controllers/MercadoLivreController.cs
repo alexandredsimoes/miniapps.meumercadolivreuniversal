@@ -16,7 +16,7 @@ namespace MyML.Web.Admin.Controllers
     public class MercadoLivreController : Controller
     {
         private string ML_API_KEY = "1pW3zr833brws5ePUbtfcQc52xzq1Ocq";
-        private string ML_RETURN_URL = "https://meumercadolivre.azurewebsites.net/mercadolivre/login";
+        private string ML_RETURN_URL = "https://www.miniapps.com.br/api/mercadolivre/login";
         private string ML_CLIENT_ID = "8765232316929095";
         private string ML_AUTORIZATION_URL = "https://api.mercadolibre.com/oauth/token";
         // GET: MercadoLivre

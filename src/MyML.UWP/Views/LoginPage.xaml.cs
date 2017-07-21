@@ -119,39 +119,40 @@ namespace MyML.UWP.Views
                 }
                 else
                 {
-                    Action clearRemoverControl = async () =>
-                    {
-                        try
-                        {
-                            var script = new List<string>();
-                            script.Add("document.getElementsByName('remember_me')[0].removeAttribute('checked');");
-                            await LoginWebview.InvokeScriptAsync("eval", script);
+                    //Action clearRemoverControl = async () =>
+                    //{
+                        
+                    //    try
+                    //    {
+                    //        var script = new List<string>();
+                    //        script.Add("document.getElementsByName('remember_me')[0].removeAttribute('checked');");
+                    //        await LoginWebview.InvokeScriptAsync("eval", script);
 
-                            script.Clear();
-                            script.Add("document.getElementsByName('remember_me')[0].parentNode.removeChild(document.getElementsByName('remember_me')[0]);");
-                            await LoginWebview.InvokeScriptAsync("eval", script);
-                        }
-                        catch (Exception)
-                        {
-                        }
+                    //        script.Clear();
+                    //        script.Add("document.getElementsByName('remember_me')[0].parentNode.removeChild(document.getElementsByName('remember_me')[0]);");
+                    //        await LoginWebview.InvokeScriptAsync("eval", script);
+                    //    }
+                    //    catch (Exception)
+                    //    {
+                    //    }
 
-                    };
+                    //};
                     if (args.Uri.IsAbsoluteUri)
                     {
-                        if (args.Uri.Query.Contains("errors.") || String.IsNullOrWhiteSpace(args.Uri.Query)) //Temos erro de autenticação
+                        if (args.Uri.Query.Contains("errors.") /*|| String.IsNullOrWhiteSpace(args.Uri.Query)*/) //Temos erro de autenticação
                         {
                             var message = String.Empty;
-
+                            /*
                             if (string.IsNullOrWhiteSpace(args.Uri.Query))
                             {
                                 message = "O MercadoLivre está com dificuldades técnicas e não é possível efetuar o login nesse momento.";
                             }
                             else
                                 message = "Não foi possível entrar. Verifique seu usuário ou senha.";
-
+                             */
                             //_viewModel.IsBusy = false;
 
-                            clearRemoverControl();
+                            //clearRemoverControl();
 
 
                             MessageDialog dialog = new MessageDialog(message, "Meu MercadoLivre");
@@ -163,7 +164,7 @@ namespace MyML.UWP.Views
                         {
                             if (args.Uri.ToString().Contains("/login"))
                             {
-                                clearRemoverControl();
+                                //clearRemoverControl();
                             }
                         }
                     }

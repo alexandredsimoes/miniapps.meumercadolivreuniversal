@@ -12,7 +12,7 @@ namespace MyML.UWP.Services
 {
     public static class BaseServices<T>
     {
-        private static readonly HttpClient _httpClient = SimpleIoc.Default.GetInstance<HttpClient>();
+        private static readonly HttpClient Client = SimpleIoc.Default.GetInstance<HttpClient>();
 
         public static async Task<T> GetAsync(string url, params KeyValuePair<string, object>[] attributesAndFilters)
         {
@@ -26,7 +26,7 @@ namespace MyML.UWP.Services
                 }
             }
 
-            await _httpClient.GetAsync(url, HttpCompletionOption.ResponseContentRead)
+            await Client.GetAsync(url, HttpCompletionOption.ResponseContentRead)
                 .ContinueWith(async c =>
                 {
                     try

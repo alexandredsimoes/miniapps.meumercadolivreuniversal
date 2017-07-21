@@ -25,7 +25,7 @@ namespace MyML.UWP.Models
         
         
         public const string ML_API_KEY = "1pW3zr833brws5ePUbtfcQc52xzq1Ocq";
-        public const string ML_RETURN_URL = "https://meumercadolivre.azurewebsites.net/mercadolivre/login";
+        public const string ML_RETURN_URL = "https://www.miniapps.com.br/api/mercadolivre/login";
         public const string ML_CLIENT_ID = "8765232316929095";
         public const string ML_REFRESH_TOKEN_URL = "https://api.mercadolibre.com/oauth/token?grant_type=refresh_token&client_id={0}&client_secret={1}&refresh_token={2}";
         public const string ML_URL_LIST_SITES = "https://api.mercadolibre.com/sites";

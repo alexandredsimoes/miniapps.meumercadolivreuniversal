@@ -108,12 +108,16 @@ namespace MyML.UWP.Services
                 }
                 return resultado;
             };
-            foreach (var item in result)
+            if (result != null)
             {
-                item.PathData = obterIcone(item.name);
-                Debug.WriteLine(item.name);
+                foreach (var item in result)
+                {
+                    item.PathData = obterIcone(item.name);
+                    Debug.WriteLine(item.name);
+                }
+                return result.Where(c => !IsNullOrWhiteSpace(c.PathData)).ToList();
             }
-            return result.Where(c => !IsNullOrWhiteSpace(c.PathData)).ToList();
+            return null;
         }
 
         #region Métodos referente as questões
