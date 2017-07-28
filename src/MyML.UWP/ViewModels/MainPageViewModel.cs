@@ -101,7 +101,9 @@ namespace MyML.UWP.ViewModels
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
-            LoadHomeFeatures();
+            if (Categories == null)
+                LoadHomeFeatures();
+
             //await new MessageDialog("QUESTION_DETAIL = " + ApplicationData.Current.LocalSettings.Values["QUESTION_ID"]).ShowAsync();
             if (state.Any())
             {
@@ -130,13 +132,9 @@ namespace MyML.UWP.ViewModels
             //Items = await _mercadoLivreServices.ListFeaturedHomeItems();
             //RaisePropertyChanged("Items");
 
-            var categories = await _mercadoLivreServices.ListCategories(null);
-
-            if (categories == null)
-            {
-                Categories = await _mercadoLivreServices.ListCategories(null);
-                RaisePropertyChanged("Categories");
-            }
+            Categories = await _mercadoLivreServices.ListCategories(null);
+            RaisePropertyChanged("Categories");
+            
         }
 
 
