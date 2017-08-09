@@ -52,22 +52,22 @@ namespace MyML.UWP.Views
                 {
                     AdMediatorMobile.Height = 90;
                     AdMediatorMobile.Width = 728;
-                    AdMediatorMobile.AdUnitId = "11585576";
-                    AdMediatorMobile.ApplicationId = "f202da6a-07d0-4773-8148-6f4e2435bde2";
+                    AdMediatorMobile.AdUnitId = "11690962";
+                    AdMediatorMobile.ApplicationId = "9nblggh20cnx";
                 }
                 else if (family.Equals("Windows.Mobile"))
                 {
                     AdMediatorMobile.Height = 50;
                     AdMediatorMobile.Width = 300;
-                    AdMediatorMobile.AdUnitId = "11585571";
-                    AdMediatorMobile.ApplicationId = "0f8d2e69-c878-402d-a106-21c5abfac193";
+                    AdMediatorMobile.AdUnitId = "11690962";
+                    AdMediatorMobile.ApplicationId = "9nblggh20cnx";
                 }
                 else
                 {
                     AdMediatorMobile.Height = 50;
                     AdMediatorMobile.Width = 300;
-                    AdMediatorMobile.AdUnitId = "11585571";
-                    AdMediatorMobile.ApplicationId = "0f8d2e69-c878-402d-a106-21c5abfac193";
+                    AdMediatorMobile.AdUnitId = "11690962";
+                    AdMediatorMobile.ApplicationId = "9nblggh20cnx";
 
                 }
 
