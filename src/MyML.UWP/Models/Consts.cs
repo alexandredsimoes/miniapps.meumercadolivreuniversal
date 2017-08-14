@@ -6,6 +6,7 @@ namespace MyML.UWP.Models
     {
         //public const string CONFIG_LICENSE_REMOVE_ADS = "CONFIG_LICENSE_REMOVE_ADS";
         internal static readonly string CONFIG_REMOVE_ADS_KEY = "ML_REMOVER_ANUNCIO";
+        internal static readonly string CONFIG_REMOVE_ADS_KEY_TRIAL = "ML_EXPERIMENTAR_SEM_ANUNCIO";
         internal static readonly string BACKGROUND_TASKNAME_QUESTIONS = "AnswerQuestionTask";
 
 
@@ -293,7 +294,9 @@ namespace MyML.UWP.Models
         /// <summary>
         /// Parametros client_id, redirect_uri
         /// </summary>
-        public const string ML_URL_AUTHENTICATION = "https://auth.mercadolivre.com.br/authorization?response_type=code&client_id={0}&redirect_uri={1}";
+        //public const string ML_URL_AUTHENTICATION = "https://auth.mercadolivre.com.br/authorization?response_type=code&client_id={0}&redirect_uri={1}";
+        public const string ML_URL_AUTHENTICATION = "https://auth.mercadolivre.com.br/authorization?response_type=token&client_id=" + ML_CLIENT_ID;
+
 
         /// <summary>
         /// Parametros ClientId, ClientSecret, RefreshToken

@@ -119,7 +119,7 @@ namespace MyML.UWP.ViewModels
                 ApplicationData.Current.LocalSettings.Values[Consts.ML_CONFIG_KEY_LOGIN_DATE] = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
 
 
-                await NotificationHelper.SubscribeNotification();
+                //await NotificationHelper.SubscribeNotification();
                 Shell.SetBusy(false);
 
                 

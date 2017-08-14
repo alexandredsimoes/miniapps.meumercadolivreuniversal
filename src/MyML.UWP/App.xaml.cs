@@ -315,12 +315,19 @@ namespace MyML.UWP
             ExibirAds = true;
             return;
 #endif
-            //ApplicationData.Current.RoamingSettings.Values.Clear();
 
             if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Consts.CONFIG_REMOVE_ADS_KEY))
+            {
                 ExibirAds = !(bool)ApplicationData.Current.RoamingSettings.Values[Consts.CONFIG_REMOVE_ADS_KEY];
+            }
+            else if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Consts.CONFIG_REMOVE_ADS_KEY_TRIAL))
+            {
+                ExibirAds = !(bool)ApplicationData.Current.RoamingSettings.Values[Consts.CONFIG_REMOVE_ADS_KEY_TRIAL];
+            }
             else
+            {
                 ExibirAds = true;
+            }
         }
 
 

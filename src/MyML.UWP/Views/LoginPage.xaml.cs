@@ -50,135 +50,25 @@ namespace MyML.UWP.Views
                 Debug.WriteLine("INICIANDO ->" + args.Uri.ToString());
                 Debug.WriteLine("Navegando " + args.Uri.Query);
 #endif
-                var code = String.Empty;
-                var match = Regex.Match(args.Uri.Query, @"(code=)TG-(\W+|\w+)-\d+");
-
-                if (match.Success)
+                //access_token=APP_USR-8765232316929095-081316-c8072b2ada1fef719b2af02be3f189f8__I_K__-41654723&expires_in=21600&user_id=41654723&domains=www.miniapps.com.br
+                if (args.Uri.OriginalString.Contains("#access_token"))
                 {
-                    code = match.Value.Split('=')[1];
-                }
+                    var query = args.Uri.AbsoluteUri.Substring(args.Uri.AbsoluteUri.IndexOf('#') + 1).Split( '&', '=');
 
-                if (!String.IsNullOrWhiteSpace(code))
-                {
-
-                    try
+                    var userInfo = new MLAutorizationInfo()
                     {
-#if DEBUG
-                        Debug.WriteLine("Codigo validado " + code);
-#endif
-                        //LoginWebview.Opacity = 0;
-                        //LoginWebview.Stop();
-                        List<KeyValuePair<string, string>> parametros = new List<KeyValuePair<string, string>>
-                        {
-                            new KeyValuePair<string, string>("client_id", Consts.ML_CLIENT_ID),
-                            new KeyValuePair<string, string>("client_secret", Consts.ML_API_KEY),
-                            new KeyValuePair<string, string>("redirect_uri", Consts.ML_RETURN_URL),
-                            new KeyValuePair<string, string>("code", code),
-                            new KeyValuePair<string, string>("grant_type", "authorization_code")
-                        };
-
-
-#if DEBUG
-                        Debug.WriteLine("Enviando codigo recebido " + code);
-#endif
-                        //var autorizationUrl = Consts.GetUrl(Consts.ML_AUTORIZATION_URL);
-                        HttpClient httpClient = new HttpClient();
-                        var result = await httpClient.PostAsync(Consts.ML_AUTORIZATION_URL, new FormUrlEncodedContent(parametros));
-                        var content = await result.Content.ReadAsStringAsync();
-                        var userInfo = JsonConvert.DeserializeObject<MLAutorizationInfo>(content);
-
-#if DEBUG
-                        Debug.WriteLine("Codigo validado " + content);
-#endif
-                        await ViewModel.SaveAuthenticationInfo(userInfo);
-
-                    }
-                    catch (Exception ex)
-                    {
-                        //Tenta converter para o objeto de erro
-                        await AppLogs.WriteError("LoginPage.NavigationStarting()", ex);
-
-                        //Avisa o usuário sobre o erro
-                        await new MessageDialog("Não foi possível conectar ao site do MercadoLivre. Verifique sua conexão com a internet.", "Meu MercadoLivre").ShowAsync();
-                    }
+                        Access_Token = query[1],
+                        Expires_In = Double.Parse(query[3]),
+                        user_id  = query[5]
+                    };
+                    await ViewModel.SaveAuthenticationInfo(userInfo);
                 }
             }
         }
 
         private async void LoginWebview_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
         {
-            try
-            {
-                if (!args.IsSuccess)
-                {
-                    var message = String.Format("{0} - {1}", args.Uri.ToString(), args.WebErrorStatus.ToString());
-                    await AppLogs.WriteError("ERRO->LoginWebview_NavigationCompleted", message);
-
-                    MessageDialog dialog = new MessageDialog("Não foi possível conectar ao site do MercadoLivre. Verifique sua conexão com a internet.", "Meu MercadoLivre");
-                    await dialog.ShowAsync();
-                }
-                else
-                {
-                    //Action clearRemoverControl = async () =>
-                    //{
-                        
-                    //    try
-                    //    {
-                    //        var script = new List<string>();
-                    //        script.Add("document.getElementsByName('remember_me')[0].removeAttribute('checked');");
-                    //        await LoginWebview.InvokeScriptAsync("eval", script);
-
-                    //        script.Clear();
-                    //        script.Add("document.getElementsByName('remember_me')[0].parentNode.removeChild(document.getElementsByName('remember_me')[0]);");
-                    //        await LoginWebview.InvokeScriptAsync("eval", script);
-                    //    }
-                    //    catch (Exception)
-                    //    {
-                    //    }
-
-                    //};
-                    if (args.Uri.IsAbsoluteUri)
-                    {
-                        if (args.Uri.Query.Contains("errors.") /*|| String.IsNullOrWhiteSpace(args.Uri.Query)*/) //Temos erro de autenticação
-                        {
-                            var message = String.Empty;
-                            /*
-                            if (string.IsNullOrWhiteSpace(args.Uri.Query))
-                            {
-                                message = "O MercadoLivre está com dificuldades técnicas e não é possível efetuar o login nesse momento.";
-                            }
-                            else
-                                message = "Não foi possível entrar. Verifique seu usuário ou senha.";
-                             */
-                            //_viewModel.IsBusy = false;
-
-                            //clearRemoverControl();
-
-
-                            MessageDialog dialog = new MessageDialog(message, "Meu MercadoLivre");
-                            await dialog.ShowAsync();
-
-                            return;
-                        }
-                        else
-                        {
-                            if (args.Uri.ToString().Contains("/login"))
-                            {
-                                //clearRemoverControl();
-                            }
-                        }
-                    }
-                    Views.Shell.SetBusy(false);
-                }
-            }
-            catch (Exception ex)
-            {
-                await AppLogs.WriteError("LoginWebView_NavigationCompleted", ex);
-            }
-            finally
-            {
-                Views.Shell.SetBusy(false);
-            }
+           
         }
 
         public LoginPageViewModel ViewModel { get { return DataContext as LoginPageViewModel; } }

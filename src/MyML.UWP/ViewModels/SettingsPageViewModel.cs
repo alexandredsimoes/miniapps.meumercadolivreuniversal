@@ -269,6 +269,7 @@ namespace MyML.UWP.ViewModels
 
             SendLog = new RelayCommand<string>(SendLogExecute);
             RemoveAds = new RelayCommand(RemoverAdsExecute);
+            RemoveTrialAds = new RelayCommand(RemoverTrialAdsExecute);
         }
 
 
@@ -372,6 +373,59 @@ namespace MyML.UWP.ViewModels
             }
         }
 
+        private async void RemoverTrialAdsExecute()
+        {
+#if DEBUG
+            LicenseInformation licenseInformation = CurrentAppSimulator.LicenseInformation;
+#else
+            LicenseInformation licenseInformation = CurrentApp.LicenseInformation;
+#endif
+
+            if (!licenseInformation.ProductLicenses[Consts.CONFIG_REMOVE_ADS_KEY_TRIAL].IsActive)
+            {
+
+                PurchaseResults result = null;
+                Views.Shell.SetBusy(true);
+                try
+                {
+                    result = await CurrentApp.RequestProductPurchaseAsync(Consts.CONFIG_REMOVE_ADS_KEY_TRIAL);
+
+                    if (result.Status == ProductPurchaseStatus.Succeeded)
+                    {
+                        await new MessageDialog(_resourceLoader.GetString("ConfigurationPageCompraEfetuada")).ShowAsync();
+                        App.ExibirAds = false;
+                        ApplicationData.Current.RoamingSettings.Values[Consts.CONFIG_REMOVE_ADS_KEY_TRIAL] = true;
+                    }
+                    else if (result.Status == ProductPurchaseStatus.NotPurchased ||
+                        result.Status == ProductPurchaseStatus.NotFulfilled)
+                    {
+                        await new MessageDialog(_resourceLoader.GetString("ConfigurationPageCompraNaoEfetuada"), _resourceLoader.GetString("ApplicationTitle")).ShowAsync();
+                    }
+                    else if (result.Status == ProductPurchaseStatus.AlreadyPurchased)
+                    {
+                        await new MessageDialog(_resourceLoader.GetString("ConfigurationPageCompraJaEfetuada")).ShowAsync();
+                        App.ExibirAds = false;
+                        ApplicationData.Current.RoamingSettings.Values[Consts.CONFIG_REMOVE_ADS_KEY_TRIAL] = true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    await new MessageDialog(ex.Message, _resourceLoader.GetString("ApplicationTitle")).ShowAsync();
+                }
+                finally
+                {
+                    Views.Shell.SetBusy(false);
+                }
+            }
+            else
+            {
+                Views.Shell.SetBusy(false);
+                await new MessageDialog(_resourceLoader.GetString("ConfigurationPageCompraJaEfetuada"), _resourceLoader.GetString("ApplicationTitle")).ShowAsync();
+                App.ExibirAds = false;
+                ApplicationData.Current.RoamingSettings.Values[Consts.CONFIG_REMOVE_ADS_KEY_TRIAL] = true;
+            }
+        }
+
         public Uri Logo => Windows.ApplicationModel.Package.Current.Logo;
 
         public string DisplayName => Windows.ApplicationModel.Package.Current.DisplayName;
@@ -392,6 +446,7 @@ namespace MyML.UWP.ViewModels
         public RelayCommand SendEmail { get; private set; }
         public RelayCommand<string> SendLog { get; private set; }
         public RelayCommand RemoveAds { get; private set; }
+        public RelayCommand RemoveTrialAds { get; private set; }
     }
 }
 
