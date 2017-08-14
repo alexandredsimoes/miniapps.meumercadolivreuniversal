@@ -37,43 +37,7 @@ namespace MyML.UWP.Views
                     SeparadorCompras.Visibility = Windows.UI.Xaml.Visibility.Visible;
                     SeparadorConfiguracao.Visibility = Visibility.Visible;
                 }
-            };
-
-
-            if (App.ExibirAds == false)
-            {
-                AdMediatorMobile.Visibility = Visibility.Collapsed;
-                AdMediatorMobile.Opacity = 0;
-            }
-            else
-            {
-                var family = Windows.System.Profile.AnalyticsInfo.VersionInfo.DeviceFamily;
-                if (family.Equals("Windows.Desktop") || family.Equals("Windows.Xbox") || family.Equals("Windows.IoT"))
-                {
-                    AdMediatorMobile.Height = 90;
-                    AdMediatorMobile.Width = 728;
-                    AdMediatorMobile.AdUnitId = "11690962";
-                    AdMediatorMobile.ApplicationId = "9nblggh20cnx";
-                }
-                else if (family.Equals("Windows.Mobile"))
-                {
-                    AdMediatorMobile.Height = 50;
-                    AdMediatorMobile.Width = 300;
-                    AdMediatorMobile.AdUnitId = "11690962";
-                    AdMediatorMobile.ApplicationId = "9nblggh20cnx";
-                }
-                else
-                {
-                    AdMediatorMobile.Height = 50;
-                    AdMediatorMobile.Width = 300;
-                    AdMediatorMobile.AdUnitId = "11690962";
-                    AdMediatorMobile.ApplicationId = "9nblggh20cnx";
-
-                }
-
-                AdMediatorMobile.Visibility = Visibility.Visible;
-                AdMediatorMobile.Opacity = 1;
-            }
+            };           
         }
 
 
