@@ -144,10 +144,7 @@ namespace MyML.UWP
 
         // runs even if restored from state
         public override async Task OnInitializeAsync(IActivatedEventArgs args)
-        {
-            //Efetua a verificação da licença do usuário (remover ADS)
-            VerifyLicense();
-
+        {            
             if (!(Window.Current.Content is ModalDialog))
             {
                 // create a new frame 
@@ -307,29 +304,7 @@ namespace MyML.UWP
 
 
             await Task.CompletedTask;
-        }
-
-        private void VerifyLicense()
-        {
-#if DEBUG
-            ExibirAds = true;
-            return;
-#endif
-
-            if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Consts.CONFIG_REMOVE_ADS_KEY))
-            {
-                ExibirAds = !(bool)ApplicationData.Current.RoamingSettings.Values[Consts.CONFIG_REMOVE_ADS_KEY];
-            }
-            else if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(Consts.CONFIG_REMOVE_ADS_KEY_TRIAL))
-            {
-                ExibirAds = !(bool)ApplicationData.Current.RoamingSettings.Values[Consts.CONFIG_REMOVE_ADS_KEY_TRIAL];
-            }
-            else
-            {
-                ExibirAds = true;
-            }
-        }
-
+        }       
 
         private void UnregisterTasks()
         {

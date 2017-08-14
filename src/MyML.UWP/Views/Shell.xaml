@@ -14,26 +14,6 @@
 
     <Page.Resources />
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition  />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-
-
-
-
-        <universal:AdControl x:Name="AdMediatorMobile"
-                             Grid.Row="1"
-                             Width="300"
-                             Height="50"
-                             Margin="0,5,0,5" Background="Black" />
-        <adduplex:AdControl x:Name="AdMediatorMobileDuplex"
-                             Grid.Row="1"
-                             Width="300"
-                             Height="50"
-                             Margin="0,5,0,5" Background="Black" AdUnitId="186431"
-                            Visibility="Collapsed" AppKey="f5a5c89e-0fc3-492f-95c8-e11395eb3e6a"/>
-
         <controls:ModalDialog x:Name="ModalContainer"
                               Grid.Row="0"
                               CanBackButtonDismiss="False"

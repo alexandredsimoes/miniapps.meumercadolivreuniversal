@@ -111,27 +111,10 @@ namespace MyML.UWP.ViewModels
             }
                       
             await VerifyExecutions();
-
-#if DEBUG
-            //Apenas para testar com outros login
-
-            //APP_USR-8765232316929095-070816-7ede7e9ec66cc6efed196cf96b4e2839__M_I__-162927607
-            //TG-57800daee4b07d84f29ee5ab-162927607
-            //07/08/2016 23:31:41
-
-            //_dataService.SaveConfig(Consts.ML_CONFIG_KEY_ACCESS_TOKEN, "APP_USR-8765232316929095-030519-6b0453cc1585922a201a360f6f8d9220__F_A__-148261232");
-            //_dataService.SaveConfig(Consts.ML_CONFIG_KEY_REFRESH_TOKEN, "TG-58bca08fe4b00f735318b779-148261232");
-            //_dataService.SaveConfig(Consts.ML_CONFIG_KEY_LOGIN_DATE, "06/03/2017 02:34:40");
-
-#endif
-            //var categories = await _mercadoLivreServices.ListCategories("MLB");
         }
 
         private async void LoadHomeFeatures()
         {
-            //Items = await _mercadoLivreServices.ListFeaturedHomeItems();
-            //RaisePropertyChanged("Items");
-
             Categories = await _mercadoLivreServices.ListCategories(null);
             RaisePropertyChanged("Categories");
             
