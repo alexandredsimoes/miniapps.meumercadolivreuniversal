@@ -28,8 +28,8 @@ namespace MyML.Web.Admin.Controllers
         private string ML_USER_ID = "";
         private string ML_REFRESH_TOKEN_URL = "https://api.mercadolibre.com/oauth/token?grant_type=refresh_token&client_id={0}&client_secret={1}&refresh_token={2}";
         private string ML_REFRESH_TOKEN = "";
-        private string ML_API_KEY = "1pW3zr833brws5ePUbtfcQc52xzq1Ocq";
-        private string ML_CLIENT_ID = "8765232316929095";
+        private string ML_API_KEY = "";
+        private string ML_CLIENT_ID = "";
         private string NOTIFICATION_HUB = "";
         private string NOTIFICATION_CONNECTION_STRING = "";
         MailMessage _mail;
@@ -268,12 +268,12 @@ namespace MyML.Web.Admin.Controllers
                 try
                 {
                     _mail.To.Clear();
-                    _mail.From = new MailAddress("alexandre.dias.simoes@outlook.com");
-                    _mail.To.Add(new MailAddress("alexandre.dias.simoes@outlook.com"));
+                    _mail.From = new MailAddress("");
+                    _mail.To.Add(new MailAddress(""));
                     _mail.Subject = "NOTIFICATIONS - " + assunto;
                     _mail.Body = conteudo;
 
-                    _smtpClient.Credentials = new System.Net.NetworkCredential("alexandre.dias.simoes@outlook.com", "Ads7ficq$");
+                    _smtpClient.Credentials = new System.Net.NetworkCredential("", "");
                     _smtpClient.EnableSsl = true;
                     _smtpClient.Port = 587;
                     _smtpClient.Host = "smtp-mail.outlook.com";
